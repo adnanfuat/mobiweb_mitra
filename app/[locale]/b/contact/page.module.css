@@ -1,0 +1,7 @@
+.shell {
+    display: flex;
+    position: relative;
+    min-height: 100vh;
+    /* background-color: rgb(0, 0, 0); */
+    
+}

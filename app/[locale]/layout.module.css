@@ -1,0 +1,22 @@
+.body {
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
+    height: 100%;
+    position: relative;
+    background-color: black;
+}
+
+
+
+.footer {
+    background-color: rebeccapurple;
+}
+
+.logowr {
+    display: flex;
+    width: 180px;
+    height: 100px;
+    position: relative;
+    /* background-color: red; */
+}
+
