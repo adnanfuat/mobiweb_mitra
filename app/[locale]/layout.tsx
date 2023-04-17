@@ -32,7 +32,7 @@ export default async function RootLayout({
     
   // console.log("assadsd", WebQuery)
 
-  let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/graphql`, { //process.env.NEXT_PUBLIC_API_URL
+  let resdata =   await fetch(`${process.env.API_URL}/api/graphql`, { //process.env.API_URL
     method: "POST",
     headers: { "Content-Type": "application/json", },
     body: JSON.stringify({
@@ -49,7 +49,7 @@ export default async function RootLayout({
     let lang= resdata?.bigdata?.history[0]?.lang?.tr;
     let logofiles =  lang?.logofiles;
 
-    let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/graphql`, { //process.env.NEXT_PUBLIC_API_URL
+    let fileobjects =   await fetch(`${process.env.API_URL}/api/graphql`, { //process.env.API_URL
       method: "POST",
       headers: { "Content-Type": "application/json", },
       body: JSON.stringify({

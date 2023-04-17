@@ -113,7 +113,7 @@ export async function getStaticProps(params) {
   try {    
     
 
-    let rawdata= await fetch(process.env.NEXT_PUBLIC_API_URL, {
+    let rawdata= await fetch(process.env.API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json", },
       body: JSON.stringify({
@@ -127,7 +127,7 @@ export async function getStaticProps(params) {
      // console.log("adverts000-->:", adverts[0], adverts?.length)
 
     
-    let rawdata_category= await fetch(process.env.NEXT_PUBLIC_API_URL, {
+    let rawdata_category= await fetch(process.env.API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json", },
       body: JSON.stringify({
