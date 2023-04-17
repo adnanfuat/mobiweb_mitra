@@ -3,7 +3,8 @@
     grid-template-rows: max-content 1fr max-content;
     height: 100%;
     position: relative;
-    background-color: #eae6e1;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(234,230,225,1) 35%, rgba(234,230,225,1) 100%);
 }
 
 

@@ -1,10 +1,11 @@
-
 import HeaderComp from "@/components/headercomp"
 import FooterComp from "@/components/footercomp"
+import WebData from "@/components/utils/webdata"
 import './globals.css';
 import s from "./layout.module.css"
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import { cloneElement } from "react";
 const inter = Inter({
   variable: '--inter-font',
   subsets:["latin","latin-ext"],
@@ -32,18 +33,7 @@ export default async function RootLayout({
     
   // console.log("assadsd", WebQuery)
 
-  let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-    method: "POST",
-    headers: { "Content-Type": "application/json", },
-    body: JSON.stringify({
-      query: WebQuery,
-      variables:{data:{slug:"mitraemlak.com.tr"}} 
-    })
-  })
-    .then(async (res) =>{console.log("res:::",res);  
-          return res?.json()
-   })
-    .then(async (result) =>   { return  result?.data?.webquery; });
+    let resdata=await WebData();
       
     // console.log("data;;;", resdata)
     let lang= resdata?.bigdata?.history[0]?.lang?.tr;
@@ -61,6 +51,8 @@ export default async function RootLayout({
       .then((result) => { return result?.data?.filesquery_specialrequests; });    
       
       let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+
+      let sev="sadsadsda";
       
   return (
     <html> 
@@ -70,7 +62,12 @@ export default async function RootLayout({
 
               <HeaderComp logo={logo}/>
 
-              <div className={s.main}>{children}</div> 
+              <div className={s.main}>
+              
+                          {/* {children} */}
+                          {cloneElement(children,  sev )}
+                        
+              </div> 
 
               <div className={s.footer}><FooterComp logo={logo}/></div>
         </body>

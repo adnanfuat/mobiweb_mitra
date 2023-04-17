@@ -7,7 +7,7 @@
 }
 
 .item {
-    background-color: rgb(233, 233, 233);
+    background-color: #ddd4c9;
     padding:10px;
     gap:15px;    
     height: auto;
@@ -33,7 +33,16 @@
 
 .i_title {    
             grid-area: i_title;
+            text-transform: lowercase;
         }
+
+
+
+.i_title::first-letter {   
+    text-transform: capitalize;    
+ } 
+
+
 
 .i_user {    
             grid-area: i_user;
@@ -63,7 +72,8 @@
 .i_info_sub div {    
             
             justify-content: space-between;
-            background-color: rgb(240, 240, 240);
+            background-color: #efe6da;
+            border-radius: 4px;
             padding:5px 10px;            
             width: 100%;
         }             
