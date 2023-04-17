@@ -58,7 +58,7 @@ let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.en
     <div>             
              <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
              <Estates adverts={resdata?.realestates}/>
-             
+             +
     </div>
     )
 
