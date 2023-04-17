@@ -15,7 +15,7 @@ export async function cacheCountries() {
     else{      
       // const  allcountriesdata = await graphcms?.request(CountriesNewQuery);
 
-            await fetch(process.env.API_URL, {
+            await fetch(process.env.NEXT_PUBLIC_API_URL, {
               method: "POST",
               headers: { "Content-Type": "application/json", },
               body: JSON.stringify({

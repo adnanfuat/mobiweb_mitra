@@ -11,7 +11,7 @@ export default async function Home({params}) {
 
   // console.log("paramssss", params)
 
-let resdata =   await fetch(`${process.env.API_URL}/api/graphql`, { //process.env.API_URL
+let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
     method: "POST",
     headers: { "Content-Type": "application/json", },
     body: JSON.stringify({
@@ -35,7 +35,7 @@ let resdata =   await fetch(`${process.env.API_URL}/api/graphql`, { //process.en
 
 
 
-    let cuff_files =   await fetch(`${process.env.API_URL}/api/graphql`, { //process.env.API_URL
+    let cuff_files =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
       method: "POST",
       headers: { "Content-Type": "application/json", },
       body: JSON.stringify({
