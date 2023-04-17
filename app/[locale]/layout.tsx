@@ -30,6 +30,7 @@ export default async function RootLayout({
 }) {
 
     
+  // console.log("assadsd", WebQuery)
 
   let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/graphql`, { //process.env.NEXT_PUBLIC_API_URL
     method: "POST",
@@ -39,8 +40,10 @@ export default async function RootLayout({
       variables:{data:{slug:"mitraemlak.com.tr"}} 
     })
   })
-    .then((res) => res.json())
-    .then((result) => { return result?.data?.webquery; });
+    .then(async (res) =>{console.log("res:::",res);  
+          return res?.json()
+   })
+    .then(async (result) =>   { return  result?.data?.webquery; });
       
     // console.log("data;;;", resdata)
     let lang= resdata?.bigdata?.history[0]?.lang?.tr;
