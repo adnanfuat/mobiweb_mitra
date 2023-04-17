@@ -4,7 +4,8 @@ export default async function RootLayout({
   children,  
   params: {locale}
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  params:any
 }) {
 
     

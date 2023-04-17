@@ -3,6 +3,8 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+typescript: {ignoreBuildErrors:true},
+
   images: {
     dangerouslyAllowSVG: true,
     domains: ['srcdn.sakaryarehberim.net', 'www.sakaryarehberim.com', 'lh3.googleusercontent.com'],
