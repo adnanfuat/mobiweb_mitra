@@ -3,13 +3,13 @@
     grid-template-rows: max-content 1fr max-content;
     height: 100%;
     position: relative;
-    background-color: black;
+    background-color: #eae6e1;
 }
 
 
 
 .footer {
-    background-color: rebeccapurple;
+    /* background-color: rebeccapurple; */
 }
 
 .logowr {
