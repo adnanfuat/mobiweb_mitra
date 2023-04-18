@@ -10,11 +10,7 @@ import { useState } from "react";
 
 const  Estates = ({adverts}) =>{
 
-  
-  
-
-  
-
+      
   return (
                           <div className={s.mainwr}>
                                                                                         
@@ -82,7 +78,7 @@ const CardImage = ({props}) => {
   let img=item?.img_tr
     
   return (    
-      <Link href={`/ad/${item?.slug_tr}/${id}`}  prefetch={false}>
+      <Link href={`/b/ad/${item?.slug_tr}/${id}`}  prefetch={false}>
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :

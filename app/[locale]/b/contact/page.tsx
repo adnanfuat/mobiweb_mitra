@@ -1,4 +1,5 @@
 import WebData from "@/components/utils/webdata";
+import Form from "./form";
 import s from "./page.module.css"
 
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
@@ -20,7 +21,7 @@ export default async function Page  () {
 
                 <div className={s.sectionwr}>                    
                       <div className={s.sectiontitle}>İletişim Formu</div>
-                      <div className={s.form}>Form</div>
+                      <div className={s.form}><ContactForm/></div>
                 </div>
 
 
@@ -34,6 +35,17 @@ export default async function Page  () {
   )
 }
 
+
+
+const ContactForm = () => {
+  return (
+      <div className={s.ci_shell}>
+        
+          <Form/>
+              
+      </div>    
+  )
+}
 
 
 
