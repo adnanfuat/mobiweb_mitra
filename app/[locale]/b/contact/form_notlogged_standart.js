@@ -1,4 +1,4 @@
-import s from "./article_comments_v2_visitor.module.css"
+import s from "./form.module.css"
 
  
  export default function Form_NotLogged_Standart ({props}) {

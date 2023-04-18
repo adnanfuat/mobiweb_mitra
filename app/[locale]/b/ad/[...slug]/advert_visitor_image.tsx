@@ -2,20 +2,19 @@
 "use client"
 import s from "./s.module.css"
 import dynamic from 'next/dynamic'
- import {siteProxy} from "@/constants/siteproxy"
+import {siteProxy} from "@/constants/siteproxy"
  import { useSnapshot } from 'valtio';
 
  const Advert_Visitor_Image_Dynamic = dynamic(() => import("./advert_visitor_image_dynamic"), { loading: () => <div className={s.advert_visitor_image_dynamic_loading}><div>Yükleniyor</div></div> } );  
 
     export const Advert_Visitor_Image = (props) => {
 
-
         let {advert, interaction} = props;      
         let advert_properties = advert?.bigdata?.history?.[0]?.info?.properties; // İlana atanmış özellikler 
         let siteState = useSnapshot(siteProxy);
   
         return (
-          <div className={s.advert_visitor_image_wr}>            
+          <div className={s.advert_visitor_image_wr}>          
                 {<Advert_Visitor_Image_Standart advert={advert}/>            }
                 {siteState.interaction && <Advert_Visitor_Image_Dynamic advert={advert}/> }
           </div>

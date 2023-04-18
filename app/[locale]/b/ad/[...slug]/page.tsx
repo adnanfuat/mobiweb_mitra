@@ -3,19 +3,18 @@ import { RiContrast2Line, RiShieldCheckFill , RiShieldFill} from "react-icons/ri
 import {Ad_LayoutMain_Visitor_V2} from "./ad_layoutmain_visitor_v2"; 
 import {Advert_VisitorMode_MetaData} from "./advert_visitormode_metadata"; 
 import {Advert_Visitor_Image} from "./advert_visitor_image"; 
+import {Advert_Visitor_Tabs} from "./advert_visitor_tabs"; 
 import s from "./s.module.css"
 import Link from 'next/link';
 import Image from "next/image";
-import dynamic from 'next/dynamic'
+//import dynamic from 'next/dynamic'
 // import {siteProxy} from "@/constants/siteproxy"
 // import { useSnapshot } from 'valtio';
-
-
-
 //const Advert_Google_Map_Dynamic = dynamic(() => import("./advert_googlemap_dynamic"), { loading: () => <div className={s.advert_visitor_image_dynamic_loading}><div>Yükleniyor</div></div> } );  
 
 
-export default async function  Ad_Core ({params}) { 
+
+export default async function  Page ({params}) { 
 
   let {locale, slug} = params ?? {}
 
@@ -32,14 +31,14 @@ export default async function  Ad_Core ({params}) {
     let datajson_advert=await rawdata_advert.json()
     let advert = datajson_advert?.data?.advertquery;   
 
-    console.log("paramssss", slug);
+    // console.log("paramssss", slug);
                         
     let parents=advert?.bigdata?.history?.[0]?.info?.parents;
     let detail=advert?.bigdata?.history?.[0]?.lang?.tr?.detail;
             
     // const [tab, settab] = useState(1)
 
-    // return <div>asdsaddsa</div>
+    //  return <div>asdsaddsa</div>
     
           return (
                   <Ad_LayoutMain_Visitor_V2  title={advert?.title_tr} parents={parents}  side={"clientside"}  pagetype="advert">     
@@ -50,21 +49,8 @@ export default async function  Ad_Core ({params}) {
                                   <div className={s.info}> <Advert_Visitor_Info advert={advert}/> </div>
                                   <div className={s.who}><Advert_Visitor_Owner advert={advert}/>                                       
                                   </div>         
-                                                                                                                             
-                                  <div className={s.tabswr}>
 
-                                  {/* <div className={s.tabs}> 
-                                      <div className={s.tab} style={{borderTopColor:tab==1 ? "darkgray" : "transparent"}} onClick={()=>settab(1)}>Açıklama</div>
-                                      <div className={s.tab} style={{borderTopColor:tab==2 ? "darkgray" : "transparent"}} onClick={()=>settab(2)}>Konum</div>                                      
-                                  </div> */}
-
-                                  <div className={s.tabpanelwr}>
-                                      
-                                      {/* {tab==1 &&  <div dangerouslySetInnerHTML={{__html: detail}} ></div>} */}
-                                      {/* {tab==2 && <Advert_Google_Map_Dynamic  advert={advert}/>} */}
-                                  </div>
-                                
-                                </div>
+                                  <Advert_Visitor_Tabs advert={advert}/>                                                                                                                                                                            
 
                             </div>
                   </Ad_LayoutMain_Visitor_V2>

@@ -1,8 +1,7 @@
 
 import GoogleMapReact from 'google-map-react';
+
 import { useState } from 'react';
-
-
 import { RiMapPinFill } from "react-icons/ri";
 
 
@@ -10,9 +9,11 @@ const AnyReactComponent = ({ text }) => <div style={{position:"relative"}}>
                       <RiMapPinFill size={"4rem"} color="#d50606" style={{position:"absolute", bottom:0, left:-30}}/>                      
           </div>;
 
-export const Advert_Google_Maps_Dynamic = (props) => {
+export const Advert_Visitor_Googlemaps_Dynamic = (props) => {
 
   let {advert} = props ?? {}
+
+  console.log("advert:::", advert);
 
   let lat=advert?.bigdata?.history[0]?.info?.coordinate?.lat
   let lng=advert?.bigdata?.history[0]?.info?.coordinate?.lng
@@ -29,7 +30,7 @@ export const Advert_Google_Maps_Dynamic = (props) => {
 
 
   return (       
-          <div style={{ height: '100vh', width: '100%' }}>  
+          <div style={{ height: '100vh', width: '100%' }}> 
                   <GoogleMapReact
                     bootstrapURLKeys={{ key: "AIzaSyBpnXwpN7TVOhjglEqdaE2zeA5szynZvH0" }}
                     defaultCenter={defaultProps.center}
@@ -50,4 +51,4 @@ export const Advert_Google_Maps_Dynamic = (props) => {
 }
 
 
-export default Advert_Google_Maps_Dynamic
+export default Advert_Visitor_Googlemaps_Dynamic

@@ -172,32 +172,32 @@ gap: 10px;
 }
 
 .ownerwho {
-display: flex;    
-background-color: #dddddd;
-color: rgb(24, 24, 24);
-padding: 10px;
-gap: 10px;
-align-items: center;
-font-size: 20px;
-border-radius: 5px 5px 0px 0px;
-justify-content: space-between;
+        display: flex;    
+        background-color: #dddddd;
+        color: rgb(24, 24, 24);
+        padding: 10px;
+        gap: 10px;
+        align-items: center;
+        font-size: 20px;
+        border-radius: 5px 5px 0px 0px;
+        justify-content: space-between;
 }
 
 .ownerphones {
-
-padding: 20px;
-display: flex;
-flex-direction: column;
-gap:18px;
-align-items: left;
-font-size: 18px;
-background-color:#dddddd;
-border-radius: 0px 0px 5px 5px ;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap:18px;
+    align-items: left;
+    font-size: 18px;
+    background-color:#dddddd;
+    border-radius: 0px 0px 5px 5px ;
 }
 
 .advert_visitor_image_wr {
-position: relative;
-height: 100%;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
 }
 
 

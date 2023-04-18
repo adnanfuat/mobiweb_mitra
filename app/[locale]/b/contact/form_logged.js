@@ -3,7 +3,7 @@ import s from "./form.module.css"
 import dynamic from 'next/dynamic'
 import { useState } from "react";
 
-const DynamicAdd = dynamic(() => import("./form_add"));
+// const DynamicAdd = dynamic(() => import("./form_add"));
 
  
  export default function Form_Logged ({props}) {
@@ -43,7 +43,7 @@ const DynamicAdd = dynamic(() => import("./form_add"));
 
                               </div>
                                       
-                                  {show && <DynamicAdd props={{slug, locale}}/>} 
+                                  {/* {show && <DynamicAdd props={{slug, locale}}/>}  */}
 
                               </div>
 

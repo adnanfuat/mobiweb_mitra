@@ -1,7 +1,6 @@
 import s from "./ad_layoutmain_visitor_v2.module.css"
 import Link from "next/link";
 
-
 export const Ad_LayoutMain_Visitor_V2 = (props) => {
     let {
                 countries,        
@@ -20,11 +19,9 @@ export const Ad_LayoutMain_Visitor_V2 = (props) => {
                         <div className={s.bodywr}>                        
                                 <div className={s.header}>
                                         
-                                        {title &&  <h1>  {title} </h1>}                                        
-                                                
+                                        {title &&  <h1>  {title} </h1>}                                                                                        
                                         <div className={s.subheader}><Advert_Visitor_Parents parents={parents}/></div>
                                         
-
                                 </div>                                                                
                                 <div className={s.childrenWr}> {props?.children} </div>
                         </div>
@@ -42,6 +39,8 @@ const Advert_Visitor_Parents = (props) => {
         let {parents} = props ?? {};
   
         // let parents=advert?.bigdata?.history?.[0]?.info?.parents;
+
+        parents=parents?.filter(item=> ( item?.slug_tr!="emlak" ) )
         
         
         let linkObj=parents?.map((item, index)=>{
@@ -59,11 +58,10 @@ const Advert_Visitor_Parents = (props) => {
             
             <div className={s.parentslist}>
                 {linkObj?.map((item, i)=>{
-                          return <Link href={"/ads/"+item?.fulllink} key={"link_"+i}><span>{i>0 && " > "}</span> {item?.label}</Link>
+                          return <Link href={"/b/ads/"+item?.fulllink} key={"link_"+i}><span>{i>0 && " > "}</span> {item?.label}</Link>
                 })}
             </div>
-                {/* {JSON.stringify(linkObj)} */}
-          
+                {/* {JSON.stringify(linkObj)} */}          
           </div>
         )
       }
