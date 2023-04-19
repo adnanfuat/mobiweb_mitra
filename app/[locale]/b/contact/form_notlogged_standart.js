@@ -3,7 +3,7 @@ import s from "./form.module.css"
  
  export default function Form_NotLogged_Standart ({props}) {
 
-  let {slug, comments,  locale} = props;    
+  let {slug, comments,  locale} = props ?? {};    
 
   comments=comments?.filter(item=> { // sadece o dile ait olan yorumları göstereyim
 

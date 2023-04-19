@@ -7,7 +7,7 @@ import { useSnapshot } from 'valtio';
 
 const Form_Logged_Dynamic = dynamic(() => import("./form_logged"));
 
-export default Form = ({props}) => {
+export default function Form  ({props}) {
 
 let siteState  = useSnapshot(siteProxy);
 

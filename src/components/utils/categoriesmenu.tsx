@@ -1,16 +1,17 @@
+"use client"
 import s from "./categoriesmenu.module.css"
 import Link from "next/link"
 import { useEffect, useState } from "react";
 import {tabStatesFunc_WithKey} from "@/components/utils/tabstatesfunc_withkey"
 import {RiFolder3Fill,RiFolder5Fill, RiGamepadLine} from "react-icons/ri";
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import {  useQuery } from "react-query";
 
 
 export const CategoriesMenu = ({props}) => 
 {
+  const router = useRouter();  
     let { parents, category} =props;       
-    const router = useRouter();  
     let slug= router?.query?.slug ?? [];
           
     let init_selecteds=parents?.map(s=>s={key:s?.key, state:true, slug:s?.slug_tr} ) ?? [];
@@ -25,10 +26,8 @@ export const CategoriesMenu = ({props}) =>
 
     return ( 
       <div style={wrapperForWithSubmenus}> 
-
-            <Recursive props={{ rootslug:"ilanlar", tabstates, set_tabstates, deep:0}}/>
-            <div style={cStyle}><RiGamepadLine/> <Link href="/console/adverts">PANEL</Link> </div>
-
+              <Recursive props={{ rootslug:"ilanlar", tabstates, set_tabstates, deep:0}}/>
+              <div style={cStyle}><RiGamepadLine/> <Link href="/console/adverts">PANEL</Link> </div>
       </div> 
     )
 }

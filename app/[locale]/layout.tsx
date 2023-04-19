@@ -1,11 +1,14 @@
+
 import HeaderComp from "@/components/headercomp"
 import FooterComp from "@/components/footercomp"
 import WebData from "@/components/utils/webdata"
+import LayoutInner from "./layoutinner"
 import './globals.css';
 import s from "./layout.module.css"
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import { cloneElement } from "react";
+
+
 const inter = Inter({
   variable: '--inter-font',
   subsets:["latin","latin-ext"],
@@ -15,11 +18,7 @@ const inter = Inter({
 import {Interaction} from "./interaction"
 import Link from 'next/link';
 
-// import { languages } from './i18n/settings'
 
-// export async function generateStaticParams() {
-//   return languages.map((lng) => ({ lng }))
-// }
 
 
 
@@ -30,9 +29,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
-    
-  // console.log("assadsd", WebQuery)
-
+   // console.log("assadsd", WebQuery)
     let resdata=await WebData();
       
     // console.log("data;;;", resdata)
@@ -52,7 +49,7 @@ export default async function RootLayout({
       
       let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
 
-      let sev="sadsadsda";
+      
       
   return (
     <html> 
@@ -64,8 +61,9 @@ export default async function RootLayout({
 
               <div className={s.main}>
               
-                          {/* {children} */}
-                          {cloneElement(children,  sev )}
+                              <LayoutInner>
+                                    {children}                          
+                              </LayoutInner>
                         
               </div> 
 

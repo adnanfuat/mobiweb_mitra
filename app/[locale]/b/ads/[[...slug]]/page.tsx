@@ -12,8 +12,10 @@ import { cacheCountries } from "@/components/utils/cachecountries";
 import { useRouter } from 'next/navigation'
 
 
-export default async function Category ({params}){
+export default async function Category ({params, searchParams}){
     
+  // console.log("asdsaddsa::::", a);
+
   let {slug} = params ?? {} ;
   let  countries = await cacheCountries();
 
@@ -50,14 +52,14 @@ export default async function Category ({params}){
     category = datajson_category?.data?.relatedcategoryquery;   
 
     
-  const router = useRouter();
-  let {country, city, district, subdistrict} = router?.query  
+  // const router = useRouter();
+  let {country, city, district, subdistrict} = searchParams ?? {}
 
   adverts=filterAdverts({adverts, country, city, district, subdistrict});
 
   let parents=category?.o_key_1?.parents;
 
-  return (<Layout  title={`${category?.title_tr}`}  countries={countries} >
+  return (<AdsLayout  title={`${category?.title_tr}`}  countries={countries} >
                           <div className={s.mainwr}>
                             
                             {(country || city || district || subdistrict) && <div className={s.filtered}>                             
@@ -75,11 +77,11 @@ export default async function Category ({params}){
                             }
                             
                               <div className={s.mobilmenu}>
-                                      <div className={s.mobilmenu_close}  onClick={()=>setmobilmenu(old=>!old)}>{mobilmenu ? <RiCloseFill size={30} /> :  <RiListUnordered size={30} />  }</div>                
+                                      {/* <div className={s.mobilmenu_close}  onClick={()=>setmobilmenu(old=>!old)}>{mobilmenu ? <RiCloseFill size={30} /> :  <RiListUnordered size={30} />  }</div>                 */}
                                       {/* { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" } */}
                               </div>
 
-                              <div className={s.desktopmenu}><LayoutLeft props={{categories,  parents, category, countries}}/></div>
+                              <div className={s.desktopmenu}><LayoutLeft props={{categories,  parents, category, countries, searchParams}}/></div>
 
                               <div className={s.bodywr}>
                                     {/* <div className={s.test}> Test ve geliştirme aşamasındadır. Siz de teste katılabilirsiniz. </div> */}
@@ -89,7 +91,7 @@ export default async function Category ({params}){
                               <Meta category={category} firstadvert={adverts[0]}/>
 
                           </div>
-              </Layout>  )
+              </AdsLayout>  )
 
 }
 
@@ -234,7 +236,7 @@ const Item = ({props}) => {
 
               <div className={s.i_user}>                
                     {!advertiser?.whoiscompany && <div style={{color:"#c1c1c1", display:"flex", alignItems:"center", gap:4}}>
-                      <Image src={item?.userdata?.image} width={35} height={35} style={{borderRadius:6}}/> {name} 
+                      <Image src={item?.userdata?.image} width={35} height={35} style={{borderRadius:6}}/> 
                     </div>}
 
                     {advertiser?.whoiscompany && <div style={{color:"#c1c1c1", display:"flex", alignItems:"center", gap:4}}>
@@ -242,7 +244,7 @@ const Item = ({props}) => {
                             {company?.title_tr}
                     </div>}
 
-                  { owner && <Link href={`/console/advert/${item?.id}`}><RiEdit2Fill/></Link> }
+                  {/* { owner && <Link href={`/console/advert/${item?.id}`}><RiEdit2Fill/></Link> } */}
               </div>                       
           </div> 
           )

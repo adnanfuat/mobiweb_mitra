@@ -1,0 +1,818 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model altsektor_reklamlar {
+  numara           Int      @id @default(autoincrement()) @db.UnsignedInt
+  ad               String   @db.Text
+  resim_adres      String   @db.TinyText
+  aktif            String   @db.Char(1)
+  mobil            String   @db.Char(1)
+  genislik         Int      @default(0) @db.UnsignedInt
+  altsektor        Int?     @db.UnsignedInt
+  yukseklik        Int      @default(0) @db.UnsignedInt
+  link             String?  @db.Text
+  altbilgi         String?  @db.Text
+  blank            String?  @db.Char(1)
+  puan             Int?     @db.UnsignedTinyInt
+  kategori         Int?     @db.UnsignedInt
+  ekleyen          String?  @db.TinyText
+  duzenleyen       String?  @db.TinyText
+  kaynak           String?  @db.Text
+  baslangic_tarihi DateTime @db.Date
+  bitis_tarihi     DateTime @db.Date
+  otomatik_ayarla  String   @db.Char(1)
+
+  @@index([altsektor], map: "FK_altsektor_reklamlar_altsektorler")
+}
+
+model altsektor_siniflandirma {
+  bigdata           String?  @db.LongText
+  numara            Int      @id @default(autoincrement()) @db.UnsignedInt
+  ustkategori_no    Int      @default(0) @db.UnsignedInt
+  ad                String   @default("0") @db.VarChar(100)
+  resim_adres       String?  @db.Text
+  eklenme_tarihi    String?  @db.Text
+  aktif             String   @db.Char(1)
+  siralama          Int      @default(0) @db.UnsignedInt
+  description       String?  @db.Text
+  keywords          String?  @db.Text
+  title             String?  @db.Text
+  alternatif_sozler String?  @db.Text
+  vitrin            String?  @db.Char(1)
+  aciklama          String   @db.Text
+  htaccess_etiket   String?  @db.VarChar(100)
+  altkategori_no    Int      @default(0) @db.UnsignedInt
+  aciklama_tarihi   DateTime @db.DateTime(0)
+  keywords_exclude  String?  @db.Text
+
+  @@index([ustkategori_no], map: "FK_altsektor_siniflandirma_altsektorler")
+  @@fulltext([ad], map: "ad")
+}
+
+model altsektorler {
+  numara                Int        @id @default(autoincrement()) @db.UnsignedInt
+  ustkategori_no        Int        @db.UnsignedInt
+  vitrin                String?    @db.Char(1)
+  ad                    String     @default("") @db.VarChar(100)
+  resim_adres           String?    @db.Text
+  title                 String?    @db.Text
+  description           String?    @db.Text
+  keywords_include      String?    @db.Text
+  keywords_exclude      String?    @db.Text
+  keywords              String?    @db.VarChar(300)
+  alternatif_sozler     String?    @db.Text
+  aciklama              String     @db.Text
+  eklenme_tarihi        String?    @db.Text
+  aktif                 String     @db.Char(1)
+  siralama              Int        @default(0) @db.UnsignedInt
+  htaccess_etiket       String     @db.VarChar(100)
+  sahte                 String     @db.Char(1)
+  yonlendirilecek_sayfa String?    @db.VarChar(200)
+  aciklama_tarihi       DateTime   @db.DateTime(0)
+  sektorler             sektorler  @relation(fields: [ustkategori_no], references: [numara], onDelete: NoAction, onUpdate: NoAction, map: "FK_altsektorler_sektorler")
+  firmalar              firmalar[]
+
+  @@index([ustkategori_no], map: "FK_altsektorler_sektorler")
+  @@fulltext([ad])
+  @@fulltext([keywords])
+}
+
+model doviz_kurlari {
+  numara  Int    @id @default(autoincrement()) @db.UnsignedInt
+  ad      String @db.TinyText
+  kisa_ad String @db.TinyText
+  alis    String @db.TinyText
+  satis   String @db.TinyText
+  aktif   String @db.Char(1)
+}
+
+model eczane {
+  numara  Int     @id @default(autoincrement()) @db.UnsignedInt
+  ad      String  @db.TinyText
+  aktif   String  @db.Char(1)
+  adres   String? @db.TinyText
+  telefon String? @db.TinyText
+  bolge   Int?    @db.UnsignedTinyInt
+}
+
+model etiket_reklam {
+  numara           Int      @id @default(autoincrement()) @db.UnsignedInt
+  ad               String   @db.Text
+  resim_adres      String   @db.TinyText
+  aktif            String   @db.Char(1)
+  genislik         Int      @default(0) @db.UnsignedInt
+  yukseklik        Int      @default(0) @db.UnsignedInt
+  link             String?  @db.Text
+  altbilgi         String?  @db.Text
+  blank            String?  @db.Char(1)
+  puan             Int?     @db.UnsignedTinyInt
+  kategori         Int?     @db.UnsignedInt
+  ekleyen          String?  @db.TinyText
+  duzenleyen       String?  @db.TinyText
+  kaynak           String?  @db.Text
+  etiket           Int?     @db.UnsignedInt
+  mobil            String?  @db.Char(1)
+  baslangic_tarihi DateTime @db.Date
+  bitis_tarihi     DateTime @db.Date
+  otomatik_ayarla  String   @db.Char(1)
+
+  @@index([etiket], map: "FK_etiket_reklam_etiketler")
+}
+
+model etiket_reklamlar {
+  numara           Int      @id @default(autoincrement()) @db.UnsignedInt
+  kategori         Int      @default(0) @db.UnsignedInt
+  ad               String   @db.Text
+  resim_adres      String?  @db.Text
+  eklenme_tarihi   String?  @db.Text
+  aktif            String   @db.Char(1)
+  siralama         Int      @default(0) @db.UnsignedInt
+  link             String   @db.Text
+  baslangic_tarihi DateTime @db.Date
+  bitis_tarihi     DateTime @db.Date
+  otomatik_ayarla  String   @db.Char(1)
+
+  @@index([kategori], map: "FK_etiket_reklamlar_etiketler")
+}
+
+model etiketler {
+  bigdata               String? @db.LongText
+  numara                Int     @id @default(autoincrement()) @db.UnsignedInt
+  ad                    String  @default("") @db.VarChar(80)
+  pad                   String  @db.TinyText
+  sayi                  Int     @default(0) @db.UnsignedInt
+  aktif                 String  @db.Char(1)
+  aciklama              String  @db.Text
+  yonlendirilecek_sayfa String  @db.VarChar(200)
+
+  @@fulltext([ad])
+}
+
+model fatura {
+  numara             Int       @id @default(autoincrement()) @db.UnsignedInt
+  firma_no           Int       @default(0) @db.UnsignedInt
+  fatura_kesildimi   String    @db.Char(1)
+  fatura_gittimi     String    @db.Char(1)
+  toplam_para        String?   @db.Text
+  aciklama           String?   @db.Text
+  tarih              DateTime? @db.Date
+  fatura_tarihi      DateTime? @db.Date
+  sozlesme_yapildimi String    @db.Char(1)
+  sozlesme_tarihi    DateTime  @db.Date
+  sozlesme_gittimi   String    @db.Char(1)
+  faturano           String?   @db.TinyText
+  faturasirano       String?   @db.TinyText
+  uyelikbuyuklugu    Int?
+}
+
+model fikirkosesi {
+  numara         Int      @id @default(autoincrement()) @db.UnsignedInt
+  ad             String   @db.Text
+  icerik         String   @db.Text
+  resim_adres    String   @db.Text
+  kategori       Int      @default(0) @db.UnsignedInt
+  eklenme_tarihi DateTime @db.Date
+  hit            Int      @default(0) @db.UnsignedInt
+  aktif          String   @db.Char(1)
+  puan           Int?     @default(0)
+  description    String?  @db.Text
+  keywords       String?  @db.Text
+  title          String?  @db.Text
+  ekstra         String?  @db.TinyText
+  ozet           String?  @db.Text
+}
+
+model firma_iletisim {
+  numara        Int     @id @default(autoincrement()) @db.UnsignedInt
+  ad            String  @db.Text
+  aktif         String  @db.Char(1)
+  icerik        String? @db.Text
+  mail          String? @db.Text
+  tarih         String  @db.Text
+  firma         Int     @default(0) @db.UnsignedInt
+  cevaplandimi  String  @db.Char(1)
+  telefon       String? @db.Text
+  haberdaret    String  @db.Char(1)
+  wp_haberdaret String  @db.Char(1)
+
+  @@index([firma], map: "FK_firma_iletisim_firmalar")
+}
+
+model firmalar {
+  bigdata                    String?      @db.LongText
+  ad                         String       @db.VarChar(150)
+  numara                     Int          @id @default(autoincrement()) @db.UnsignedInt
+  ustkategori_no             Int          @default(0) @db.UnsignedInt
+  altkategori_no             Int          @db.UnsignedInt
+  subdistrict                Int?         @default(1)
+  ilce                       Int          @db.UnsignedInt
+  il                         Int          @default(0)
+  country                    Int          @default(1)
+  siniflandirma              String       @db.Text
+  aktif                      String       @db.Char(1)
+  adres                      String?      @db.Text
+  telefon                    String?      @db.VarChar(150)
+  eposta                     String?      @db.VarChar(100)
+  eposta2                    String       @db.VarChar(100)
+  eposta3                    String       @db.VarChar(100)
+  webadres                   String?      @db.VarChar(100)
+  webadres2                  String       @db.VarChar(100)
+  webadres3                  String       @db.VarChar(100)
+  sahip                      String       @db.VarChar(50)
+  resim_adres                String?      @db.Text
+  eklenme_tarihi             String?      @db.Text
+  puan                       Int          @default(1) @db.UnsignedInt
+  hit                        Int          @default(1) @db.UnsignedInt
+  ekleyen                    String       @db.Text
+  ekleyen_eposta             String       @db.TinyText
+  faaliyet                   String       @db.Text
+  ip                         String?      @db.TinyText
+  ekleyen_aciklama           String       @db.Text
+  resim_genislik             Int?
+  resim_yukseklik            Int?
+  description                String?      @db.Text
+  keywords                   String?      @db.Text
+  title                      String?      @db.Text
+  alternatif_sozler          String?      @db.Text
+  vizyon                     String       @db.Char(1)
+  ekleyen_telefon            String       @db.TinyText
+  diger                      String?      @db.Text
+  ekleme                     String?      @db.TinyText
+  duzenleme                  String?      @db.TinyText
+  reklamla_ilgilenen         String?      @db.Text
+  eposta_bilgi_mesaj         String?      @db.Char(1)
+  eposta2_bilgi_mesaj        String       @db.Char(1)
+  eposta3_bilgi_mesaj        String       @db.Char(1)
+  ekleyen_eposta_bilgi_mesaj String?      @db.Char(1)
+  musteri_temsilcisi         Int?         @db.TinyInt
+  eposta_goruntulensin       String       @db.Char(1)
+  eposta2_goruntulensin      String       @db.Char(1)
+  eposta3_goruntulensin      String       @db.Char(1)
+  ilan_tarihi                String?      @db.TinyText
+  blank                      String?      @db.Char(1)
+  uyelik_durumu              String?      @db.Char(1)
+  sergileme_secenegi         Int          @db.TinyInt
+  ozelbilgi                  String       @db.Text
+  firma_ekledi               String       @db.Char(1)
+  ad_onay                    String       @db.Char(1)
+  faaliyet_onay              String       @db.Char(1)
+  title_onay                 String       @db.Char(1)
+  ozel_bilgi_onay            String       @db.Char(1)
+  resim_adres_onay           String       @db.Char(1)
+  o_resim_adres              String       @db.Text
+  o_faaliyet                 String       @db.MediumText
+  o_title                    String       @db.MediumText
+  ozel_bilgi                 String       @db.MediumText
+  o_ozel_bilgi               String       @db.MediumText
+  onay_bekliyor              String       @db.Char(1)
+  resim_yazi_durumu          String       @db.Char(1)
+  degisim_zamani             String       @db.TinyText
+  o_ad                       String       @db.MediumText
+  firma_url                  String       @db.TinyText
+  displaymode                Int?         @db.TinyInt
+  altsektorler               altsektorler @relation(fields: [altkategori_no], references: [numara], onDelete: NoAction, onUpdate: NoAction, map: "FK_firmalar_altsektorler")
+
+  @@index([altkategori_no], map: "FK_firmalar_altsektorler")
+  @@index([ilce], map: "FK_firmalar_ilceler")
+}
+
+model firmalar_harita {
+  numara     Int     @id @default(autoincrement()) @db.UnsignedInt
+  xkoordinat String? @db.TinyText
+  ykoordinat String? @db.Text
+  firma      Int?    @db.UnsignedInt
+  aktif      String? @db.Char(1)
+}
+
+model firmalar_telefon {
+  numara            Int     @id @default(autoincrement()) @db.UnsignedInt
+  etiket            String? @db.TinyText
+  telefonkod        String? @db.TinyText
+  telefon           String? @db.TinyText
+  firma             Int?    @db.UnsignedInt
+  aktif             String? @db.Char(1)
+  puan              Int?    @db.TinyInt
+  varsayilan        String? @db.Char(1)
+  bilgi_mesaj       String? @db.Char(1)
+  wapp_mesaji_alsin String? @db.Char(1)
+  pbxmi             String? @db.Char(1)
+  hatsayi           Int?    @db.UnsignedTinyInt
+  dahili            String? @db.TinyText
+}
+
+model guzelsozler {
+  numara         Int     @id @default(autoincrement()) @db.UnsignedInt
+  ad             String  @db.VarChar(90)
+  detay          String? @db.Text
+  eklenme_tarihi String? @db.VarChar(10)
+  aktif          String  @db.Char(1)
+  siralama       Int     @default(0) @db.UnsignedInt
+}
+
+model haber {
+  numara              Int       @id @default(autoincrement()) @db.UnsignedInt
+  ad                  String    @default("") @db.VarChar(120)
+  icerik              String    @db.Text
+  resim_adres         String    @db.Text
+  kategori            Int       @default(0) @db.UnsignedInt
+  eklenme_tarihi      DateTime? @db.Date
+  hit                 Int       @default(0) @db.UnsignedInt
+  aktif               String    @db.Char(1)
+  saat                DateTime? @db.Time(0)
+  description         String?   @db.Text
+  keywords            String?   @db.Text
+  title               String?   @db.Text
+  gundem              String?   @db.Char(1)
+  ozet                String    @db.Text
+  onemli              String?   @db.Char(1)
+  galeri_link         String?   @db.TinyText
+  videohaber          String    @db.Char(1)
+  resim_baglanti      String?   @db.TinyText
+  kaynak              String?   @db.TinyText
+  haber_baglanti      String?   @db.TinyText
+  ozel                String    @db.Char(1)
+  video_player        String    @db.Char(1)
+  haber_galeri        String?   @db.Text
+  ilgili_sektorler    String?   @db.Text
+  ilgili_altsektorler String?   @db.Text
+  history             String?   @db.LongText
+
+  @@fulltext([ad], map: "ad")
+}
+
+model haber_kategori {
+  numara           Int     @id @default(autoincrement()) @db.UnsignedInt
+  ad               String  @db.Text
+  aktif            String  @db.Char(1)
+  resim_adres      String? @db.Text
+  aciklama         String? @db.Text
+  siralama         Int?    @db.UnsignedTinyInt
+  siralama_turu    String? @db.TinyText
+  siralama_kriteri String? @db.TinyText
+  link             String? @db.TinyText
+  blank            String? @db.Char(1)
+  kategori         Int     @default(0) @db.TinyInt
+  link_altbilgi    String? @db.TinyText
+  htaccess_etiket  String  @db.VarChar(255)
+  veri_turu        String  @db.TinyText
+}
+
+model hava {
+  numara      Int    @id @default(autoincrement()) @db.UnsignedInt
+  ad          String @db.TinyText
+  resim_adres String @db.TinyText
+  aktif       String @db.Char(1)
+}
+
+model namaz_vakitleri_kategori {
+  numara Int    @id @default(autoincrement()) @db.UnsignedInt
+  ad     String @db.TinyText
+  aktif  String @db.Char(1)
+}
+
+model nobetci_bolgeler {
+  numara Int    @id @default(autoincrement()) @db.UnsignedInt
+  ad     String @db.TinyText
+  aktif  String @db.Char(1)
+  puan   Int    @default(0) @db.UnsignedTinyInt
+}
+
+model nobetci_eczaneler {
+  numara        Int     @id @default(autoincrement()) @db.UnsignedInt
+  tarih         String  @db.TinyText
+  eczane1       Int     @default(0) @db.UnsignedInt
+  eczane2       Int     @default(0) @db.UnsignedInt
+  eczane3       Int?    @db.UnsignedInt
+  eczane4       Int?    @db.UnsignedInt
+  puan          Int?    @db.UnsignedTinyInt
+  eczane5       Int     @default(0) @db.UnsignedInt
+  eczane6       Int     @default(0) @db.UnsignedInt
+  eczane7       Int     @default(0) @db.UnsignedInt
+  eczane8       Int     @default(0) @db.UnsignedInt
+  aktif         String? @db.Char(1)
+  kategori      Int     @default(0) @db.UnsignedInt
+  bolge         Int?    @db.UnsignedTinyInt
+  gunduz_nobeti String  @db.Char(1)
+}
+
+model nobetci_eczaneler_kategori {
+  numara Int    @id @default(autoincrement()) @db.UnsignedInt
+  ad     String @db.TinyText
+  aktif  String @db.Char(1)
+}
+
+model onemli_baglantilar {
+  numara   Int     @id @default(autoincrement()) @db.UnsignedInt
+  ad       String  @db.Text
+  aktif    String  @db.Char(1)
+  link     String? @db.Text
+  altbilgi String? @db.Text
+  blank    String? @db.Char(1)
+  puan     Int?    @db.UnsignedTinyInt
+}
+
+model ozelfirmalar_slayt {
+  numara             Int       @id @default(autoincrement()) @db.UnsignedInt
+  ad                 String?   @db.Text
+  detay              String?   @db.Text
+  resim_adres        String?   @db.Text
+  firma_no           Int       @default(0) @db.UnsignedInt
+  eklenme_tarihi     DateTime? @db.Date
+  guncellenme_tarihi DateTime? @db.Date
+  aktif              String    @db.Char(1)
+  resim_genislik     Int?
+  resim_yukseklik    Int?
+  puan               Int?      @default(0)
+  origin             String?   @db.TinyText
+}
+
+model redirecter {
+  id       Int       @id @default(autoincrement())
+  incoming String?   @db.Text
+  redirect String?   @db.Text
+  date     DateTime? @db.Date
+}
+
+model rehber {
+  numara         Int      @id @default(autoincrement()) @db.UnsignedInt
+  ad             String   @db.Text
+  icerik         String   @db.Text
+  resim_adres    String   @db.Text
+  kategori       Int      @default(0) @db.UnsignedInt
+  eklenme_tarihi DateTime @db.Date
+  hit            Int      @default(0) @db.UnsignedInt
+  aktif          String   @db.Char(1)
+  puan           Int?     @default(0)
+  description    String?  @db.Text
+  keywords       String?  @db.Text
+  title          String?  @db.Text
+  video_player   String   @db.Char(1)
+}
+
+model rehber_detay {
+  numara                Int     @id @default(autoincrement()) @db.UnsignedInt
+  icerik                String  @db.Text
+  resim_adres           String? @db.Text
+  kayit_no              Int     @default(0) @db.UnsignedInt
+  radiobutton           String  @db.Text
+  video                 String  @db.Text
+  video_adres           String  @db.TinyText
+  video_resim_adres     String  @db.TinyText
+  video_genislik        Int
+  video_yukseklik       Int
+  video_radiobutton     String  @db.Text
+  mobil_video_genislik  Int
+  mobil_video_yukseklik Int
+}
+
+model rehber_kategori {
+  numara           Int     @id @default(autoincrement()) @db.UnsignedInt
+  ad               String  @db.Text
+  aktif            String  @db.Char(1)
+  resim_adres      String? @db.Text
+  aciklama         String? @db.Text
+  eposta           String? @db.TinyText
+  siralama         Int?    @db.UnsignedTinyInt
+  siralama_turu    String? @db.TinyText
+  siralama_kriteri String? @db.TinyText
+  htaccess_etiket  String  @db.VarChar(255)
+}
+
+model roportaj_detay {
+  numara                Int     @id @default(autoincrement()) @db.UnsignedInt
+  icerik                String  @db.Text
+  resim_adres           String? @db.Text
+  kayit_no              Int     @default(0) @db.UnsignedInt
+  radiobutton           String  @db.Text
+  video                 String? @db.Text
+  video_adres           String  @db.TinyText
+  video_resim_adres     String  @db.TinyText
+  video_genislik        Int
+  video_yukseklik       Int
+  video_radiobutton     String  @db.Text
+  mobil_video_genislik  Int
+  mobil_video_yukseklik Int
+}
+
+model roportajlar {
+  numara         Int     @id @default(autoincrement()) @db.UnsignedInt
+  ad             String  @db.Text
+  icerik         String  @db.Text
+  resim_adres    String  @db.Text
+  kategori       Int     @default(0) @db.UnsignedInt
+  eklenme_tarihi String  @db.Text
+  hit            Int     @default(0) @db.UnsignedInt
+  aktif          String  @db.Char(1)
+  description    String? @db.Text
+  keywords       String? @db.Text
+  title          String? @db.Text
+  ozet           String? @db.Text
+  onemli         String? @db.Char(1)
+  basyazi        String? @db.Char(1)
+  video_player   String  @db.Char(1)
+}
+
+model sektorler {
+  numara                Int            @id @default(autoincrement()) @db.UnsignedInt
+  ad                    String         @db.VarChar(90)
+  detay                 String?        @db.Text
+  description           String?        @db.Text
+  resim_adres           String?        @db.Text
+  alternatif_sozler     String?        @db.Text
+  eklenme_tarihi        String?        @db.VarChar(10)
+  keywords              String?        @db.Text
+  title                 String?        @db.Text
+  aktif                 String         @db.Char(1)
+  siralama              Int            @default(0) @db.UnsignedInt
+  extra1                String         @db.Text
+  extra2                String         @db.Text
+  vitrin                String?        @db.Char(1)
+  htaccess_etiket       String         @db.VarChar(100)
+  sahte                 String         @db.Char(1)
+  yonlendirilecek_sayfa String         @db.VarChar(200)
+  keywords_exclude      String?        @db.Text
+  altsektorler          altsektorler[]
+
+  @@fulltext([ad], map: "ad")
+}
+
+model siniflandirma_sponsorlari {
+  numara           Int      @id @default(autoincrement()) @db.UnsignedInt
+  ad               String   @db.Text
+  resim_adres      String   @db.TinyText
+  aktif            String   @db.Char(1)
+  genislik         Int      @default(0) @db.UnsignedInt
+  yukseklik        Int      @default(0) @db.UnsignedInt
+  link             String?  @db.Text
+  altbilgi         String?  @db.Text
+  blank            String?  @db.Char(1)
+  puan             Int?     @db.UnsignedTinyInt
+  kategori         Int?     @db.UnsignedInt
+  ekleyen          String?  @db.TinyText
+  duzenleyen       String?  @db.TinyText
+  kaynak           String?  @db.Text
+  mobil            String?  @db.Char(1)
+  baslangic_tarihi DateTime @db.Date
+  bitis_tarihi     DateTime @db.Date
+  otomatik_ayarla  String   @db.Char(1)
+}
+
+model siniflandirmanin_lideri {
+  numara           Int      @id @default(autoincrement()) @db.UnsignedInt
+  ad               String   @db.Text
+  resim_adres      String   @db.TinyText
+  aktif            String   @db.Char(1)
+  genislik         Int      @default(0) @db.UnsignedInt
+  yukseklik        Int      @default(0) @db.UnsignedInt
+  link             String?  @db.Text
+  altbilgi         String?  @db.Text
+  blank            String?  @db.Char(1)
+  puan             Int?     @db.UnsignedTinyInt
+  kategori         Int?     @db.UnsignedInt
+  ekleyen          String?  @db.TinyText
+  duzenleyen       String?  @db.TinyText
+  kaynak           String?  @db.Text
+  mobil            String?  @db.Char(1)
+  baslangic_tarihi DateTime @db.Date
+  bitis_tarihi     DateTime @db.Date
+  otomatik_ayarla  String   @db.Char(1)
+}
+
+model sr_reklamlar {
+  numara           Int      @id @default(autoincrement()) @db.UnsignedInt
+  ad               String   @db.Text
+  resim_adres      String   @db.TinyText
+  aktif            String   @db.Char(1)
+  genislik         Int      @default(0) @db.UnsignedInt
+  yukseklik        Int      @default(0) @db.UnsignedInt
+  link             String?  @db.Text
+  altbilgi         String?  @db.Text
+  blank            String?  @db.Char(1)
+  puan             Int?     @db.UnsignedTinyInt
+  kategori         Int?     @db.UnsignedInt
+  ekleyen          String?  @db.TinyText
+  duzenleyen       String?  @db.TinyText
+  kaynak           String   @db.Text
+  mobil            String   @db.Char(1)
+  baslangic_tarihi DateTime @db.Date
+  bitis_tarihi     DateTime @db.Date
+  otomatik_ayarla  String   @db.Char(1)
+
+  @@index([kategori], map: "FK_sr_reklamlar_reklam_kategori")
+}
+
+model video {
+  numara      Int     @id @default(autoincrement()) @db.UnsignedInt
+  ad          String  @db.Text
+  resim_adres String  @db.TinyText
+  video_adres String  @db.TinyText
+  aktif       String? @db.Char(1)
+  baglanti1   String  @db.TinyText
+  baglanti2   String  @db.TinyText
+  baglanti3   String  @db.TinyText
+  baglanti4   String  @db.TinyText
+  baglanti5   String  @db.TinyText
+  kontrol     String  @db.Char(1)
+}
+
+model yazarlar {
+  numara          Int     @id @default(autoincrement()) @db.UnsignedInt
+  ad              String  @db.Text
+  aktif           String  @db.Char(1)
+  resim_adres     String? @db.Text
+  aciklama        String? @db.Text
+  eposta          String? @db.TinyText
+  siralama        Int?    @db.UnsignedTinyInt
+  telefon         String? @db.TinyText
+  htaccess_etiket String  @db.VarChar(255)
+}
+
+model yazi_detay {
+  numara                Int     @id @default(autoincrement()) @db.UnsignedInt
+  icerik                String  @db.Text
+  resim_adres           String? @db.Text
+  kayit_no              Int     @default(0) @db.UnsignedInt
+  radiobutton           String  @db.Text
+  video                 String  @db.Text
+  video_adres           String  @db.TinyText
+  video_resim_adres     String  @db.TinyText
+  video_genislik        Int
+  video_yukseklik       Int
+  video_radiobutton     String  @db.Text
+  mobil_video_genislik  Int
+  mobil_video_yukseklik Int
+}
+
+model yazilar {
+  numara         Int     @id @default(autoincrement()) @db.UnsignedInt
+  ad             String  @db.Text
+  icerik         String  @db.Text
+  resim_adres    String  @db.Text
+  kategori       Int     @default(0) @db.UnsignedInt
+  eklenme_tarihi String  @db.Text
+  hit            Int     @default(0) @db.UnsignedInt
+  aktif          String  @db.Char(1)
+  description    String? @db.Text
+  keywords       String? @db.Text
+  title          String? @db.Text
+  ozet           String? @db.Text
+  onemli         String  @db.Char(1)
+  basyazi        String  @db.Char(1)
+  video_player   String  @db.Char(1)
+}
+
+model contents {
+  id               Int       @id @default(autoincrement()) @db.UnsignedInt
+  active           Int?      @default(1) @db.TinyInt
+  type             String?   @db.VarChar(25)
+  bigdata          String?   @db.LongText
+  slug_tr          String?   @db.VarChar(135)
+  key              String?   @db.TinyText
+  rank             Int?
+  title_tr         String?   @db.VarChar(135)
+  title_en         String?   @db.TinyText
+  title_fr         String?   @db.TinyText
+  title_ar         String?   @db.TinyText
+  parent_slug      String?   @db.TinyText
+  parent_key       String?   @db.TinyText
+  oldid            Int?
+  oldparent        Int?      @default(0) @db.UnsignedInt
+  parent           Int?      @default(0) @db.UnsignedInt
+  createdat        DateTime  @default(now()) @db.DateTime(0)
+  bigparent        Int?
+  oldbigparent     Int?
+  updatedat        DateTime? @db.DateTime(0)
+  slug_en          String?   @db.TinyText
+  slug_fr          String?   @db.TinyText
+  slug_ar          String?   @db.TinyText
+  bigparent_slug   String?   @db.TinyText
+  country_slug     String?   @db.TinyText
+  city_slug        String?   @db.TinyText
+  district_slug    String?   @db.TinyText
+  subdistrict_slug String?   @db.TinyText
+  user             String?   @db.TinyText
+  img_tr           String?   @db.TinyText
+  img_en           String?   @db.TinyText
+  img_fr           String?   @db.TinyText
+  img_ar           String?   @db.TinyText
+  i_key_1          Float?    @db.Float
+  o_key_1          String?   @db.LongText
+
+  @@index([type], map: "type")
+  @@fulltext([title_tr], map: "title_tr")
+}
+
+model categories {
+  id        Int       @id @default(autoincrement()) @db.UnsignedInt
+  title     String    @default("") @db.VarChar(90)
+  sort      Int       @default(0)
+  img       String?   @db.Text
+  active    String    @default("1") @db.Char(1)
+  father    Int
+  bigdata   String?   @db.LongText
+  type      Int?
+  project   Int?
+  module    Int?
+  kind      String?   @db.TinyText
+  createdat DateTime? @db.DateTime(0)
+  updatedat DateTime? @db.DateTime(0)
+
+  @@index([module], map: "FK_categories_products")
+}
+
+model logger {
+  id     Int     @id @default(autoincrement())
+  name   String? @db.TinyText
+  detail String? @db.Text
+}
+
+model ozel_firmalar_slider_yedek_20220322 {
+  numara             Int      @id @default(autoincrement()) @db.UnsignedInt
+  ad                 String?  @db.MediumText
+  detay              String?  @db.Text
+  resim_adres        String?  @db.MediumText
+  firma_no           Int      @default(0) @db.UnsignedInt
+  eklenme_tarihi     DateTime @db.Date
+  guncellenme_tarihi DateTime @db.Date
+  aktif              String   @db.Char(1)
+  resim_genislik     Int?
+  resim_yukseklik    Int?
+  puan               Int?     @default(0)
+}
+
+model willbedeleted {
+  id      Int     @id @default(autoincrement())
+  user    Int?    @db.TinyInt
+  data    String? @db.TinyText
+  deleted Int?    @db.TinyInt
+}
+
+model ozelfirmalar_milestone {
+  numara          Int      @id @default(autoincrement()) @db.UnsignedInt
+  ad              String?  @db.Text
+  detay           String?  @db.Text
+  resim_adres     String?  @db.Text
+  firma_no        Int      @default(0) @db.UnsignedInt
+  eklenme_tarihi  DateTime @db.Date
+  aktif           String   @db.Char(1)
+  resim_genislik  Int?
+  resim_yukseklik Int?
+  puan            Int?     @default(0) @db.TinyInt
+  origin          String?  @db.TinyText
+
+  @@index([firma_no], map: "FK_ozelfirmalar_firmalar")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId], map: "Account_userId_fkey")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Session_userId_fkey")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

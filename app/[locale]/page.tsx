@@ -55,7 +55,7 @@ let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.en
       // Yapmam gerken: Yukarıda cuffsları obje olarak yollamışım. halbuki cuffsları yollayıp yanlarına sadece objeleri koymalıydım...
 
     return (
-    <div>        assda     
+    <div>             
              <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
              <Estates adverts={resdata?.realestates}/>
              

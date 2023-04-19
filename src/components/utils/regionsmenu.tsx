@@ -1,18 +1,19 @@
 
 import s from "./regionsmenu.module.css"
 import Link from "next/link"
-import { useRouter } from 'next/router';
-
+import { useRouter } from 'next/navigation';
 import { BiWorld, BiMapAlt, BiMapPin, BiMap } from "react-icons/bi";
-
 
 
 export const RegionsMenu = ({props}) => 
 {
-    let { countries} =props;       
+
+    // console.log("saassas--->", props);
+
+    let { countries} =props ?? {} ;       
     const router = useRouter();      
-    let { rightbar } = projectsettingsFunc() ?? {}
-    let { country, city , district, slug } = router?.query;
+    // let { rightbar } = projectsettingsFunc() ?? {}
+    let { country, city , district, slug } = props?.searchParams ?? {};
 
     let list= 1 ////Sr gibi bir sitede şehirlerin listelenmesi anlamlımı ? Tabi ki değil. Tek şehir var zaten
     let fixedcountry = "turkiye"
@@ -57,7 +58,7 @@ export const RegionsMenu = ({props}) =>
                                                                               <span><Link  href={{pathname:fulllink, query:{country:countryitem?.slug_tr}}}  style={{textDecoration:selected ? "underline": "none"}}>{countryitem?.title_tr}</Link></span>                                                                              
                                                                         </div>}
                                                                           
-                                                                        {selected && <Cities cities={cities} countryitem={countryitem} fulllink={fulllink}/>}
+                                                                        {selected && <Cities cities={cities} countryitem={countryitem} fulllink={fulllink} searchParams={props?.searchParams}/>}
                                                                                 
                                                                                                                                                                                                                               
                                                                     </div>      
@@ -76,12 +77,14 @@ export const RegionsMenu = ({props}) =>
 const Cities = (props) => {
 
   
-    let { selected, cities, countryitem, fulllink} = props ?? {} 
+    let { selected, cities, countryitem, fulllink, searchParams} = props ?? {} 
 
-    const router = useRouter();      
-    let { rightbar } = projectsettingsFunc() ?? {}
-    let fixedcity = rightbar?.fixedcity; // Sabiltenmiş şehir
-    let { country, city , district } = router?.query;
+    let { country, city , district, slug } = searchParams ?? {};
+
+
+    const router = useRouter();          
+    let fixedcity = "sakarya"; // Sabiltenmiş şehir
+    
 
    // city= city ?? fixedcity; // Eğer query paramaterstan country gelmemesine karşına sabitlenmiş bir country varsa onu al
     

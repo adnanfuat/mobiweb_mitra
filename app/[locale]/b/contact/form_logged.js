@@ -8,7 +8,7 @@ import { useState } from "react";
  
  export default function Form_Logged ({props}) {
 
-  let {slug, comments,  locale} = props;
+  let {slug, comments,  locale} = props ?? {};
   
   // const  commentsclient  = commentsClientMode({parent_slug:slug});  // , whichPermissions:["article_edit", "article_add"]
 

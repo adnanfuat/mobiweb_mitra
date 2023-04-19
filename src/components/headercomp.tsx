@@ -1,16 +1,28 @@
 import Link from "next/link";
 import s from "./headercomp.module.css";
-import {Menu} from "@/components/menu"
+import {Menu} from "@/components/menu";
+import {LoginIntro} from "@/components/loginintro";
+import dynamic from "next/dynamic";
 
 
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
-  export  default function HeaderComp  (props) {
+
+  
+
+
+  export  default async function HeaderComp  (props) {
+
+    const session = await getServerSession(authOptions)
   
     let {logo} = props ?? {};
   
     let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename  
   
     let {width, height} = logo?.bigdata?.details ?? {}
+
+    console.log("session::", session)
   
     return (
       <div className={s.headercompwr}>
@@ -21,6 +33,9 @@ import {Menu} from "@/components/menu"
   
   
         </div>
+                
+
+        <LoginIntro/>
 
         <Menu/>
   
