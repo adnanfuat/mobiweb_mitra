@@ -5,13 +5,13 @@ import { useState } from "react";
 
  const DynamicAdd = dynamic(() => import("./form_add"));
  
- export default function Form_Logged ({props}) {
+ export default function Form_Logged_Dynamic ({props}) {
 
   let {slug,   session} = props ?? {};
   
   let contactmessages=session?.user?.contactmessages ?? [];
 
-  console.log(" : ", props);
+  // console.log(" : ", props);
 
   const [show, setshow] = useState(false)
 
@@ -34,7 +34,7 @@ import { useState } from "react";
                                       
                               </div>
                                       
-                                  {show && <DynamicAdd props={{slug}}/>} 
+                                  {show && <DynamicAdd slug={slug} session={session}/>} 
 
                               </div>
 
