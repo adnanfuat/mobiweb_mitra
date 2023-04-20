@@ -13,9 +13,7 @@ export default async function RootLayout({
       
   return (    
         <div className={s.shell}>
-
               {children}
-
         </div>    
   )
 }

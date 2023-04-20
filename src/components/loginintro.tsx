@@ -5,12 +5,15 @@ import dynamic from "next/dynamic";
 
 const Dynamic_Login = dynamic(() => import("./login").then(comp=>comp.Login), { loading: () => <div>Yükleniyor</div> });
 
-export const LoginIntro = () => {
+export const LoginIntro = (props) => {
+
+  let {session} = props ?? {};
+
   const queryClient = new QueryClient();
   return (
     <div>
       <QueryClientProvider client={queryClient}>           
-        <Dynamic_Login/>
+        <Dynamic_Login session={session}/>
       </QueryClientProvider>    
     </div>
   )

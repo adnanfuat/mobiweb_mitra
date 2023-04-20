@@ -1,17 +1,17 @@
 "use client"
-// import {isLogged} from "./utils/islogged";
 import s from "./login.module.css";
 import {  signIn, signOut } from "next-auth/react";
-// import { userNotifications } from "@/components/hooksnew/usernotifications";  
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-import {RiLockUnlockFill, RiLockUnlockLine, RiEmotionHappyLine, RiEmotionUnhappyLine, RiStarSFill, RiCloseFill, RiMenuLine, RiUserStarFill, RiUser3Fill, RiVideoFill, RiVideoLine, RiLock2Fill, RiLock2Line, RiPlayMiniFill,RiMagicFill, RiPlayMiniLine, RiMailLine, RiMailSendFill, RiStarHalfFill, RiStarFill, RiEditBoxLine, RiEditBoxFill,  RiToggleFill, RiToggleLine , RiAncientPavilionFill, RiAncientPavilionLine, RiInstagramLine, RiInstagramFill, RiDeleteBin2Fill, RiDeleteBin2Line, RiEyeLine, RiEyeOffLine, RiCodeBoxFill, RiCodeBoxLine, RiFileTextFill, RiFileTextLine} from "react-icons/ri";
-import {useMutation, useQueryClient, useQuery } from 'react-query';
+import {RiUserStarFill, RiUser3Fill} from "react-icons/ri";
+import { useQuery } from 'react-query';
 
 
-export const Login = ({props}) => {
 
-  const {session, user, accessToken} = props?? {}// isLogged();
+export const Login = (props) => {
+
+  const {session} = props?? {}// isLogged();
+
+  let {user} =  session ?? {};
   
         const fetcher = async () => {
                 
@@ -29,8 +29,7 @@ export const Login = ({props}) => {
    
 
       const { data} = useQuery( ["notifications_count"], () => fetcher() , {refetchOnWindowFocus:true})  // daha sonra false'a çevir...
-      
-      //  console.log("sdsa--->", user);
+            
 
   //**************************** (sitemap fecth) */
 
@@ -45,21 +44,9 @@ export const Login = ({props}) => {
 
                                   {data?.i_key_1>0 && <div onClick={()=>!user && signIn()}  className={s.notifications}>{data?.i_key_1}</div>        }
 
-                                  <div className={s.popup}>                                    
-                                                
-                                                <Link href={"/console"}>Konsol</Link>
-                                                
-                                                {/* <Link href={"/console/notifications"}>Bildirimler</Link> */}
-                                                <a href={"/console/notifications"}>Bildirimler</a>
-
-                                                {/* <Link href={"/console/adverts"}>İlan</Link> */}
-                                                <a href={"/console/adverts"}>İlan</a>
-
-                                                {/* <Link href={"/console/contents"}>Haber</Link> */}
-                                                <a href={"/console/contents"}>Haber</a>
-                                                                                                                                                
-                                                <div  onClick={()=>{signOut(); router.push(`/`) }}>Çıkış</div>
-
+                                  <div className={s.popup}>                                                                                    
+                                          {/* <Link href={"/console"}>Konsol</Link>                                                                                                                                                                                                                                                                                               */}
+                                          <div  onClick={()=>{signOut(); router.push(`/`) }}>Çıkış</div>
                                   </div>
                             </div>
               

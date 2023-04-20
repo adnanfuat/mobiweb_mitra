@@ -4,6 +4,8 @@ import type { NextAuthOptions } from 'next-auth'
 import prisma from "../../../src/db/prismadb";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { parseContentFunc } from '@/components/utils/parsecontentfunc';
+import { parseContentsFunc } from '@/components/utils/parsecontentsfunc';
 
 
 export const authOptions: NextAuthOptions = 
@@ -16,15 +18,21 @@ export const authOptions: NextAuthOptions =
       async session({ session, token,user }) {
         
   
-                  // let tokenObj=await db.session.findFirst({where:{userId:user?.id}})        
-                  // let userinfo=await db.contents.findFirst({select:{bigdata:true, slug_tr:true}, where:{AND:[{type:"userinfo"}, {slug_tr:user?.email}]}}); //devamlı bu verileri çekmesin diye cacheleme yapılabilir.. ya da backendde cachleme yapılabilir..
-  
-                  // let companies=await db.contents.findMany({select:{title_tr:true, slug_tr:true}, where:{AND:[{type:"company"}, {user:user?.email}]}}); //devamlı bu verileri çekmesin diye cacheleme yapılabilir.. ya da backendde cachleme yapılabilir..                
-  
-                  //               userinfo=parseContentFunc({result:userinfo});                        
-                  //               session.user.accessToken = tokenObj?.sessionToken;
-                  //               session.user.userinfo=userinfo;        
-                  //               session.user.companies=companies;        
+                            // Bu işlemleri burada değil, backendde yapmam lazım.. 
+                            let tokenObj=await prisma.session.findFirst({where:{userId:user?.id}})        
+                            let userinfo=await prisma.contents.findFirst({select:{bigdata:true, slug_tr:true}, where:{AND:[{type:"user-info"}, {slug_tr:user?.email}]}}); //devamlı bu verileri çekmesin diye cacheleme yapılabilir.. ya da backendde cachleme yapılabilir..                                                  
+                            let smsverifications=await prisma.contents.findMany({select:{bigdata:true, slug_tr:true,parent_slug:true, title_tr:true}, where:{AND:[{type:"verification"},{bigparent_slug:"phone"}, {user:user?.email}]}}); //devamlı bu verileri çekmesin diye cacheleme yapılabilir.. ya da backendde cachleme yapılabilir..
+                            let companies=await prisma.contents.findMany({select:{title_tr:true, slug_tr:true}, where:{AND:[{type:"company"}, {user:user?.email}]}}); //devamlı bu verileri çekmesin diye cacheleme yapılabilir.. ya da backendde cachleme yapılabilir..                
+                            let contactmessages=await prisma.contents.findMany({select:{title_tr:true, slug_tr:true, bigdata:true}, where:{AND:[{type:"message"}, {bigparent_slug:"web"}, {parent_slug:"contact"}, {parent_key:"mitraemlak.com.tr"}]}}); //devamlı bu verileri çekmesin diye cacheleme yapılabilir.. ya da backendde cachleme yapılabilir..                
+                            contactmessages=parseContentsFunc({result:contactmessages});      
+
+                            //  console.log("smsverificationssmsverifications: ", smsverifications);
+                                          userinfo=parseContentFunc({result:userinfo});                        
+                                          session.user.accessToken = tokenObj?.sessionToken;
+                                          session.user.userinfo=userinfo;        
+                                          session.user.companies=companies;        
+                                          session.user.smsverifications=smsverifications;      
+                                          session.user.contactmessages=contactmessages;      
                                 
   
                                  return Promise.resolve(session);
@@ -34,20 +42,7 @@ export const authOptions: NextAuthOptions =
   
   events:{
     async createUser({user}) {     
-                                  // let result=  await graphcms?.request(SwissArmyKnifeMutation,{data:{type:"initializenewuser", email:user?.email}});        
-                                  
-                                  let bigdata=                                  
-                                    {
-                                      name :user?.name,
-                                      usertype: "standart",
-                                      jobtype: "",
-                                      code: 0
-                                    }                                    
-                                  
-                                    bigdata=JSON.stringify(bigdata)
-
-                                  let userinfo=await prisma.contents.create({data:{bigdata, type:"userinfo", img_tr:user?.image ,slug_tr:user?.email, bigparent_slug:"standart" ,  title_tr:user?.name, user:user?.email  }});
-
+                                   let result=  await graphcms?.request(SwissArmyKnifeMutation,{data:{type:"initializenewuser", email:user?.email}});        
                              }
   },
   

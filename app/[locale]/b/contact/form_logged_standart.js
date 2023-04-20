@@ -1,23 +1,25 @@
 import s from "./form.module.css"
 
  
- export default function Form_NotLogged_Standart ({props}) {
+ export default function Form_Logged_Standart ({props}) {
 
-  let {slug, comments,  locale} = props ?? {};    
+  let {session} = props ?? {};    
 
-  comments=comments?.filter(item=> { // sadece o dile ait olan yorumları göstereyim
+  // comments=comments?.filter(item=> { // sadece o dile ait olan yorumları göstereyim
 
-    let historylength = item?.bigdata?.history?.length ?? 0 ;
+  //   let historylength = item?.bigdata?.history?.length ?? 0 ;
   
-    let lasthistory = item?.bigdata?.history?.[historylength-1]
+  //   let lasthistory = item?.bigdata?.history?.[historylength-1]
   
-    let langcontrol= eval(`lasthistory?.lang?.${locale ?? localeStatic}?.comment`)  
+  //   let langcontrol= eval(`lasthistory?.lang?.${locale ?? localeStatic}?.comment`)  
   
-    if (langcontrol)   {return true } else  {return false}
+  //   if (langcontrol)   {return true } else  {return false}
   
-  })
-  
-    console.log("article:::", comments);
+  // })  
+     
+     // console.log("article:::", session);
+
+     let comments=[];
     
 
   return ( 

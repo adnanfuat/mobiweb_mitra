@@ -1,15 +1,19 @@
 import WebData from "@/components/utils/webdata";
 import Form from "./form";
 import s from "./page.module.css"
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
 
 
-
 export default async function Page  () {
-  let resdata=await WebData();
 
-  // console.log("resdata:::", resdata);
+  let resdata=await WebData();
+  const session = await getServerSession(authOptions)  
+  // console.log("resdata:::", session);
+
+
 
   return (
     <div className={s.shell}>
@@ -21,7 +25,7 @@ export default async function Page  () {
 
                 <div className={s.sectionwr}>                    
                       <div className={s.sectiontitle}>İletişim Formu</div>
-                      <div className={s.form}><ContactForm/></div>
+                      <div className={s.form}><ContactForm session={session}/></div>
                 </div>
 
 
@@ -37,11 +41,14 @@ export default async function Page  () {
 
 
 
-const ContactForm = () => {
+const ContactForm = (props) => {
+
+  let {session} = props ?? {};
+
   return (
       <div className={s.ci_shell}>
         
-          <Form/>
+          <Form session={session}/>
               
       </div>    
   )

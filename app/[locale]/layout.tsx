@@ -1,4 +1,3 @@
-
 import HeaderComp from "@/components/headercomp"
 import FooterComp from "@/components/footercomp"
 import WebData from "@/components/utils/webdata"
@@ -7,7 +6,6 @@ import './globals.css';
 import s from "./layout.module.css"
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-
 
 const inter = Inter({
   variable: '--inter-font',
@@ -19,17 +17,13 @@ import {Interaction} from "./interaction"
 import Link from 'next/link';
 
 
-
-
-
 export default async function RootLayout({
   children,  
   params: {locale}
 }: {
   children: React.ReactNode
 }) {
-
-   // console.log("assadsd", WebQuery)
+    
     let resdata=await WebData();
       
     // console.log("data;;;", resdata)
@@ -49,8 +43,7 @@ export default async function RootLayout({
       
       let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
 
-      
-      
+            
   return (
     <html> 
         <body className={`${s.body} ${inter.variable}`} >

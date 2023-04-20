@@ -1,30 +1,48 @@
 import { signIn } from "next-auth/react"
 
 import { Button} from "@/components/reuseable/button";
-import { GraphQLClient } from "graphql-request";
-import { isLogged} from  "@/components/hooksnew/islogged";
+// import { isLogged } from  "@/components/hooksnew/islogged";
 import { useState } from "react";
 import {  useQueryClient } from "react-query";
 import { useMutation } from "react-query"
 
-export default function Form_Add ({props}) {
-  
-    let {slug, locale} = props
-    const {name,permissions, user} = isLogged();
-    const queryClient = useQueryClient()
-  
-    const [loading, setloading] = useState(false)
-    // console.log("comments props---------->", user);
-      
-  const graphcms = new GraphQLClient(process.env.NEXT_PUBLIC_API_URL, { headers: {authorization: `Bearer ${user?.accessToken}`  }});
-  const fetcher =async ()=> {
-    await graphcms?.request( Form_Insert, { comment:_X, parent_slug:slug, project:"sakaryarehberim", active:1,  parent:0, accessToken:user?.accessToken, langCode:locale});
-    queryClient.invalidateQueries();  
-    set_X("");setloading(false);
-}
-    
-const { mutate } = useMutation( () => fetcher(),    {onSuccess: () => { queryClient.invalidateQueries() }} );
 
+export default function Form_Add (props) {
+  
+    let {slug, locale} = props;
+
+    // console.log("asdsaddsasadsadsd", props);
+    // const {name,permissions, user} = isLogged();
+
+    const queryClient = useQueryClient()  
+    const [loading, setloading] = useState(false)
+  
+      
+    
+    const inserter = async () => {
+                
+      return await fetch(process.env.NEXT_PUBLIC_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", authorization: `Bearer ${accessToken}`},
+        body: JSON.stringify({
+          query: Form_Insert,
+          variables: { data: {type:"notifications_count"} },
+        }),
+      })
+        .then((res) => res.json())
+        .then((result) => { 
+                      queryClient.invalidateQueries(); 
+                      set_X(""); setloading(false);
+                      return  result?.data?.swissarmyknifequery;
+                 });
+        
+        
+}
+
+
+Buradan mesaj yollamayı yap
+    
+    const { mutate } = useMutation( () => inserter(),    {onSuccess: () => { queryClient.invalidateQueries() }} );
 
     const [_X, set_X] = useState("");
     async function pusher() { if (_X.length > 5  ) {  mutate() } }

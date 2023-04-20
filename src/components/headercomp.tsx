@@ -22,7 +22,7 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]"
   
     let {width, height} = logo?.bigdata?.details ?? {}
 
-    console.log("session::", session)
+    //  console.log("session::", session)
   
     return (
       <div className={s.headercompwr}>
@@ -35,7 +35,7 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]"
         </div>
                 
 
-        <LoginIntro/>
+        <LoginIntro session={session}/>
 
         <Menu/>
   
