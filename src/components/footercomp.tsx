@@ -23,7 +23,7 @@ import { TbBrandFacebook, TbBrandInstagram, TbBrandTwitter, TbBrandYoutube, TbBr
   
 
 <div className={s.socials}>
-        <a target="blank" href="https://www.facebook.com/sakaryarehberim" title="50.000 Sakaryalı" className={s.social}><TbBrandFacebook/></a>
+        <a target="blank" href="https://www.facebook.com/sakaryarehberim" title="50.000 Sakaryalı..." className={s.social}><TbBrandFacebook/></a>
         <a target="blank" href="https://instagram.com/sakarya_rehberim" title="23.000 Sakaryalı takipçi" className={s.social}><TbBrandInstagram/></a>
         <a target="blank" href="https://twitter.com/sakaryarehberim" title="#Sakarya'dan 4000 kişi" className={s.social}><TbBrandTwitter/></a>
         <a target="blank" href="https://www.youtube.com/sakaryarehberimcom" title="Videolarla Sakarya" className={s.social}><TbBrandYoutube/></a>                  
