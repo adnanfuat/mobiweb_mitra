@@ -5,7 +5,7 @@ import { useSession} from "next-auth/react"
 
 
 
-export const isLogged =   () => {
+export const useIsLogged =   () => {
 
     // const session = await getServerSession(authOptions);
     

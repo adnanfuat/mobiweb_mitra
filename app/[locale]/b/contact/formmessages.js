@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 
   
-  export const formMessages = ({parent_slug}) => {
+  export const useFormMessages = ({parent_slug}) => {
                 
     const fetcher =async ()=>           
                         {                                                    

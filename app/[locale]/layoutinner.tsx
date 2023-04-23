@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 import { QueryClientProvider, QueryClient } from "react-query";
 
-
+import {siteProxy} from "@/constants/siteproxy"
 
 export default function LayoutInner({
   children,
@@ -19,7 +19,7 @@ export default function LayoutInner({
   return (
           <SessionProvider session={session} refetchInterval={5 * 60}>
                     <QueryClientProvider client={queryClient}>       
-                                              <div>{children}</div>
+                                              <div  onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}>{children}</div>
                     </QueryClientProvider>
           </SessionProvider>
         )

@@ -1,20 +1,37 @@
+import s from "./page.module.css"
+import { BolgeIsmiOgren } from "@/components/utils/bolgeismiogren";
 import WebData from "@/components/utils/webdata";
 import Form from "./form";
-import s from "./page.module.css"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
+import {localeStatic} from "@/constants/localestatic";
+// import userMessages from "@/components/utils/usermessages";
+
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
+import { cacheCountries } from "@/components/utils/cachecountries";
 
 
-export default async function Page  () {
+export default async function Page  ({params}) {
+
+  let  countries = await cacheCountries();
+
+  let {locale} = params ?? {}
 
   let resdata=await WebData();
-  const session = await getServerSession(authOptions)  
-  // console.log("resdata:::", session);
+  const session = await getServerSession(authOptions);
 
+  let info = resdata?.bigdata?.history[0];
+  let lang = info?.lang;
+  let selectedlang = eval(`lang.${locale}`);
+  let defaultlang = eval(`lang.${localeStatic}`);
+  let selectedaddresses= selectedlang?.addresses;
+  let defaultaddresses = defaultlang?.addresses;
 
+  let addresses = (selectedaddresses && selectedaddresses?.length>0) ?  selectedaddresses : defaultaddresses
 
+  //  console.log("resdata::::::::", defaultaddresses);
+  
   return (
     <div className={s.shell}>
       
@@ -24,14 +41,15 @@ export default async function Page  () {
             <div className={s.mainwr}>
 
                 <div className={s.sectionwr}>                    
-                      <div className={s.sectiontitle}>İletişim Formu</div>
-                      <div className={s.form}><ContactForm session={session}/></div>
+                      <div className={s.sectiontitle}>Mesaj Formu</div>
+                      <div className={s.form}><ContactForm session={session} /></div>
+                      {/* usermessages={usermessages} */}
                 </div>
 
 
                 <div className={s.sectionwr}>                    
                       <div className={s.sectiontitle}>İletişim Bilgileri</div>
-                      <div className={s.info}><ContactInfo/></div>   
+                      <div className={s.info}><ContactInfo addresses={addresses} countries={countries}/></div>   
                 </div>
                          
             </div>
@@ -43,12 +61,12 @@ export default async function Page  () {
 
 const ContactForm = (props) => {
 
-  let {session} = props ?? {};
+  let {session, usermessages} = props ?? {};
 
   return (
       <div className={s.ci_shell}>
         
-          <Form session={session}/>
+          <Form session={session} usermessages={usermessages}/>
               
       </div>    
   )
@@ -56,12 +74,15 @@ const ContactForm = (props) => {
 
 
 
-const ContactInfo = () => {
+const ContactInfo = (props) => {
+
+  let {addresses, countries} = props ?? {};
+  
     return (
         <div className={s.ci_shell}>
           
 
-          <Address/>          
+          <Addresses addresses={addresses} countries={countries}/>          
           <Phones/>          
           <Email/>          
 
@@ -90,16 +111,29 @@ const Email = () => {
 
 
 
-const Address = () => {
+const Addresses = (props) => {
+  
+  let {addresses, countries} = props ?? {};
+
+  
   return (
     <div className={s.ci_itemwr}>
             
-            
-    <div className={s.ci_itemicon}><RiMapPin2Fill/></div>
-    <div className={s.ci_itemdatawr}>
-          <div className={s.ci_itemtitle}>Adres</div>
-          <div className={s.ci_itemdata}>Pazarcı Mah. Uğur Mumcu Cad. 134/A Antalya / Gazipaşa</div>                                  
-    </div>          
+        
+          <div className={s.ci_itemicon}><RiMapPin2Fill/></div>
+          <div className={s.ci_itemdatawr}>
+                <div className={s.ci_itemtitle}>Adres</div>
+
+                <div className={s.itemswr}>
+                        {addresses?.map((addressitem, i)=>{
+                                
+                                    return <div className={s.ci_itemdata}  key={i}>{addressitem?.address} {BolgeIsmiOgren(addressitem?.subdistrict_slug, "mahalle", countries) ?? ""} {BolgeIsmiOgren(addressitem?.district_slug, "ilce", countries) ?? ""} {BolgeIsmiOgren(addressitem?.city_slug, "il", countries) ?? ""} {BolgeIsmiOgren(addressitem?.country_slug, "ulke", countries) ?? ""}</div>  
+
+                              })
+                        }
+                </div>
+          </div>     
+           
 
   </div>
   )

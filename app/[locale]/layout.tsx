@@ -1,6 +1,7 @@
 import HeaderComp from "@/components/headercomp"
 import FooterComp from "@/components/footercomp"
 import WebData from "@/components/utils/webdata"
+import DictionaryData from "@/components/utils/dictionarydata"
 import LayoutInner from "./layoutinner"
 import './globals.css';
 import s from "./layout.module.css"
@@ -13,20 +14,23 @@ const inter = Inter({
   weight:["100", "200","300","400","500","600", "700","800","900"]
 })
 
-import {Interaction} from "./interaction"
-import Link from 'next/link';
+
+
 
 
 export default async function RootLayout({
   children,  
-  params: {locale}
+  params
 }: {
   children: React.ReactNode
 }) {
-    
+        
+
     let resdata=await WebData();
+
+    let dictionary=await DictionaryData();
       
-    // console.log("data;;;", resdata)
+    //  console.log("data;;::;", dictionary)
     let lang= resdata?.bigdata?.history[0]?.lang?.tr;
     let logofiles =  lang?.logofiles;
 
@@ -43,21 +47,19 @@ export default async function RootLayout({
       
       let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
 
+      
+
             
   return (
     <html> 
         <body className={`${s.body} ${inter.variable}`} >
-
-              <Interaction/>
-
-              <HeaderComp logo={logo}/>
-
-              <div className={s.main}>
               
+              <HeaderComp logo={logo} params={params} dictionary={dictionary}/>
+
+              <div className={s.main}>              
                               <LayoutInner>
                                     {children}                          
-                              </LayoutInner>
-                        
+                              </LayoutInner>                        
               </div> 
 
               <div className={s.footer}><FooterComp logo={logo}/></div>

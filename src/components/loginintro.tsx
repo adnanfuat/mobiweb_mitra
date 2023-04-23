@@ -10,10 +10,11 @@ export const LoginIntro = (props) => {
   let {session} = props ?? {};
 
   const queryClient = new QueryClient();
+
   return (
     <div>
       <QueryClientProvider client={queryClient}>           
-        <Dynamic_Login session={session}/>
+            <Dynamic_Login session={session}/>
       </QueryClientProvider>    
     </div>
   )

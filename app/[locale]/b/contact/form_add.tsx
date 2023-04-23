@@ -12,9 +12,7 @@ export default function Form_Add (props) {
     let {user} = session ?? {};
 
     let {accessToken, name} = user ?? {};
-
-    // console.log("session::::: ", user);
-
+    
     const queryClient = useQueryClient()  
     const [loading, setloading] = useState(false)
     
@@ -56,17 +54,16 @@ export default function Form_Add (props) {
                         value={message}
                         style={{  padding:20, margin:"10px 0px",  fontSize: "1rem" }}
                         onChange={(e)=>setmessage(e.target.value)}
-                        disabled={!name }
+                        
                     >
                     </textarea>
-  
-  
+    
   {/* (kullanıcı sisteme girdiğinde otomatik yorum yetkisini açıp, burada da o yetkinin varlığını aramamız lazım. Şu an loginauthorized yanlış olmuş...) */}
                       
   {(name) ?
                                                   
                         
-                            <Button props={{loading, text: loading ? `Kaydediliyor` :  `Kaydet`, width:160, icon: `IoSave`, disabled:(message.length < 6 || loading),  onClick:() => { if (message.length > 5) { setloading(true) ;pusher(); }  }  }}/>  
+                            <Button props={{loading, text: loading ? `Kaydediliyor` :  `Gönder`, width:160, icon: `IoSave`, disabled:(message.length < 6 || loading),  onClick:() => { if (message.length > 5) { setloading(true) ;pusher(); }  }  }}/>  
   
                             :
   

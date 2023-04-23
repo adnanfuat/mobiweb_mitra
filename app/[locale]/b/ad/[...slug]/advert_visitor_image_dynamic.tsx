@@ -33,11 +33,11 @@ export default function Advert_Visitor_Image_Dynamic  (props) {
       <div className="embla__viewport"  ref={emblaRef} >
         <div className="embla__container" >
           
-          {fileslugs?.map(slug=>{
+          {fileslugs?.map((slug, i)=>{
                     
                     let file=connectedfiles?.find(a=>a?.slug_tr==slug); // Dosya Objeleri aradaın ilgili dosya objesini al
 
-                    return <div className="embla__slide" onClick={()=> emblaApi.scrollNext()}><MiniImg slug={slug} file={file}/></div>
+                    return <div className="embla__slide" onClick={()=> emblaApi.scrollNext()} key={i}><MiniImg slug={slug} file={file}/></div>
 
           })}
           

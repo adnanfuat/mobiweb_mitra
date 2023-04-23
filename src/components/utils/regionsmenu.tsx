@@ -40,14 +40,14 @@ export const RegionsMenu = ({props}) =>
                <div className={s.rmainwr}>
       
                         {
-                          countries.map(countryitem=> {      
+                          countries.map((countryitem, i)=> {      
                             
                                                 let selected = countryitem.slug_tr==country;
 
                                                 let cities = fixedcity ? countryitem?.cities?.filter(c=>c?.slug_tr==fixedcity) : countryitem?.cities; // Sabit bir ülke atandıysa sadece onu ver..
 
                                                         return (                                                                
-                                                                    <div className={s.categorynamewr}>  
+                                                                    <div className={s.categorynamewr}  key={i}>  
 
                                                                             {/* { console.log("categories::.:::::", countryitem) } */}
 
@@ -91,11 +91,11 @@ const Cities = (props) => {
     return(
                   <div className={s.citieswr}> 
                   
-                            {cities?.map(cityitem=>{
+                            {cities?.map((cityitem, i)=>{
               
                                                                 let selected = cityitem.slug_tr==city;
               
-                                                                return  <div className={s.categorynamewr}>
+                                                                return  <div className={s.categorynamewr}  key={i}>
                                                                             <div className={s.categorynameitem}  style={{fontSize:15}}>  
                                                                                 { <BiMapAlt/> } 
                                                                                 <span><Link href={{pathname:fulllink, query:{country:countryitem?.slug_tr, city:cityitem?.slug_tr}}} style={{textDecoration:selected ? "underline": "none"}}>{cityitem?.title_tr}</Link></span>                                                                              
@@ -132,13 +132,13 @@ const Districts = (props) => {
 
   return (
             <div className={s.citieswr}> 
-                {districts?.map(districtitem=>{
+                {districts?.map((districtitem,i)=>{
 
                           let selected = districtitem.slug_tr==district;
 
                           
 
-                            return( <div className={s.categorynamewr}>
+                            return( <div className={s.categorynamewr}  key={i}>
                                               <div className={s.categorynameitem}  style={{fontSize:14}}>  
                                                   { <BiMapPin/> } 
                                                   <span><Link  href={{pathname:fulllink, query:{country:countryitem?.slug_tr, city:cityitem?.slug_tr, district:districtitem?.slug_tr}}} style={{textDecoration:selected ? "underline": "none"}}>{districtitem?.title_tr}</Link></span>                                                                              
@@ -174,11 +174,11 @@ const Subdistricts = (props) => {
 
   return (
     <div className={s.citieswr}> 
-                                  { subdistricts?.map(subdistrictitem=>{
+                                  { subdistricts?.map((subdistrictitem,i)=>{
 
                                                                               let selected = subdistrictitem.slug_tr==subdistrict;
 
-                                                                              return  (<div className={s.categorynamewr}>
+                                                                              return  (<div className={s.categorynamewr}  key={i}>
                                                                               <div className={s.categorynameitem} style={{fontSize:13}}>  
                                                                                   { <BiMap/> } 
                                                                                   <span><Link  href={{pathname:fulllink, query:{country:countryitem?.slug_tr, city:cityitem?.slug_tr, district:districtitem?.slug_tr,  subdistrict:subdistrictitem?.slug_tr}}} style={{textDecoration:selected ? "underline": "none"}}>{subdistrictitem?.title_tr}</Link></span>                                                                              

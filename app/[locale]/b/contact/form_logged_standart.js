@@ -1,44 +1,24 @@
 import s from "./form.module.css"
+import { signIn } from "next-auth/react"
+import { RiSendPlaneLine } from "react-icons/ri";
 
- 
- export default function Form_Logged_Standart ({props}) {
+export default function Form_Logged_Standart ({props}) {
 
   let {session} = props ?? {};    
-
-  // comments=comments?.filter(item=> { // sadece o dile ait olan yorumları göstereyim
-
-  //   let historylength = item?.bigdata?.history?.length ?? 0 ;
-  
-  //   let lasthistory = item?.bigdata?.history?.[historylength-1]
-  
-  //   let langcontrol= eval(`lasthistory?.lang?.${locale ?? localeStatic}?.comment`)  
-  
-  //   if (langcontrol)   {return true } else  {return false}
-  
-  // })  
-     
-     // console.log("article:::", session);
-
-     let comments=[];
-    
-
+         
   return ( 
                     <div className={s.shell}> 
                     <div className={s.wr}>
-                              <div className={s.title}> Yorumlar </div>
 
-                              <div className={s.items}>                   
-                                      
-                                      {comments?.map((comment, index)=>{
+                              {/* <div className={s.title}> Mesaj </div> */}
 
-                                              return <Comment props={{comment, locale}} key ={index}/> 
+                              <div className={s.items_empty}  onClick={()=> signIn()}>                                                         
 
-                                      })}
-                                      {comments?.length==0 && <div className={s.empty}> [İlk yorum yapan siz olun]  </div>} 
+                                      {<div className={s.empty}> <span><RiSendPlaneLine size={"4rem"}/></span><span>[Mesaj yollamak için tıklayın]</span>  </div>} 
 
                               </div>
                                       
-                              {/* <buttton onClick={()=> signIn()} className={s.addbutton}> Yorum ekle </buttton> */}
+                              <buttton onClick={()=> signIn()} className={s.addbutton}> Mesaj yolla </buttton>
 
                               </div>
 

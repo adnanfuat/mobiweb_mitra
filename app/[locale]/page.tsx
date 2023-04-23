@@ -9,18 +9,20 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default async function Home({params}) {
 
-  // console.log("paramssss", params)
+   console.log("paramssss", params)
 
 let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
     method: "POST",
     headers: { "Content-Type": "application/json", },
     body: JSON.stringify({
       query: WebQuery,
-      variables:{data:{slug:"mitraemlak.com.tr"}}
+      variables:{data:{slug:"mitraemlak.com"}}
     })
   })
     .then((res) => res.json())
     .then((result) => { return result?.data?.webquery; });
+
+    //  console.log("resdataaaaaa:", resdata)
 
     let cuffs= resdata?.bigdata?.history[0]?.lang?.tr?.cuffs;
 
@@ -55,7 +57,7 @@ let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.en
       // Yapmam gerken: Yukarıda cuffsları obje olarak yollamışım. halbuki cuffsları yollayıp yanlarına sadece objeleri koymalıydım...
 
     return (
-    <div>             
+    <div>         
              <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
              <Estates adverts={resdata?.realestates}/>
              

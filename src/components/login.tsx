@@ -17,10 +17,10 @@ export const Login = (props) => {
                 
                 return await fetch(process.env.NEXT_PUBLIC_API_URL, {
                   method: "POST",
-                  headers: { "Content-Type": "application/json", authorization: `Bearer ${accessToken}`},
+                  headers: { "Content-Type": "application/json", authorization: `Bearer ${user?.accessToken}`},
                   body: JSON.stringify({
                     query: SwissArmyKnifeQuery_Raw,
-                    variables: { data: {type:"notifications_count"} },
+                    variables: { data: {type:"notifications_count"} }
                   }),
                 })
                   .then((res) => res.json())
@@ -28,7 +28,7 @@ export const Login = (props) => {
         }
    
 
-      const { data} = useQuery( ["notifications_count"], () => fetcher() , {refetchOnWindowFocus:true})  // daha sonra false'a çevir...
+      const { data  } = useQuery( ["notifications_count"], () => fetcher() , {refetchOnWindowFocus:true})  // daha sonra false'a çevir...
             
 
   //**************************** (sitemap fecth) */
@@ -44,8 +44,7 @@ export const Login = (props) => {
 
                                   {data?.i_key_1>0 && <div onClick={()=>!user && signIn()}  className={s.notifications}>{data?.i_key_1}</div>        }
 
-                                  <div className={s.popup}>                                                                                    
-                                          {/* <Link href={"/console"}>Konsol</Link>                                                                                                                                                                                                                                                                                               */}
+                                  <div className={s.popup}>                                                                                                                              
                                           <div  onClick={()=>{signOut(); router.push(`/`) }}>Çıkış</div>
                                   </div>
                             </div>

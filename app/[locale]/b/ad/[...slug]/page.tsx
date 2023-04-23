@@ -91,9 +91,9 @@ export default async function  Page ({params}) {
 
 
                           {phones?.length>0 && <div className={s.ownerphones}>
-                              {phones?.map(p=>
+                              {phones?.map((p,i)=>
                                   
-                                        <div className={s.phoneitem}>
+                                        <div className={s.phoneitem}  key={i}>
                                                 <span> {p.verified ? <RiShieldCheckFill title='Doğrulanmış' size={20} color="green"/> : <RiShieldFill title="Doğrulanmamış" size={20} color="gray"/>} </span>
                                                 <span> {p?.phone} </span>
                                         </div>

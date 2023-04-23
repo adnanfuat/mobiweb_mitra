@@ -1,40 +1,45 @@
 // import {commentsClientMode} from  "@/components/hooksnew/commentsclientmode";
 import s from "./form.module.css"
 import dynamic from 'next/dynamic'
-import { useState } from "react";
+import {siteProxy} from "@/constants/siteproxy";
+import { useQuery } from 'react-query';
+import userMessages from "@/components/utils/usermessages";
+
+import { useSnapshot } from 'valtio';
 
  const DynamicAdd = dynamic(() => import("./form_add"));
  
- export default function Form_Logged_Dynamic ({props}) {
+
+ export default  function Form_Logged_Dynamic ({props}) {
+  
 
   let {slug,   session} = props ?? {};
+    
+  let siteState  = useSnapshot(siteProxy);
+  const { data, error  } = useQuery( ["userMessages"], () =>  userMessages({user:session?.user}) , {refetchOnWindowFocus:true})  // daha sonra false'a çevir...
   
-  let contactmessages=session?.user?.contactmessages ?? [];
+    
+  // console.log("sadsadsa", data, error, session?.user)
 
-  // console.log(" : ", props);
-
-  const [show, setshow] = useState(false)
-
-  return ( <form onSubmit={() => formik?.handleSubmit()}>Form_Logged {JSON.stringify(contactmessages)}
+  return ( <form onSubmit={() => formik?.handleSubmit()}>
                     <div className={s.shell}> 
-                    <div className={s.wr} onMouseOver={()=>setshow(true)}>
-                              <div className={s.title}> Yorumlar </div>
+                    <div className={s.wr_dynamic}>
+                              
+                              <div className={s.title}> Yolladığım mesajlar </div>
 
-                              <div className={s.items}>                   
+                              <div className={s.items}>                                                                   
                                       
-                                      {contactmessages?.map((message, index)=>{
+                                      { data?.map((message, index)=>{
 
-                                              return <Comment props={{message}} key ={index}/> 
+                                              return <Comment message={message} key ={index}/> 
 
-                                      })}
-                                      {contactmessages?.length==0 && <div className={s.empty}> [İlk yorum yapan siz olun]  </div>} 
-                                                  
-                                                  
+                                      }) }
                                       
-                                      
+                                      { data?.length==0 && <div className={s.empty}> [Hiç mesajınız yok]  </div> }
+                                                                                                                                                                                
                               </div>
                                       
-                                  {show && <DynamicAdd slug={slug} session={session}/>} 
+                                  {siteState?.interaction && <DynamicAdd slug={slug} session={session}/>} 
 
                               </div>
 
@@ -46,22 +51,22 @@ import { useState } from "react";
 
 
 
-const Comment = ({props}) => {
+const Comment = (props) => {
 
-    let {message, locale} = props;
+    let {message, locale} = props ?? {};
 
     let historylength = message?.bigdata?.history?.length ?? 0 ;
     let lasthistory = message?.bigdata?.history?.[historylength-1];
 
-    let text =  message?.title_tr;
-    
-    console.log("asdsaddsa:--> ", message);
+    let text =  message?.title_tr;    
 
+    // Textare disabled??
+    console.log("asdsaddsa:--> ", message);
 
   return (
     <div className={s.item}> 
         {text}
-        <div className={s.user}> <img src={lasthistory?.info?.user?.image} style={{width:40, height:40}}/>{lasthistory?.info?.user?.name} </div>        
+        <div className={s.user}> <img src={lasthistory?.info?.user?.image} style={{width:40, height:40}}/> {lasthistory?.info?.user?.name} </div>        
     </div>
   )
 }
