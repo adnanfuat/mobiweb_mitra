@@ -26,7 +26,7 @@ export const CategoriesMenu = ({props}) =>
 
     return ( 
       <div style={wrapperForWithSubmenus}> 
-              <Recursive props={{ rootslug:"ilanlar", tabstates, set_tabstates, deep:0}}/>
+              <Recursive props={{ rootslug:"hizmetler", tabstates, set_tabstates, deep:0}}/>
               <div style={cStyle}><RiGamepadLine/> <Link href="/console/adverts">PANEL</Link> </div>
       </div> 
     )

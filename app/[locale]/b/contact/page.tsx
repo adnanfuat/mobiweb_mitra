@@ -30,7 +30,7 @@ export default async function Page  ({params}) {
 
   let addresses = (selectedaddresses && selectedaddresses?.length>0) ?  selectedaddresses : defaultaddresses
 
-  //  console.log("resdata::::::::", defaultaddresses);
+    // console.log("resdata::::::::sadasdsdadsa", resdata);
   
   return (
     <div className={s.shell}>
@@ -42,7 +42,7 @@ export default async function Page  ({params}) {
 
                 <div className={s.sectionwr}>                    
                       <div className={s.sectiontitle}>Mesaj Formu</div>
-                      <div className={s.form}><ContactForm session={session} /></div>
+                      <div className={s.form}><ContactForm session={session} resdata={resdata}/></div>
                       {/* usermessages={usermessages} */}
                 </div>
 
@@ -61,12 +61,12 @@ export default async function Page  ({params}) {
 
 const ContactForm = (props) => {
 
-  let {session, usermessages} = props ?? {};
+  let {session, usermessages, resdata} = props ?? {};
 
   return (
       <div className={s.ci_shell}>
         
-          <Form session={session} usermessages={usermessages}/>
+          <Form session={session} usermessages={usermessages} resdata={resdata}/>
               
       </div>    
   )

@@ -17,6 +17,7 @@ export const Menu = (props) => {
                   <Link href={"/"} className={s.menuitem}>  {title} </Link>
                   <Link href={"/"} className={s.menuitem}>Kurumsal</Link>
                   <Link href={"/"} className={s.menuitem}>Emlak İlanları</Link>                  
+                  <Link href={"/b/services"} className={s.menuitem}>Hizmetler</Link>                  
                   <Link href={"/b/contact"} className={s.menuitem}>İletişim</Link>
         </div>
     )

@@ -38,7 +38,7 @@ const WebQuery =
       active
       user
       bigdata
-      realestates {
+      richcontents {
                       id            
                       title_tr
                       slug_tr

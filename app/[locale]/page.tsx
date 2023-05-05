@@ -22,7 +22,7 @@ let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.en
     .then((res) => res.json())
     .then((result) => { return result?.data?.webquery; });
 
-    //  console.log("resdataaaaaa:", resdata)
+      // console.log("resdataaaaaa2:", resdata)
 
     let cuffs= resdata?.bigdata?.history[0]?.lang?.tr?.cuffs;
 
@@ -59,7 +59,7 @@ let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.en
     return (
     <div>         
              <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
-             <Estates adverts={resdata?.realestates}/>
+             <Estates adverts={resdata?.richcontents?.filter(a=>a.bigbigparent_key=="1668310884")}/>
              
     </div>
     )
@@ -87,7 +87,7 @@ let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.en
       active
       user
       bigdata
-      realestates {
+      richcontents {
                       id
                       title_tr
                       slug_tr
@@ -97,6 +97,7 @@ let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.en
                       updatedat
                       active
                       user
+                      bigbigparent_key
                   }
     }
   }`

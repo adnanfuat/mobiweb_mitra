@@ -13,7 +13,7 @@ import { useSnapshot } from 'valtio';
  export default  function Form_Logged_Dynamic ({props}) {
   
 
-  let {slug,   session} = props ?? {};
+  let {slug,   session, resdata} = props ?? {};
     
   let siteState  = useSnapshot(siteProxy);
   const { data, error  } = useQuery( ["userMessages"], () =>  userMessages({user:session?.user}) , {refetchOnWindowFocus:true})  // daha sonra false'a çevir...
@@ -39,7 +39,7 @@ import { useSnapshot } from 'valtio';
                                                                                                                                                                                 
                               </div>
                                       
-                                  {siteState?.interaction && <DynamicAdd slug={slug} session={session}/>} 
+                                  {siteState?.interaction && <DynamicAdd slug={slug} session={session} resdata={resdata}/>} 
 
                               </div>
 

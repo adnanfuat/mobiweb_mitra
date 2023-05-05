@@ -9,7 +9,9 @@ const Form_Logged_Dynamic = dynamic(() => import("./form_logged_dynamic"));
 
 export default function Form (props) {
 
-let {session, usermessages} = props ?? {};    
+let {session, usermessages, resdata} = props ?? {};    
+
+// console.log("sdakjsdakjdsakj", resdata)
     
         let siteState  = useSnapshot(siteProxy);
         

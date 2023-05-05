@@ -7,7 +7,7 @@ import { useMutation } from "react-query"
 
 export default function Form_Add (props) {
   
-    let { slug, session } = props ??  {};
+    let { slug, session , resdata} = props ??  {};
 
     let {user} = session ?? {};
 
@@ -24,7 +24,14 @@ export default function Form_Add (props) {
                                       headers: { "Content-Type": "application/json", authorization: `Bearer ${accessToken}`},
                                       body: JSON.stringify({
                                         query: SwissArmyKnifeMutation,
-                                        variables: { data: {type:"message", parent_slug:"contact", bigparent_slug:"web", parent_key:"mitraemlak.com", message} },
+                                        variables: { data: {
+                                                                        type:"message", 
+                                                                        parent_slug:"contact", 
+                                                                        bigparent_slug:"web", 
+                                                                        bigparent_key:resdata?.user,// Alıcının yani bu web sitesinin sahibinin mail adresi....
+                                                                        parent_key:"mitraemlak.com", 
+                                                                        message
+                                          } },
                                       }),
                                     })
                                       .then((res) => res.json())
