@@ -1,0 +1,65 @@
+.mainWr {
+  background-color: #c9c9c961;
+  display: grid;
+  gap:20px;
+  grid-template-columns: 1fr 1fr;  
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid gray;
+  grid-template-areas: 
+      "name name"
+      "phones phones";
+}
+
+.logo{
+/* background-color: aqua; */
+grid-area: logo;
+justify-content: center;
+display: flex;
+}
+
+
+.name{
+/* background-color: blue; */
+display: flex;
+grid-area: name;
+justify-content: center;
+align-items: center;
+gap: 20px;
+}
+
+.phones{
+  display: flex;
+  /* background-color: darkblue; */  
+  grid-area: phones;
+  justify-content: center;
+}
+
+
+.phonesWr{
+  display: flex;
+  /* background-color: darkblue; */
+  /* flex-direction: column; */
+  gap:20px;
+  /* padding: 20px; */
+}
+
+
+.phoneWr{
+  display: flex;
+  /* background-color: darkblue; */
+  /* flex-direction: column; */
+  gap:20px;
+  align-self: center;
+  /* padding: 20px; */
+  align-items: center;
+}
+
+@media screen and (max-width: 1200px) {
+    
+  .mainWr {
+                  grid-template-columns: 1fr;
+        }  
+
+}      

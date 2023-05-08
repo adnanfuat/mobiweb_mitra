@@ -1,23 +1,22 @@
 
-import s from "./regionsmenu.module.css"
+import s from "./richcontent_regionsmenu_visitor.module.css"
 import Link from "next/link"
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { projectsettingsFunc } from "@/constants/projectsettingsfunc";
 import { BiWorld, BiMapAlt, BiMapPin, BiMap } from "react-icons/bi";
 
 
-export const RegionsMenu = ({props}) => 
+
+export const RichContent_RegionsMenu_Visitor = ({props}) => 
 {
-
-    // console.log("saassas--->", props);
-
-    let { countries} =props ?? {} ;       
+    let { countries, urlprefix } =props ?? {};       
     const router = useRouter();      
-    // let { rightbar } = projectsettingsFunc() ?? {}
-    let { country, city , district, slug } = props?.searchParams ?? {};
+    let { rightbar } = projectsettingsFunc() ?? {}
+    let { country, city , district, slug } = router?.query;
 
-    let list= 1 ////Sr gibi bir sitede şehirlerin listelenmesi anlamlımı ? Tabi ki değil. Tek şehir var zaten
-    let fixedcountry = "turkiye"
-    let fixedcity = "sakarya"; // Sabiltenmiş şehir
+    let list= rightbar?.countries?.list; ////Sr gibi bir sitede şehirlerin listelenmesi anlamlımı ? Tabi ki değil. Tek şehir var zaten
+    let fixedcountry = rightbar?.fixedcountry; // Sabiltenmiş ülke
+    let fixedcity = rightbar?.fixedcity; // Sabiltenmiş şehir
 
     country= country ?? fixedcountry; // Eğer query paramaterstan country gelmemesine karşına sabitlenmiş bir country varsa onu al
 
@@ -28,7 +27,7 @@ export const RegionsMenu = ({props}) =>
 
     slug= slug ? slug.join("/") :""
     
-    let fulllink=`${"/ads/"}` + slug
+    let fulllink=`/${urlprefix}/` + slug
     
     
 
@@ -40,14 +39,14 @@ export const RegionsMenu = ({props}) =>
                <div className={s.rmainwr}>
       
                         {
-                          countries.map((countryitem, i)=> {      
+                          countries.map(countryitem=> {      
                             
                                                 let selected = countryitem.slug_tr==country;
 
                                                 let cities = fixedcity ? countryitem?.cities?.filter(c=>c?.slug_tr==fixedcity) : countryitem?.cities; // Sabit bir ülke atandıysa sadece onu ver..
 
                                                         return (                                                                
-                                                                    <div className={s.categorynamewr}  key={i}>  
+                                                                    <div className={s.categorynamewr}>  
 
                                                                             {/* { console.log("categories::.:::::", countryitem) } */}
 
@@ -58,7 +57,7 @@ export const RegionsMenu = ({props}) =>
                                                                               <span><Link  href={{pathname:fulllink, query:{country:countryitem?.slug_tr}}}  style={{textDecoration:selected ? "underline": "none"}}>{countryitem?.title_tr}</Link></span>                                                                              
                                                                         </div>}
                                                                           
-                                                                        {selected && <Cities cities={cities} countryitem={countryitem} fulllink={fulllink} searchParams={props?.searchParams}/>}
+                                                                        {selected && <Cities cities={cities} countryitem={countryitem} fulllink={fulllink}/>}
                                                                                 
                                                                                                                                                                                                                               
                                                                     </div>      
@@ -77,25 +76,23 @@ export const RegionsMenu = ({props}) =>
 const Cities = (props) => {
 
   
-    let { selected, cities, countryitem, fulllink, searchParams} = props ?? {} 
+    let { selected, cities, countryitem, fulllink} = props ?? {} 
 
-    let { country, city , district, slug } = searchParams ?? {};
-
-
-    const router = useRouter();          
-    let fixedcity = "sakarya"; // Sabiltenmiş şehir
-    
+    const router = useRouter();      
+    let { rightbar } = projectsettingsFunc() ?? {}
+    let fixedcity = rightbar?.fixedcity; // Sabiltenmiş şehir
+    let { country, city , district } = router?.query;
 
    // city= city ?? fixedcity; // Eğer query paramaterstan country gelmemesine karşına sabitlenmiş bir country varsa onu al
     
     return(
                   <div className={s.citieswr}> 
                   
-                            {cities?.map((cityitem, i)=>{
+                            {cities?.map(cityitem=>{
               
                                                                 let selected = cityitem.slug_tr==city;
               
-                                                                return  <div className={s.categorynamewr}  key={i}>
+                                                                return  <div className={s.categorynamewr}>
                                                                             <div className={s.categorynameitem}  style={{fontSize:15}}>  
                                                                                 { <BiMapAlt/> } 
                                                                                 <span><Link href={{pathname:fulllink, query:{country:countryitem?.slug_tr, city:cityitem?.slug_tr}}} style={{textDecoration:selected ? "underline": "none"}}>{cityitem?.title_tr}</Link></span>                                                                              
@@ -132,13 +129,13 @@ const Districts = (props) => {
 
   return (
             <div className={s.citieswr}> 
-                {districts?.map((districtitem,i)=>{
+                {districts?.map(districtitem=>{
 
                           let selected = districtitem.slug_tr==district;
 
                           
 
-                            return( <div className={s.categorynamewr}  key={i}>
+                            return( <div className={s.categorynamewr}>
                                               <div className={s.categorynameitem}  style={{fontSize:14}}>  
                                                   { <BiMapPin/> } 
                                                   <span><Link  href={{pathname:fulllink, query:{country:countryitem?.slug_tr, city:cityitem?.slug_tr, district:districtitem?.slug_tr}}} style={{textDecoration:selected ? "underline": "none"}}>{districtitem?.title_tr}</Link></span>                                                                              
@@ -174,11 +171,11 @@ const Subdistricts = (props) => {
 
   return (
     <div className={s.citieswr}> 
-                                  { subdistricts?.map((subdistrictitem,i)=>{
+                                  { subdistricts?.map(subdistrictitem=>{
 
                                                                               let selected = subdistrictitem.slug_tr==subdistrict;
 
-                                                                              return  (<div className={s.categorynamewr}  key={i}>
+                                                                              return  (<div className={s.categorynamewr}>
                                                                               <div className={s.categorynameitem} style={{fontSize:13}}>  
                                                                                   { <BiMap/> } 
                                                                                   <span><Link  href={{pathname:fulllink, query:{country:countryitem?.slug_tr, city:cityitem?.slug_tr, district:districtitem?.slug_tr,  subdistrict:subdistrictitem?.slug_tr}}} style={{textDecoration:selected ? "underline": "none"}}>{subdistrictitem?.title_tr}</Link></span>                                                                              
@@ -209,8 +206,6 @@ const RelatedSubCategoriesQuery =
       title_en
       title_fr
       title_ar
-      title_sa
-      slug_sa
       slug_tr
       slug_en
       slug_fr

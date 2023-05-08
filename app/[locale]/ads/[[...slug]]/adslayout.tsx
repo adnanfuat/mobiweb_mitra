@@ -1,5 +1,6 @@
 import s from "./adslayout.module.css"
 import Link from "next/link";
+import HeaderComp from "@/components/headercomp";
 
 
 export const AdsLayout = (props) => {
@@ -12,23 +13,28 @@ export const AdsLayout = (props) => {
                 parents,// [ { "slug_tr": "emlak", "title_tr": "Emlak", "key": "1668310884" } ] // İlanların genel listelemesinde ve ilanda kullanıyoruz bu template'i... İlanlarda router/query/slug üzerinden alıyoruz ama ilan düzenlesinde sadece o ilanın içinden alabiliriz "parents" bilgisini... Dolayısıyla sadeceilan sayfasındaişe yarayan birbilgi
                 title,
                 side,// "/ad/" ---> "/console/adverts/"
+                sidepadding
         } =     props ?? {}
 
-                                
+        // paddingLeft:sidepadding, paddingRight:sidepadding
     return (        
-                <div className={s.mainwr} >                                
+        <div >   
+                
+                <div className={s.childrenWr}> {props?.children} </div>
+                
+                {/* <div className={s.mainwr}  style={{position:"relative" }}>      
+
                         <div className={s.bodywr}>                        
-                                <div className={s.header}>
-                                        
-                                        {title &&  <h1>  {title} </h1>}                                        
+                                <div className={s.header}>                                                                                
                                                 
                                         <div className={s.subheader}><Advert_Visitor_Parents parents={parents}/></div>
                                         
 
                                 </div>                                                                
-                                <div className={s.childrenWr}> {props?.children} </div>
+                                
                         </div>
-                </div>        
+                </div>    */}
+        </div>                        
     )
 }
 

@@ -4,24 +4,25 @@ import WebData from "@/components/utils/webdata";
 import Form from "./form";
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
-
 import {localeStatic} from "@/constants/localestatic";
-// import userMessages from "@/components/utils/usermessages";
-
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
 import { cacheCountries } from "@/components/utils/cachecountries";
+import HeaderComp from "@/components/headercomp";
+import { DesignLayout } from "../ads/[[...slug]]/designlayout";
 
 
 export default async function Page  ({params}) {
 
   let  countries = await cacheCountries();
+  
+  params= params.locale ? params : {...params, locale:localeStatic}; // Eğer locale gelmemişse localestatic'i atıyoruz
 
   let {locale} = params ?? {}
 
-  let resdata=await WebData();
+  let webdata=await WebData();
   const session = await getServerSession(authOptions);
 
-  let info = resdata?.bigdata?.history[0];
+  let info = webdata?.bigdata?.history[0];
   let lang = info?.lang;
   let selectedlang = eval(`lang.${locale}`);
   let defaultlang = eval(`lang.${localeStatic}`);
@@ -29,31 +30,31 @@ export default async function Page  ({params}) {
   let defaultaddresses = defaultlang?.addresses;
 
   let addresses = (selectedaddresses && selectedaddresses?.length>0) ?  selectedaddresses : defaultaddresses
+  // console.log("webdata::::::::sadasdsdadsa", params);  
+  let sidepadding = 42;
 
-    // console.log("resdata::::::::sadasdsdadsa", resdata);
-  
-  return (
-    <div className={s.shell}>
-      
-            
-            <div className={s.pagetitle}>İletişim</div>
+     return (
+      <DesignLayout title="İletişim">
 
-            <div className={s.mainwr}>
-
-                <div className={s.sectionwr}>                    
-                      <div className={s.sectiontitle}>Mesaj Formu</div>
-                      <div className={s.form}><ContactForm session={session} resdata={resdata}/></div>
-                      {/* usermessages={usermessages} */}
-                </div>
+        <div className={s.shell}>
+              
+              <div className={s.mainwr}>
+                  <div className={s.sectionwr}>                    
+                        <div className={s.sectiontitle}>Mesaj Formu</div>
+                        <div className={s.form}><ContactForm session={session} webdata={webdata}/></div>
+                        {/* usermessages={usermessages} */}
+                  </div>
 
 
-                <div className={s.sectionwr}>                    
-                      <div className={s.sectiontitle}>İletişim Bilgileri</div>
-                      <div className={s.info}><ContactInfo addresses={addresses} countries={countries}/></div>   
-                </div>
-                         
-            </div>
-    </div>
+                  <div className={s.sectionwr}>                    
+                        <div className={s.sectiontitle}>İletişim Bilgileri</div>
+                        <div className={s.info}><ContactInfo addresses={addresses} countries={countries}/></div>   
+                  </div>
+                          
+              </div>
+        </div>
+
+        </DesignLayout>        
   )
 }
 
@@ -61,12 +62,12 @@ export default async function Page  ({params}) {
 
 const ContactForm = (props) => {
 
-  let {session, usermessages, resdata} = props ?? {};
+  let {session, usermessages, webdata} = props ?? {};
 
   return (
       <div className={s.ci_shell}>
         
-          <Form session={session} usermessages={usermessages} resdata={resdata}/>
+          <Form session={session} usermessages={usermessages} webdata={webdata}/>
               
       </div>    
   )

@@ -4,13 +4,12 @@ import { cache} from "../utils/cache";
 
 
 export async function cacheCountries() {
-
- 
-    let  countries = cache.get( "countries" )
+   
+    let countries = cache.get("countries");
   
-    if (countries?.length>0)  {
-      // console.log("cache country :)");      
-    } 
+    if (countries?.length>0)  {        
+                                    // console.log("cache country :)");      
+                              } 
     
     else{      
       // const  allcountriesdata = await graphcms?.request(CountriesNewQuery);
@@ -59,6 +58,8 @@ const CountriesNewQuery_Raw =
             title_en
             title_fr
             title_ar      
+            title_sa
+            slug_sa
             slug_tr
             slug_en
             slug_fr
@@ -68,7 +69,9 @@ const CountriesNewQuery_Raw =
               title_tr
               title_en
               title_fr
-              title_ar      
+              title_ar
+              title_sa
+            slug_sa
               slug_tr
               slug_en
               slug_fr
@@ -79,6 +82,8 @@ const CountriesNewQuery_Raw =
                 title_en
                 title_fr
                 title_ar      
+                title_sa
+                slug_sa
                 slug_tr
                 slug_en
                 slug_fr
@@ -88,6 +93,8 @@ const CountriesNewQuery_Raw =
                   title_en
                   title_fr
                   title_ar      
+                  title_sa
+            slug_sa
                   slug_tr
                   slug_en
                   slug_fr

@@ -1,22 +1,36 @@
 
+import { cache} from "./cache";
+
 const WebData = async () => {
 
+  let webdata = cache.get("webdata");
   
-    let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-        method: "POST",
-        headers: { "Content-Type": "application/json", },
-        body: JSON.stringify({
-          query: WebQuery,
-          variables:{data:{slug:"mitraemlak.com"}} 
-        })
-      })
-        .then(async (res) =>{  
-              return res?.json()
-       })
-        .then(async (result) =>   { return  result?.data?.webquery; });
+  if (webdata)  {        
+                                   console.log("webdata is alreadycached:)");      
+                 } 
 
+                 else {
 
-        return resdata
+                                  webdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json", },
+                                    body: JSON.stringify({
+                                      query: WebQuery,
+                                      variables:{data:{slug:"mitraemlak.com"}} 
+                                    })
+                                  })
+                                    .then(async (res) =>{  
+                                          return res?.json()
+                                  })
+                                    .then(async (result) =>   { return  result?.data?.webquery; });
+                                                
+                                  cache.set("webdata", webdata, 100000);
+                                  console.log("webdata is cached first time :/");      
+
+                 }
+  
+  return webdata                 
+    
 
 }
 
@@ -47,6 +61,7 @@ const WebQuery =
                       createdat
                       updatedat
                       active
+                      bigbigparent_key
                       user
                   }
     }

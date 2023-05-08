@@ -1,30 +1,49 @@
+import s from "./layout.module.css"
+import HeaderComp from "@/components/headercomp"
+import FooterComp from "@/components/footercomp"
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from './page.module.css'
 import Estates from './estates';
 import {Index_Cuffs_V2_Visitor} from "./cuffs/index_cuffs_v2_visitor"
+import WebData from "@/components/utils/webdata"
+import DictionaryData from "@/components/utils/dictionarydata"
+import { localeStatic } from "@/constants/localestatic"
 
 const inter = Inter({ subsets: ['latin'] })
 
 
-export default async function Home({params}) {
+export default async function Home(props) {
 
-   console.log("paramssss", params)
+  let {params} = props ?? {}
+  let {locale} = params ?? {}
+  
+  locale = locale ? locale : localeStatic;
 
-let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-    method: "POST",
-    headers: { "Content-Type": "application/json", },
-    body: JSON.stringify({
-      query: WebQuery,
-      variables:{data:{slug:"mitraemlak.com"}}
+  //  console.log("paramssss", props)
+   let dictionary=await DictionaryData({locale});
+   let webdata=await WebData();
+
+   
+
+    let cuffs= webdata?.bigdata?.history[0]?.lang?.tr?.cuffs;
+
+
+    let lang= webdata?.bigdata?.history[0]?.lang?.tr;
+    let logofiles =  lang?.logofiles;
+
+    let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+      method: "POST",
+      headers: { "Content-Type": "application/json", },
+      body: JSON.stringify({
+        query: FilesQuery_SpecialRequests,
+        variables:{data:{specialrequests:logofiles}} 
+      })
     })
-  })
-    .then((res) => res.json())
-    .then((result) => { return result?.data?.webquery; });
-
-      // console.log("resdataaaaaa2:", resdata)
-
-    let cuffs= resdata?.bigdata?.history[0]?.lang?.tr?.cuffs;
+      .then((res) => res.json())
+      .then((result) => { return result?.data?.filesquery_specialrequests; });    
+      
+      let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
 
     
 
@@ -55,12 +74,21 @@ let resdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.en
       })
             
       // Yapmam gerken: Yukarıda cuffsları obje olarak yollamışım. halbuki cuffsları yollayıp yanlarına sadece objeleri koymalıydım...
-
+      
     return (
-    <div>         
-             <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
-             <Estates adverts={resdata?.richcontents?.filter(a=>a.bigbigparent_key=="1668310884")}/>
-             
+    <div style={{position:"relative"}}>
+      
+             <HeaderComp logo={logo} params={props?.params} dictionary={dictionary} position="absolute"  sidepadding={42} topbottom={5}/>
+
+             <div className={s.main}>              
+                                                             
+                                    <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
+                                    {/* asdas : {JSON.stringify(props)} */}
+                                   <Estates adverts={webdata?.richcontents?.filter(a=>a.bigbigparent_key=="1668310884")} locale={locale} sidepadding={42} />
+                              
+             </div> 
+
+              <div className={s.footer}><FooterComp logo={logo}/></div>             
     </div>
     )
 

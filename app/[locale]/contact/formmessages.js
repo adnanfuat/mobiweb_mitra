@@ -50,6 +50,7 @@ const CommentsQuery_Raw =
       title_en
       title_fr
       title_ar      
+      title_sa
       slug_tr
       slug_en
       slug_fr

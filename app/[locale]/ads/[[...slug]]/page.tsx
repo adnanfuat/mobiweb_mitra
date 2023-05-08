@@ -3,68 +3,45 @@ import Link from 'next/link';
 import { BolgeIsmiOgren } from "@/components/utils/bolgeismiogren";
 import { datetimeFunc } from "@/components/utils/datetimefunc";
 import Head from "next/head";
-import {AdsLayout} from "./adslayout"; 
-import { RiEdit2Fill } from "react-icons/ri";
 import Image from "next/image";
-import { RiListUnordered, RiCloseFill } from "react-icons/ri";
 import {LayoutLeft} from "./layoutleft";
 import { cacheCountries } from "@/components/utils/cachecountries";
-import { useRouter } from 'next/navigation'
+import richContents_WithCategories from "@/components/utils/richcontents_withcategories";
+import relatedCategory from "@/components/utils/relatedcategory";
+import { DesignLayout } from "./designlayout";
 
 
-export default async function Category ({params, searchParams}){
+export default async function Category (props){ return (  <Rs_Shell root_category={"emlak"} root_slug={`ads`} sidepadding={42}  {...props}/>  ) }
+
+
+export async function Rs_Shell (props){
     
-  // console.log("asdsaddsa::::", a);
+  let {params, searchParams, root_category, root_slug, sidepadding} = props ?? {};  
 
   let {slug} = params ?? {} ;
   let  countries = await cacheCountries();
 
   slug = slug ? slug : []
   let sluglength=slug?.length;
-  let lastslugitem=slug?.length==0 ? "ilanlar" :  slug?.[sluglength-1];
-   let slugObj={slug, lastslugitem}
+  let lastslugitem=slug?.length==0 ? root_category :  slug?.[sluglength-1];
+      
+  let adverts=await richContents_WithCategories({slug, active:1})  ?? []
 
-   let adverts     =   [];  
-   let categories  =   [];  
-   let category    =   {};  
-   
-   let rawdata= await fetch(process.env.NEXT_PUBLIC_API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", },
-    body: JSON.stringify({
-      query: AdvertsQuery_WithCategories_Raw,
-      variables: {data:{slug, active:1, onlyauthdata:false}},
-    }),
-  })       
-    let datajson=await rawdata.json()
-    adverts = datajson?.data?.advertsquery_withcategories;           
+  let category=await relatedCategory({lastslugitem})  ?? []
 
-  
-  let rawdata_category= await fetch(process.env.NEXT_PUBLIC_API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", },
-    body: JSON.stringify({
-      query: RelatedCategoryQuery,
-      variables: {data:{origin:(lastslugitem) }},
-    }),
-  })       
-    let datajson_category=await rawdata_category.json()
-    category = datajson_category?.data?.relatedcategoryquery;   
-
-    
-  // const router = useRouter();
   let {country, city, district, subdistrict} = searchParams ?? {}
 
   adverts=filterAdverts({adverts, country, city, district, subdistrict});
 
   let parents=category?.o_key_1?.parents;
 
-  return (<AdsLayout  title={`${category?.title_tr}`}  countries={countries} >
-                          <div className={s.mainwr}>
-                            
+  return (
+              <DesignLayout title={`${category?.title_tr}`}  >
+                          
+                          <div className={s.mainwr}>                            
                             {(country || city || district || subdistrict) && <div className={s.filtered}>                             
                                 
-                                    <Link href={"/ads"}><div  className={s.filteredinner}>
+                                    <Link href={`/${root_slug}`}><div  className={s.filteredinner}>
                                           <div className={s.filteredtitle} >Filtre</div>                              
                                               {country && <div> {country} </div>}
                                               {city && <div> {city} </div>}
@@ -73,7 +50,7 @@ export default async function Category ({params, searchParams}){
                                           </div>
                                     </Link>
 
-                                </div>
+                              </div>
                             }
                             
                               <div className={s.mobilmenu}>
@@ -81,17 +58,18 @@ export default async function Category ({params, searchParams}){
                                       {/* { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" } */}
                               </div>
 
-                              <div className={s.desktopmenu}><LayoutLeft props={{categories,  parents, category, countries, searchParams}}/></div>
+                              <div className={s.desktopmenu}><LayoutLeft props={{ parents, category, countries, searchParams}}/></div>
 
-                              <div className={s.bodywr}>
-                                    {/* <div className={s.test}> Test ve geliştirme aşamasındadır. Siz de teste katılabilirsiniz. </div> */}
+                              <div className={s.bodywr}>                                    
                                     <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item,  countries}} key={index}/> }) } </div>                    
                               </div>
 
-                              <Meta category={category} firstadvert={adverts[0]}/>
+                              <Meta category={category} firstadvert={adverts[0]} root_slug={root_slug}/>
 
                           </div>
-              </AdsLayout>  )
+                </DesignLayout>                          
+              
+              )
 
 }
 
@@ -99,7 +77,7 @@ export default async function Category ({params, searchParams}){
 
 const Meta = (props) => {
 
-        let {category, firstadvert} = props ?? {};
+        let {category, firstadvert, root_slug} = props ?? {};
 
         let parents=category?.o_key_1?.parents;                       
         let parents_links=parents?.map((a)=> a?.slug_tr);    parents_links=parents_links?.filter(item=>item!="ilanlar")
@@ -147,7 +125,7 @@ const Meta = (props) => {
                                                                       "author": {
                                                                       "@type": "Person",
                                                                       "name": "Steve",
-                                                                      "url":  "${`${process.env.NEXT_PUBLIC_API_URL}/ads/${parents_links?.join("/")} ${category?.slug_tr!="ilanlar" ? `/${category?.slug_tr}` : "" }`}",
+                                                                      "url":  "${`${process.env.NEXT_PUBLIC_API_URL}/${root_slug}/${parents_links?.join("/")} ${category?.slug_tr!="ilanlar" ? `/${category?.slug_tr}` : "" }`}",
                                                                     }
                                                                     }
                                                                 `}}>
@@ -156,7 +134,7 @@ const Meta = (props) => {
                                                               
                                                             <meta property="og:type" content="website" />
                                                             <meta name="og_site_name" property="og:site_name" content="sakaryarehberim.com"/>
-                                                            <meta name="og_url" property="og:url" content={`${process.env.NEXT_PUBLIC_API_URL}/ads/${parents_links?.join("/")} ${category?.slug_tr!="ilanlar" ? `/${category?.slug_tr}` : "" }`}/>
+                                                            <meta name="og_url" property="og:url" content={`${process.env.NEXT_PUBLIC_API_URL}/${root_slug}/${parents_links?.join("/")} ${category?.slug_tr!="ilanlar" ? `/${category?.slug_tr}` : "" }`}/>
                                                             <meta name="og_title" property="og:title" content={`${parents} ${title}`}/>
                                                             <meta name="og_description" property="og:description" content={description ?  description: title}/>
                                                             <meta name="og_image" property="og:image" content={img}/>
@@ -194,7 +172,7 @@ const Item = ({props}) => {
   let district_name = item?.district_slug; 
   let subdistrict_name = item?.subdistrict_slug;  
 
-  // console.log("asdsasasdsadsaad:", item?.title_tr, item);
+  // console.log("asdsasasds${root_slug}aad:", item?.title_tr, item);
 
   function currencyFormat(num) {
                                   return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+ " TL"
@@ -258,7 +236,7 @@ const CardImage = ({props}) => {
   let img=item?.img_tr
     
   return (    
-      <Link href={`/ad/${item?.slug_tr}/${id}`}  prefetch={false}>   
+      <Link href={`/ad/${item?.slug_tr}/${id}`}  >   
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :
@@ -281,33 +259,6 @@ const CardImage = ({props}) => {
     
 
 
-  
-const RelatedCategoryQuery = 
-`  query RelatedCategoryQuery ($data:JSON)  {
-    relatedcategoryquery (data:$data) {
-      id
-      active
-      parent_slug
-      bigdata
-      title_tr
-      title_en
-      title_fr
-      title_ar
-      slug_tr
-      slug_en
-      slug_fr
-      slug_ar
-      rank
-      user
-      i_key_1
-      o_key_1
-      key
-      parent_key      
-      createdat        
-    }
-  }`
-;
-
 
 
 const filterAdverts = ({adverts, country, city, district, subdistrict}) => {
@@ -328,47 +279,3 @@ const filterAdverts = ({adverts, country, city, district, subdistrict}) => {
 
 
 
-
-
-const AdvertsQuery_WithCategories_Raw = 
-`  query AdvertsQuery_WithCategories  ($data: JSON ) {
-        advertsquery_withcategories (data:$data) {
-            id
-            active
-            parent_slug
-            parent_key
-            bigparent_slug
-            bigdata
-            title_tr
-            slug_tr
-            slug_en
-            slug_fr
-            slug_ar
-            rank
-            img_tr
-            user
-            createdat
-            country_slug
-            city_slug
-            district_slug
-            subdistrict_slug    
-            parentObj{
-              title_tr
-              slug_tr
-            }
-            getconnectedfiles {
-              id
-              bigdata
-              rank
-              slug_tr
-              title_tr
-              parent
-              user
-            }      
-            
-            userdata {
-              image
-            }
-          }
-  }`
-;

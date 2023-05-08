@@ -1,0 +1,18 @@
+.title {
+  padding: 10px;
+  font-size: 2rem;
+  background-color: #cbbb9f;
+  border-radius: 6px 6px 0px 0px;
+}
+
+.designwr {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.mainwr {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}

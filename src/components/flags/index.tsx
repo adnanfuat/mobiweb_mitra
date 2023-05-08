@@ -6,7 +6,7 @@ import { useState } from "react";
 import s from "./index.module.css"
 import { useDetectClickOutside } from 'react-detect-click-outside';
 
-const locales= ["tr","en"]
+const locales= ["tr","en","fr","ar"]
 
 export const Flags = ({locale, params}) => {
 
@@ -17,11 +17,18 @@ export const Flags = ({locale, params}) => {
 
     const ref = useDetectClickOutside({ onTriggered: ()=>setpopup(false) });
 
+    let countryCode = a;
+
+    if (a=="ar") // Arapçadanın flagı "sa" oalrak geçiyor...
+    {
+        countryCode="sa"
+    }
+
  return (
      <div style={{position:"absolute" , right:7, top:3}} ref={ref} >
 
                 <ReactCountryFlag
-                    countryCode={a}
+                    countryCode={countryCode}
                     svg
                     style={{
                         width: '2em',
@@ -66,6 +73,8 @@ const Popup = (props) => {
         let reallink="";
         let exploededlinkparts =""
 
+
+
         
          const goFunc = () => {
             
@@ -87,7 +96,7 @@ const Popup = (props) => {
         }
         
 
-        return (<div  key={i}> 
+        return (<div  key={i}>
 
                         <ReactCountryFlag
                                     countryCode={a}
@@ -133,10 +142,10 @@ const getCode = ({locale}) => {
          var a ="FR"
      }
 
-     else if (locale=="sa") {
+     else if (locale=="ar") {
          var a ="SA"
      }
 
 
-  return (a )
+  return (a)
 }

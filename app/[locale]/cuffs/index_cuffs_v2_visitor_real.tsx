@@ -30,7 +30,7 @@ export const  Index_Cuffs_V2_Visitor_Real = ({props}) => {
          return (<div className={s.imgwr} >
                         <Carousel showThumbs={false} showStatus={true}>
                               {cuffs?.map((item, i) => (
-                                    <Link href={item?.link} prefetch={false} key={`cuff-l-${i}`}>
+                                    <Link href={item?.link}  key={`cuff-l-${i}`}>
                                           <div key={`cuff-${i}`} className={s.cuffitem}>
                                                 <img src={item?.imgpath} />
                                                 {/* {item?.img_filename && <p className="legend">{item?.img_filename}</p>} */}

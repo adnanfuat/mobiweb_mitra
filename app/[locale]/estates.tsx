@@ -6,16 +6,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { RiListUnordered, RiCloseFill,RiEdit2Fill } from "react-icons/ri";
 import { useState } from "react";
+import dictionaryFunc from "@/components/utils/dictionaryfunc";
+import DictionaryData from "@/components/utils/dictionarydata";
 
 
-const  Estates = ({adverts}) =>{
+const  Estates = async ({adverts, sidepadding, locale}) =>{
+  
+  
+  let dictionary=await DictionaryData({locale});
 
-      
+  // console.log("555555555555", dictionary);
   return (
-                          <div className={s.mainwr}>
+                          <div className={s.mainwr} style={{paddingLeft: sidepadding, paddingRight: sidepadding }}>
                                                                                         
                               <div className={s.bodywr}>                                    
-                                    <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item}} key={index}/> }) } </div>                    
+                                    <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item, dictionary}} key={index}/> }) } </div>                    
                               </div>
                               
                           </div>
@@ -28,7 +33,10 @@ export default Estates
 
 
 const Item = ({props}) => {
-  const {item} =props ?? {};
+  const {item, dictionary} =props ?? {};
+
+  
+
   let {parentObj, loggedUserMail} = item ?? {};
     
   let properties=item?.bigdata?.history?.[0]?.info?.properties;
@@ -46,6 +54,9 @@ const Item = ({props}) => {
 
   let {timeAgo, localeString} = datetimeFunc({datetime:item?.createdat});
 
+  let fiyat_text = dictionaryFunc({key:"1683442733652", dictionary}).text;
+  let tarih_text = dictionaryFunc({key:"1683442804941", dictionary}).text;
+
   return ( 
           <div className={s.item}>            
               <div className={s.i_title}>{item?.title_tr}</div>
@@ -54,12 +65,12 @@ const Item = ({props}) => {
               <div className={s.i_image}><CardImage props={{item, id: item?.id}}/></div>
               <div className={s.i_info}>
                             {fiyat && <div className={s.i_info_sub}>
-                                <div>Fiyat</div>  
+                                <div>{fiyat_text}</div>  
                                 <div>{currencyFormat(fiyat?.value)}</div>  
                             </div>}
 
                             <div className={s.i_info_sub}>
-                                <div>Tarih</div>  
+                                <div>{tarih_text}</div>  
                                 <div title={localeString}>{timeAgo}</div>  
                             </div>
 
@@ -78,7 +89,7 @@ const CardImage = ({props}) => {
   let img=item?.img_tr
     
   return (    
-      <Link href={`/b/ad/${item?.slug_tr}/${id}`}  prefetch={true}>
+      <Link href={`/b/ad/${item?.slug_tr}/${id}`} >
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :
@@ -174,6 +185,8 @@ const RelatedCategoryQuery =
       title_en
       title_fr
       title_ar
+      title_sa
+      slug_sa
       slug_tr
       slug_en
       slug_fr

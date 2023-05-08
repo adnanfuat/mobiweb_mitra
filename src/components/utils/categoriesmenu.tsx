@@ -25,11 +25,11 @@ export const CategoriesMenu = ({props}) =>
     useEffect(() => { set_tabstates(init_selecteds); }, [init_selecteds?.length, slug?.[slug?.length-1]]);    
 
     return ( 
-      <div style={wrapperForWithSubmenus}> 
-              <Recursive props={{ rootslug:"hizmetler", tabstates, set_tabstates, deep:0}}/>
-              <div style={cStyle}><RiGamepadLine/> <Link href="/console/adverts">PANEL</Link> </div>
-      </div> 
-    )
+                <div style={wrapperForWithSubmenus}> 
+                        <Recursive props={{ rootslug:"hizmetler", tabstates, set_tabstates, deep:0}}/>
+                        <div style={cStyle}><RiGamepadLine/> <Link href="/console/adverts">PANEL</Link> </div>
+                </div>
+           )
 }
 
 
@@ -110,6 +110,8 @@ const RelatedSubCategoriesQuery =
       title_en
       title_fr
       title_ar
+      title_sa
+            slug_sa
       slug_tr
       slug_en
       slug_fr

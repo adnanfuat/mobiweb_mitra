@@ -39,7 +39,7 @@ export default async function Category ({params, searchParams}){
     let datajson=await rawdata.json()
     adverts = datajson?.data?.advertsquery_withcategories;           
 
-    console.log("advertsssssssss", adverts[0]);
+    // console.log("advertsssssssss", adverts[0]);
 
     adverts = adverts?.filter(a=>a.bigbigparent_key=="1668310717_998")
 
@@ -262,7 +262,7 @@ const CardImage = ({props}) => {
   let img=item?.img_tr
     
   return (    
-      <Link href={`/ad/${item?.slug_tr}/${id}`}  prefetch={false}>   
+      <Link href={`/ad/${item?.slug_tr}/${id}`}  >   
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :
@@ -296,7 +296,9 @@ const RelatedCategoryQuery =
       title_tr
       title_en
       title_fr
-      title_ar
+      title_sa
+      slug_sa
+      title_sa
       slug_tr
       slug_en
       slug_fr

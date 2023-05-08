@@ -18,7 +18,7 @@ export const  Index_Cuffs_V2_Visitor_Demo = ({props}) => {
          
          return (
                <div className={s.imgwr} >
-                        <Link href={link} prefetch={false} >
+                        <Link href={link}  >
                             {/* <Image src={images[0]?.src} width={755} height={440} alt={images[0]?.title_tr ?? "..."} loading="eager"  /> */}
                             <img src={imgpath} alt={cuffs[0]?.title_tr ?? "..."}  width="100%" height={"auto"} />
                         </Link>
