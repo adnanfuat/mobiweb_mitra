@@ -6,7 +6,7 @@ const WebData = async () => {
   let webdata = cache.get("webdata");
   
   if (webdata)  {        
-                                   console.log("webdata is alreadycached:)");      
+                                   //&console.log("webdata is alreadycached:)");      
                  } 
 
                  else {
@@ -25,7 +25,7 @@ const WebData = async () => {
                                     .then(async (result) =>   { return  result?.data?.webquery; });
                                                 
                                   cache.set("webdata", webdata, 100000);
-                                  console.log("webdata is cached first time :/");      
+                                  //console.log("webdata is cached first time :/");      
 
                  }
   
@@ -41,7 +41,7 @@ export  default WebData
 const WebQuery = 
 `  query WebQuery ($data:JSON)  {
     webquery (data:$data) {
-      id
+      id      
       title_tr
       slug_tr
       img_tr
@@ -63,6 +63,9 @@ const WebQuery =
                       active
                       bigbigparent_key
                       user
+                      userdata {
+                        image
+                      }
                   }
     }
   }`

@@ -9,14 +9,29 @@ import { cacheCountries } from "@/components/utils/cachecountries";
 import richContents_WithCategories from "@/components/utils/richcontents_withcategories";
 import relatedCategory from "@/components/utils/relatedcategory";
 import { DesignLayout } from "./designlayout";
+import WebData from "@/components/utils/webdata";
+import DictionaryData from "@/components/utils/dictionarydata";
+import { localeStatic } from "@/constants/localestatic";
 
 
-export default async function Category (props){ return (  <Rs_Shell root_category={"emlak"} root_slug={`ads`} sidepadding={42}  {...props}/>  ) }
+export default async function Category (props){ 
+  
+  let {params} = props ?? {}
+  let {locale} = params ?? {}
+
+  locale = locale ? locale : localeStatic;
+
+  let dictionary=await DictionaryData({locale});
+  let webdata=await WebData();
+
+    return (  <Rs_Shell root_category={"emlak"} bigbigparent_key="1668310884" root_slug={`ads`} dictionary={dictionary} webdata={webdata}  sidepadding={42}  {...props}/>  ) 
+  
+  }
 
 
 export async function Rs_Shell (props){
     
-  let {params, searchParams, root_category, root_slug, sidepadding} = props ?? {};  
+  let {params, searchParams, root_category, root_slug, sidepadding, bigbigparent_key, webdata, dictionary} = props ?? {};  
 
   let {slug} = params ?? {} ;
   let  countries = await cacheCountries();
@@ -24,8 +39,26 @@ export async function Rs_Shell (props){
   slug = slug ? slug : []
   let sluglength=slug?.length;
   let lastslugitem=slug?.length==0 ? root_category :  slug?.[sluglength-1];
-      
-  let adverts=await richContents_WithCategories({slug, active:1})  ?? []
+
+  // let webdata = await WebData();
+  // console.log("webdatawebdatawebdata", webdata?.richcontents);      
+  // let adverts=await richContents_WithCategories({slug, active:1, website:process.env.DOMAIN, useremail:process.env.USEREMAIL})  ?? []
+
+  let adverts =  webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884");
+
+  if (slug?.length>0) { 
+    // Sol taraftaki menüden alt kategorilerden biri seçildiğinde, diyelim //--> İş yeri > Satılık İş yeri... İlgili ilanların içinde parentlarında Satılık İş Yeri var mı diye bakıp, onları filitreler. 
+    // Böylece sadece gidilen linkteki son slugı içeren ilanları verir bize...
+            adverts = adverts?.filter(ad=> {
+                          let parents= ad?.bigdata?.history[0]?.info?.parents ?? [];
+                          parents=parents?.map(item=>item?.slug_tr)
+                          let lastslugitem = slug?.[sluglength-1];
+                          // console.log("asdasdsa," , parents, lastslugitem);
+                          return parents?.find(pa=>pa==lastslugitem)
+            })
+            
+  }
+
 
   let category=await relatedCategory({lastslugitem})  ?? []
 
@@ -36,9 +69,10 @@ export async function Rs_Shell (props){
   let parents=category?.o_key_1?.parents;
 
   return (
-              <DesignLayout title={`${category?.title_tr}`}  >
+              <DesignLayout title={`${category?.title_tr}`} dictionary={dictionary}  >
                           
-                          <div className={s.mainwr}>                            
+                          <div className={s.mainwr}> 
+                          {/* sasadsa{JSON.stringify(slug)}   -                          {JSON.stringify(adverts[0]?.bigdata?.history[0]?.info?.parents)} */}
                             {(country || city || district || subdistrict) && <div className={s.filtered}>                             
                                 
                                     <Link href={`/${root_slug}`}><div  className={s.filteredinner}>
@@ -58,7 +92,7 @@ export async function Rs_Shell (props){
                                       {/* { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" } */}
                               </div>
 
-                              <div className={s.desktopmenu}><LayoutLeft props={{ parents, category, countries, searchParams}}/></div>
+                              <div className={s.desktopmenu}><LayoutLeft props={{ parents, category, bigbigparent_key, countries, searchParams}}/></div>
 
                               <div className={s.bodywr}>                                    
                                     <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item,  countries}} key={index}/> }) } </div>                    
@@ -214,7 +248,7 @@ const Item = ({props}) => {
 
               <div className={s.i_user}>                
                     {!advertiser?.whoiscompany && <div style={{color:"#c1c1c1", display:"flex", alignItems:"center", gap:4}}>
-                      <Image src={item?.userdata?.image} width={35} height={35} style={{borderRadius:6}}/> 
+                          <Image src={item?.userdata?.image} width={35} height={35} style={{borderRadius:6}}/>
                     </div>}
 
                     {advertiser?.whoiscompany && <div style={{color:"#c1c1c1", display:"flex", alignItems:"center", gap:4}}>
@@ -240,7 +274,7 @@ const CardImage = ({props}) => {
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :
-          <div><img  width="150px" height="auto" src={`/images/common/sr.jpg`} title={"aaaa"} alt={"aaa"}  /></div>
+          <div><img  width="150px" height="auto" src={`/whitelogo.jpg`} title={"Resim bulunmadı"} alt={"Resim bulunmadı"}  /></div>
           }
       </Link>    
   )

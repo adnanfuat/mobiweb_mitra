@@ -9,6 +9,7 @@ import {Index_Cuffs_V2_Visitor} from "./cuffs/index_cuffs_v2_visitor"
 import WebData from "@/components/utils/webdata"
 import DictionaryData from "@/components/utils/dictionarydata"
 import { localeStatic } from "@/constants/localestatic"
+import { json } from "stream/consumers"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -76,9 +77,10 @@ export default async function Home(props) {
       // Yapmam gerken: Yukarıda cuffsları obje olarak yollamışım. halbuki cuffsları yollayıp yanlarına sadece objeleri koymalıydım...
       
     return (
-    <div style={{position:"relative"}}>
+    <div style={{position:"relative"}}> 
+    {/* PROPSSSS : {JSON.stringify(params)} -------------- */}
       
-             <HeaderComp logo={logo} params={props?.params} dictionary={dictionary} position="absolute"  sidepadding={42} topbottom={5}/>
+             <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>
 
              <div className={s.main}>              
                                                              

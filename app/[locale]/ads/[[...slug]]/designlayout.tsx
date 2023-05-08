@@ -10,7 +10,7 @@ const inter = Inter({
 
 
 export const DesignLayout = (props) => {
-    let {title} = props ?? {}
+    let {title, dictionary} = props ?? {}
 
     let sidepadding = 42;
 
@@ -18,7 +18,7 @@ export const DesignLayout = (props) => {
     
   return (
     <div  className={s.designwr}>
-        <HeaderComp  position="relative"  sidepadding={sidepadding} topbottom={5}/>
+        <HeaderComp  position="relative"  sidepadding={sidepadding} topbottom={5} dictionary={dictionary}/>
 
 
         <div style={{paddingLeft:sidepadding, paddingRight:sidepadding }}  className={s.mainwr}>

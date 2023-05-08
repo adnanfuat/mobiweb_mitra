@@ -13,23 +13,23 @@ import { RiEdit2Fill } from "react-icons/ri";
 import Image from "next/image";
 import { RiListUnordered, RiCloseFill } from "react-icons/ri";
 import {RichContent_LayoutLeft_Visitor} from "./richcontent_layoutleft_visitor";
-import { useState } from "react";
+// import { useState } from "react";
 
 
 const  Rs_Shell = ({consolelink, category,  adverts, bigbigparent_key,bigbigparent_slug,  countries, urlprefix, urlprefix_editpage, urlprefix_viewpage, title, parents}) =>{
 
-    const {name,permissions, user} = isLogged();  
-    const [mobilmenu, setmobilmenu] = useState(false);
+    // const {name,permissions, user} = isLogged();  
+    // const [mobilmenu, setmobilmenu] = useState(false);
   
-    const router = useRouter();
-    let {country, city, district, subdistrict, slug} = router?.query;  
+    // const router = useRouter();
+    // let {country, city, district, subdistrict, slug} = router?.query;  
     // console.log("asdsadsdasad : ",category);      
-    adverts=filterAdverts({adverts, country, city, district, subdistrict});
+    adverts=filterAdverts({adverts, country, city, district, subdistrict}) ?? [];
     
     // let parents=category?.o_key_1?.parents ?? [];
   
     return (<RichContent_LayoutMain_Visitor  title={`${category?.title_tr}`}  countries={countries} bigbigparent_key={bigbigparent_key} bigbigparent_slug={bigbigparent_slug} urlprefix={urlprefix} urlprefix_editpage={urlprefix_editpage} urlprefix_viewpage={urlprefix_viewpage} parents={parents}>
-                            <div className={s.mainwr}>
+                            <div className={s.mainwr}>saaaaaaaaaaaaa
                               
                               {(country || city || district || subdistrict) && <div className={s.filtered}>                             
                                   
@@ -45,12 +45,12 @@ const  Rs_Shell = ({consolelink, category,  adverts, bigbigparent_key,bigbigpare
                                   </div>
                               }
                               
-                                <div className={s.mobilmenu}>
+                                {/* <div className={s.mobilmenu}>
                                         <div className={s.mobilmenu_close}  onClick={()=>setmobilmenu(old=>!old)}>{mobilmenu ? <RiCloseFill size={30} /> :  <RiListUnordered size={30} />  }</div>                
                                         { mobilmenu ? <RichContent_LayoutLeft_Visitor props={{ consolelink,urlprefix, category, countries, bigbigparent_slug, bigbigparent_key, title }} /> : "" }
-                                </div>
+                                </div> */}
   
-                                <div className={s.desktopmenu}><RichContent_LayoutLeft_Visitor props={{ consolelink, urlprefix, category, countries, bigbigparent_slug, bigbigparent_key, title}}/></div>
+                                {/* <div className={s.desktopmenu}><RichContent_LayoutLeft_Visitor props={{ consolelink, urlprefix, category, countries, bigbigparent_slug, bigbigparent_key, title}}/></div> */}
   
                                 <div className={s.bodywr}>
                                       {/* <div className={s.test}> Test ve geliştirme aşamasındadır. Siz de teste katılabilirsiniz. </div> */}
@@ -70,7 +70,7 @@ const  Rs_Shell = ({consolelink, category,  adverts, bigbigparent_key,bigbigpare
   
 const filterAdverts = ({adverts, country, city, district, subdistrict}) => {
 
-    if (country) { adverts= adverts.filter(a=>a?.country_slug  ==  country) }
+    if (country) { adverts= adverts.filter(a=>a?.country_slug  ==  country)  }
   
     if (city) { adverts= adverts.filter(a=>a?.city_slug  ==  city) }
   

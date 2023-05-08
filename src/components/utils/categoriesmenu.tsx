@@ -11,9 +11,12 @@ import {  useQuery } from "react-query";
 export const CategoriesMenu = ({props}) => 
 {
   const router = useRouter();  
-    let { parents, category} =props;       
+    let { parents, category, bigbigparent_key} =props;       
     let slug= router?.query?.slug ?? [];
           
+
+    let full_parents= category?.o_key_1?.parents
+
     let init_selecteds=parents?.map(s=>s={key:s?.key, state:true, slug:s?.slug_tr} ) ?? [];
     
     init_selecteds=init_selecteds?.filter(a=>a!="ilanlar"); 
@@ -26,8 +29,9 @@ export const CategoriesMenu = ({props}) =>
 
     return ( 
                 <div style={wrapperForWithSubmenus}> 
-                        <Recursive props={{ rootslug:"hizmetler", tabstates, set_tabstates, deep:0}}/>
-                        <div style={cStyle}><RiGamepadLine/> <Link href="/console/adverts">PANEL</Link> </div>
+                  {/* {bigbigparent_key} - {JSON.stringify(full_parents)} */}
+                        <Recursive props={{ category, bigbigparent_key, tabstates, set_tabstates, deep:0}}/>
+                        {/* <div style={cStyle}><RiGamepadLine/> <Link href="/console/adverts">PANEL</Link> </div> */}
                 </div>
            )
 }
@@ -36,22 +40,22 @@ export const CategoriesMenu = ({props}) =>
 
 const Recursive = ({props}) => {
   
-  let {rootslug,  tabstates, set_tabstates, deep} =props;   
+  let {category,  tabstates, set_tabstates, deep, bigbigparent_key} =props;   
 
     const fetcher_sc =async ()=> { 
-      let rawdata= await fetch(process.env.NEXT_PUBLIC_API_URL, { method: "POST", headers: { "Content-Type": "application/json", }, body: JSON.stringify({ query: RelatedSubCategoriesQuery, variables: {data:{origin:rootslug}}, }), })       
+      let rawdata= await fetch(process.env.NEXT_PUBLIC_API_URL, { method: "POST", headers: { "Content-Type": "application/json", }, body: JSON.stringify({ query: RelatedSubCategoriesQuery_WithKey, variables: {data:{origin:bigbigparent_key}}, }), })       
         let datajson=await rawdata.json(); let data = datajson?.data; // console.log("sadsadsdasda", categories)                                                
         return data
   };    
 
-  const {  data:data_sc } = useQuery( ["RelatedSubCategoriesQuery", deep, rootslug ], () => fetcher_sc() , { enabled:true } );
-  let subcategories = data_sc?.relatedsubcategoriesquery ?? [];
+  const {  data:data_sc } = useQuery( ["RelatedSubCategoriesQuery", deep, category?.key ], () => fetcher_sc() , { enabled:true } );
+  let subcategories = data_sc?.relatedsubcategoriesquery_withkey ?? [];
 
    
 
   return (
-            <div style={sublinkscontainer} key={`${deep}-${rootslug}`}> 
-              {/* {JSON.stringify(tabstates)} */}
+            <div style={sublinkscontainer} key={`${deep}-${"sssss"}`}> 
+              {/* {JSON.stringify(bigbigparent_key)} */}
               
             {subcategories?.map((category, index)=>{
 
@@ -78,7 +82,7 @@ const Recursive = ({props}) => {
                             <Link href={`${`/ads/`}${links}${category?.slug_tr}`} style={{textDecoration:((tabstates?.find(t=>t.key==category?.slug_tr))) ? "underline" : "none"}}>{category?.title_tr}</Link>
                       </div>                       
                       
-                            {(selected && subcategories?.length>0) && <Recursive props={{rootslug:category?.slug_tr,  tabstates, set_tabstates, deep:deep+1}}/>}              
+                            {(selected && subcategories?.length>0) && <Recursive props={{category,bigbigparent_key:category?.key ,  tabstates, set_tabstates, deep:deep+1}}/>}              
 
                     
                     </div>
@@ -112,6 +116,34 @@ const RelatedSubCategoriesQuery =
       title_ar
       title_sa
             slug_sa
+      slug_tr
+      slug_en
+      slug_fr
+      slug_ar
+      rank
+      user
+      i_key_1
+      o_key_1
+      key
+      parent_key
+      
+    }
+  }`
+;
+
+
+
+const RelatedSubCategoriesQuery_WithKey = 
+`  query RelatedSubCategoriesQuery_WithKey ($data:JSON)  {
+    relatedsubcategoriesquery_withkey (data:$data) {
+      id
+      active
+      parent_slug
+      bigdata
+      title_tr
+      title_en
+      title_fr
+      title_ar
       slug_tr
       slug_en
       slug_fr

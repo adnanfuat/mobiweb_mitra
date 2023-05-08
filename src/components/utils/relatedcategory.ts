@@ -24,7 +24,7 @@ const relatedCategory = async ({lastslugitem}) => {
                                     relatedcategory = datajson_category?.data?.relatedcategoryquery;
                                                 
                                     cache.set(cachekey, relatedcategory, 100000);                                    
-                                    console.log("relatedcategory is cached first time :/ ", cachekey);
+                                    //console.log("relatedcategory is cached first time :/ ", cachekey);
 
                       }
   

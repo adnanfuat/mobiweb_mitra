@@ -2,10 +2,10 @@ import { cache} from "./cache";
 
 const DictionaryData = async ({locale}) => {
               
-                            let cachekey= `dictionarydata`
+                            let cachekey= `dictionarydata_${locale}`
                             let dictionarydata = cache.get(cachekey);
                             
-                            if (!!dictionarydata)  { console.log("dictionarydata is alreadycached:)", cachekey, locale); } 
+                            if (!!dictionarydata)  { console.log("dictionarydata is alreadycached:)", cachekey); } 
                                           else {
                           
                                                               let dictionarydata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
@@ -19,12 +19,11 @@ const DictionaryData = async ({locale}) => {
                                                                 .then(async (res) =>{ return res?.json() })
                                                                 .then(async (result) =>   {  return  result?.data?.dictionaryquery;  });
 
-                                                                cache.set(cachekey, dictionarydata, 100000);    
 
                                                                 dictionarydata=await dictionarydata?.map( d=> d = {title:eval(`d?.title_${locale}`), img:eval(`d?.img_${locale}`), slug:eval(`d?.slug_${locale}`), key:d?.key}  )
                                                                           
-                                                                                                                                                            
-                                                              console.log("dictionarydata is cached first time :/ ", cachekey, locale);
+                                                              cache.set(cachekey, dictionarydata, 100000);                                                                                                  
+                                                              //console.log("dictionarydata is cached first time :/ ", cachekey);
                           
                                                 }
         

@@ -17,17 +17,18 @@ import fileSpecialRequests from "./utils/files_specialrequests";
 
     const session = await getServerSession(authOptions)
   
-    let { params, position, sidepadding =42, topbottom=5} = props ?? {}
+    let { params, position, sidepadding =42, topbottom=5, webdata, dictionary} = props ?? {}
 
     let {locale} = params ?? {};
 
-    locale = locale ? locale : localeStatic;
+    // locale = locale ? locale : localeStatic;
     position= position ? position : "relative";
 
     // console.log("locale::..________________", locale);
         
-    let dictionary =   await DictionaryData({locale}) ;
-    let webdata =      await WebData() ;
+    
+    // let webdata =await WebData() ;
+    // let dictionary =   await DictionaryData({locale}) ;
 
     
 
@@ -56,9 +57,10 @@ import fileSpecialRequests from "./utils/files_specialrequests";
                 
 
           <div className={s.rightwr} >
+            {/*    */}
                   <LoginIntro session={session}/>
-                  <Menu dictionary={dictionary}  params={params}/>
-                  <Flags  params={params} locale={locale}/>
+                  <Menu params={params} webdata={webdata} dictionary={dictionary}/>
+                  <Flags params={params}/>
           </div>
 
   

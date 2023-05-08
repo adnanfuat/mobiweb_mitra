@@ -8,8 +8,12 @@ import { useDetectClickOutside } from 'react-detect-click-outside';
 
 const locales= ["tr","en","fr","ar"]
 
-export const Flags = ({locale, params}) => {
+export const Flags = (props) => {
 
+    let {params} = props ?? {}
+
+    let {locale} = params ?? {}
+    
     const router = useRouter();
     
     let a=getCode({locale})
@@ -26,6 +30,8 @@ export const Flags = ({locale, params}) => {
 
  return (
      <div style={{position:"absolute" , right:7, top:3}} ref={ref} >
+
+{/* headerssssssssssss {JSON.stringify(params)} */}
 
                 <ReactCountryFlag
                     countryCode={countryCode}
@@ -73,30 +79,33 @@ const Popup = (props) => {
         let reallink="";
         let exploededlinkparts =""
 
-
-
         
-         const goFunc = () => {
+         const goFunc = async () => {
             
-                    if (!locale) // Default olarak tr gelmiyor.. Bu durumda biz ekleyelim...
-                    {
-                        exploededlinkparts=`/tr/${pathname}`
-                    }
-                    else 
-                    {
-                        exploededlinkparts =   pathname.split('/'); // Bölülerden ayır
-                        exploededlinkparts=exploededlinkparts?.filter((a,i)=>i>1); // "/en" bu iki parçaya ayrılıyor.. Bunları at. İlk ikisi yani
-                        exploededlinkparts=exploededlinkparts?.join("/");// Sonra bölüyle birleştir.            
-                        exploededlinkparts=`/${locale}/${exploededlinkparts}`; // Yeni localeyi ekle
-                        console.log("ddddddddd5: ", exploededlinkparts)
-                    }
+                    // if (!locale) // Default olarak tr gelmiyor.. Bu durumda biz ekleyelim...
+                    // {
+                    //     exploededlinkparts=`/tr/${pathname}`
+                    // }
+                    // else 
+                    // {
+                    //     exploededlinkparts =   pathname.split('/'); // Bölülerden ayır
+                    //     exploededlinkparts = exploededlinkparts?.filter(ex=>ex!=""); // Boşluk geliyor dizinin başına.. Boşluklu olanlara ihtiyaç yok...
+                    //     //exploededlinkparts=exploededlinkparts?.filter((a,i)=>i>1); // "/en" bu iki parçaya ayrılıyor.. Bunları at. İlk ikisi yani
+                    //     console.log("ddddddddd5: ", exploededlinkparts)
+                    //     exploededlinkparts=exploededlinkparts?.join("/");// Sonra bölüyle birleştir.            
+                    //     exploededlinkparts=`/${locale}/${exploededlinkparts}`; // Yeni localeyi ekle
+                    // }
           
-            router.push(`${exploededlinkparts}`) ; // Yeni dile yönlendir
+                    // let fetchres= await fetch(`/api/changelanguage?locale=fr`)
+                    router.push(`/api/changelanguage?locale=${locale}`);
+                    // console.log("ddddddddd5: ", locale, fetchres);
+            // router.push(`${exploededlinkparts}`, {locale:locale}) ; // Yeni dile yönlendir
+            //router.push(`/${locale}`);
             setpopup(o=>!o)
         }
         
 
-        return (<div  key={i}>
+        return (<div  key={i}> {pathname}
 
                         <ReactCountryFlag
                                     countryCode={a}

@@ -1,7 +1,7 @@
 
 import { cache} from "./cache";
 
-const richContents_WithCategories = async ({slug, active}) => {
+const richContents_WithCategories = async ({slug, active, website, useremail}) => {
 
   let cachekey= `richcontents_${active ? "active" : "passive"}_${JSON.stringify(slug)}`
   let richcontents = cache.get(cachekey);
@@ -16,14 +16,14 @@ const richContents_WithCategories = async ({slug, active}) => {
                                       headers: {  "Content-Type"  : "application/json" },
                                       body: JSON.stringify({
                                         query: AdvertsQuery_WithCategories_Raw,
-                                        variables: {data:{slug, active:1, onlyauthdata:false}},
+                                        variables: {data:{slug, active:1, onlyauthdata:false, website, useremail}},
                                       }),
                                     })       
                                       let datajson=await rawdata.json()
                                       richcontents = datajson?.data?.advertsquery_withcategories;     
                                                 
                                   cache.set(cachekey, richcontents, 100000);
-                                  console.log("richcontents is cached first time :/ ", cachekey);      
+                                  //console.log("richcontents is cached first time :/ ", cachekey);      
                       }
   
                       return richcontents                 

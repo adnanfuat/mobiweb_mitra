@@ -24,7 +24,7 @@ const fileSpecialRequests = async ({logofiles}) => {
                                     .then((result) => { return result?.data?.filesquery_specialrequests; });   
                                                 
                                   cache.set(cachekey, fileobjects, 100000);
-                                  console.log("fileSpecialRequests is cached first time :/", cachekey);      
+                                  //console.log("fileSpecialRequests is cached first time :/", cachekey);      
 
                  }
   

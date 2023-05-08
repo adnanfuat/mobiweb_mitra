@@ -1,11 +1,18 @@
 import Link from "next/link";
 import s from "./menu.module.css"
+import DictionaryData from "./utils/dictionarydata";
 import dictionaryFunc from "./utils/dictionaryfunc";
-export const Menu = (props) => {
+export const Menu = async (props) => {
 
-    let {dictionary,  params } = props ?? {};
-      
+    let { params , dictionary } = props ?? {};
     let {locale} = params ?? {}
+
+    // console.log("params:::", props);
+
+    locale = locale ? locale : "tr";
+
+    
+      
 
     let ana_sayfa = dictionaryFunc({key:"1682173393396", dictionary}).text;
     let hakkimizda = dictionaryFunc({key:"1682173354630", dictionary}).text;
@@ -15,18 +22,18 @@ export const Menu = (props) => {
         
         
 
-        locale = locale ? locale : "tr";
+        
 
     
   
     return (
-        <div className={s.menuwr} >    
-          {/* {JSON.stringify(dictionary)}    - {locale}        */}
-                  <Link href={"/"} className={s.menuitem}>  {ana_sayfa} </Link>
-                  <Link href={"/"} className={s.menuitem}>{hakkimizda}</Link>
-                  <Link href={"/ads"} className={s.menuitem}>{emlak_ilanlari}</Link>                  
-                  <Link href={"/b/services"} className={s.menuitem}>{hizmetler}</Link>                  
-                  <Link href={"/contact"} className={s.menuitem}>{iletisim}</Link>
+        <div className={s.menuwr} >  
+          {/* {JSON.stringify(props)}    - {locale}        */}
+                  <Link href={`/`} className={s.menuitem} >  {ana_sayfa}  </Link>
+                  <Link href={`/`} className={s.menuitem}  >{hakkimizda}</Link>
+                  <Link href={`/ads`} className={s.menuitem}  >{emlak_ilanlari} </Link>                  
+                  <Link href={`/b/services`} className={s.menuitem}  >{hizmetler}</Link>                  
+                  <Link href={`/contact`} className={s.menuitem}  >{iletisim}</Link>
         </div>
     )
   }
