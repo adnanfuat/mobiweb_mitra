@@ -10,19 +10,16 @@ import dictionaryFunc from "@/components/utils/dictionaryfunc";
 import DictionaryData from "@/components/utils/dictionarydata";
 
 
-const  Estates = async ({adverts, sidepadding, locale}) =>{
-  
-  
-  let dictionary=await DictionaryData({locale});
+const  Estates = async ({adverts, sidepadding, params}) =>{
 
+  let {locale} = params ?? {};    
+  let dictionary=await DictionaryData({locale});
   // console.log("555555555555", dictionary);
   return (
-                          <div className={s.mainwr} style={{paddingLeft: sidepadding, paddingRight: sidepadding }}>
-                                                                                        
-                              <div className={s.bodywr}>                                    
-                                    <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item, dictionary}} key={index}/> }) } </div>                    
-                              </div>
-                              
+                          <div className={s.mainwr} style={{paddingLeft: sidepadding, paddingRight: sidepadding }}>                                                                                        
+                                <div className={s.bodywr}>
+                                      <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item, dictionary, params}} key={index}/> }) } </div>                    
+                                </div>
                           </div>
                )
 
@@ -33,9 +30,9 @@ export default Estates
 
 
 const Item = ({props}) => {
-  const {item, dictionary} =props ?? {};
-
+  const {item, dictionary, params} =props ?? {};
   
+  let {locale} = params ?? {};    
 
   let {parentObj, loggedUserMail} = item ?? {};
     
@@ -62,7 +59,7 @@ const Item = ({props}) => {
               <div className={s.i_title}>{item?.title_tr}</div>
               <div className={s.parenttitle}>{parentObj?.title_tr}</div>               
               
-              <div className={s.i_image}><CardImage props={{item, id: item?.id}}/></div>
+              <div className={s.i_image}><CardImage props={{item, id: item?.id, params}}/></div>
               <div className={s.i_info}>
                             {fiyat && <div className={s.i_info_sub}>
                                 <div>{fiyat_text}</div>  
@@ -84,12 +81,15 @@ const Item = ({props}) => {
   
 const CardImage = ({props}) => {
 
-  let {item, id} = props ?? {};
+  let {item, id, params} = props ?? {};
 
-  let img=item?.img_tr
+  let img=item?.img_tr;
+
+  let {locale} = params ?? {};    
+
     
   return (    
-      <Link href={`/b/ad/${item?.slug_tr}/${id}`} >
+      <Link href={`/${locale}/ad/${item?.slug_tr}/${id}`} >
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :

@@ -6,12 +6,14 @@
 
 .shell {    
 display: grid;
-grid-template-columns: max-content 4fr 2fr;
+grid-template-columns: 2fr 2fr 3fr;
 grid-template-areas: 
-"image info who"
+"image image info"
+"who who info"
 "tabswr tabswr tabswr"
 ;
 gap:30px;
+position: relative;
 
 }
 
@@ -45,22 +47,41 @@ gap:30px;
 
 
 .image {
-    grid-area: image;       
+    grid-area: image;        
+    /* background-color: #484f57;    */
+    }
+    
+.advert_visitor_image_wr {
+        position: relative;        
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        max-height: 700px;
     }
 
+    
 .imagestandartwr {
         display: grid;
         position: relative;
-        width: 800px;
-        height: 600px;
+        width: 100%;
+        height: 100%;
+        min-height: 600px;    
         }
         
 
+        .myembla {
+            border:2px solid red;
+            position: relative;
+            width: 100%;
+            height: 100%;
+                    
+
+        }
 
 .onelineproperty {
 display: flex;
 justify-content: space-between;
-font-size: 1.3rem;    
+font-size: 0.9rem;    
 align-items: center;                        
 background-color: #dddddd;
 padding: 10px;
@@ -134,7 +155,7 @@ border-radius: 4px;
     flex-direction: column;
     width: 100%;
     height: 100%;     
-    gap:10px;
+    gap:4px;
     
 }     
 
@@ -151,6 +172,13 @@ border-radius: 4px;
 .infoemptywr span {
     margin-top: 10px;
     font-weight: bold;
+}
+
+.parents {
+        display: flex;
+        position: absolute;
+        top:-55px;
+        right:30px    
 }
 
 
@@ -194,11 +222,6 @@ gap: 10px;
     border-radius: 0px 0px 5px 5px ;
 }
 
-.advert_visitor_image_wr {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-}
 
 
 .advert_visitor_image_dynamic_loading {
@@ -227,17 +250,20 @@ opacity: 0.7;
     .shell {            
         grid-template-columns: max-content 1fr;
         grid-template-areas: 
-        "image info info"
-        "image who who"
+        "image image image"
+        "info info info"
+        "who who who"
         "tabswr tabswr tabswr"
         ;
-        gap:20px;                
+        gap:20px;               
+        
         }      
 
-        .imagestandartwr {            
-            width: 640px;
-            height: 480px;
-            border:5px solid rgb(197, 0, 0)
+
+
+        .imagestandartwr {                        
+            /* border:5px solid rgb(197, 0, 0) */
+            min-height: 700px;    
             }        
 
          
@@ -249,12 +275,29 @@ opacity: 0.7;
 @media screen and (max-width: 1200px) {
     
 
+    .shell {            
+        grid-template-columns: 1fr;
+        grid-template-areas:         
+        "parents"
+        "image"
+        "info"
+        "who"
+        "tabswr"
+        ;                
+        }   
+
         
         .imagestandartwr {            
-            width: 500px;
-            height: 375px;
+            
             border:5px solid black
-            }           
+            } 
+            
+            .parents {
+                position: relative;
+                grid-area: parents;
+                top:0px;
+                right:0px    
+            }
                    
 }     
 
@@ -264,7 +307,8 @@ opacity: 0.7;
 
     .shell {            
         grid-template-columns: 1fr;
-        grid-template-areas: 
+        grid-template-areas:        
+        "parents"
         "image"
         "info"
         "who"

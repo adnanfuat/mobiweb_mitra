@@ -10,24 +10,21 @@ const inter = Inter({
 
 
 export const DesignLayout = (props) => {
-    let {title, dictionary} = props ?? {}
-
-    let sidepadding = 42;
-
-      
-    
+    let {title, dictionary, params, webdata} = props ?? {};
+    let sidepadding = 26;
+          
   return (
     <div  className={s.designwr}>
-        <HeaderComp  position="relative"  sidepadding={sidepadding} topbottom={5} dictionary={dictionary}/>
-
+      {/* {JSON.stringify(webdata)} */}
+      
+        <HeaderComp position="relative"  sidepadding={sidepadding} topbottom={5} dictionary={dictionary} params={params} webdata={webdata}/>
 
         <div style={{paddingLeft:sidepadding, paddingRight:sidepadding }}  className={s.mainwr}>
 
-                    <div className={`${s.title} ${inter.variable}`}>{title ? title : "Başlık atanmamış"}</div>
-        
+                    <div className={`${s.title} ${inter.variable}`}>{title ? title : "Başlık atanmamış"}</div>        
+                    
                     { props?.children }
-
-            
+                        
         </div>
 
         </div>

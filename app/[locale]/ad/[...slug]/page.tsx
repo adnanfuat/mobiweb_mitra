@@ -7,6 +7,9 @@ import {Advert_Visitor_Tabs} from "./advert_visitor_tabs";
 import s from "./s.module.css"
 import Link from 'next/link';
 import Image from "next/image";
+import { DesignLayout } from "@/layouts/designlayout";
+import DictionaryData from "@/components/utils/dictionarydata";
+import WebData from "@/components/utils/webdata";
 //import dynamic from 'next/dynamic'
 // import {siteProxy} from "@/constants/siteproxy"
 // import { useSnapshot } from 'valtio';
@@ -19,6 +22,8 @@ export default async function  Page ({params}) {
   let {locale, slug} = params ?? {}
 
   
+  let dictionary=await DictionaryData({locale});
+  let webdata=await WebData();
 
   let rawdata_advert= await fetch(process.env.NEXT_PUBLIC_API_URL, {
     method: "POST",
@@ -41,24 +46,57 @@ export default async function  Page ({params}) {
     //  return <div>asdsaddsa</div>
     
           return (
-                  <Ad_LayoutMain_Visitor_V2  title={advert?.title_tr} parents={parents}  side={"clientside"}  pagetype="advert">     
-                                                         
-                            <div className={s.shell}> asddsa {advert?.id}
-                                  <div className={s.metadata}> <Advert_VisitorMode_MetaData advert={advert}/>   </div>
-                                  <div className={s.image}><Advert_Visitor_Image advert={advert}/></div>
-                                  <div className={s.info}> <Advert_Visitor_Info advert={advert}/> </div>
-                                  <div className={s.who}><Advert_Visitor_Owner advert={advert}/>                                       
-                                  </div>         
-
-                                  <Advert_Visitor_Tabs advert={advert}/>                                                                                                                                                                            
-
-                            </div>
-                  </Ad_LayoutMain_Visitor_V2>
+              <DesignLayout  title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>
+                                <div className={s.shell}> 
+                                      <div className={s.parents}><Advert_Visitor_Parents parents={parents} params={params}/></div>                                                                                                                                                                     
+                                      <div className={s.metadata}> <Advert_VisitorMode_MetaData advert={advert}/>   </div>
+                                      <div className={s.image}><Advert_Visitor_Image advert={advert}/></div>
+                                      <div className={s.info}> <Advert_Visitor_Info advert={advert}/> </div>
+                                      <div className={s.who}><Advert_Visitor_Owner advert={advert}/>                                       
+                                      </div>         
+                                      <Advert_Visitor_Tabs advert={advert}/>       
+                                </div>
+                </DesignLayout>
                 )
     
     }
 
     
+
+
+
+    const Advert_Visitor_Parents = (props) => {
+
+      let {parents, params} = props ?? {};
+      let {locale} = params ?? {};
+
+      // let parents=advert?.bigdata?.history?.[0]?.info?.parents;
+
+      parents=parents?.filter(item=> ( item?.slug_tr!="emlak" ) )
+      
+      
+      let linkObj=parents?.map((item, index)=>{
+                
+                          item={value:item?.slug_tr, label:item?.title_tr, fulllink:(parents?.filter((p,i)=>i<=index)?.map(p=>p?.slug_tr)?.join("/"))}
+
+                          return item
+                
+                }) ?? []
+          
+              linkObj= linkObj?.length>0 ? [{value:"", label:"İlanlar", fulllink:""}    , ...linkObj] : [] // Sadece ilan sayfasındayken yukarıdaki parent breadcrumbını göster. Haricinde ana sayfada gösterme
+
+      return (
+        <div>
+          
+          <div className={s.parentslist}>
+              {linkObj?.map((item, i)=>{
+                        return <Link href={`/${locale}/ads/`+item?.fulllink} key={"link_"+i}><span>{i>0 && " > "}</span> {item?.label}</Link>
+              })}
+          </div>
+              {/* {JSON.stringify(linkObj)} */}          
+        </div>
+      )
+    }
 
 
 

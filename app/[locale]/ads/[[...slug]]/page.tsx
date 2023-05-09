@@ -8,7 +8,7 @@ import {LayoutLeft} from "./layoutleft";
 import { cacheCountries } from "@/components/utils/cachecountries";
 import richContents_WithCategories from "@/components/utils/richcontents_withcategories";
 import relatedCategory from "@/components/utils/relatedcategory";
-import { DesignLayout } from "./designlayout";
+import { DesignLayout } from "@/layouts/designlayout";
 import WebData from "@/components/utils/webdata";
 import DictionaryData from "@/components/utils/dictionarydata";
 import { localeStatic } from "@/constants/localestatic";
@@ -31,7 +31,7 @@ export default async function Category (props){
 
 export async function Rs_Shell (props){
     
-  let {params, searchParams, root_category, root_slug, sidepadding, bigbigparent_key, webdata, dictionary} = props ?? {};  
+  let {params, searchParams, root_category, root_slug,  bigbigparent_key, webdata, dictionary} = props ?? {};  
 
   let {slug} = params ?? {} ;
   let  countries = await cacheCountries();
@@ -62,17 +62,21 @@ export async function Rs_Shell (props){
 
   let category=await relatedCategory({lastslugitem})  ?? []
 
+  // console.log("asdasdasdsda: ", category);
+
   let {country, city, district, subdistrict} = searchParams ?? {}
 
   adverts=filterAdverts({adverts, country, city, district, subdistrict});
 
   let parents=category?.o_key_1?.parents;
 
+  
+
   return (
-              <DesignLayout title={`${category?.title_tr}`} dictionary={dictionary}  >
+              <DesignLayout title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>
                           
                           <div className={s.mainwr}> 
-                          {/* sasadsa{JSON.stringify(slug)}   -                          {JSON.stringify(adverts[0]?.bigdata?.history[0]?.info?.parents)} */}
+                                                    
                             {(country || city || district || subdistrict) && <div className={s.filtered}>                             
                                 
                                     <Link href={`/${root_slug}`}><div  className={s.filteredinner}>
@@ -117,7 +121,7 @@ const Meta = (props) => {
         let parents_links=parents?.map((a)=> a?.slug_tr);    parents_links=parents_links?.filter(item=>item!="ilanlar")
         //parents=parents?.filter((a, i)=> i>1);
         parents=parents?.map((a)=> a?.title_tr);      
-        parents=parents.join(" > ");
+        parents=parents?.join(" > ");
 
         let description=category?.bigdata?.history?.[0]?.lang?.tr?.decription;
         let title=category?.title_tr;

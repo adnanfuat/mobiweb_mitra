@@ -27,8 +27,8 @@ export default function Advert_Visitor_Image_Dynamic  (props) {
   }, [emblaApi])
 
   return (
-    <div style={{position:"absolute", zIndex:50, top:0, width:"100%", height:"100%"}}>        
-      <div className="embla">
+    
+      <div className={`embla ${s.myembla}`}>
 
       <div className="embla__viewport"  ref={emblaRef} >
         <div className="embla__container" >
@@ -58,7 +58,7 @@ export default function Advert_Visitor_Image_Dynamic  (props) {
           </div>}
 
     </div>
-</div>
+
   )
   
 }

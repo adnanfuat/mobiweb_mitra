@@ -31,11 +31,11 @@ const DictionaryData = async ({locale}) => {
                           
                                                 }
         
-                                                console.log("dictionarydata:::. 1", dictionarydata?.[0]?.title_tr)
+                                                // console.log("dictionarydata:::. 1", dictionarydata?.[0]?.title_tr)
 
                                                 dictionarydata= dictionarydata?.map( d=> d = {title:eval(`d?.title_${locale}`), img:eval(`d?.img_${locale}`), slug:eval(`d?.slug_${locale}`), key:d?.key}  )
 
-                                                 console.log("dictionarydata:::. 2", dictionarydata?.[0]?.title)
+                                                //  console.log("dictionarydata:::. 2", dictionarydata?.[0]?.title)
 
                             return dictionarydata       
 

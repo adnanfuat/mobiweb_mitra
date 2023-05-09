@@ -3,13 +3,14 @@ import { BolgeIsmiOgren } from "@/components/utils/bolgeismiogren";
 import WebData from "@/components/utils/webdata";
 import Form from "./form";
 import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/pages/api/auth/[...nextauth]"
+import { authOptions } from "@/app/api/auth/[...nextauth]"
 import {localeStatic} from "@/constants/localestatic";
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
 import { cacheCountries } from "@/components/utils/cachecountries";
 import HeaderComp from "@/components/headercomp";
-import { DesignLayout } from "../ads/[[...slug]]/designlayout";
+import { DesignLayout } from "@/layouts/designlayout";
 import DictionaryData from "@/components/utils/dictionarydata";
+import dictionaryFunc from "@/components/utils/dictionaryfunc";
 
 
 export default async function Page  ({params}) {
@@ -24,6 +25,9 @@ export default async function Page  ({params}) {
   let dictionary  =   await DictionaryData({locale});
   const session   =   await getServerSession(authOptions);
 
+  let iletisim =         dictionaryFunc({key:"1668310884_999", dictionary}).text;
+  let mesaj_formu =         dictionaryFunc({key:"1668310884_999", dictionary}).text;
+
   let info = webdata?.bigdata?.history[0];
   let lang = info?.lang;
   let selectedlang = eval(`lang.${locale}`);
@@ -32,11 +36,11 @@ export default async function Page  ({params}) {
   let defaultaddresses = defaultlang?.addresses;
 
   let addresses = (selectedaddresses && selectedaddresses?.length>0) ?  selectedaddresses : defaultaddresses
-  // console.log("webdata::::::::sadasdsdadsa", params);  
+  // console.log("webdata::::::::sadasdsdadsa", webdata);  
   let sidepadding = 42;
 
      return (
-      <DesignLayout title="İletişim" dictionary={dictionary}>
+      <DesignLayout title={iletisim} dictionary={dictionary} params={params} webdata={webdata}> 
 
         <div className={s.shell}>
               

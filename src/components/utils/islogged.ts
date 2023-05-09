@@ -1,7 +1,6 @@
 "use client"
 import { useSession} from "next-auth/react"
-// import { authOptions } from "@/pages/api/auth/[...nextauth]"
-// import { getServerSession } from "next-auth/next"
+
 
 
 

@@ -15,8 +15,8 @@ import {siteProxy} from "@/constants/siteproxy"
   
         return (
           <div className={s.advert_visitor_image_wr}>          
-                {<Advert_Visitor_Image_Standart advert={advert}/>            }
-                {siteState.interaction && <Advert_Visitor_Image_Dynamic advert={advert}/> }
+                {/* {siteState.interaction && <Advert_Visitor_Image_Dynamic advert={advert}/> } */}
+                {<Advert_Visitor_Image_Standart advert={advert}/> }
           </div>
         )
       }

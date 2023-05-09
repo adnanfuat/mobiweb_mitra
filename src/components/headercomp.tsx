@@ -4,12 +4,12 @@ import {Menu} from "@/components/menu";
 import {LoginIntro} from "@/components/loginintro";
 import {Flags} from "@/components/flags";
 
-import { localeStatic } from "@/constants/localestatic";
+// import { localeStatic } from "@/constants/localestatic";
 
 import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/pages/api/auth/[...nextauth]"
-import DictionaryData from "./utils/dictionarydata";
-import WebData from "./utils/webdata";
+import { authOptions } from "../../app/api/auth/[...nextauth]"
+// import DictionaryData from "./utils/dictionarydata";
+// import WebData from "./utils/webdata";
 import fileSpecialRequests from "./utils/files_specialrequests";
 
   
@@ -21,26 +21,14 @@ import fileSpecialRequests from "./utils/files_specialrequests";
 
     let {locale} = params ?? {};
 
-    // locale = locale ? locale : localeStatic;
     position= position ? position : "relative";
-
-    // console.log("locale::..________________", locale);
-    // console.log("dictionarydictionary: ", locale, dictionary?.[0]);
-    
-    // let webdata =await WebData() ;
-    // let dictionary =   await DictionaryData({locale}) ;
-
-    
-
 
     let lang= webdata?.bigdata?.history[0]?.lang?.tr;
     let logofiles =  lang?.logofiles;
 
     let fileobjects = await fileSpecialRequests({logofiles})
-
- 
-      
-        let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+       
+    let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
           
         // let {logo, params, dictionary} = props ?? {};                  
         let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
@@ -50,14 +38,16 @@ import fileSpecialRequests from "./utils/files_specialrequests";
     return (
       <div className={s.headercompwr} style={{position, padding:`${topbottom}px ${sidepadding}px`}}>
           
-          <div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}>
+          <Link href={`/${locale}`}><div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}>
     
-    
-          </div>
+          {/* `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})` */}
+
+          {/* -- {JSON.stringify(fileobjects)} */}
+
+          </div></Link>
                 
 
-          <div className={s.rightwr} >
-            {/*    */}
+          <div className={s.rightwr} >               
                   <LoginIntro session={session}/>
                   <Menu params={params} webdata={webdata} dictionary={dictionary}/>
                   <Flags params={params}/>

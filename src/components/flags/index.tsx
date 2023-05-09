@@ -105,7 +105,8 @@ const Popup = (props) => {
         }
         
 
-        return (<div  key={i}> {pathname}
+        return (<div  key={i}> 
+        
 
                         <ReactCountryFlag
                                     countryCode={a}
