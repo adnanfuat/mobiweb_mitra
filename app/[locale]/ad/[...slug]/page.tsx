@@ -10,6 +10,7 @@ import Image from "next/image";
 import { DesignLayout } from "@/layouts/designlayout";
 import DictionaryData from "@/components/utils/dictionarydata";
 import WebData from "@/components/utils/webdata";
+import { localeStatic } from "@/constants/localestatic";
 //import dynamic from 'next/dynamic'
 // import {siteProxy} from "@/constants/siteproxy"
 // import { useSnapshot } from 'valtio';
@@ -48,11 +49,12 @@ export default async function  Page ({params}) {
           return (
               <DesignLayout  title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>
                                 <div className={s.shell}> 
-                                      <div className={s.parents}><Advert_Visitor_Parents parents={parents} params={params}/></div>                                                                                                                                                                     
-                                      <div className={s.metadata}> <Advert_VisitorMode_MetaData advert={advert}/>   </div>
-                                      <div className={s.image}><Advert_Visitor_Image advert={advert}/></div>
-                                      <div className={s.info}> <Advert_Visitor_Info advert={advert}/> </div>
-                                      <div className={s.who}><Advert_Visitor_Owner advert={advert}/>                                       
+                              {/* ASDSDASASDA      {JSON.stringify(params)} */}
+                                      <div className={s.parents}>   <Advert_Visitor_Parents parents={parents} params={params}/></div>                                                                                                                                                                     
+                                      <div className={s.metadata}>  <Advert_VisitorMode_MetaData advert={advert} params={params}/>   </div>
+                                      <div className={s.image}>     <Advert_Visitor_Image advert={advert}  params={params}/></div>
+                                      <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div>
+                                      <div className={s.who}>       <Advert_Visitor_Owner advert={advert}  params={params}/>                                       
                                       </div>         
                                       <Advert_Visitor_Tabs advert={advert}/>       
                                 </div>
@@ -150,25 +152,26 @@ export default async function  Page ({params}) {
     
      const Advert_Visitor_Info = (props) => {
 
-      let {advert} = props;
+      let {advert, params} = props;
       
       let advert_properties = advert?.bigdata?.history?.[0]?.info?.properties; // İlana atanmış özellikler 
 
       if (advert_properties?.length>0)  return (
-                                                            <div className={s.infowr}>
+                                                            <div className={s.infowr}> 
+                                                                {/* {JSON.stringify(params)} */}
                                                                   {advert_properties?.map((item, i )=>{
 
                                                                             if (item?.input_type=="multicheckbox" && item?.value?.length>0) {
-                                                                            return <MultiCheckboxModule property={item} key={`mumo-${i}`}/>
+                                                                            return <MultiCheckboxModule property={item} key={`mumo-${i}`}  params={params}/>
                                                                           }
                                                                           else if (item?.input_type=="textfield") {
-                                                                            return <TextFieldModule property={item} key={`tefi-${i}`}/>
+                                                                            return <TextFieldModule property={item} key={`tefi-${i}`}  params={params}/>
                                                                           }
                                                                           else if (item?.input_type=="select") {
-                                                                            return <SelectFieldModule property={item} key={`sefi-${i}`}/>
+                                                                            return <SelectFieldModule property={item} key={`sefi-${i}`}  params={params}/>
                                                                           }
                                                                           else if (item?.input_type=="radio") {
-                                                                            return <RadioFieldModule property={item} key={`rafi-${i}`}/>
+                                                                            return <RadioFieldModule property={item} key={`rafi-${i}`}  params={params}/>
                                                                           }
                                                                       
                                                                   })}
@@ -195,9 +198,11 @@ export default async function  Page ({params}) {
 
     const MultiCheckboxModule = (props) => {
 
-      let {property} = props;
+      let {property, params} = props;
 
       let selecteds=property?.value;
+
+      let {locale} = params ?? {}
 
       // console.log("selectedsselectedsselectedsselecteds: ", selecteds);
 
@@ -211,7 +216,7 @@ export default async function  Page ({params}) {
                                 {selecteds?.map((o, i)=>{
                                               
                                                 
-                                                return <div key={`mu-${i}`}>{o?.value_label_tr}</div>
+                                                return <div key={`mu-${i}`}>{eval(`o?.value_label_${locale}`)}</div>
 
                                 })}
                     </div>
@@ -220,19 +225,23 @@ export default async function  Page ({params}) {
 
     const TextFieldModule = (props) => {
 
-      let {property} = props ?? {}
+      let {property, params} = props ?? {}
+
+      let {locale} = params ?? {}
       
 
-      return <div className={s.onelineproperty}>        
-                          <div className={s.xxxxxxxxxxxx}> {property?.key_label_tr} </div>
+      return <div className={s.onelineproperty}>
+         {/* {JSON.stringify(property)}        */}
+                          <div className={s.xxxxxxxxxxxx}>  {eval(`property?.key_label_${locale}`) ?? eval(`property?.key_label_${localeStatic}`)} </div>
                           <div className={s.xxxxxxxxxxxxxxx}> {property?.value_label_tr} </div>                          
              </div>
   }
   
       const SelectFieldModule = (props) => {
 
-          let {property} = props ?? {}        
+          let {property, params} = props ?? {}        
           
+          let {locale} = params ?? {}
           
 
           return <div className={s.onelineproperty}>
@@ -243,7 +252,9 @@ export default async function  Page ({params}) {
 
       const RadioFieldModule = (props) => {
 
-        let {property} = props ?? {}
+        let {property, params} = props ?? {}
+
+        let {locale} = params ?? {}
 
         return <div>Radio.........</div>
       }

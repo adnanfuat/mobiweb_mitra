@@ -75,7 +75,9 @@ export async function Rs_Shell (props){
   return (
               <DesignLayout title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>
                           
-                          <div className={s.mainwr}> 
+                          <div className={s.mainwr}>  
+                            
+                              {/* {JSON.stringify(params)} */}
                                                     
                             {(country || city || district || subdistrict) && <div className={s.filtered}>                             
                                 
@@ -99,10 +101,10 @@ export async function Rs_Shell (props){
                               <div className={s.desktopmenu}><LayoutLeft props={{ parents, category, bigbigparent_key, countries, searchParams}}/></div>
 
                               <div className={s.bodywr}>                                    
-                                    <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item,  countries}} key={index}/> }) } </div>                    
+                                    <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item, countries, params}} key={index}/> }) } </div>                    
                               </div>
 
-                              <Meta category={category} firstadvert={adverts[0]} root_slug={root_slug}/>
+                              <Meta category={category} firstadvert={adverts[0]} root_slug={root_slug} params={params}/>
 
                           </div>
                 </DesignLayout>                          
@@ -115,7 +117,7 @@ export async function Rs_Shell (props){
 
 const Meta = (props) => {
 
-        let {category, firstadvert, root_slug} = props ?? {};
+        let {category, firstadvert, root_slug, params} = props ?? {};
 
         let parents=category?.o_key_1?.parents;                       
         let parents_links=parents?.map((a)=> a?.slug_tr);    parents_links=parents_links?.filter(item=>item!="ilanlar")
@@ -193,10 +195,11 @@ const Meta = (props) => {
 
 
 const Item = ({props}) => {
-  const {item,  countries} =props ?? {};
+  const {item,  countries, params} =props ?? {};
   let {parentObj, loggedUserMail} = item ?? {};
   // let {name} = mailName({mail:item?.user})  
   // let owner = user?.email==item?.user;
+  const {locale} =params ?? {};
 
   let properties=item?.bigdata?.history?.[0]?.info?.properties;
 
@@ -236,7 +239,7 @@ const Item = ({props}) => {
               </div>      
       
               
-              <div className={s.i_image}><CardImage props={{item, id: item?.id}}/></div>
+              <div className={s.i_image}><CardImage props={{item, id: item?.id, params}}/></div>
               <div className={s.i_info}>
                             {fiyat && <div className={s.i_info_sub}>                                
                                 <div>{currencyFormat(fiyat?.value)}</div>  
@@ -269,12 +272,12 @@ const Item = ({props}) => {
   
 const CardImage = ({props}) => {
 
-  let {item, id} = props ?? {};
+  let {item, id, params} = props ?? {};
 
   let img=item?.img_tr
     
   return (    
-      <Link href={`/ad/${item?.slug_tr}/${id}`}  >   
+      <Link href={`/${params?.locale}/ad/${item?.slug_tr}/${id}`}  >   
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :
