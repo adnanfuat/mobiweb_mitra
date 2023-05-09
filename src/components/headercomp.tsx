@@ -25,7 +25,7 @@ import fileSpecialRequests from "./utils/files_specialrequests";
     position= position ? position : "relative";
 
     // console.log("locale::..________________", locale);
-        
+    // console.log("dictionarydictionary: ", locale, dictionary?.[0]);
     
     // let webdata =await WebData() ;
     // let dictionary =   await DictionaryData({locale}) ;

@@ -7,7 +7,7 @@ const fileSpecialRequests = async ({logofiles}) => {
   let fileobjects = cache.get(cachekey);
   
   if (fileobjects)  {        
-                                   console.log("fileSpecialRequests is alreadycached:)", cachekey);      
+                                  //  console.log("fileSpecialRequests is alreadycached:)", cachekey);      
                     } 
 
                  else {

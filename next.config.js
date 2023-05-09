@@ -9,6 +9,7 @@ typescript: {ignoreBuildErrors:true},
     dangerouslyAllowSVG: true,
     domains: ['srcdn.sakaryarehberim.net', 'www.sakaryarehberim.com', 'lh3.googleusercontent.com'],
   },
+  
   i18n: {
     // These are all the locales you want to support in
     // your application

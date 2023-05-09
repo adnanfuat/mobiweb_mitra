@@ -4,34 +4,32 @@ import FooterComp from "@/components/footercomp"
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from './page.module.css'
-import Estates from './estates';
 import {Index_Cuffs_V2_Visitor} from "./cuffs/index_cuffs_v2_visitor"
 import WebData from "@/components/utils/webdata"
 import DictionaryData from "@/components/utils/dictionarydata"
 import { localeStatic } from "@/constants/localestatic"
-import { json } from "stream/consumers"
+import Estates from "./estates"
 
 const inter = Inter({ subsets: ['latin'] })
 
 
 export default async function Home(props) {
 
-  let {params} = props ?? {}
+  let {params, } = props ?? {}
   let {locale} = params ?? {}
   
-  locale = locale ? locale : localeStatic;
+  // locale = locale ? locale : localeStatic;
 
   //  console.log("paramssss", props)
    let dictionary=await DictionaryData({locale});
-   let webdata=await WebData();
+  
 
+  let webdata=await WebData();
    
+  let cuffs= webdata?.bigdata?.history[0]?.lang?.tr?.cuffs;
 
-    let cuffs= webdata?.bigdata?.history[0]?.lang?.tr?.cuffs;
-
-
-    let lang= webdata?.bigdata?.history[0]?.lang?.tr;
-    let logofiles =  lang?.logofiles;
+  let lang= webdata?.bigdata?.history[0]?.lang?.tr;
+  let logofiles =  lang?.logofiles;
 
     let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
       method: "POST",
@@ -98,6 +96,26 @@ export default async function Home(props) {
 
   
 }
+
+
+
+
+ 
+// export async function getStaticProps(params) {
+   
+//   let {slug, locale} = params ?? {} ;
+
+// console.log("asdsadsa", params);
+
+//   let dictionary = DictionaryData({locale})
+      
+
+
+//     return {
+//       props: {dictionary}, 
+//       revalidate: 500,      
+//     };
+//   }
 
 
 

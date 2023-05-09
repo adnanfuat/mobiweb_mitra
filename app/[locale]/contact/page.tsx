@@ -9,6 +9,7 @@ import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
 import { cacheCountries } from "@/components/utils/cachecountries";
 import HeaderComp from "@/components/headercomp";
 import { DesignLayout } from "../ads/[[...slug]]/designlayout";
+import DictionaryData from "@/components/utils/dictionarydata";
 
 
 export default async function Page  ({params}) {
@@ -19,8 +20,9 @@ export default async function Page  ({params}) {
 
   let {locale} = params ?? {}
 
-  let webdata=await WebData();
-  const session = await getServerSession(authOptions);
+  let webdata=        await WebData();
+  let dictionary  =   await DictionaryData({locale});
+  const session   =   await getServerSession(authOptions);
 
   let info = webdata?.bigdata?.history[0];
   let lang = info?.lang;
@@ -34,15 +36,14 @@ export default async function Page  ({params}) {
   let sidepadding = 42;
 
      return (
-      <DesignLayout title="İletişim">
+      <DesignLayout title="İletişim" dictionary={dictionary}>
 
         <div className={s.shell}>
               
               <div className={s.mainwr}>
                   <div className={s.sectionwr}>                    
                         <div className={s.sectiontitle}>Mesaj Formu</div>
-                        <div className={s.form}><ContactForm session={session} webdata={webdata}/></div>
-                        {/* usermessages={usermessages} */}
+                        <div className={s.form}><ContactForm session={session} webdata={webdata}/></div>                        
                   </div>
 
 
@@ -64,13 +65,7 @@ const ContactForm = (props) => {
 
   let {session, usermessages, webdata} = props ?? {};
 
-  return (
-      <div className={s.ci_shell}>
-        
-          <Form session={session} usermessages={usermessages} webdata={webdata}/>
-              
-      </div>    
-  )
+  return ( <div className={s.ci_shell}><Form session={session} usermessages={usermessages} webdata={webdata}/></div> )
 }
 
 
@@ -80,14 +75,10 @@ const ContactInfo = (props) => {
   let {addresses, countries} = props ?? {};
   
     return (
-        <div className={s.ci_shell}>
-          
-
-          <Addresses addresses={addresses} countries={countries}/>          
-          <Phones/>          
-          <Email/>          
-
-
+        <div className={s.ci_shell}>          
+              <Addresses addresses={addresses} countries={countries}/>          
+              <Phones/>
+              <Email/>
         </div>    
     )
 }
@@ -98,13 +89,12 @@ const ContactInfo = (props) => {
 const Email = () => {
   return (
     <div className={s.ci_itemwr}>
-            
-            
-    <div className={s.ci_itemicon}><RiMailFill/></div>
-    <div className={s.ci_itemdatawr}>
-          <div className={s.ci_itemtitle}>E-Posta</div>
-          <div className={s.ci_itemdata}>info@mitraemlak.com</div>                                  
-    </div>          
+                        
+        <div className={s.ci_itemicon}><RiMailFill/></div>
+        <div className={s.ci_itemdatawr}>
+              <div className={s.ci_itemtitle}>E-Posta</div>
+              <div className={s.ci_itemdata}>info@mitraemlak.com</div>                                  
+        </div>          
 
   </div>
   )

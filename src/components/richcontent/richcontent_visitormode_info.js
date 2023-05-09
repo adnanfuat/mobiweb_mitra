@@ -28,7 +28,7 @@ export const Advert_VisitorMode_Info = ({props}) => {
           if (thisPropertyIsBelongAnyThisAdvertCategory) // İlana ait bu özellik, ilanın bağlı olduğu kategorilerden birine ait mi ?
           
               return  (
-                <div key={index} className={styles.itemWr}> 
+                <div  className={styles.itemWr} key={item?.key_label_tr}> 
                   <div className={styles.itemRowWr}> 
                       <div className={styles.item} > 
                             <div className={styles.inline_left}>{item?.key_label_tr}</div>
@@ -37,10 +37,10 @@ export const Advert_VisitorMode_Info = ({props}) => {
                       
                     {item?.input_type== "multicheckbox"  && <div  className={styles.optionsWr}>
                       
-                      {item?.options?.map(option=>{
+                      {item?.options?.map((option, index)=>{
                           // console.log('xxxxxxxxxxxxxx', x, item)
                           let found=item?.value?.find(f=>f?.key==option?.key)
-                          return <div className={styles.option} style={{color: found ? "black" : "gray" }}>
+                          return <div className={styles.option} style={{color: found ? "black" : "gray" }} key={`${option?.key}-${index}`}>
                                         <div>{found ? <CheckCircleTwoToneIcon/>: <CheckCircleOutlineIcon/>} </div>
                                         <div> {option?.label?.tr} </div>
                                   </div>

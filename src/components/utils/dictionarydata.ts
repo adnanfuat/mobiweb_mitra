@@ -5,10 +5,13 @@ const DictionaryData = async ({locale}) => {
                             let cachekey= `dictionarydata`
                             let dictionarydata = cache.get(cachekey);
                             
-                            if (!!dictionarydata)  { console.log("dictionarydata is alreadycached:)", cachekey, locale); } 
+                            if (dictionarydata?.length>0)  { 
+                                                        // console.log("dictionarydata is alreadycached:)", cachekey, locale, dictionarydata?.[0]?.slug_tr);
+                                                   }  //dictionarydata[0]
+
                                           else {
                           
-                                                              let dictionarydata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+                                                              dictionarydata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
                                                                 method: "POST",
                                                                 headers: { "Content-Type": "application/json", },
                                                                 body: JSON.stringify({
@@ -19,17 +22,20 @@ const DictionaryData = async ({locale}) => {
                                                                 .then(async (res) =>{ return res?.json() })
                                                                 .then(async (result) =>   {  return  result?.data?.dictionaryquery;  });
 
-                                                                cache.set(cachekey, dictionarydata, 100000);    
+                                                                // let data = await dictionarydata?.json();
+                                                                // let data = await data?.dictionaryquery;
 
-                                                                dictionarydata=await dictionarydata?.map( d=> d = {title:eval(`d?.title_${locale}`), img:eval(`d?.img_${locale}`), slug:eval(`d?.slug_${locale}`), key:d?.key}  )
-                                                                          
-                                                                                                                                                            
+                                                                cache.set(cachekey, dictionarydata, 100000);    
+                                                                                                                                                                                                                                                                                                      
                                                               console.log("dictionarydata is cached first time :/ ", cachekey, locale);
                           
                                                 }
         
+                                                console.log("dictionarydata:::. 1", dictionarydata?.[0]?.title_tr)
 
-                                                // console.log("dictionarydata:::.", dictionarydata)
+                                                dictionarydata= dictionarydata?.map( d=> d = {title:eval(`d?.title_${locale}`), img:eval(`d?.img_${locale}`), slug:eval(`d?.slug_${locale}`), key:d?.key}  )
+
+                                                 console.log("dictionarydata:::. 2", dictionarydata?.[0]?.title)
 
                             return dictionarydata       
 

@@ -46,7 +46,7 @@ export const RichContent_RegionsMenu_Visitor = ({props}) =>
                                                 let cities = fixedcity ? countryitem?.cities?.filter(c=>c?.slug_tr==fixedcity) : countryitem?.cities; // Sabit bir ülke atandıysa sadece onu ver..
 
                                                         return (                                                                
-                                                                    <div className={s.categorynamewr}>  
+                                                                    <div className={s.categorynamewr} key={countryitem?.slug_tr}>  
 
                                                                             {/* { console.log("categories::.:::::", countryitem) } */}
 
@@ -92,7 +92,7 @@ const Cities = (props) => {
               
                                                                 let selected = cityitem.slug_tr==city;
               
-                                                                return  <div className={s.categorynamewr}>
+                                                                return  <div className={s.categorynamewr}  key={cityitem?.slug_tr}>
                                                                             <div className={s.categorynameitem}  style={{fontSize:15}}>  
                                                                                 { <BiMapAlt/> } 
                                                                                 <span><Link href={{pathname:fulllink, query:{country:countryitem?.slug_tr, city:cityitem?.slug_tr}}} style={{textDecoration:selected ? "underline": "none"}}>{cityitem?.title_tr}</Link></span>                                                                              
@@ -128,14 +128,14 @@ const Districts = (props) => {
   let { country, city , district } = router?.query;
 
   return (
-            <div className={s.citieswr}> 
+            <div className={s.citieswr}  key={city?.slug_tr}> 
                 {districts?.map(districtitem=>{
 
                           let selected = districtitem.slug_tr==district;
 
                           
 
-                            return( <div className={s.categorynamewr}>
+                            return( <div className={s.categorynamewr}  key={districtitem?.slug_tr}>
                                               <div className={s.categorynameitem}  style={{fontSize:14}}>  
                                                   { <BiMapPin/> } 
                                                   <span><Link  href={{pathname:fulllink, query:{country:countryitem?.slug_tr, city:cityitem?.slug_tr, district:districtitem?.slug_tr}}} style={{textDecoration:selected ? "underline": "none"}}>{districtitem?.title_tr}</Link></span>                                                                              
@@ -170,17 +170,16 @@ const Subdistricts = (props) => {
   
 
   return (
-    <div className={s.citieswr}> 
+    <div className={s.citieswr} key={districtitem?.slug_tr}> 
                                   { subdistricts?.map(subdistrictitem=>{
 
                                                                               let selected = subdistrictitem.slug_tr==subdistrict;
 
-                                                                              return  (<div className={s.categorynamewr}>
+                                                                              return  (<div className={s.categorynamewr} key={subdistrictitem?.slug_tr}>
                                                                               <div className={s.categorynameitem} style={{fontSize:13}}>  
                                                                                   { <BiMap/> } 
                                                                                   <span><Link  href={{pathname:fulllink, query:{country:countryitem?.slug_tr, city:cityitem?.slug_tr, district:districtitem?.slug_tr,  subdistrict:subdistrictitem?.slug_tr}}} style={{textDecoration:selected ? "underline": "none"}}>{subdistrictitem?.title_tr}</Link></span>                                                                              
-                                                                              </div>                                                                                                                                                                                                              
-                                                                          
+                                                                              </div>                                                                                                                                                                                                                                                                                        
                                                                           </div>)
 
 

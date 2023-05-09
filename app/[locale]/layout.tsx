@@ -30,32 +30,7 @@ export default  function RootLayout({
 
 ) {
 
-    // const Context = createContext();
-
-
-    // let webdata=await WebData();
-
-    // let dictionary=await DictionaryData();
-      
-    // //  console.log("data;;::;", dictionary)
-    // let lang= webdata?.bigdata?.history[0]?.lang?.tr;
-    // let logofiles =  lang?.logofiles;
-
-    // let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json", },
-    //   body: JSON.stringify({
-    //     query: FilesQuery_SpecialRequests,
-    //     variables:{data:{specialrequests:logofiles}} 
-    //   })
-    // })
-    //   .then((res) => res.json())
-    //   .then((result) => { return result?.data?.filesquery_specialrequests; });    
-      
-    //   let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
-      
-    //   // params={...params, lang}
-    //   props.params.abc="asdsads";
+ 
 
     const queryClient = new QueryClient();
      

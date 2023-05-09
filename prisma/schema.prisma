@@ -672,8 +672,8 @@ model contents {
   id               Int       @id @default(autoincrement()) @db.UnsignedInt
   user             String?   @db.TinyText
   active           Int?      @default(1) @db.TinyInt
-  slug_sa          String?   @db.VarChar(135)
   slug_tr          String?   @db.VarChar(135)
+  slug_sa          String?   @db.VarChar(135)
   bigbigparent_key String?   @db.TinyText
   bigparent_key    String?   @db.TinyText
   type             String?   @db.VarChar(25)

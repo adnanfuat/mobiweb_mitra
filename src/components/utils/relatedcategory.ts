@@ -7,7 +7,7 @@ const relatedCategory = async ({lastslugitem}) => {
   let relatedcategory = cache.get(cachekey);
   
   if (!!relatedcategory)  {        
-                                   console.log("relatedcategory is alreadycached:)", cachekey);      
+                          //         console.log("relatedcategory is alreadycached:)", cachekey);      
                           } 
                  else {
 

@@ -29,7 +29,7 @@ const  Rs_Shell = ({consolelink, category,  adverts, bigbigparent_key,bigbigpare
     // let parents=category?.o_key_1?.parents ?? [];
   
     return (<RichContent_LayoutMain_Visitor  title={`${category?.title_tr}`}  countries={countries} bigbigparent_key={bigbigparent_key} bigbigparent_slug={bigbigparent_slug} urlprefix={urlprefix} urlprefix_editpage={urlprefix_editpage} urlprefix_viewpage={urlprefix_viewpage} parents={parents}>
-                            <div className={s.mainwr}>saaaaaaaaaaaaa
+                            <div className={s.mainwr}>
                               
                               {(country || city || district || subdistrict) && <div className={s.filtered}>                             
                                   

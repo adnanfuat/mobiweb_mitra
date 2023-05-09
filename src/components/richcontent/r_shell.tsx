@@ -125,7 +125,7 @@ export default function  R_Shell (props) {
                           {phones?.length>0 && <div className={s.ownerphones}>
                               {phones?.map(p=>
                                   
-                                        <div className={s.phoneitem}>
+                                        <div className={s.phoneitem} key={p.phone}>
                                                 <span> {p.verified ? <RiShieldCheckFill title='Doğrulanmış' size={20} color="green"/> : <RiShieldFill title="Doğrulanmamış" size={20} color="gray"/>} </span>
                                                 <span> {p?.phone} </span>
                                         </div>
