@@ -6,7 +6,7 @@ const WebData = async () => {
   let webdata = cache.get("webdata");
   
   if (webdata)  {        
-                                   //&console.log("webdata is alreadycached:)");      
+                                   //&git aconsole.log("webdata is alreadycached:)");      
                  } 
 
                  else {
