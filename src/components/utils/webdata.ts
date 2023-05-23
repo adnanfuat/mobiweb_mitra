@@ -25,10 +25,10 @@ const WebData = async () => {
                                     .then(async (result) =>   { return  result?.data?.webquery; });
                                                 
                                   cache.set("webdata", webdata, 100000);
-                                  //console.log("webdata is cached first time :/");      
+                                  // console.log("webdata is cached first time :/", webdata);      
 
                  }
-  
+                   
   return webdata                 
     
 
@@ -52,6 +52,8 @@ const WebQuery =
       active
       user
       bigdata
+      o_key_1
+      o_key_2
       richcontents {
                       id            
                       title_tr

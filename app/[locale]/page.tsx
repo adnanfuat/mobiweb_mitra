@@ -84,7 +84,7 @@ export default async function Home(props) {
                                                              
                                     <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
                                     {/* asdas : {JSON.stringify(props)} */}
-                                   <Estates adverts={webdata?.richcontents?.filter(a=>a.bigbigparent_key=="1668310884")} params={params} sidepadding={42} />
+                                   <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} sidepadding={42} />
                               
              </div> 
 
