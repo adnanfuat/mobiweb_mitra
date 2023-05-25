@@ -17,27 +17,51 @@ import { localeStatic } from "@/constants/localestatic";
 export default async function Category (props){ 
   
   let {params} = props ?? {}
-  let {locale} = params ?? {}
+  let {locale, slug} = params ?? {}
 
   locale = locale ? locale : localeStatic;
 
   let dictionary=await DictionaryData({locale});
   let webdata=await WebData();
 
-  // console.log("webdata:::", webdata)
-  return <div>
+  let lastslugitem = slug?.[slug?.length-1]
 
-    asdsad
-  </div>
+  let contents = webdata?.o_key_2?.contents ?? []; // Bize tüm kategoriler geldi..
 
-  // return (  <Rs_Shell root_category={"emlak"} bigbigparent_key="1668310884" root_slug={`ads`} dictionary={dictionary} webdata={webdata}  sidepadding={42}  {...props}/>  ) 
+  let categories = webdata?.o_key_1?.categories ?? []; // Bize tüm kategoriler geldi..
+  
+  let relatedcategory = categories?.find(cat=>cat?.slug_tr==lastslugitem); // Şimdi o tüm kategoriler içinden son slug itemına göre kategorileri getir bize...
+
+  let parentkeys_forsubcontents = relatedcategory?.o_key_1?.parentkeys_forsubcontents ?? []; // Şimdi biz bir kategorideyiz ama bize bu bu kategoriye bağlı olup, aynı zamanda altlarındaki kategorilere de bağlı olan içerikler lazım... Bunu ben backendde hesaplamıştım zaten. O keyleri alıyorum
+
+  contents=contents?.filter(co=> { // içeriklerimizi tarayacağız ve içeriklerimizin parentlarından herhangi biri yukarıdaki key lerin arasında varsa listeleyeceğiz...
+
+          let co_parents=co?.parents?.map(c=>c?.key); // önce parentların gereksiz teferruatlarını atalım...
+
+          if (co_parents?.find(a=>parentkeys_forsubcontents?.includes(a))) // Şimdi bu içeriğin parentları arasında, içinde bulunduğumuz sayfa/kategoriye bağlı keylerden herhangi biri var mı bakalım..
+          {
+            return co // İşte bu durumda dönelim...
+          }
+        
+
+  })
+  
+  //  console.log("webdata:::", lastslugitem,webdata?.o_key_2?.contents?.[1])
+  console.log("webdata:::", contents)
+
+  // return <div>
+
+  //   {JSON.stringify(params)}
+  // </div>
+
+  return (  <Rs_Shell contents={contents} root_category={"emlak"} bigbigparent_key="1684587055957" root_slug={`ads`} dictionary={dictionary} webdata={webdata}  sidepadding={42}  {...props}/>  ) 
   
   }
 
 
 export async function Rs_Shell (props){
     
-  let {params, searchParams, root_category, root_slug,  bigbigparent_key, webdata, dictionary} = props ?? {};  
+  let {contents, params, searchParams, root_category, root_slug,  bigbigparent_key, webdata, dictionary} = props ?? {};  
 
   let {slug} = params ?? {} ;
   let  countries = await cacheCountries();
@@ -46,29 +70,20 @@ export async function Rs_Shell (props){
   let sluglength=slug?.length;
   let lastslugitem=slug?.length==0 ? root_category :  slug?.[sluglength-1];
 
-  // let webdata = await WebData();
-  // console.log("webdatawebdatawebdata", webdata?.richcontents);      
-  // let adverts=await richContents_WithCategories({slug, active:1, website:process.env.DOMAIN, useremail:process.env.USEREMAIL})  ?? []
-
-  let adverts =  webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884");
+  let adverts =  webdata?.o_key_2?.contents//.filter(a=>a?.bigbigparent_key==bigbigparent_key);
 
   if (slug?.length>0) { 
     // Sol taraftaki menüden alt kategorilerden biri seçildiğinde, diyelim //--> İş yeri > Satılık İş yeri... İlgili ilanların içinde parentlarında Satılık İş Yeri var mı diye bakıp, onları filitreler. 
     // Böylece sadece gidilen linkteki son slugı içeren ilanları verir bize...
             adverts = adverts?.filter(ad=> {
-                          let parents= ad?.bigdata?.history[0]?.info?.parents ?? [];
-                          parents=parents?.map(item=>item?.slug_tr)
-                          let lastslugitem = slug?.[sluglength-1];
-                          // console.log("asdasdsa," , parents, lastslugitem);
-                          return parents?.find(pa=>pa==lastslugitem)
-            })
-            
+                                              let parents= ad?.bigdata?.history[0]?.info?.parents ?? [];
+                                              parents=parents?.map(item=>item?.slug_tr)
+                                              let lastslugitem = slug?.[sluglength-1];                          
+                                              return parents?.find(pa=>pa==lastslugitem);
+                                          })            
   }
 
-
-  let category=await relatedCategory({lastslugitem})  ?? []
-
-  // console.log("asdasdasdsda: ", category);
+  let category=await relatedCategory({lastslugitem})  ?? []  
 
   let {country, city, district, subdistrict} = searchParams ?? {}
 
@@ -107,10 +122,10 @@ export async function Rs_Shell (props){
                               <div className={s.desktopmenu}><LayoutLeft props={{ parents, category, bigbigparent_key, countries, searchParams}}/></div>
 
                               <div className={s.bodywr}>                                    
-                                    <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item, countries, params}} key={index}/> }) } </div>                    
+                                    <div className={s.itemswr}> {contents?.map((item,index) =>{ return <Item props={{item, countries, params}} key={index}/> }) } </div>                    
                               </div>
 
-                              <Meta category={category} firstadvert={adverts[0]} root_slug={root_slug} params={params}/>
+                              <Meta category={category} firstadvert={contents[0]} root_slug={root_slug} params={params}/>
 
                           </div>
                 </DesignLayout>                          

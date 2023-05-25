@@ -25,7 +25,7 @@ const WebData = async () => {
                                     .then(async (result) =>   { return  result?.data?.webquery; });
                                                 
                                   cache.set("webdata", webdata, 100000);
-                                  // console.log("webdata is cached first time :/", webdata);      
+                                  console.log("webdata is cached first time :/");      
 
                  }
                    
