@@ -7,7 +7,7 @@ import {Flags} from "@/components/flags";
 // import { localeStatic } from "@/constants/localestatic";
 
 import { getServerSession } from "next-auth/next"
-import { authOptions } from "../../app/api/auth/[...nextauth]"
+import { authOptions } from "../../pages/api/auth/[...nextauth]"
 // import DictionaryData from "./utils/dictionarydata";
 // import WebData from "./utils/webdata";
 import fileSpecialRequests from "./utils/files_specialrequests";

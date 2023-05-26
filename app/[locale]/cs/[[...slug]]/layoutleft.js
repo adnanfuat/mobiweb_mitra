@@ -6,6 +6,7 @@ import {RegionsMenu} from "@/components/utils/regionsmenu"
 import Link from "next/link"
 import s from "./layoutleft.module.css"
 import { RiAddFill, RiArtboard2Fill, RiEditBoxFill} from "react-icons/ri";
+import { CategoriesMenu_Bigdata } from "@/components/utils/categoriesmenu_bigdata"
 // import { useRouter } from 'next/router';
 // import {  signIn } from "next-auth/react";
 // import Image from "next/image";
@@ -14,6 +15,9 @@ import { RiAddFill, RiArtboard2Fill, RiEditBoxFill} from "react-icons/ri";
 export const LayoutLeft = ({props}) => {
 
   let {
+        categories,    
+        root_slug,
+        bigbigparent_slug,
         countries,        
         category,        
         parents, //// [ { "slug_tr": "emlak", "title_tr": "Emlak", "key": "1668310884" } ] // İlanların genel listelemesinde ve ilanda kullanıyoruz bu template'i... İlanlarda router/query/slug üzerinden alıyoruz ama ilan düzenlesinde sadece o ilanın içinden alabiliriz "parents" bilgisini... Dolayısıyla sadeceilan sayfasındaişe yarayan birbilgi
@@ -27,7 +31,7 @@ export const LayoutLeft = ({props}) => {
       <div className={s.menu}>
             <div className={s.menuleft}>
               <RiArtboard2Fill size={20}/>
-              <Link href="/ads">İlanlar</Link> 
+              <Link href={`/${root_slug}/${bigbigparent_slug}`}>İlanlar</Link> 
             </div>            
             
             {/* <div className={s.menuright}>
@@ -36,7 +40,7 @@ export const LayoutLeft = ({props}) => {
 
       </div>
       
-      <CategoriesMenu props={props}/>
+      <CategoriesMenu_Bigdata props={props}/>
       <RegionsMenu props={props}/>
 
     </div>

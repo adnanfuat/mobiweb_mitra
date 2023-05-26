@@ -3,7 +3,7 @@ import { BolgeIsmiOgren } from "@/components/utils/bolgeismiogren";
 import WebData from "@/components/utils/webdata";
 import Form from "./form";
 import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/app/api/auth/[...nextauth]"
+import { authOptions } from "../../../pages/api/auth/[...nextauth]"
 import {localeStatic} from "@/constants/localestatic";
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
 import { cacheCountries } from "@/components/utils/cachecountries";
@@ -37,28 +37,22 @@ export default async function Page  ({params}) {
 
   let addresses = (selectedaddresses && selectedaddresses?.length>0) ?  selectedaddresses : defaultaddresses
   // console.log("webdata::::::::sadasdsdadsa", webdata);  
-  let sidepadding = 42;
+  
 
      return (
       <DesignLayout title={iletisim} dictionary={dictionary} params={params} webdata={webdata}> 
-
-        <div className={s.shell}>
-              
-              <div className={s.mainwr}>
-                  <div className={s.sectionwr}>                    
-                        <div className={s.sectiontitle}>Mesaj Formu</div>
-                        <div className={s.form}><ContactForm session={session} webdata={webdata}/></div>                        
-                  </div>
-
-
-                  <div className={s.sectionwr}>                    
-                        <div className={s.sectiontitle}>İletişim Bilgileri</div>
-                        <div className={s.info}><ContactInfo addresses={addresses} countries={countries}/></div>   
-                  </div>
-                          
-              </div>
-        </div>
-
+                <div className={s.shell}>                      
+                      <div className={s.mainwr}>
+                          <div className={s.sectionwr}>                    
+                                <div className={s.sectiontitle}>Mesaj Formu</div>
+                                <div className={s.form}><ContactForm session={session} webdata={webdata}/></div>                        
+                          </div>
+                          <div className={s.sectionwr}>                    
+                                <div className={s.sectiontitle}>İletişim Bilgileri</div>
+                                <div className={s.info}><ContactInfo addresses={addresses} countries={countries}/></div>   
+                          </div>                                  
+                      </div>
+                </div>
         </DesignLayout>        
   )
 }

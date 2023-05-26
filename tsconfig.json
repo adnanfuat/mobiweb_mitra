@@ -25,6 +25,7 @@
       "@/app/*": ["./app/*"],
       "@/layouts/*": ["./src/components/layouts/*"],
       "@/components/*": ["./src/components/*"],
+      "@/utils/*": ["./src/components/utils/*"],
       "@/constants/*": ["./src/constants/*"],
     }
   },

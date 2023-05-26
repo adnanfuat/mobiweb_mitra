@@ -1,12 +1,17 @@
 
-
+import { cache} from "./cache";
 
 const WebData = async () => {
 
+  let webdata = cache.get("webdata");
   
+  if (webdata)  {        
+                                    console.log("webdata is alreadycached:)");      
+                 } 
 
-                                 return  await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL                                    
-                                    next:{revalidate:10},                                   
+                 else {
+
+                                  webdata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
                                     method: "POST",
                                     headers: { "Content-Type": "application/json", },
                                     body: JSON.stringify({
@@ -17,11 +22,14 @@ const WebData = async () => {
                                     .then(async (res) =>{  
                                           return res?.json()
                                   })
-                                    .then(async (result) =>   { console.log("sasdasdsa", result); return  result?.data?.webquery; });
+                                    .then(async (result) =>   { return  result?.data?.webquery; });
                                                 
-                                  
+                                  cache.set("webdata", webdata, 100000);
                                   console.log("webdata is cached first time :/");      
 
+                 }
+                   
+  return webdata                 
     
 
 }

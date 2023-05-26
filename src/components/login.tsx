@@ -38,7 +38,7 @@ export const Login = (props) => {
   return (        
                !session ?  <div onClick={()=> signIn()}  className={s.icon}> {  <RiUser3Fill/> }</div>              
               
-              : <div onClick={()=>router.push("/console")}  className={s.icon} style={{ backgroundImage:`url(${session?.user?.image})`, backgroundSize:"cover"}}  title={session?.user?.name} >                                                                                                 
+              : <div  className={s.icon} style={{ backgroundImage:`url(${session?.user?.image})`, backgroundSize:"cover"}}  title={session?.user?.name} >                                                                                                 
                                   
                                   {!session?.user?.image && <RiUserStarFill/> }       
 
@@ -46,6 +46,7 @@ export const Login = (props) => {
 
                                   <div className={s.popup}>                                                                                                                              
                                           <div  onClick={()=>{signOut(); router.push(`/`) }}>Çıkış</div>
+                                          <div  onClick={()=>{fetch("/api/clearcache"); }}>Cache temizle</div>
                                   </div>
                             </div>
               

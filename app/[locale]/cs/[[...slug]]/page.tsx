@@ -6,13 +6,14 @@ import Head from "next/head";
 import Image from "next/image";
 import {LayoutLeft} from "./layoutleft";
 import { cacheCountries } from "@/components/utils/cachecountries";
-import richContents_WithCategories from "@/components/utils/richcontents_withcategories";
 import relatedCategory from "@/components/utils/relatedcategory";
 import { DesignLayout } from "@/layouts/designlayout";
 import WebData from "@/components/utils/webdata";
 import DictionaryData from "@/components/utils/dictionarydata";
 import { localeStatic } from "@/constants/localestatic";
+import relatedCategory_Bigdata from "@/components/utils/relatedcategory_bigdata";
 
+let bigbigparent_slug="urunler"; // Soldaki menüde hangi kategoriden itibaren aşağısnı göstereceğiz  ?
 
 export default async function Category (props){ 
   
@@ -26,7 +27,7 @@ export default async function Category (props){
 
   let lastslugitem = slug?.[slug?.length-1]
 
-  let contents = webdata?.o_key_2?.contents ?? []; // Bize tüm kategoriler geldi..
+  let contents = webdata?.o_key_2?.contents ?? []; // Bize tüm kategoriler geldi..  
 
   let categories = webdata?.o_key_1?.categories ?? []; // Bize tüm kategoriler geldi..
   
@@ -44,22 +45,15 @@ export default async function Category (props){
           }        
   })
   
-  //  console.log("webdata:::", lastslugitem,webdata?.o_key_2?.contents?.[1])
-  console.log("webdata:::", contents)
-
-  // return <div>
-
-  //   {JSON.stringify(params)}
-  // </div>
-
-  return (  <Rs_Shell contents={contents} root_category={"emlak"} bigbigparent_key="1684587055957" root_slug={`ads`} dictionary={dictionary} webdata={webdata}  sidepadding={42}  {...props}/>  ) 
+  // categories={categories?.filter(cat=>parentkeys_forsubcontents?.includes(cat?.key))}
+   return (  <Rs_Shell contents={contents} root_category={"emlak"} bigbigparent_slug={bigbigparent_slug} categories={categories} root_slug={`cs`} dictionary={dictionary} webdata={webdata}  sidepadding={42}  {...props}/>  ) 
   
   }
 
 
 export async function Rs_Shell (props){
     
-  let {contents, params, searchParams, root_category, root_slug,  bigbigparent_key, webdata, dictionary} = props ?? {};  
+  let {contents, params, searchParams, root_category, root_slug,  bigbigparent_slug, categories, webdata, dictionary} = props ?? {};  
 
   let {slug} = params ?? {} ;
   let  countries = await cacheCountries();
@@ -81,22 +75,18 @@ export async function Rs_Shell (props){
                                           })            
   }
 
-  let category=await relatedCategory({lastslugitem})  ?? []  
-
+  let category=await relatedCategory_Bigdata({lastslugitem, categories})  ?? {}
   let {country, city, district, subdistrict} = searchParams ?? {}
-
   adverts=filterAdverts({adverts, country, city, district, subdistrict});
-
   let parents=category?.o_key_1?.parents;
 
   
-
   return (
               <DesignLayout title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>
                           
                           <div className={s.mainwr}>  
                             
-                              {/* {JSON.stringify(params)} */}
+                              {/* {JSON.stringify(contents)} */}
                                                     
                             {(country || city || district || subdistrict) && <div className={s.filtered}>                             
                                 
@@ -117,7 +107,7 @@ export async function Rs_Shell (props){
                                       {/* { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" } */}
                               </div>
 
-                              <div className={s.desktopmenu}><LayoutLeft props={{ parents, category, bigbigparent_key, countries, searchParams}}/></div>
+                              <div className={s.desktopmenu}><LayoutLeft props={{ parents, category,categories, root_slug, bigbigparent_slug, countries, searchParams}}/></div>
 
                               <div className={s.bodywr}>                                    
                                     <div className={s.itemswr}> {contents?.map((item,index) =>{ return <Item props={{item, countries, params}} key={index}/> }) } </div>                    
@@ -241,14 +231,12 @@ const Item = ({props}) => {
   let {timeAgo, localeString} = datetimeFunc({datetime:item?.createdat});
 
   return ( 
-          <div className={s.item}>            
+          <div className={s.item}>     {JSON.stringify(item?.contents_tr[0]?.files)}       
               <div className={s.i_title}>{item?.title_tr}</div>
               <div className={s.parenttitle}>{parentObj?.title_tr}</div>      
               <div className={s.i_address}>
 
-                                        {/* {BolgeIsmiOgren(country_name, "ulke", countries) ?? ""}     */}
-
-
+                                        
                                         <span> {BolgeIsmiOgren(city_name, "il", countries) ?? ""} </span>
 
                                         <span> {BolgeIsmiOgren(district_name, "ilce", countries) ?? ""} </span>
@@ -272,18 +260,7 @@ const Item = ({props}) => {
 
               </div>
 
-              <div className={s.i_user}>                
-                    {!advertiser?.whoiscompany && <div style={{color:"#c1c1c1", display:"flex", alignItems:"center", gap:4}}>
-                          <Image src={item?.userdata?.image} width={35} height={35} style={{borderRadius:6}}/>
-                    </div>}
-
-                    {advertiser?.whoiscompany && <div style={{color:"#c1c1c1", display:"flex", alignItems:"center", gap:4}}>
-                            <Image src={`${process.env.NEXT_PUBLIC_IMGSOURCE}/${company?.img_tr}`} width={35} height={24} alt={name} className={s.ownerimg}/>  
-                            {company?.title_tr}
-                    </div>}
-
-                  {/* { owner && <Link href={`/console/advert/${item?.id}`}><RiEdit2Fill/></Link> } */}
-              </div>                       
+                                    
           </div> 
           )
 }
@@ -296,7 +273,7 @@ const CardImage = ({props}) => {
   let img=item?.img_tr
     
   return (    
-      <Link href={`/${params?.locale}/ad/${item?.slug_tr}/${id}`}  >   
+      <Link href={`/${params?.locale}/ad/${item?.slug_tr}/${id}`}  > zzas: {img}   
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :
