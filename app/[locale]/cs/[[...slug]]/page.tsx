@@ -41,9 +41,7 @@ export default async function Category (props){
           if (co_parents?.find(a=>parentkeys_forsubcontents?.includes(a))) // Şimdi bu içeriğin parentları arasında, içinde bulunduğumuz sayfa/kategoriye bağlı keylerden herhangi biri var mı bakalım..
           {
             return co // İşte bu durumda dönelim...
-          }
-        
-
+          }        
   })
   
   //  console.log("webdata:::", lastslugitem,webdata?.o_key_2?.contents?.[1])
