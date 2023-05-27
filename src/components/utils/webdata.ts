@@ -17,7 +17,7 @@ const WebData = async () => {
                                     .then(async (res) =>{  
                                           return res?.json()
                                   })
-                                    .then(async (result) =>   { console.log("sasdasdsa", result); return  result?.data?.webquery; });
+                                    .then(async (result) =>   {  return  result?.data?.webquery; });
                                                 
                                   
                                   console.log("webdata is cached first time :/");      

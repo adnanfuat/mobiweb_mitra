@@ -231,7 +231,7 @@ const Item = ({props}) => {
   let {timeAgo, localeString} = datetimeFunc({datetime:item?.createdat});
 
   return ( 
-          <div className={s.item}>     {JSON.stringify(item?.contents_tr[0]?.files)}       
+          <div className={s.item}>     {JSON.stringify(item?.slug_tr)}       
               <div className={s.i_title}>{item?.title_tr}</div>
               <div className={s.parenttitle}>{parentObj?.title_tr}</div>      
               <div className={s.i_address}>
@@ -273,7 +273,7 @@ const CardImage = ({props}) => {
   let img=item?.img_tr
     
   return (    
-      <Link href={`/${params?.locale}/ad/${item?.slug_tr}/${id}`}  > zzas: {img}   
+      <Link href={`/${params?.locale}/c/${item?.slug_tr}/${id}`}  > zzas: {img}   
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :

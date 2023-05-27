@@ -7,7 +7,7 @@ export const Menu = async (props) => {
     let { params , dictionary } = props ?? {};
     let {locale} = params ?? {}
 
-    // console.log("params:::", props);
+    //  console.log("params:::", dictionary);
     // locale = locale ? locale : "tr";
           
     let ana_sayfa =        dictionaryFunc({key:"1682173393396", dictionary}).text;
@@ -27,7 +27,7 @@ export const Menu = async (props) => {
                   {/* <Link href={`/`} className={s.menuitem}  >{hakkimizda}</Link> */}
                   <Link href={`/${locale}/ads`} className={s.menuitem}   >{emlak_ilanlari} </Link>                  
 
-                  <Link href={`/${locale}/cs/urunler`} className={s.menuitem}   >{urunler} </Link>                  
+                  <Link href={`/${locale}/cs/urunler`} className={s.menuitem} >{urunler} </Link>                  
                   {/* <Link href={`/b/services`} className={s.menuitem}  >{hizmetler}</Link>                   */}
                   <Link href={`/${locale}/contact`} className={s.menuitem}  >{iletisim}</Link>
         </div>
