@@ -22,7 +22,7 @@ export const Menu = async (props) => {
                       
     return (
         <div className={s.menuwr} style={menu?.style}>  
-          { JSON.stringify(menu) }
+          {/* { JSON.stringify(menu) } */}
           {/* {dictionary?.[0]?.title} */}
           {/* {locale} */}
                   <Link href={`/${locale}`} className={s.menuitem}  style={itemFunc({type:"main_page", menu})?.style}> {ana_sayfa} </Link>
