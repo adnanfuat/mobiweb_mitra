@@ -21,7 +21,7 @@ export const Menu = async (props) => {
         
                       
     return (
-        <div className={s.menuwr} >  
+        <div className={s.menuwr} style={menu?.style}>  
           { JSON.stringify(menu) }
           {/* {dictionary?.[0]?.title} */}
           {/* {locale} */}
