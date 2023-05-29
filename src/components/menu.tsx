@@ -27,7 +27,9 @@ export const Menu = async (props) => {
           {/* {locale} */}
                   <Link href={`/${locale}`} className={s.menuitem} >  {ana_sayfa}  </Link>
                   {/* <Link href={`/`} className={s.menuitem}  >{hakkimizda}</Link> */}
-                  {itemFunc({type:"real_estates", menu})?.visible && <Link href={`/${locale}/ads`} className={s.menuitem}> {emlak_ilanlari} </Link>}                  
+
+
+                  {itemFunc({type:"real_estates", menu})?.visible && <Link href={`/${locale}/ads`} className={s.menuitem} style={itemFunc({type:"real_estates", menu})?.style}> {emlak_ilanlari} </Link>}                  
 
                   <Link href={`/${locale}/cs/urunler`} className={s.menuitem} >{urunler} </Link>                  
                   {/* <Link href={`/b/services`} className={s.menuitem}  >{hizmetler}</Link> */}
