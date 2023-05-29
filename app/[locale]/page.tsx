@@ -93,7 +93,8 @@ const Theme1 = async (props) => {
   let {logo, params, dictionary, webdata, cuffs} = props ?? {};
 
   return (
-              <div style={{position:"relative"}}> 
+              <div style={{position:"relative"}}>  
+              sadsaddsa {webdata?.bigdata?.theme?.name}
               {/* PROPSSSS : {JSON.stringify(params)} -------------- */}
                 
                       <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>
