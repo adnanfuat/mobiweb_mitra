@@ -22,15 +22,15 @@ export const Menu = async (props) => {
                       
     return (
         <div className={s.menuwr} >  
-          asdsad {JSON.stringify(menu)}    -  
+          { JSON.stringify(menu) }
           {/* {dictionary?.[0]?.title} */}
           {/* {locale} */}
                   <Link href={`/${locale}`} className={s.menuitem} >  {ana_sayfa}  </Link>
                   {/* <Link href={`/`} className={s.menuitem}  >{hakkimizda}</Link> */}
-                  {itemFunc({type:"real_estates", menu})?.visible==true && <Link href={`/${locale}/ads`} className={s.menuitem}> {emlak_ilanlari} </Link>}                  
+                  {itemFunc({type:"real_estates", menu})?.visible && <Link href={`/${locale}/ads`} className={s.menuitem}> {emlak_ilanlari} </Link>}                  
 
                   <Link href={`/${locale}/cs/urunler`} className={s.menuitem} >{urunler} </Link>                  
-                  {/* <Link href={`/b/services`} className={s.menuitem}  >{hizmetler}</Link>                   */}
+                  {/* <Link href={`/b/services`} className={s.menuitem}  >{hizmetler}</Link> */}
                   <Link href={`/${locale}/contact`} className={s.menuitem}  >{iletisim}</Link>
         </div>
     )
