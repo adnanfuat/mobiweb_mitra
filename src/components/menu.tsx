@@ -42,12 +42,15 @@ export const Menu = async (props) => {
 
   
   
-  const itemFunc = ({type, menu}) => {
+  const itemFunc = ({type, menu}) => { //
 
     let relateditem = menu?.items?.find( m =>m?.type== type);
 
     return (
-             {visible: relateditem?.visible}
+             {
+              visible: relateditem?.visible,
+              style: relateditem?.style
+            }
            )
   }
   
