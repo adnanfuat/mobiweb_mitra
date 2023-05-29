@@ -10,6 +10,11 @@
 }
 
 
+.rightwr {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
 
 
 .logowr {
@@ -18,12 +23,6 @@
   height: 100px;
   position: relative;
   /* background-color: red; */
-}
-
-.rightwr {
-  display: flex;
-  gap: 10px;
-  align-items: center;
 }
 
 

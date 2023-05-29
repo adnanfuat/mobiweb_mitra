@@ -1,5 +1,5 @@
 import s from "./layout.module.css"
-import HeaderComp from "@/components/headercomp"
+import HeaderComp from "@/components/header/headercomp"
 import FooterComp from "@/components/footercomp"
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -72,21 +72,11 @@ export default async function Home(props) {
       // Yapmam gerken: Yukarıda cuffsları obje olarak yollamışım. halbuki cuffsları yollayıp yanlarına sadece objeleri koymalıydım...
       
     return (
-    <div style={{position:"relative"}}> 
-    {/* PROPSSSS : {JSON.stringify(params)} -------------- */}
+    
       
-             <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>
+            <Theme1 logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>
 
-             <div className={s.main}>              
-                                                             
-                                    <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
-                                    {/* asdas : {JSON.stringify(props)} */}
-                                   <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} sidepadding={42} />
-                              
-             </div> 
-
-              <div className={s.footer}><FooterComp logo={logo}/></div>             
-    </div>
+    
     )
 
 
@@ -97,22 +87,34 @@ export default async function Home(props) {
 
 
 
- 
-// export async function getStaticProps(params) {
-   
-//   let {slug, locale} = params ?? {} ;
 
-// console.log("asdsadsa", params);
+const Theme1 = async (props) => {
 
-//   let dictionary = DictionaryData({locale})
-      
+  let {logo, params, dictionary, webdata, cuffs} = props ?? {};
+
+  return (
+              <div style={{position:"relative"}}> 
+              {/* PROPSSSS : {JSON.stringify(params)} -------------- */}
+                
+                      <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>
+
+                      <div className={s.main}>              
+                                                                      
+                                              <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
+                                              {/* asdas : {JSON.stringify(props)} */}
+                                               <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} sidepadding={42} />
+                                        
+                      </div> 
+
+                        <div className={s.footer}><FooterComp logo={logo}/></div>             
+              </div>          
+        )
+}
 
 
-//     return {
-//       props: {dictionary}, 
-//       revalidate: 500,      
-//     };
-//   }
+
+
+
 
 
 

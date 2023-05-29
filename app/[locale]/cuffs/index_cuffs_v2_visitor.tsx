@@ -10,11 +10,7 @@ const Index_Cuffs_V2_Visitor_Dynamic = dynamic(() => import("./index_cuffs_v2_vi
 
 export const  Index_Cuffs_V2_Visitor = (props) => {
       
-      let siteState = useSnapshot(siteProxy);
-            
-      //  return <div style={{position:"relative", top:50}}>asdsadsadsadsadsad</div>
-      // return siteState?.interaction ?<Index_Cuffs_V2_Visitor_Dynamic props={props}/> : <div style={{backgroundColor:"red", minHeight:250, width:"100%"}}>asdsaddssaddddddddddddddddddddddd</div> 
-      return siteState?.interaction ?<Index_Cuffs_V2_Visitor_Dynamic props={props}/> : <Index_Cuffs_V2_Visitor_Demo props={props}/>  
-     
+            let siteState = useSnapshot(siteProxy);            
+            return siteState?.interaction ?<Index_Cuffs_V2_Visitor_Dynamic props={props}/> : <Index_Cuffs_V2_Visitor_Demo props={props}/>       
          
      }

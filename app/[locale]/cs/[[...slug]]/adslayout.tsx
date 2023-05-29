@@ -1,6 +1,6 @@
 import s from "./adslayout.module.css"
 import Link from "next/link";
-import HeaderComp from "@/components/headercomp";
+import HeaderComp from "@/components/header/headercomp";
 
 
 export const AdsLayout = (props) => {

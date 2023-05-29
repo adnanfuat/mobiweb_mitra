@@ -11,7 +11,7 @@ const WebData = async () => {
                                     headers: { "Content-Type": "application/json", },
                                     body: JSON.stringify({
                                       query: WebQuery,
-                                      variables:{data:{slug:"mitraemlak.com"}} 
+                                      variables:{data:{slug:process.env.DOMAIN}} 
                                     })
                                   })
                                     .then(async (res) =>{  
