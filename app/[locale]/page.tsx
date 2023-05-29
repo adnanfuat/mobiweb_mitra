@@ -15,12 +15,11 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default async function Home(props) {
 
-  let {params, } = props ?? {}
+  let {params} = props ?? {}
   let {locale} = params ?? {}
     
-  //  console.log("paramssss", props)
-  let dictionary=await DictionaryData({locale});
   
+  let dictionary=await DictionaryData({locale});  
   let webdata=await WebData();
    
   let cuffs= webdata?.bigdata?.history[0]?.lang?.tr?.cuffs;
@@ -94,7 +93,7 @@ const Theme1 = async (props) => {
 
   return (
               <div style={{position:"relative"}}>  
-              sadsaddsa {webdata?.bigdata?.theme?.name}
+              {/* sadsaddsa {webdata?.bigdata?.theme?.name} */}
               {/* PROPSSSS : {JSON.stringify(params)} -------------- */}
                 
                       <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>

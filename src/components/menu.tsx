@@ -4,11 +4,13 @@ import DictionaryData from "./utils/dictionarydata";
 import dictionaryFunc from "./utils/dictionaryfunc";
 export const Menu = async (props) => {
 
-    let { params , dictionary } = props ?? {};
+    let { params , dictionary, webdata } = props ?? {};
     let {locale} = params ?? {}
 
     //  console.log("params:::", dictionary);
     // locale = locale ? locale : "tr";
+
+    let menu = webdata?.bigdata?.menu ?? {} 
           
     let ana_sayfa =        dictionaryFunc({key:"1682173393396", dictionary}).text;
     let hakkimizda =       dictionaryFunc({key:"1682173354630", dictionary}).text;
@@ -20,7 +22,7 @@ export const Menu = async (props) => {
                       
     return (
         <div className={s.menuwr} >  
-          {/* {JSON.stringify()}    -   */}
+          asdsad {JSON.stringify(menu)}    -  
           {/* {dictionary?.[0]?.title} */}
           {/* {locale} */}
                   <Link href={`/${locale}`} className={s.menuitem} >  {ana_sayfa}  </Link>

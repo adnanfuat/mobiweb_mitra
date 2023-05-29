@@ -57,17 +57,18 @@ export  default async function HeaderComp  (props) {
     return (
       <div className={selection?.dynamic_css.headercompwr} style={{position, padding:`${topbottom}px ${sidepadding}px`}}>
           
-          <Link href={`/${locale}`}><div className={selection?.dynamic_css.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}>
-    
-          {/* `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})` */}
-          {/* -- {JSON.stringify(fileobjects)} */}
-
+              <Link href={`/${locale}`}><div className={selection?.dynamic_css.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}>
+              
           </div></Link>
                 
                 <div className={selection?.dynamic_css.rightwr} >               
-                        <LoginIntro session={session}/>
-                        <Menu params={params} webdata={webdata} dictionary={dictionary}/>
-                        <Flags params={params}/>
+                        
+                            <LoginIntro session={session}/>
+                            
+                            <Menu params={params} webdata={webdata} dictionary={dictionary}/>
+                            
+                            <Flags params={params}/>
+
                 </div>
     
       </div>
