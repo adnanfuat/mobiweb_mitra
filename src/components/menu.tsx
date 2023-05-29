@@ -25,7 +25,7 @@ export const Menu = async (props) => {
           { JSON.stringify(menu) }
           {/* {dictionary?.[0]?.title} */}
           {/* {locale} */}
-                  <Link href={`/${locale}`} className={s.menuitem} >  {ana_sayfa}  </Link>
+                  <Link href={`/${locale}`} className={s.menuitem}  style={itemFunc({type:"real_estates", menu})?.style} >  {ana_sayfa}  </Link>
                   {/* <Link href={`/`} className={s.menuitem}  >{hakkimizda}</Link> */}
 
 
