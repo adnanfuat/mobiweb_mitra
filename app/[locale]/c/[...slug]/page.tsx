@@ -3,6 +3,7 @@ import { RiContrast2Line, RiShieldCheckFill , RiShieldFill} from "react-icons/ri
 import {Ad_LayoutMain_Visitor_V2} from "./ad_layoutmain_visitor_v2"; 
 import {Advert_VisitorMode_MetaData} from "./advert_visitormode_metadata"; 
 import {Content_Visitor_Image} from "./content_visitor_image"; 
+// import {Content_Visitor_Image} from "./content_visitor_"; 
 import {Advert_Visitor_Tabs} from "./advert_visitor_tabs"; 
 import s from "./s.module.css"
 import Link from 'next/link';
@@ -16,6 +17,7 @@ import { localeStatic } from "@/constants/localestatic";
 // import { useSnapshot } from 'valtio';
 //const Advert_Google_Map_Dynamic = dynamic(() => import("./advert_googlemap_dynamic"), { loading: () => <div className={s.advert_visitor_image_dynamic_loading}><div>Yükleniyor</div></div> } );  
 
+let root_slug="cs"
 
 
 export default async function  Page ({params}) { 
@@ -30,12 +32,12 @@ export default async function  Page ({params}) {
 
   let advert=undefined
                             
-    // let parents=advert?.bigdata?.history?.[0]?.info?.parents;
-    let parents=[];
-
-    let contents= webdata?.o_key_2?.contents ?? [];
-
-    let content = contents?.find(co=>co?.id==slug[1])
+  // let parents=[];
+  
+  let contents= webdata?.o_key_2?.contents ?? [];
+  
+  let content = contents?.find(co=>co?.id==slug[1])
+  let parents=content?.parents;
     // let detail=advert?.bigdata?.history?.[0]?.lang?.tr?.detail;              
     // const [tab, settab] = useState(1)
     //  return <div>asdsaddsa</div>    
@@ -44,10 +46,12 @@ export default async function  Page ({params}) {
           return (
               <DesignLayout  title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>
                                 <div className={s.shell}> 
-                                      {/* {content?.title_tr} ----  ASDSDASASDA   ----   {JSON.stringify(webdata?.bigdata?.fileObjects)} */}
-                                      <div className={s.parents}>   <Advert_Visitor_Parents parents={parents} params={params}/></div>                                                                                                                                                                     
-                                      <div className={s.metadata}>  <Advert_VisitorMode_MetaData content={content} params={params}/>   </div>
-                                      <div className={s.image}>     <Content_Visitor_Image content={content} fileObjects={fileObjects}  params={params}/></div>
+                                      {/* {content?.title_tr}  {JSON.stringify(webdata?.bigdata?.fileObjects)} */}
+                                      {/* {JSON.stringify(content)}  */}
+                                      <div className={s.parents}>  <Content_Visitor_Parents parents={parents} params={params} root_slug={root_slug}/></div>                                                                                                                                                                     
+                                      <div className={s.metadata}> <Advert_VisitorMode_MetaData content={content} params={params}/> </div>
+                                      <div className={s.image}>   <Content_Visitor_Image content={content} fileObjects={fileObjects} params={params}/> </div>
+                                      {/* <div className={s.maintext}> <Content_Visitor_MainText content={content} fileObjects={fileObjects} params={params}/> </div> */}
                                       {/* <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div> */}
                                              
                                       <Advert_Visitor_Tabs advert={advert}/>       
@@ -61,14 +65,13 @@ export default async function  Page ({params}) {
 
 
 
-    const Advert_Visitor_Parents = (props) => {
+    const Content_Visitor_Parents = (props) => {
 
-      let {parents, params} = props ?? {};
+      let {parents, params, root_slug} = props ?? {};
       let {locale} = params ?? {};
+      
 
-      // let parents=advert?.bigdata?.history?.[0]?.info?.parents;
-
-      parents=parents?.filter(item=> ( item?.slug_tr!="emlak" ) )
+      // parents=parents?.filter(item=> ( item?.slug_tr!="emlak" ) )
       
       
       let linkObj=parents?.map((item, index)=>{
@@ -79,17 +82,16 @@ export default async function  Page ({params}) {
                 
                 }) ?? []
           
-              linkObj= linkObj?.length>0 ? [{value:"", label:"İlanlar", fulllink:""}    , ...linkObj] : [] // Sadece ilan sayfasındayken yukarıdaki parent breadcrumbını göster. Haricinde ana sayfada gösterme
+             // linkObj= linkObj?.length>0 ? [{value:"", label:"İlanlar", fulllink:""}    , ...linkObj] : [] // Sadece ilan sayfasındayken yukarıdaki parent breadcrumbını göster. Haricinde ana sayfada gösterme
 
       return (
         <div>
           
           <div className={s.parentslist}>
               {linkObj?.map((item, i)=>{
-                        return <Link href={`/${locale}/ads/`+item?.fulllink} key={"link_"+i}><span>{i>0 && " > "}</span> {item?.label}</Link>
+                        return <Link href={`/${locale}/${root_slug}/`+item?.fulllink} key={"link_"+i}><span>{i>0 && " > "}</span> {item?.label}</Link>
               })}
-          </div>
-              {/* {JSON.stringify(linkObj)} */}          
+          </div>              
         </div>
       )
     }

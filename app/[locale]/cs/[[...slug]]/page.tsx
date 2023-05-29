@@ -22,8 +22,11 @@ export default async function Category (props){
 
   locale = locale ? locale : localeStatic;
 
-  let dictionary=await DictionaryData({locale});
-  let webdata=await WebData();
+  let dictionary=await DictionaryData({locale}) ;
+  let webdata=await WebData()                   ;
+
+  let  fileObjects = webdata?.bigdata?.fileObjects;
+  // console.log("itemitemitem: ", fileObjects);
 
   let lastslugitem = slug?.[slug?.length-1]
 
@@ -44,16 +47,15 @@ export default async function Category (props){
             return co // İşte bu durumda dönelim...
           }        
   })
-  
-  // categories={categories?.filter(cat=>parentkeys_forsubcontents?.includes(cat?.key))}
-   return (  <Rs_Shell contents={contents} root_category={"emlak"} bigbigparent_slug={bigbigparent_slug} categories={categories} root_slug={`cs`} dictionary={dictionary} webdata={webdata}  sidepadding={42}  {...props}/>  ) 
+    
+   return (  <Rs_Shell contents={contents} root_category={"emlak"} bigbigparent_slug={bigbigparent_slug} categories={categories} root_slug={`cs`} dictionary={dictionary} webdata={webdata} fileObjects={fileObjects}  sidepadding={42}  {...props}/>  ) 
   
   }
 
 
 export async function Rs_Shell (props){
     
-  let {contents, params, searchParams, root_category, root_slug,  bigbigparent_slug, categories, webdata, dictionary} = props ?? {};  
+  let {contents, params, searchParams, root_category, root_slug,  bigbigparent_slug, categories, webdata, dictionary, fileObjects} = props ?? {};  
 
   let {slug} = params ?? {} ;
   let  countries = await cacheCountries();
@@ -79,6 +81,7 @@ export async function Rs_Shell (props){
   let {country, city, district, subdistrict} = searchParams ?? {}
   adverts=filterAdverts({adverts, country, city, district, subdistrict});
   let parents=category?.o_key_1?.parents;
+
 
   
   return (
@@ -110,7 +113,7 @@ export async function Rs_Shell (props){
                               <div className={s.desktopmenu}><LayoutLeft props={{ parents, category,categories, root_slug, bigbigparent_slug, countries, searchParams}}/></div>
 
                               <div className={s.bodywr}>                                    
-                                    <div className={s.itemswr}> {contents?.map((item,index) =>{ return <Item props={{item, countries, params}} key={index}/> }) } </div>                    
+                                    <div className={s.itemswr}> {contents?.map((item,index) =>{ return <Item props={{item, countries, params, fileObjects}} key={index}/> }) } </div>                    
                               </div>
 
                               <Meta category={category} firstadvert={contents[0]} root_slug={root_slug} params={params}/>
@@ -124,87 +127,8 @@ export async function Rs_Shell (props){
 
 
 
-const Meta = (props) => {
-
-        let {category, firstadvert, root_slug, params} = props ?? {};
-
-        let parents=category?.o_key_1?.parents;                       
-        let parents_links=parents?.map((a)=> a?.slug_tr);    parents_links=parents_links?.filter(item=>item!="ilanlar")
-        //parents=parents?.filter((a, i)=> i>1);
-        parents=parents?.map((a)=> a?.title_tr);      
-        parents=parents?.join(" > ");
-
-        let description=category?.bigdata?.history?.[0]?.lang?.tr?.decription;
-        let title=category?.title_tr;
-        
-        description=description?.replace(/["']+/g, ' ');   // Tırnaklar sıkıntı oluşturuyorum. Çözümü kaldrımakta buldum
-        title=title?.replace(/["']+/g, ' ');    
-      
-        let img =  process.env.NEXT_PUBLIC_IMGSOURCE+"/" + firstadvert?.img_tr;
-
-                            return ( 
-                                      // <div>  
-                                                    <Head> 
-                                                        <title> {title} </title>    
-
-                                                            <meta name="description" content={description ? description : title } />
-
-                                                                <script type="application/ld+json" dangerouslySetInnerHTML={{__html: `
-                                                                    { 
-                                                                    "@context": "https://schema.org", 
-                                                                    "@type": "Advert",
-                                                                    "headline": "${parents} ${title}",
-                                                                    "alternativeHeadline": "${parents} ${title}",
-                                                                    "image": "${img}",
-                                                                    "award": "xxxxx",
-                                                                    "editor": "John Doe", 
-                                                                    "genre":  "${title}", 
-                                                                    "keywords":  "${title}", 
-                                                                    "wordcount":  "${title?.length}",
-                                                                    "publisher": {
-                                                                      "@type": "Organization",
-                                                                      "name": "PROWEB"
-                                                                    },
-                                                                    "url":  "${`${process.env.NEXT_PUBLIC_API_URL}/ad/${category?.slug_tr}/${description}`}",
-                                                                    "datePublished": "${category?.createdat}",
-                                                                    "dateCreated":  "${category?.createdat}",
-                                                                    "dateModified":  "${category?.createdat}",
-                                                                    "description": "${description ?? title}",
-                                                                    "articleBody": "${description ?? title}",
-                                                                      "author": {
-                                                                      "@type": "Person",
-                                                                      "name": "Steve",
-                                                                      "url":  "${`${process.env.NEXT_PUBLIC_API_URL}/${root_slug}/${parents_links?.join("/")} ${category?.slug_tr!="ilanlar" ? `/${category?.slug_tr}` : "" }`}",
-                                                                    }
-                                                                    }
-                                                                `}}>
-                                                                </script>
-                                                                    
-                                                              
-                                                            <meta property="og:type" content="website" />
-                                                            <meta name="og_site_name" property="og:site_name" content="sakaryarehberim.com"/>
-                                                            <meta name="og_url" property="og:url" content={`${process.env.NEXT_PUBLIC_API_URL}/${root_slug}/${parents_links?.join("/")} ${category?.slug_tr!="ilanlar" ? `/${category?.slug_tr}` : "" }`}/>
-                                                            <meta name="og_title" property="og:title" content={`${parents} ${title}`}/>
-                                                            <meta name="og_description" property="og:description" content={description ?  description: title}/>
-                                                            <meta name="og_image" property="og:image" content={img}/>
-                                                            {/* <meta name="og_image2" property="og:image" content={resimler[0]}/> */}
-                                                            {/* Niye 2 tane koyulmuş önceden anlayamadım... */}
-                                                            <meta name="twitter:title" content={`${parents} ${title}`}/>
-                                                            <meta name="twitter:description" content={description}/>
-                                                            <meta name="twitter:image" content={img}/>
-                                                            <meta name="twitter:card" content="summary_large_image"/>
-                                                            <meta property="og:image:width" content="900"/>
-                                                            <meta property="og:image:height" content="475"/>
-                                        </Head>
-
-                                    // </div>
-                                   )
-                   }
-
-
-
 const Item = ({props}) => {
-  const {item,  countries, params} =props ?? {};
+  const {item,  countries, params, fileObjects} =props ?? {};
   let {parentObj, loggedUserMail} = item ?? {};
   // let {name} = mailName({mail:item?.user})  
   // let owner = user?.email==item?.user;
@@ -231,7 +155,8 @@ const Item = ({props}) => {
   let {timeAgo, localeString} = datetimeFunc({datetime:item?.createdat});
 
   return ( 
-          <div className={s.item}>     {JSON.stringify(item?.slug_tr)}       
+          <div className={s.item}>     
+              {/* {JSON.stringify(item?.slug_tr)}        */}
               <div className={s.i_title}>{item?.title_tr}</div>
               <div className={s.parenttitle}>{parentObj?.title_tr}</div>      
               <div className={s.i_address}>
@@ -246,7 +171,7 @@ const Item = ({props}) => {
               </div>      
       
               
-              <div className={s.i_image}><CardImage props={{item, id: item?.id, params}}/></div>
+              <div className={s.i_image}><CardImage props={{item, id: item?.id, params, fileObjects}}/></div>
               <div className={s.i_info}>
                             {fiyat && <div className={s.i_info_sub}>                                
                                 <div>{currencyFormat(fiyat?.value)}</div>  
@@ -268,12 +193,17 @@ const Item = ({props}) => {
   
 const CardImage = ({props}) => {
 
-  let {item, id, params} = props ?? {};
+  let {item, id, params, fileObjects} = props ?? {};
+  
+  let fileObject=fileObjects?.find(f=>f?.slug_tr==item?.files_tr?.[0]);
 
-  let img=item?.img_tr
+  let img =!!fileObject ? fileObject?.bigdata?.folder + "/" + fileObject?.bigdata?.filename : undefined
+
+  
     
   return (    
-      <Link href={`/${params?.locale}/c/${item?.slug_tr}/${id}`}  > zzas: {img}   
+      <Link href={`/${params?.locale}/c/${item?.slug_tr}/${id}`}  >
+          {/* {JSON.stringify(item)}  */}
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :
@@ -314,5 +244,84 @@ const filterAdverts = ({adverts, country, city, district, subdistrict}) => {
 }
 
 
+
+
+
+const Meta = (props) => {
+
+  let {category, firstadvert, root_slug, params} = props ?? {};
+
+  let parents=category?.o_key_1?.parents;                       
+  let parents_links=parents?.map((a)=> a?.slug_tr);    parents_links=parents_links?.filter(item=>item!="ilanlar")
+  //parents=parents?.filter((a, i)=> i>1);
+  parents=parents?.map((a)=> a?.title_tr);      
+  parents=parents?.join(" > ");
+
+  let description=category?.bigdata?.history?.[0]?.lang?.tr?.decription;
+  let title=category?.title_tr;
+  
+  description=description?.replace(/["']+/g, ' ');   // Tırnaklar sıkıntı oluşturuyorum. Çözümü kaldrımakta buldum
+  title=title?.replace(/["']+/g, ' ');    
+
+  let img =  process.env.NEXT_PUBLIC_IMGSOURCE+"/" + firstadvert?.img_tr;
+
+                      return ( 
+                                // <div>  
+                                              <Head> 
+                                                  <title> {title} </title>    
+
+                                                      <meta name="description" content={description ? description : title } />
+
+                                                          <script type="application/ld+json" dangerouslySetInnerHTML={{__html: `
+                                                              { 
+                                                              "@context": "https://schema.org", 
+                                                              "@type": "Advert",
+                                                              "headline": "${parents} ${title}",
+                                                              "alternativeHeadline": "${parents} ${title}",
+                                                              "image": "${img}",
+                                                              "award": "xxxxx",
+                                                              "editor": "John Doe", 
+                                                              "genre":  "${title}", 
+                                                              "keywords":  "${title}", 
+                                                              "wordcount":  "${title?.length}",
+                                                              "publisher": {
+                                                                "@type": "Organization",
+                                                                "name": "PROWEB"
+                                                              },
+                                                              "url":  "${`${process.env.NEXT_PUBLIC_API_URL}/ad/${category?.slug_tr}/${description}`}",
+                                                              "datePublished": "${category?.createdat}",
+                                                              "dateCreated":  "${category?.createdat}",
+                                                              "dateModified":  "${category?.createdat}",
+                                                              "description": "${description ?? title}",
+                                                              "articleBody": "${description ?? title}",
+                                                                "author": {
+                                                                "@type": "Person",
+                                                                "name": "Steve",
+                                                                "url":  "${`${process.env.NEXT_PUBLIC_API_URL}/${root_slug}/${parents_links?.join("/")} ${category?.slug_tr!="ilanlar" ? `/${category?.slug_tr}` : "" }`}",
+                                                              }
+                                                              }
+                                                          `}}>
+                                                          </script>
+                                                              
+                                                        
+                                                      <meta property="og:type" content="website" />
+                                                      <meta name="og_site_name" property="og:site_name" content="sakaryarehberim.com"/>
+                                                      <meta name="og_url" property="og:url" content={`${process.env.NEXT_PUBLIC_API_URL}/${root_slug}/${parents_links?.join("/")} ${category?.slug_tr!="ilanlar" ? `/${category?.slug_tr}` : "" }`}/>
+                                                      <meta name="og_title" property="og:title" content={`${parents} ${title}`}/>
+                                                      <meta name="og_description" property="og:description" content={description ?  description: title}/>
+                                                      <meta name="og_image" property="og:image" content={img}/>
+                                                      {/* <meta name="og_image2" property="og:image" content={resimler[0]}/> */}
+                                                      {/* Niye 2 tane koyulmuş önceden anlayamadım... */}
+                                                      <meta name="twitter:title" content={`${parents} ${title}`}/>
+                                                      <meta name="twitter:description" content={description}/>
+                                                      <meta name="twitter:image" content={img}/>
+                                                      <meta name="twitter:card" content="summary_large_image"/>
+                                                      <meta property="og:image:width" content="900"/>
+                                                      <meta property="og:image:height" content="475"/>
+                                  </Head>
+
+                              // </div>
+                             )
+             }
 
 
