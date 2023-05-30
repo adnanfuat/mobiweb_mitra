@@ -28,11 +28,7 @@ export default async function Home(props) {
 
   let theme_name = webdata?.bigdata?.theme?.name;
 
-
-   
-  let theme_name = webdata?.bigdata?.theme?.name;
-
-
+ 
    
   let cuffs= webdata?.bigdata?.history?.[0]?.lang?.tr?.cuffs;
 
@@ -103,8 +99,6 @@ export default async function Home(props) {
 
 
 
-=======
->>>>>>> a1f7d8351752d64856967ff206db71732a7b95c7
 
 
 
@@ -139,6 +133,7 @@ export default async function Home(props) {
     }
   }`
 ;
+//
 
 
 
