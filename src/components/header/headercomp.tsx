@@ -10,8 +10,6 @@ import {Flags} from "@/components/flags";
 
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../../../pages/api/auth/[...nextauth]"
-// import DictionaryData from "./utils/dictionarydata";
-// import WebData from "./utils/webdata";
 import fileSpecialRequests from "../utils/files_specialrequests";
 
 
@@ -38,8 +36,9 @@ export  default async function HeaderComp  (props) {
         let {width, height} = logo?.bigdata?.details ?? {};
 
         // props={locale, position, topbottom, sidepadding, filename, session, params, webdata, dictionary  }
-        props={...props, position, filename, selection, session }
+        props={...props, position, filename, selection, session, locale }
         
+        // return <div>asdsad: {locale}</div>
     return (
           <Theme_1 {...props}/>
     )

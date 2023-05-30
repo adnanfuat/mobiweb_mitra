@@ -27,13 +27,11 @@ export default  function RootLayout({
 
  
   const queryClient = new QueryClient();
+  {/* <div  onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}>{children}</div> */}
      
-  return (<SessionProvider session={session} refetchInterval={5 * 60}>
-                    <QueryClientProvider client={queryClient} >       
-                                              {/* <div  onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}>{children}</div> */}
-                                              {children}
-                    </QueryClientProvider>
-          </SessionProvider> )
+  return (<html><SessionProvider session={session} refetchInterval={5 * 60}>
+                    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+          </SessionProvider></html>)
 }
 
 // onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}

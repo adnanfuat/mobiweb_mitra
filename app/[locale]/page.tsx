@@ -78,18 +78,24 @@ export default async function Home(props) {
       })
             
       // Yapmam gerken: Yukarıda cuffsları obje olarak yollamışım. halbuki cuffsları yollayıp yanlarına sadece objeleri koymalıydım...
-      
 
-      switch (theme_name) {
-        case "theme_mitra": return <Theme_Mitra logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>                            
-        case "theme_arges": return <Theme_Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
-        case "theme_vitalis": return <Theme_Vitalis logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
-      
-        default:  return <div style={{color:"white"}}>{JSON.stringify(webdata?.bigdata?.theme)}</div>
-          
+      let component=<div>...</div>;
+
+      if (theme_name=="theme_mitra") {
+        component=<Theme_Mitra logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>                            
       }
-      
-
+      else if (theme_name=="theme_arges") {
+        component=<Theme_Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
+      }
+      else if (theme_name=="theme_vitalis") {
+        component=<Theme_Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
+      }     
+      else 
+      {
+        component=<div style={{color:"white"}}>{JSON.stringify(webdata?.bigdata?.theme)}</div>
+      }                       
+                      
+      return component
       // return <div>{JSON.stringify(webdata?.bigdata?.theme)}</div>
       
 

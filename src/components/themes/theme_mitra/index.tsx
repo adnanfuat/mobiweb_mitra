@@ -22,28 +22,15 @@ export const Theme_Mitra = async (props) => {
 
     let {logo, params, dictionary, webdata, cuffs} = props ?? {};
   
-    return (
-        <html> 
-        <body className={`${s.body} ${inter.variable}`} >
-                <div style={{position:"relative"}}>  
-                {/* sadsaddsa {webdata?.bigdata?.theme?.name} */}
-                {/* PROPSSSS : {JSON.stringify(params)} -------------- */}
-                  
-                        <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>
-  
-                        <div className={s.main}>              
-                                                                        
+    return (<div style={{position:"relative"}}>                
+                <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>  
+                        <div className={s.main}>                                                                                      
                                                 <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
                                                 {/* asdas : {JSON.stringify(props)} */}
-                                                 <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} sidepadding={42} />
-                                          
-                        </div> 
-  
-                          <div className={s.footer}><FooterComp logo={logo}/></div>             
-                </div>     
-                </body>
-              </html>                       
-          )
+                                                 <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} sidepadding={42} />                                          
+                        </div>   
+                        <div className={s.footer}><FooterComp logo={logo}/></div>             
+                </div>)
   }
   
   

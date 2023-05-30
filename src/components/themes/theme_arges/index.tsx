@@ -24,9 +24,7 @@ export const Theme_Arges = async (props) => {
 
     let {logo, params, dictionary, webdata, cuffs} = props ?? {};
   
-    return (
-        <html> 
-                <body className={`${s.body} ${inter.variable}`} >
+    return (<body className={`${s.body} ${inter.variable}`} >
                         <div style={{position:"relative"}}>  
                         {/* sadsaddsa {webdata?.bigdata?.theme?.name} */}
                         {/* PROPSSSS : {JSON.stringify(params)} -------------- */}
@@ -44,9 +42,7 @@ export const Theme_Arges = async (props) => {
                                 <div className={s.footer}><FooterComp logo={logo}/></div>             
                         </div>     
 
-                </body>                     
-        </html>
-          )
+                </body>)
   }
   
   
