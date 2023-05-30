@@ -85,40 +85,41 @@ export async function Rs_Shell (props){
 
   
   return (
-              <DesignLayout title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>
-                          
+              <DesignLayout title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>    
+                                    
                           <div className={s.mainwr}>  
                             
-                              {/* {JSON.stringify(contents)} */}
-                                                    
-                            {(country || city || district || subdistrict) && <div className={s.filtered}>                             
-                                
-                                    <Link href={`/${root_slug}`}><div  className={s.filteredinner}>
-                                          <div className={s.filteredtitle} >Filtre</div>                              
-                                              {country && <div> {country} </div>}
-                                              {city && <div> {city} </div>}
-                                              {district && <div> {district} </div>}
-                                              {subdistrict && <div> {subdistrict} </div>}
-                                          </div>
-                                    </Link>
+                            {/* {JSON.stringify(contents)} */}
+                                                  
+                          {(country || city || district || subdistrict) && <div className={s.filtered}>                             
+                              
+                                  <Link href={`/${root_slug}`}><div  className={s.filteredinner}>
+                                        <div className={s.filteredtitle} >Filtre</div>                              
+                                            {country && <div> {country} </div>}
+                                            {city && <div> {city} </div>}
+                                            {district && <div> {district} </div>}
+                                            {subdistrict && <div> {subdistrict} </div>}
+                                        </div>
+                                  </Link>
 
-                              </div>
-                            }
-                            
-                              <div className={s.mobilmenu}>
-                                      {/* <div className={s.mobilmenu_close}  onClick={()=>setmobilmenu(old=>!old)}>{mobilmenu ? <RiCloseFill size={30} /> :  <RiListUnordered size={30} />  }</div>                 */}
-                                      {/* { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" } */}
-                              </div>
+                            </div>
+                          }
+                          
+                            <div className={s.mobilmenu}>
+                                    {/* <div className={s.mobilmenu_close}  onClick={()=>setmobilmenu(old=>!old)}>{mobilmenu ? <RiCloseFill size={30} /> :  <RiListUnordered size={30} />  }</div>                 */}
+                                    {/* { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" } */}
+                            </div>
 
-                              <div className={s.desktopmenu}><LayoutLeft props={{ parents, category,categories, root_slug, bigbigparent_slug, countries, searchParams}}/></div>
+                            <div className={s.desktopmenu}><LayoutLeft props={{ parents, category,categories, root_slug, bigbigparent_slug, countries, searchParams}}/></div>
 
-                              <div className={s.bodywr}>                                    
-                                    <div className={s.itemswr}> {contents?.map((item,index) =>{ return <Item props={{item, countries, params, fileObjects}} key={index}/> }) } </div>                    
-                              </div>
+                            <div className={s.bodywr}>                                    
+                                  <div className={s.itemswr}> {contents?.map((item,index) =>{ return <Item props={{item, countries, params, fileObjects}} key={index}/> }) } </div>                    
+                            </div>
 
-                              <Meta category={category} firstadvert={contents[0]} root_slug={root_slug} params={params}/>
+                            <Meta category={category} firstadvert={contents[0]} root_slug={root_slug} params={params}/>
 
-                          </div>
+                        </div>
+
                 </DesignLayout>                          
               
               )
