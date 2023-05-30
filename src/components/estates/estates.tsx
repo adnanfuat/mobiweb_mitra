@@ -3,9 +3,7 @@ import s from "./estates.module.css"
 import {datetimeFunc} from "@/components/utils/datetimefunc"
 import {cacheCountries} from "@/components/utils/cachecountries"
 import Link from "next/link";
-import Image from "next/image";
-import { RiListUnordered, RiCloseFill,RiEdit2Fill } from "react-icons/ri";
-import { useState } from "react";
+
 import dictionaryFunc from "@/components/utils/dictionaryfunc";
 import DictionaryData from "@/components/utils/dictionarydata";
 
@@ -15,12 +13,10 @@ const  Estates = async ({adverts, sidepadding, params}) =>{
   let {locale} = params ?? {};    
   let dictionary=await DictionaryData({locale});
   
-  return (
-                          <div className={s.mainwr} style={{paddingLeft: sidepadding, paddingRight: sidepadding }}>                                                                                        
-                                <div className={s.bodywr}>
+        return (
+                          <div style={{backgroundColor:"transparent"}}>                                
                                       <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item, dictionary, params}} key={index}/> }) } </div>                    
-                                </div>
-                          </div>
+                          </div>                             
                )
 
 }

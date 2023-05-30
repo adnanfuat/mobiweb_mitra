@@ -1,16 +1,11 @@
 "use client"
 
 import './globals.css';
-import s from "./layout.module.css"
-import { Inter } from 'next/font/google'
+
+
 import {siteProxy} from "@/constants/siteproxy"
 
 
-const inter = Inter({
-  variable: '--inter-font',
-  subsets:["latin","latin-ext"],
-  weight:["100", "200","300","400","500","600", "700","800","900"]
-})
 
 
 import { SessionProvider } from "next-auth/react" 
@@ -31,24 +26,17 @@ export default  function RootLayout({
 ) {
 
  
-
-    const queryClient = new QueryClient();
+  const queryClient = new QueryClient();
      
-  return (
-    <html> 
-        <body className={`${s.body} ${inter.variable}`} >
-        {/* <HeaderComp params={params} sidepadding={42} topbottom={5}/> */}
-          <SessionProvider session={session} refetchInterval={5 * 60}>
-                    <QueryClientProvider client={queryClient}>       
-                                              <div  onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}>{children}</div>
+  return (<SessionProvider session={session} refetchInterval={5 * 60}>
+                    <QueryClientProvider client={queryClient} >       
+                                              {/* <div  onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}>{children}</div> */}
+                                              {children}
                     </QueryClientProvider>
-          </SessionProvider>
-        </body>
-    </html>
-  )
+          </SessionProvider> )
 }
 
-
+// onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}
 
 
 
@@ -80,9 +68,6 @@ const WebQuery =
     }
   }`
 ;
-
-
-
 
 
 

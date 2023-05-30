@@ -3,7 +3,7 @@ import s from "./index.module.css"
 import HeaderComp from "@/components/header/headercomp"
 import FooterComp from "@/components/footercomp"
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
+
 import styles from './page.module.css'
 import {Index_Cuffs_V2_Visitor} from "@/components/cuffs/index_cuffs_v2_visitor"
 import WebData from "@/components/utils/webdata"
@@ -11,11 +11,20 @@ import DictionaryData from "@/components/utils/dictionarydata"
 import { localeStatic } from "@/constants/localestatic"
 import Estates from "@/components/estates/estates";
 
+import { Inter } from 'next/font/google'
+const inter = Inter({
+        variable: '--inter-font',
+        subsets:["latin","latin-ext"],
+        weight:["100", "200","300","400","500","600", "700","800","900"]
+      })
+
 export const Theme_Mitra = async (props) => {
 
     let {logo, params, dictionary, webdata, cuffs} = props ?? {};
   
     return (
+        <html> 
+        <body className={`${s.body} ${inter.variable}`} >
                 <div style={{position:"relative"}}>  
                 {/* sadsaddsa {webdata?.bigdata?.theme?.name} */}
                 {/* PROPSSSS : {JSON.stringify(params)} -------------- */}
@@ -31,7 +40,9 @@ export const Theme_Mitra = async (props) => {
                         </div> 
   
                           <div className={s.footer}><FooterComp logo={logo}/></div>             
-                </div>          
+                </div>     
+                </body>
+              </html>                       
           )
   }
   

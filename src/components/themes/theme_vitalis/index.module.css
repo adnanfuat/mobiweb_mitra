@@ -4,14 +4,38 @@
     /* background-color: rebeccapurple; */
   }
   
+.shell {
+  display: flex;
+  flex-direction: column;
+  gap:30px;
 
+}
   
   .main {
-    min-height: 80vh;
+    
+    display: flex;
+    flex-direction: column;
+    gap:20px
   }
   
 
   .cuffs {
-    display: flex;
-    width: 80vw;
+    display: flex;    
+    justify-content: center;
+    
+  }
+
+  .cuffs div{
+    width: 80%;
+  }
+
+  .estates {
+    display: flex;    
+    justify-content: center;    
+    
+    width: 100%;
+  }
+
+  .estates>div{
+    width: 80%;
   }
