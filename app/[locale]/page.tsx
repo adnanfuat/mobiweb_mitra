@@ -22,9 +22,9 @@ export default async function Home(props) {
   let dictionary=await DictionaryData({locale});  
   let webdata=await WebData();
    
-  let cuffs= webdata?.bigdata?.history[0]?.lang?.tr?.cuffs;
+  let cuffs= webdata?.bigdata?.history?.[0]?.lang?.tr?.cuffs;
 
-  let lang= webdata?.bigdata?.history[0]?.lang?.tr;
+  let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
   let logofiles =  lang?.logofiles;
 
     let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
