@@ -70,13 +70,7 @@ export default async function Home(props) {
             
       // Yapmam gerken: Yukarıda cuffsları obje olarak yollamışım. halbuki cuffsları yollayıp yanlarına sadece objeleri koymalıydım...
       
-    return (
-    
-      
-            <Theme1 logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>
-
-    
-    )
+    return ( <Theme1 logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/> )
 
 
 
@@ -92,7 +86,7 @@ const Theme1 = async (props) => {
   let {logo, params, dictionary, webdata, cuffs} = props ?? {};
 
   return (
-              <div style={{position:"relative"}}>  
+              <div style={{position:"relative"}}>  sasasa
               {/* sadsaddsa {webdata?.bigdata?.theme?.name} */}
               {/* PROPSSSS : {JSON.stringify(params)} -------------- */}
                 
