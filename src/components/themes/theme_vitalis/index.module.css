@@ -10,3 +10,8 @@
     min-height: 80vh;
   }
   
+
+  .cuffs {
+    display: flex;
+    width: 80vw;
+  }
