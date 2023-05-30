@@ -26,7 +26,7 @@ export  default async function HeaderComp  (props) {
 
     position= position ? position : "relative";
 
-    let lang= webdata?.bigdata?.history[0]?.lang?.tr;
+    let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
     let logofiles =  lang?.logofiles;
 
     let fileobjects = await fileSpecialRequests({logofiles})
