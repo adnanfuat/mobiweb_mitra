@@ -1,7 +1,7 @@
 import s from "./estates.module.css"
 
-import {datetimeFunc} from "../../src/components/utils/datetimefunc"
-import {cacheCountries} from "../../src/components/utils/cachecountries"
+import {datetimeFunc} from "@/components/utils/datetimefunc"
+import {cacheCountries} from "@/components/utils/cachecountries"
 import Link from "next/link";
 import Image from "next/image";
 import { RiListUnordered, RiCloseFill,RiEdit2Fill } from "react-icons/ri";
@@ -14,7 +14,7 @@ const  Estates = async ({adverts, sidepadding, params}) =>{
 
   let {locale} = params ?? {};    
   let dictionary=await DictionaryData({locale});
-  // console.log("555555555555", dictionary);
+  
   return (
                           <div className={s.mainwr} style={{paddingLeft: sidepadding, paddingRight: sidepadding }}>                                                                                        
                                 <div className={s.bodywr}>

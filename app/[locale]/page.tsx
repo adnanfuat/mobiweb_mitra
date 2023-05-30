@@ -4,11 +4,15 @@ import FooterComp from "@/components/footercomp"
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from './page.module.css'
-import {Index_Cuffs_V2_Visitor} from "./cuffs/index_cuffs_v2_visitor"
+import {Index_Cuffs_V2_Visitor} from "../../src/components/cuffs/index_cuffs_v2_visitor"
 import WebData from "@/components/utils/webdata"
 import DictionaryData from "@/components/utils/dictionarydata"
 import { localeStatic } from "@/constants/localestatic"
-import Estates from "./estates"
+
+
+import {Theme_Mitra} from "@/themes/theme_mitra"
+import {Theme_Arges} from "@/themes/theme_arges"
+import {Theme_Vitalis} from "@/themes/theme_vitalis"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,6 +25,14 @@ export default async function Home(props) {
   
   let dictionary=await DictionaryData({locale});  
   let webdata=await WebData();
+
+  let theme_name = webdata?.bigdata?.theme?.name;
+
+
+   
+  let theme_name = webdata?.bigdata?.theme?.name;
+
+
    
   let cuffs= webdata?.bigdata?.history?.[0]?.lang?.tr?.cuffs;
 
@@ -70,9 +82,19 @@ export default async function Home(props) {
             
       // Yapmam gerken: Yukarıda cuffsları obje olarak yollamışım. halbuki cuffsları yollayıp yanlarına sadece objeleri koymalıydım...
       
-    return ( <Theme1 logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/> )
 
+      switch (theme_name) {
+        case "theme_mitra": return <Theme_Mitra logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>                            
+        case "theme_arges": return <Theme_Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
+        case "theme_vitalis": return <Theme_Vitalis logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
+      
+        default:  return <div style={{color:"white"}}>{JSON.stringify(webdata?.bigdata?.theme)}</div>
+          
+      }
+      
 
+      // return <div>{JSON.stringify(webdata?.bigdata?.theme)}</div>
+      
 
   
 }
@@ -81,34 +103,8 @@ export default async function Home(props) {
 
 
 
-const Theme1 = async (props) => {
-
-  let {logo, params, dictionary, webdata, cuffs} = props ?? {};
-
-  return (
-              <div style={{position:"relative"}}>  sasasa
-              {/* sadsaddsa {webdata?.bigdata?.theme?.name} */}
-              {/* PROPSSSS : {JSON.stringify(params)} -------------- */}
-                
-                      <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>
-
-                      <div className={s.main}>              
-                                                                      
-                                              <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
-                                              {/* asdas : {JSON.stringify(props)} */}
-                                               <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} sidepadding={42} />
-                                        
-                      </div> 
-
-                        <div className={s.footer}><FooterComp logo={logo}/></div>             
-              </div>          
-        )
-}
-
-
-
-
-
+=======
+>>>>>>> a1f7d8351752d64856967ff206db71732a7b95c7
 
 
 
