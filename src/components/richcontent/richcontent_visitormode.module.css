@@ -17,8 +17,7 @@
     grid-template-areas: 
         "imagearea info"
         "contact info"
-        ;
-    /* background-color: chocolate;      */
+        ;    
     padding: 10px;    
 }
 

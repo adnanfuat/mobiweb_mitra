@@ -127,6 +127,7 @@ export default async function Home(props) {
       bigdata
       richcontents {
                       id
+                      key
                       title_tr
                       slug_tr
                       img_tr

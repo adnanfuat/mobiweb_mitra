@@ -1,6 +1,5 @@
 
 import { RiContrast2Line, RiShieldCheckFill , RiShieldFill} from "react-icons/ri";
-import {Ad_LayoutMain_Visitor_V2} from "./ad_layoutmain_visitor_v2"; 
 import {Advert_VisitorMode_MetaData} from "./advert_visitormode_metadata"; 
 import {Advert_Visitor_Image} from "./advert_visitor_image"; 
 import {Advert_Visitor_Tabs} from "./advert_visitor_tabs"; 
@@ -11,17 +10,12 @@ import { DesignLayout } from "@/layouts/designlayout";
 import DictionaryData from "@/components/utils/dictionarydata";
 import WebData from "@/components/utils/webdata";
 import { localeStatic } from "@/constants/localestatic";
-//import dynamic from 'next/dynamic'
-// import {siteProxy} from "@/constants/siteproxy"
-// import { useSnapshot } from 'valtio';
-//const Advert_Google_Map_Dynamic = dynamic(() => import("./advert_googlemap_dynamic"), { loading: () => <div className={s.advert_visitor_image_dynamic_loading}><div>Yükleniyor</div></div> } );  
-
+import { DesignLayout_Theme_Vitalis } from "@/themes/theme_vitalis/layouts/designlayout_theme_vitalis";
 
 
 export default async function  Page ({params}) { 
 
-  let {locale, slug} = params ?? {}
-
+  let {locale, slug} = params ?? {};
   
   let dictionary=await DictionaryData({locale});
   let webdata=await WebData();
@@ -31,39 +25,62 @@ export default async function  Page ({params}) {
     headers: { "Content-Type": "application/json", },
     body: JSON.stringify({
       query: AdvertQuery_Raw,
-      variables: {data:{id:slug?.[1]}},
+      variables: {data:{key:slug?.[1]}},
     }),
   })       
-    let datajson_advert=await rawdata_advert.json()
-    let advert = datajson_advert?.data?.advertquery;   
-
-    // console.log("paramssss", slug);
-                        
+    let datajson_advert=await rawdata_advert.json();
+    let advert = datajson_advert?.data?.advertquery;
+                            
     let parents=advert?.bigdata?.history?.[0]?.info?.parents;
     let detail=advert?.bigdata?.history?.[0]?.lang?.tr?.detail;
-            
-    // const [tab, settab] = useState(1)
+    let theme_name = webdata?.bigdata?.theme?.name;
 
-    //  return <div>asdsaddsa</div>
-    
-          return (
-              <DesignLayout  title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>
-                                <div className={s.shell}> 
-                              {/* ASDSDASASDA      {JSON.stringify(params)} */}
-                                      <div className={s.parents}>   <Advert_Visitor_Parents parents={parents} params={params}/></div>                                                                                                                                                                     
-                                      <div className={s.metadata}>  <Advert_VisitorMode_MetaData advert={advert} params={params}/>   </div>
-                                      <div className={s.image}>     <Advert_Visitor_Image advert={advert}  params={params}/></div>
-                                      <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div>
-                                      <div className={s.who}>       <Advert_Visitor_Owner advert={advert}  params={params}/>                                       
-                                      </div>         
-                                      <Advert_Visitor_Tabs advert={advert}/>       
-                                </div>
-                </DesignLayout>
-                )
+    let props = { advert,  detail, parents };
+
+
+      if (theme_name=="theme_mitra") {
+        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+      }
+      else if (theme_name=="theme_arges") {
+        return (<DesignLayout_Theme_Arges title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Theme_Arges> )                      
+      }
+      else if (theme_name=="theme_vitalis") {
+        return (<DesignLayout_Theme_Vitalis title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}><RsData   {...props}  /> </DesignLayout_Theme_Vitalis> )                      
+      }     
+      else 
+      {
+        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+      }  
+                    
+
     
     }
 
     
+
+
+    
+const RsData = async (props) => {
+
+  let {params, searchParams, root_category, root_slug,  bigbigparent_key, webdata, dictionary, parents, advert} = props ?? {};  
+
+  return (
+    
+                      <div className={s.shell}> 
+                    {/* ASDSDASASDA      {JSON.stringify(params)} */}
+                            <div className={s.parents}>   <Advert_Visitor_Parents parents={parents} params={params}/></div>                                                                                                                                                                     
+                            <div className={s.metadata}>  <Advert_VisitorMode_MetaData advert={advert} params={params}/>   </div>
+                            <div className={s.image}>     <Advert_Visitor_Image advert={advert}  params={params}/></div>
+                            <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div>
+                            <div className={s.who}>       <Advert_Visitor_Owner advert={advert}  params={params}/>                                       
+                            </div>         
+                            <Advert_Visitor_Tabs advert={advert}/>       
+                      </div>
+      
+      )
+
+
+}
 
 
 
@@ -230,8 +247,7 @@ export default async function  Page ({params}) {
       let {locale} = params ?? {}
       
 
-      return <div className={s.onelineproperty}>
-         {/* {JSON.stringify(property)}        */}
+      return <div className={s.onelineproperty}>         
                           <div className={s.xxxxxxxxxxxx}>  {eval(`property?.key_label_${locale}`) ?? eval(`property?.key_label_${localeStatic}`)} </div>
                           <div className={s.xxxxxxxxxxxxxxx}> {property?.value_label_tr} </div>                          
              </div>
@@ -281,6 +297,7 @@ export default async function  Page ({params}) {
         `  query AdvertQuery  ($data: JSON ) {
                 advertquery (data:$data) {
                     id
+                    key
                     active
                     parent_slug
                     parent_key

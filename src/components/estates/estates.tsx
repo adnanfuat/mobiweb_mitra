@@ -85,7 +85,7 @@ const CardImage = ({props}) => {
 
     
   return (    
-      <Link href={`/${locale}/ad/${item?.slug_tr}/${id}`} >
+      <Link href={`/${locale}/ad/${item?.slug_tr}/${item?.key}`} >
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :

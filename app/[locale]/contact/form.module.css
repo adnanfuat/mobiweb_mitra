@@ -38,7 +38,7 @@
 }
 
 .wr_dynamic {
-  background-color: rgb(255, 255, 255);
+  
   padding: 20px 10px;
   display: flex;
   gap: 30px;
@@ -46,7 +46,7 @@
 }
 
 .items {
-  background-color: rgb(255, 255, 255);
+  
   display: flex;
   flex-direction: column;
   gap: 50px;

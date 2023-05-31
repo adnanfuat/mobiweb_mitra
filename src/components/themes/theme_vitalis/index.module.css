@@ -7,7 +7,9 @@
 .shell {
   display: flex;
   flex-direction: column;
-  gap:30px;
+  
+  /* min-height: 100vh; */
+  
 
 }
   
@@ -25,17 +27,16 @@
     
   }
 
-  .cuffs div{
+  /* .cuffs div{
     width: 80%;
-  }
+  } */
 
   .estates {
     display: flex;    
-    justify-content: center;    
-    
+    justify-content: center;        
     width: 100%;
   }
 
   .estates>div{
-    width: 80%;
+    width: 100%;
   }

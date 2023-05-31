@@ -11,6 +11,7 @@ import HeaderComp from "@/components/header/headercomp";
 import { DesignLayout } from "@/layouts/designlayout";
 import DictionaryData from "@/components/utils/dictionarydata";
 import dictionaryFunc from "@/components/utils/dictionaryfunc";
+import { DesignLayout_Theme_Vitalis } from "@/themes/theme_vitalis/layouts/designlayout_theme_vitalis";
 
 
 export default async function Page  ({params}) {
@@ -39,22 +40,56 @@ export default async function Page  ({params}) {
   // console.log("webdata::::::::sadasdsdadsa", webdata);  
   
 
-     return (
-      <DesignLayout title={iletisim} dictionary={dictionary} params={params} webdata={webdata}> 
-                <div className={s.shell}>                      
-                      <div className={s.mainwr}>
-                          <div className={s.sectionwr}>                    
-                                <div className={s.sectiontitle}>Mesaj Formu</div>
-                                <div className={s.form}><ContactForm session={session} webdata={webdata}/></div>                        
-                          </div>
-                          <div className={s.sectionwr}>                    
-                                <div className={s.sectiontitle}>İletişim Bilgileri</div>
-                                <div className={s.info}><ContactInfo addresses={addresses} countries={countries}/></div>   
-                          </div>                                  
+
+  let theme_name = webdata?.bigdata?.theme?.name;
+    
+  if (theme_name=="theme_mitra") {
+    return (<DesignLayout_Theme_Mitra title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+  }
+  else if (theme_name=="theme_arges") {
+    return (<DesignLayout_Theme_Arges title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Theme_Arges> )                      
+  }
+  else if (theme_name=="theme_vitalis") {
+    return (<DesignLayout_Theme_Vitalis title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata}><RsData addresses={addresses} webdata={webdata} session={session} countries={countries} /> </DesignLayout_Theme_Vitalis> )                      
+  }     
+  else 
+  {
+    return (<DesignLayout_Theme_Mitra title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+  }   
+
+
+     
+}
+
+
+
+
+
+const RsData = async (props) => {
+
+      let { addresses, countries, webdata, session } = props ?? {};
+
+      let theme=webdata?.bigdata?.theme;
+
+      let contact_page =  theme?.pages?.contact ?? {};
+
+      let background_color = contact_page?.background_color;
+
+      
+
+      return <div className={s.shell}>                      
+                  <div className={s.mainwr} style={{backgroundColor:background_color}}>
+                      <div className={s.sectionwr}>                    
+                            <div className={s.sectiontitle}>Mesaj Formu</div>
+                            <div className={s.form}><ContactForm session={session} webdata={webdata}/></div>                        
                       </div>
-                </div>
-        </DesignLayout>        
-  )
+                      <div className={s.sectionwr}>                    
+                            <div className={s.sectiontitle}>İletişim Bilgileri</div>
+                            <div className={s.info}><ContactInfo addresses={addresses} countries={countries}/></div>   
+                      </div>                                  
+                  </div>
+            </div>
+
 }
 
 

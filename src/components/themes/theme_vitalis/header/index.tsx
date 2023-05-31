@@ -20,7 +20,7 @@ export  default async function HeaderComp  (props) {
     
     const session = await getServerSession(authOptions)
   
-    let { params, position, sidepadding =42, topbottom=5, webdata, dictionary} = props ?? {}
+    let { params, position,  topbottom=5, webdata, dictionary} = props ?? {}
 
     let {locale} = params ?? {};
 
@@ -36,9 +36,10 @@ export  default async function HeaderComp  (props) {
         // let {logo, params, dictionary} = props ?? {};                  
         let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
         let {width, height} = logo?.bigdata?.details ?? {};
-
-        // props={locale, position, topbottom, sidepadding, filename, session, params, webdata, dictionary  }
+        
         props={...props, position, filename,  session }
+
+        // console.log("propsprops", props);
         
     return (
       <div className={s.headercompwr} style={{position, padding:`${topbottom}px 250px`}}>
@@ -49,10 +50,8 @@ export  default async function HeaderComp  (props) {
 
                     <div className={s.rightwr} >               
                             
-                                <LoginIntro session={session}/>
-                                
-                                <Menu params={params} webdata={webdata} dictionary={dictionary}/>
-                                
+                                <LoginIntro session={session} dictionary={dictionary}/>                                
+                                <Menu params={params} webdata={webdata} dictionary={dictionary}/>                                
                                 <Flags params={params}/>
                     </div>
                               

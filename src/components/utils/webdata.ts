@@ -47,7 +47,8 @@ const WebQuery =
       o_key_1
       o_key_2
       richcontents {
-                      id            
+                      id      
+                      key      
                       title_tr
                       slug_tr
                       img_tr

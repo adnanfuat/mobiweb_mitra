@@ -12,12 +12,10 @@ import { DesignLayout } from "@/layouts/designlayout";
 import DictionaryData from "@/components/utils/dictionarydata";
 import WebData from "@/components/utils/webdata";
 import { localeStatic } from "@/constants/localestatic";
-//import dynamic from 'next/dynamic'
-// import {siteProxy} from "@/constants/siteproxy"
-// import { useSnapshot } from 'valtio';
-//const Advert_Google_Map_Dynamic = dynamic(() => import("./advert_googlemap_dynamic"), { loading: () => <div className={s.advert_visitor_image_dynamic_loading}><div>Yükleniyor</div></div> } );  
+import { DesignLayout_Theme_Vitalis } from "@/themes/theme_vitalis/layouts/designlayout_theme_vitalis";
 
-let root_slug="cs"
+
+let root_slug="cs";
 
 
 export default async function  Page ({params}) { 
@@ -28,40 +26,67 @@ export default async function  Page ({params}) {
   let dictionary=await DictionaryData({locale});
   let webdata=await WebData();
 
-  let fileObjects=webdata?.bigdata?.fileObjects ?? []
+  let contents= webdata?.o_key_2?.contents ?? [];      
+  let content = contents?.find(co=>co?.id==slug[1]);
 
-  let advert=undefined
-                            
-  // let parents=[];
   
-  let contents= webdata?.o_key_2?.contents ?? [];
-  
-  let content = contents?.find(co=>co?.id==slug[1])
-  let parents=content?.parents;
-    // let detail=advert?.bigdata?.history?.[0]?.lang?.tr?.detail;              
-    // const [tab, settab] = useState(1)
-    //  return <div>asdsaddsa</div>    
-    // console.log("fileObjects::::.", webdata)
+  let theme_name = webdata?.bigdata?.theme?.name;
+    
+      if (theme_name=="theme_mitra") {
+        return (<DesignLayout_Theme_Mitra title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+      }
+      else if (theme_name=="theme_arges") {
+        return (<DesignLayout_Theme_Arges title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Theme_Arges> )                      
+      }
+      else if (theme_name=="theme_vitalis") {
+        return (<DesignLayout_Theme_Vitalis title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}><RsData params={params} webdata={webdata}/> </DesignLayout_Theme_Vitalis> )                      
+      }     
+      else 
+      {
+        return (<DesignLayout_Theme_Mitra title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+      }   
+    
 
-          return (
-              <DesignLayout  title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>
-                                <div className={s.shell}> 
-                                      {/* {content?.title_tr}  {JSON.stringify(webdata?.bigdata?.fileObjects)} */}
-                                      {/* {JSON.stringify(content)}  */}
-                                      <div className={s.parents}>  <Content_Visitor_Parents parents={parents} params={params} root_slug={root_slug}/></div>                                                                                                                                                                     
-                                      <div className={s.metadata}> <Advert_VisitorMode_MetaData content={content} params={params}/> </div>
-                                      <div className={s.image}>   <Content_Visitor_Image content={content} fileObjects={fileObjects} params={params}/> </div>
-                                      {/* <div className={s.maintext}> <Content_Visitor_MainText content={content} fileObjects={fileObjects} params={params}/> </div> */}
-                                      {/* <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div> */}
-                                             
-                                      <Advert_Visitor_Tabs advert={advert}/>       
-                                </div>
-                </DesignLayout>
-                )
+
     
     }
 
     
+
+    const RsData = async (props) => {
+
+      let {params, dictionary, webdata} = props ?? {};
+      let {locale, slug} = params ?? {};
+
+      
+    
+      let fileObjects=webdata?.bigdata?.fileObjects ?? []
+    
+      let advert=undefined
+                                
+      // let parents=[];
+      
+      let contents= webdata?.o_key_2?.contents ?? [];      
+      let content = contents?.find(co=>co?.id==slug[1]);
+      let parents=content?.parents;
+
+      
+          return (
+                  <div className={s.shell}> 
+                      {/* {content?.title_tr}  {JSON.stringify(webdata?.bigdata?.fileObjects)} */}
+                      {/* {JSON.stringify(content)}  */}
+                      <div className={s.parents}>  <Content_Visitor_Parents parents={parents} params={params} root_slug={root_slug}/></div>                                                                                                                                                                     
+                      <div className={s.metadata}> <Advert_VisitorMode_MetaData content={content} params={params}/> </div>
+                      <div className={s.image}>   <Content_Visitor_Image content={content} fileObjects={fileObjects} params={params}/> </div>
+                      {/* <div className={s.maintext}> <Content_Visitor_MainText content={content} fileObjects={fileObjects} params={params}/> </div> */}
+                      {/* <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div> */}
+                            
+                      <Advert_Visitor_Tabs advert={advert}/>       
+                  </div>
+            )
+
+    }
+
 
 
 

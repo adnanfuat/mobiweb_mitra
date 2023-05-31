@@ -4,12 +4,13 @@ import {  signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import {RiUserStarFill, RiUser3Fill} from "react-icons/ri";
 import { useQuery } from 'react-query';
+import dictionaryFunc from "./utils/dictionaryfunc";
 
 
 
 export const Login = (props) => {
 
-  const {session} = props?? {}// isLogged();
+  const {session, dictionary} = props?? {}// isLogged();
 
   let {user} =  session ?? {};
   
@@ -33,6 +34,8 @@ export const Login = (props) => {
 
   //**************************** (sitemap fecth) */
 
+  let log_out      =   dictionaryFunc({key:"1683707781276", dictionary}).text;
+
   let router = useRouter();
 
   return (        
@@ -40,12 +43,14 @@ export const Login = (props) => {
               
               : <div  className={s.icon} style={{ backgroundImage:`url(${session?.user?.image})`, backgroundSize:"cover"}}  title={session?.user?.name} >                                                                                                 
                                   
-                                  {!session?.user?.image && <RiUserStarFill/> }       
+                                  {!session?.user?.image && <RiUserStarFill/> }    
+
+                                  {/* {JSON.stringify(dictionary?.find(a=>a?.slug=="log_out"))}    */}
 
                                   {data?.i_key_1>0 && <div onClick={()=>!user && signIn()}  className={s.notifications}>{data?.i_key_1}</div>        }
 
                                   <div className={s.popup}>                                                                                                                              
-                                          <div  onClick={()=>{signOut(); router.push(`/`) }}>Çıkış</div>
+                                          <div  onClick={()=>{signOut(); router.push(`/`) }}>{log_out}</div>
                                           <div  onClick={()=>{fetch("/api/clearcache"); }}>Cache temizle</div>
                                   </div>
                             </div>

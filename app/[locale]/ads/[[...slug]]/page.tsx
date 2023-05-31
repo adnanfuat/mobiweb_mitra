@@ -12,6 +12,7 @@ import { DesignLayout } from "@/layouts/designlayout";
 import WebData from "@/components/utils/webdata";
 import DictionaryData from "@/components/utils/dictionarydata";
 import { localeStatic } from "@/constants/localestatic";
+import { DesignLayout_Theme_Vitalis } from "@/themes/theme_vitalis/layouts/designlayout_theme_vitalis";
 
 
 export default async function Category (props){ 
@@ -70,48 +71,109 @@ export async function Rs_Shell (props){
 
   let parents=category?.o_key_1?.parents;
 
-  
 
-  return (
-              <DesignLayout title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>
-                          
-                          <div className={s.mainwr}>  
-                            
-                              {/* {JSON.stringify(params)} */}
-                                                    
-                            {(country || city || district || subdistrict) && <div className={s.filtered}>                             
-                                
-                                    <Link href={`/${root_slug}`}><div  className={s.filteredinner}>
-                                          <div className={s.filteredtitle} >Filtre</div>                              
-                                              {country && <div> {country} </div>}
-                                              {city && <div> {city} </div>}
-                                              {district && <div> {district} </div>}
-                                              {subdistrict && <div> {subdistrict} </div>}
-                                          </div>
-                                    </Link>
 
-                              </div>
-                            }
-                            
-                              <div className={s.mobilmenu}>
-                                      {/* <div className={s.mobilmenu_close}  onClick={()=>setmobilmenu(old=>!old)}>{mobilmenu ? <RiCloseFill size={30} /> :  <RiListUnordered size={30} />  }</div>                 */}
-                                      {/* { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" } */}
-                              </div>
+  let theme_name = webdata?.bigdata?.theme?.name;
+    
+  if (theme_name=="theme_mitra") {
+    return (<DesignLayout_Theme_Mitra title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+  }
+  else if (theme_name=="theme_arges") {
+    return (<DesignLayout_Theme_Arges title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Theme_Arges> )                      
+  }
+  else if (theme_name=="theme_vitalis") {
+    return (<DesignLayout_Theme_Vitalis title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}><RsData   {...props}  /> </DesignLayout_Theme_Vitalis> )                      
+  }     
+  else 
+  {
+    return (<DesignLayout_Theme_Mitra title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+  }  
 
-                              <div className={s.desktopmenu}><LayoutLeft props={{ parents, category, bigbigparent_key, countries, searchParams}}/></div>
 
-                              <div className={s.bodywr}>                                    
-                                    <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item, countries, params}} key={index}/> }) } </div>                    
-                              </div>
 
-                              <Meta category={category} firstadvert={adverts[0]} root_slug={root_slug} params={params}/>
-
-                          </div>
-                </DesignLayout>                          
-              
-              )
 
 }
+
+
+
+const RsData = async (props) => {
+
+  let {params, searchParams, root_category, root_slug,  bigbigparent_key, webdata, dictionary} = props ?? {};  
+
+  let {slug} = params ?? {} ;
+  let  countries = await cacheCountries();
+
+  slug = slug ? slug : []
+  let sluglength=slug?.length;
+  let lastslugitem=slug?.length==0 ? root_category :  slug?.[sluglength-1];
+
+  // let webdata = await WebData();
+  // console.log("webdatawebdatawebdata", webdata?.richcontents);      
+  // let adverts=await richContents_WithCategories({slug, active:1, website:process.env.DOMAIN, useremail:process.env.USEREMAIL})  ?? []
+
+  let adverts =  webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884");
+
+  if (slug?.length>0) { 
+    // Sol taraftaki menüden alt kategorilerden biri seçildiğinde, diyelim //--> İş yeri > Satılık İş yeri... İlgili ilanların içinde parentlarında Satılık İş Yeri var mı diye bakıp, onları filitreler. 
+    // Böylece sadece gidilen linkteki son slugı içeren ilanları verir bize...
+            adverts = adverts?.filter(ad=> {
+                          let parents= ad?.bigdata?.history[0]?.info?.parents ?? [];
+                          parents=parents?.map(item=>item?.slug_tr)
+                          let lastslugitem = slug?.[sluglength-1];
+                          // console.log("asdasdsa," , parents, lastslugitem);
+                          return parents?.find(pa=>pa==lastslugitem)
+            })
+            
+  }
+
+
+  let category=await relatedCategory({lastslugitem})  ?? []
+
+  // console.log("asdasdasdsda: ", category);
+
+  let {country, city, district, subdistrict} = searchParams ?? {}
+
+  adverts=filterAdverts({adverts, country, city, district, subdistrict});
+
+  let parents=category?.o_key_1?.parents;
+  
+
+  return (<div className={s.mainwr}>  
+                              
+  {/* {JSON.stringify(params)} */}
+                        
+                {(country || city || district || subdistrict) && <div className={s.filtered}>                             
+                    
+                        <Link href={`/${root_slug}`}><div  className={s.filteredinner}>
+                              <div className={s.filteredtitle} >Filtre</div>                              
+                                  {country && <div> {country} </div>}
+                                  {city && <div> {city} </div>}
+                                  {district && <div> {district} </div>}
+                                  {subdistrict && <div> {subdistrict} </div>}
+                              </div>
+                        </Link>
+
+                  </div>
+                }
+
+                  <div className={s.mobilmenu}>
+                          {/* <div className={s.mobilmenu_close}  onClick={()=>setmobilmenu(old=>!old)}>{mobilmenu ? <RiCloseFill size={30} /> :  <RiListUnordered size={30} />  }</div>                 */}
+                          {/* { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" } */}
+                  </div>
+
+                  <div className={s.desktopmenu}><LayoutLeft props={{ parents, category, bigbigparent_key, countries, searchParams}}/></div>
+
+                  <div className={s.bodywr}>                                    
+                        <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item, countries, params}} key={index}/> }) } </div>                    
+                  </div>
+
+                  <Meta category={category} firstadvert={adverts[0]} root_slug={root_slug} params={params}/>
+
+        </div>)
+
+
+}
+
 
 
 
@@ -277,7 +339,7 @@ const CardImage = ({props}) => {
   let img=item?.img_tr
     
   return (    
-      <Link href={`/${params?.locale}/ad/${item?.slug_tr}/${id}`}  >   
+      <Link href={`/${params?.locale}/ad/${item?.slug_tr}/${item?.key}`}  >   
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :
