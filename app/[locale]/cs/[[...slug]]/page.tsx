@@ -84,10 +84,7 @@ export async function Rs_Shell (props){
 
 
   
-  return (
-              <DesignLayout title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}>    
-                                    
-                          <div className={s.mainwr}>  
+  return (<DesignLayout title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}><div className={s.mainwr}>  
                             
                             {/* {JSON.stringify(contents)} */}
                                                   
@@ -118,11 +115,7 @@ export async function Rs_Shell (props){
 
                             <Meta category={category} firstadvert={contents[0]} root_slug={root_slug} params={params}/>
 
-                        </div>
-
-                </DesignLayout>                          
-              
-              )
+                        </div></DesignLayout>)
 
 }
 
