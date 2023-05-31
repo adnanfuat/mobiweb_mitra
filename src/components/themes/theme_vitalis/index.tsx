@@ -23,13 +23,8 @@ export const Theme_Vitalis = async (props) => {
 
     let {logo, params, dictionary, webdata, cuffs} = props ?? {};
 
-    
-
-
-
   
-    return (<body>
-                        <div  className={`${s.shell} ${inter.variable}`}>  
+    return (<div  className={`${s.shell} ${inter.variable}`}>  
                         {/* <img src="/themes/vitalis/bg.png" width={80} height={40}/> */}
                         
                                 <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata}  sidepadding={42} topbottom={5}/>
@@ -48,7 +43,7 @@ export const Theme_Vitalis = async (props) => {
         
                                 <div className={s.footer}><FooterComp logo={logo}/></div>             
                         </div>          
-                </body> )
+                )
   }
   
   

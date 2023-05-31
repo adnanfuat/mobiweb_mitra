@@ -88,7 +88,7 @@ export default async function Home(props) {
         component=<Theme_Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
       }
       else if (theme_name=="theme_vitalis") {
-        component=<Theme_Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
+        component=<Theme_Vitalis logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
       }     
       else 
       {
