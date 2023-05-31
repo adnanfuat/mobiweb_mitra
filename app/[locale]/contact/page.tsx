@@ -12,6 +12,7 @@ import { DesignLayout } from "@/layouts/designlayout";
 import DictionaryData from "@/components/utils/dictionarydata";
 import dictionaryFunc from "@/components/utils/dictionaryfunc";
 import { DesignLayout_Theme_Vitalis } from "@/themes/theme_vitalis/layouts/designlayout_theme_vitalis";
+import { DesignLayout_Theme_Mitra } from "@/themes/theme_mitra/layouts/designlayout_theme_mitra";
 
 
 export default async function Page  ({params}) {

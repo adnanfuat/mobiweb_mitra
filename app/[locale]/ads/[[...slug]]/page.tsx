@@ -13,6 +13,8 @@ import WebData from "@/components/utils/webdata";
 import DictionaryData from "@/components/utils/dictionarydata";
 import { localeStatic } from "@/constants/localestatic";
 import { DesignLayout_Theme_Vitalis } from "@/themes/theme_vitalis/layouts/designlayout_theme_vitalis";
+import { DesignLayout_Theme_Mitra } from "@/themes/theme_mitra/layouts/designlayout_theme_mitra";
+import { DesignLayout_Theme_Arges } from "@/themes/theme_arges/layouts/designlayout_theme_arges";
 
 
 export default async function Category (props){ 

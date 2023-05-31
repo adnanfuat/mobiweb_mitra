@@ -11,6 +11,8 @@ import DictionaryData from "@/components/utils/dictionarydata";
 import WebData from "@/components/utils/webdata";
 import { localeStatic } from "@/constants/localestatic";
 import { DesignLayout_Theme_Vitalis } from "@/themes/theme_vitalis/layouts/designlayout_theme_vitalis";
+import { DesignLayout_Theme_Mitra } from "@/themes/theme_mitra/layouts/designlayout_theme_mitra";
+import { DesignLayout_Theme_Arges } from "@/themes/theme_arges/layouts/designlayout_theme_arges";
 
 
 export default async function  Page ({params}) { 
@@ -35,21 +37,21 @@ export default async function  Page ({params}) {
     let detail=advert?.bigdata?.history?.[0]?.lang?.tr?.detail;
     let theme_name = webdata?.bigdata?.theme?.name;
 
-    let props = { advert,  detail, parents };
+    let props = { advert,  detail, parents, params };
 
 
       if (theme_name=="theme_mitra") {
-        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData {...props}/> </DesignLayout_Theme_Mitra> )                      
       }
       else if (theme_name=="theme_arges") {
-        return (<DesignLayout_Theme_Arges title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Theme_Arges> )                      
+        return (<DesignLayout_Theme_Arges title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData  {...props}/> </DesignLayout_Theme_Arges> )                      
       }
       else if (theme_name=="theme_vitalis") {
         return (<DesignLayout_Theme_Vitalis title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}><RsData   {...props}  /> </DesignLayout_Theme_Vitalis> )                      
       }     
       else 
       {
-        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData {...props}/> </DesignLayout_Theme_Mitra> )                      
       }  
                     
 
