@@ -1,9 +1,8 @@
 "use client"
 
 import './globals.css';
+import {siteProxy} from "@/constants/siteproxy"
 
-
-// import {siteProxy} from "@/constants/siteproxy"
 
 
 
@@ -30,19 +29,33 @@ export default  function RootLayout({
   const queryClient = new QueryClient();
   {/* <div  onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}>{children}</div> */}
      
-  return (<html><body>
+  return (
+  // <html>   
+  //   <head>
+  //     <title>My page ____</title>
+  //   </head>       
+  //         <body onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}>          
           <SessionProvider session={session} refetchInterval={5 * 60}>
                     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
           </SessionProvider>
-          </body></html>)
+          // </body></html>
+          )
 
   }
 
-//   return (<html><body> 
-//               {children}    
-//     </body></html>)  
-// }
 
-// onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}
+
+
+  // return (<html>   
+  //   <head>
+  //     <title>My page ____</title>
+  //   </head>       
+  //         <body onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}>          
+  //         <SessionProvider session={session} refetchInterval={5 * 60}>
+  //                   <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  //         </SessionProvider>
+  //         </body></html>)
+
+
 
 

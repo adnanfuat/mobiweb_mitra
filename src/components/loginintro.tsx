@@ -7,14 +7,15 @@ const Dynamic_Login = dynamic(() => import("./login").then(comp=>comp.Login), { 
 
 export const LoginIntro = (props) => {
 
-  let {session, dictionary} = props ?? {};
+  let { dictionary} = props ?? {};
+  // let {session, dictionary} = props ?? {};
 
   const queryClient = new QueryClient();
 
   return (
     <div>
       <QueryClientProvider client={queryClient}>           
-            <Dynamic_Login session={session} dictionary={dictionary}/>
+            <Dynamic_Login dictionary={dictionary}/>
       </QueryClientProvider>    
     </div>
   )

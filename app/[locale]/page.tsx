@@ -1,10 +1,9 @@
 import { Inter } from 'next/font/google'
 import WebData from "@/components/utils/webdata"
-import DictionaryData from "@/components/utils/dictionarydata"
-// import { localeStatic } from "@/constants/localestatic"
+import DictionaryData from "@/components/utils/dictionarydata";
+
 
 //deneme yap //
-
 import {Theme_Mitra} from "@/themes/theme_mitra"
 import {Theme_Arges} from "@/themes/theme_arges"
 import {Theme_Vitalis} from "@/themes/theme_vitalis"
@@ -86,11 +85,12 @@ export default async function Home(props) {
       }     
       else 
       {
-        component=<div style={{color:"black"}}>assa: {JSON.stringify(theme_name)}  </div>
+        component=<div style={{color:"black"}}>Teme bulunamadı... {JSON.stringify(webdata)}  </div>
       }                       
                       
       return component
       // return <div>{JSON.stringify(webdata?.bigdata?.theme)}</div>
+      
       
 
   

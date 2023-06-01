@@ -1,15 +1,13 @@
 import Link from "next/link";
 import s from "./menu.module.css"
 import dictionaryFunc from "@/utils/dictionaryfunc";
+
 export const Menu = async (props) => {
 
     let { params , dictionary, webdata } = props ?? {};
-    let {locale} = params ?? {}
+    let {locale} = params ?? {};  
 
-    //  console.log("params:::", dictionary);
-    // locale = locale ? locale : "tr";
-
-    let menu = webdata?.bigdata?.menu ?? {} 
+    let menu = webdata?.bigdata?.menu ?? {};
           
     let ana_sayfa      =   dictionaryFunc({key:"1682173393396", dictionary}).text;
     let hakkimizda     =   dictionaryFunc({key:"1682173354630", dictionary}).text;
@@ -35,12 +33,7 @@ export const Menu = async (props) => {
                   {/* <Link href={`/b/services`} className={s.menuitem}  >{hizmetler}</Link> */}
                   <Link href={`/${locale}/contact`} className={s.menuitem}  >{iletisim}</Link>
                   
-                                      {/* <style jsx>{`
-                                    .additional {
-                                                background-color: red;
-                                              }
-
-                                  `}</style> */}
+                                      
         </div>
     )
   }

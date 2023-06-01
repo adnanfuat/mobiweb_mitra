@@ -5,12 +5,16 @@ import { useRouter } from "next/navigation";
 import {RiUserStarFill, RiUser3Fill} from "react-icons/ri";
 import { useQuery } from 'react-query';
 import dictionaryFunc from "./utils/dictionaryfunc";
+import { useSession } from "next-auth/react";
 
 
 
 export const Login = (props) => {
 
-  const {session, dictionary} = props?? {}// isLogged();
+  const { dictionary} = props?? {}// isLogged();
+
+  const { data: session } = useSession();
+
 
   let {user} =  session ?? {};
   

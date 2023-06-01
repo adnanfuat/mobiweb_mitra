@@ -43,6 +43,8 @@ export  default async function HeaderComp  (props) {
         
     return (
       <div className={s.headercompwr} style={{position, padding:`${topbottom}px 250px`}}>
+
+        <head><link rel="icon" href="/favicon.ico" sizes="any"/></head>
           
         <Link href={`/${locale}`}><div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}>
 

@@ -29,7 +29,7 @@ export const Flags = (props) => {
     }
 
  return (
-     <div style={{position:"absolute" , right:7, top:3}} ref={ref} >
+     <div  ref={ref} >
 
 {/* headerssssssssssss {JSON.stringify(params)} */}
 
