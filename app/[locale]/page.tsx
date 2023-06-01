@@ -75,19 +75,19 @@ export default async function Home(props) {
 
       let component=<div>...</div>;
 
-      // if (theme_name=="theme_mitra" && 1==1) { // && 1==3
-      //   component=<Theme_Mitra logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>                            
-      // }
-      // else if (theme_name=="theme_arges" && 1==1) {
-      //   component=<Theme_Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
-      // }
-      // else if (theme_name=="theme_vitalis" && 1==1) {
-      //   component=<Theme_Vitalis logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
-      // }     
-      // else 
-      // {
-      //   component=<div style={{color:"black"}}>assa: {JSON.stringify(theme_name)}  </div>
-      // }                       
+      if (theme_name=="theme_mitra" && 1==1) { // && 1==3
+        component=<Theme_Mitra logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>                            
+      }
+      else if (theme_name=="theme_arges" && 1==1) {
+        component=<Theme_Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
+      }
+      else if (theme_name=="theme_vitalis" && 1==1) {
+        component=<Theme_Vitalis logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
+      }     
+      else 
+      {
+        component=<div style={{color:"black"}}>assa: {JSON.stringify(theme_name)}  </div>
+      }                       
                       
       return component
       // return <div>{JSON.stringify(webdata?.bigdata?.theme)}</div>
