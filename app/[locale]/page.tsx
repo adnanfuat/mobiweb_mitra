@@ -9,7 +9,7 @@ import WebData from "@/components/utils/webdata"
 import DictionaryData from "@/components/utils/dictionarydata"
 import { localeStatic } from "@/constants/localestatic"
 
-//deneme yap
+//deneme yap //
 
 import {Theme_Mitra} from "@/themes/theme_mitra"
 import {Theme_Arges} from "@/themes/theme_arges"
