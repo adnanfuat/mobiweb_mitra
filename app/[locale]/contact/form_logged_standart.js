@@ -1,8 +1,10 @@
 import s from "./form.module.css"
-import { signIn } from "next-auth/react"
+ import { signIn } from "next-auth/react"
 import { RiSendPlaneLine } from "react-icons/ri";
 
-export default function Form_Logged_Standart ({props}) {
+export  function Form_Logged_Standart ({props}) {
+
+// export default function Form_Logged_Standart ({props}) {
 
   let {session} = props ?? {};    
          
@@ -10,7 +12,7 @@ export default function Form_Logged_Standart ({props}) {
                     <div className={s.shell}> 
                     <div className={s.wr}>
 
-                              {/* <div className={s.title}> Mesaj </div> */}
+                              
 
                               <div className={s.items_empty}  onClick={()=> signIn()}>                                                         
 

@@ -10,7 +10,7 @@ import {Flags} from "@/components/flags";
 
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../../../pages/api/auth/[...nextauth]"
-import fileSpecialRequests from "../utils/files_specialrequests";
+
 
 
 export  default async function HeaderComp  (props) {
@@ -18,18 +18,13 @@ export  default async function HeaderComp  (props) {
     let selection = selectorFunc();
     const session = await getServerSession(authOptions)
   
-    let { params, position, sidepadding =42, topbottom=5, webdata, dictionary} = props ?? {}
+    let { params, position, sidepadding =42, topbottom=5, logo, webdata, dictionary} = props ?? {}
 
     let {locale} = params ?? {};
 
     position= position ? position : "relative";
 
-    let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
-    let logofiles =  lang?.logofiles;
 
-    let fileobjects = await fileSpecialRequests({logofiles})
-       
-    let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
           
         // let {logo, params, dictionary} = props ?? {};                  
         let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
@@ -40,41 +35,32 @@ export  default async function HeaderComp  (props) {
         
         // return <div>asdsad: {locale}</div>
     return (
-          <Theme_1 {...props}/>
-    )
-  }
-  
-
-
-
-  
-  
-   const Theme_1 = (props) => {
-
-    let { params, position, sidepadding =42, topbottom=5, webdata, dictionary, filename, selection, locale, session} = props ?? {}
-
-    return (
-      <div className={selection?.dynamic_css.headercompwr} style={{position, padding:`${topbottom}px ${sidepadding}px`}}>
-          
-              <Link href={`/${locale}`}><div className={selection?.dynamic_css.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}>
-
-      </div></Link>
+            <div className={selection?.dynamic_css.headercompwr} style={{position, padding:`${topbottom}px ${sidepadding}px`}}>
                 
-                  <div className={selection?.dynamic_css.rightwr} >               
-                          
-                              <LoginIntro session={session}/>
-                              
-                              <Menu params={params} webdata={webdata} dictionary={dictionary}/>
-                              
-                              <Flags params={params}/>
+                        <Link href={`/${locale}`}><div className={selection?.dynamic_css.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}>
 
-                  </div>
-                               
-    
+                  </div></Link>
+                          
+                            <div className={selection?.dynamic_css.rightwr} >               
+                                    
+                                        <LoginIntro session={session} dictionary={dictionary}/>
+                                        
+                                        <Menu params={params} webdata={webdata} dictionary={dictionary}/>
+                                        
+                                        <Flags params={params}/>
+
+                            </div>
+                            
       </div>
     )
   }
   
+
+
+
+  
+  
+
 
   
 

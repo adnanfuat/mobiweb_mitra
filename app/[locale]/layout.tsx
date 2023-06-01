@@ -3,12 +3,12 @@
 import './globals.css';
 
 
-import {siteProxy} from "@/constants/siteproxy"
+// import {siteProxy} from "@/constants/siteproxy"
 
 
 
 
-import { SessionProvider } from "next-auth/react" 
+ import { SessionProvider } from "next-auth/react" 
 
 import { QueryClientProvider, QueryClient } from "react-query";
 // import HeaderComp from '@/components/headercomp';
@@ -18,68 +18,31 @@ import { QueryClientProvider, QueryClient } from "react-query";
 export default  function RootLayout({
   children,
   session
+  
 }
 : {
   children: React.ReactNode,  
 }
-
-) {
+) 
+{
 
  
   const queryClient = new QueryClient();
   {/* <div  onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}>{children}</div> */}
      
-  return (<html><body><SessionProvider session={session} refetchInterval={5 * 60}>
+  return (<html><body>
+          <SessionProvider session={session} refetchInterval={5 * 60}>
                     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-          </SessionProvider></body></html>)
-}
+          </SessionProvider>
+          </body></html>)
+
+  }
+
+//   return (<html><body> 
+//               {children}    
+//     </body></html>)  
+// }
 
 // onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}
 
 
-
-const WebQuery = 
-`  query WebQuery ($data:JSON)  {
-    webquery (data:$data) {
-      id
-      title_tr
-      slug_tr
-      img_tr
-      bigdata
-      createdat
-      img_tr
-      updatedat
-      active
-      user
-      bigdata
-      richcontents {
-                      id            
-                      title_tr
-                      slug_tr
-                      img_tr
-                      bigdata
-                      createdat
-                      updatedat
-                      active
-                      user
-                  }
-    }
-  }`
-;
-
-
-
-const FilesQuery_SpecialRequests = 
-`  query FilesQuery_SpecialRequests ($data:JSON )  {
-      filesquery_specialrequests (data:$data) {
-      id
-      title_tr      
-      bigdata
-      slug_tr
-      title_tr
-      active
-      user
-      o_key_1
-    }
-  }`  
-;

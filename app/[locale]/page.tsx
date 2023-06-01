@@ -1,13 +1,7 @@
-import s from "./layout.module.css"
-import HeaderComp from "@/components/header/headercomp"
-import FooterComp from "@/components/footercomp"
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from './page.module.css'
-import {Index_Cuffs_V2_Visitor} from "../../src/components/cuffs/index_cuffs_v2_visitor"
 import WebData from "@/components/utils/webdata"
 import DictionaryData from "@/components/utils/dictionarydata"
-import { localeStatic } from "@/constants/localestatic"
+// import { localeStatic } from "@/constants/localestatic"
 
 //deneme yap //
 
@@ -24,7 +18,7 @@ export default async function Home(props) {
   let {locale} = params ?? {}
     
   
-  let dictionary=await DictionaryData({locale});  
+  let dictionary= await DictionaryData({locale: locale ?? "tr"});  
   let webdata=await WebData();
 
   let theme_name = webdata?.bigdata?.theme?.name;
@@ -81,18 +75,18 @@ export default async function Home(props) {
 
       let component=<div>...</div>;
 
-      if (theme_name=="theme_mitra") {
+      if (theme_name=="theme_mitra" && 1==1) { // && 1==3
         component=<Theme_Mitra logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>                            
       }
-      else if (theme_name=="theme_arges") {
+      else if (theme_name=="theme_arges" && 1==3) {
         component=<Theme_Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
       }
-      else if (theme_name=="theme_vitalis") {
+      else if (theme_name=="theme_vitalis" && 1==3) {
         component=<Theme_Vitalis logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
       }     
       else 
       {
-        component=<div style={{color:"white"}}>{JSON.stringify(webdata?.bigdata?.theme)}</div>
+        component=<div style={{color:"black"}}>assa: {JSON.stringify(dictionary)}  </div>
       }                       
                       
       return component

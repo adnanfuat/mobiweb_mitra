@@ -39,23 +39,39 @@ export default async function Page  ({params}) {
 
   let addresses = (selectedaddresses && selectedaddresses?.length>0) ?  selectedaddresses : defaultaddresses
   // console.log("webdata::::::::sadasdsdadsa", webdata);  
+
+
   
+  let logofiles =  lang?.tr?.logofiles;
+
+    let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+      method: "POST",
+      headers: { "Content-Type": "application/json", },
+      body: JSON.stringify({
+        query: FilesQuery_SpecialRequests,
+        variables:{data:{specialrequests:logofiles}} 
+      })
+    })
+      .then((res) => res.json())
+      .then((result) => { return result?.data?.filesquery_specialrequests; });    
+      
+      let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
 
 
   let theme_name = webdata?.bigdata?.theme?.name;
     
   if (theme_name=="theme_mitra") {
-    return (<DesignLayout_Theme_Mitra title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+    return (<DesignLayout_Theme_Mitra title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
   }
   else if (theme_name=="theme_arges") {
-    return (<DesignLayout_Theme_Arges title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Theme_Arges> )                      
+    return (<DesignLayout_Theme_Arges title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Theme_Arges> )                      
   }
   else if (theme_name=="theme_vitalis") {
-    return (<DesignLayout_Theme_Vitalis title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata}><RsData addresses={addresses} webdata={webdata} session={session} countries={countries} /> </DesignLayout_Theme_Vitalis> )                      
+    return (<DesignLayout_Theme_Vitalis title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData addresses={addresses} webdata={webdata} session={session} countries={countries} /> </DesignLayout_Theme_Vitalis> )                      
   }     
   else 
   {
-    return (<DesignLayout_Theme_Mitra title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+    return (<DesignLayout_Theme_Mitra title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
   }   
 
 
@@ -196,3 +212,23 @@ const Phones = () => {
   </div>
   )
 }
+
+
+
+
+const FilesQuery_SpecialRequests =
+`  query FilesQuery_SpecialRequests ($data:JSON )  {
+      filesquery_specialrequests (data:$data) {
+      id
+      title_tr
+      bigdata
+      slug_tr
+      title_tr
+      active
+      user
+      o_key_1
+    }
+  }`
+;
+
+

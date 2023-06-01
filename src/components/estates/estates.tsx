@@ -1,17 +1,17 @@
 import s from "./estates.module.css"
 
 import {datetimeFunc} from "@/components/utils/datetimefunc"
-import {cacheCountries} from "@/components/utils/cachecountries"
+// import {cacheCountries} from "@/components/utils/cachecountries"
 import Link from "next/link";
 
 import dictionaryFunc from "@/components/utils/dictionaryfunc";
-import DictionaryData from "@/components/utils/dictionarydata";
 
 
-const  Estates = async ({adverts, sidepadding, params}) =>{
+
+const  Estates = async ({adverts, dictionary, params}) =>{
 
   let {locale} = params ?? {};    
-  let dictionary=await DictionaryData({locale});
+  
   
         return (
                           <div style={{backgroundColor:"transparent"}}>                                
@@ -97,105 +97,105 @@ const CardImage = ({props}) => {
 
 
   
-export async function getStaticProps(params) {
+// export async function getStaticProps(params) {
    
-  let {slug} = params ?? {} ;
-  let  countries = await cacheCountries();
+//   let {slug} = params ?? {} ;
+//   let  countries = await cacheCountries();
 
-  // console.log("asdsaddsas::: ", params );
+//   // console.log("asdsaddsas::: ", params );
 
-  slug = slug ? slug : []
-  let sluglength=slug?.length;
-  let lastslugitem=slug?.length==0 ? "ilanlar" :  slug?.[sluglength-1];
-   let slugObj={slug, lastslugitem}
+//   slug = slug ? slug : []
+//   let sluglength=slug?.length;
+//   let lastslugitem=slug?.length==0 ? "ilanlar" :  slug?.[sluglength-1];
+//    let slugObj={slug, lastslugitem}
 
-   let adverts     =    [];  
-   let categories  =    [];  
-   let category    =    {};  
+//    let adverts     =    [];  
+//    let categories  =    [];  
+//    let category    =    {};  
    
-  try {    
+//   try {    
     
 
-    let rawdata= await fetch(process.env.NEXT_PUBLIC_API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", },
-      body: JSON.stringify({
-        query: AdvertsQuery_WithCategories_Raw,
-        variables: {data:{slug, active:1, onlyauthdata:false}},
-      }),
-    })       
-      let datajson=await rawdata.json()
-      adverts = datajson?.data?.advertsquery_withcategories;      
+//     let rawdata= await fetch(process.env.NEXT_PUBLIC_API_URL, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json", },
+//       body: JSON.stringify({
+//         query: AdvertsQuery_WithCategories_Raw,
+//         variables: {data:{slug, active:1, onlyauthdata:false}},
+//       }),
+//     })       
+//       let datajson=await rawdata.json()
+//       adverts = datajson?.data?.advertsquery_withcategories;      
 
-     // console.log("adverts000-->:", adverts[0], adverts?.length)
+//      // console.log("adverts000-->:", adverts[0], adverts?.length)
 
     
-    let rawdata_category= await fetch(process.env.NEXT_PUBLIC_API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", },
-      body: JSON.stringify({
-        query: RelatedCategoryQuery,
-        variables: {data:{origin:(lastslugitem) }},
-      }),
-    })       
-      let datajson_category=await rawdata_category.json()
-      category = datajson_category?.data?.relatedcategoryquery;   
+//     let rawdata_category= await fetch(process.env.NEXT_PUBLIC_API_URL, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json", },
+//       body: JSON.stringify({
+//         query: RelatedCategoryQuery,
+//         variables: {data:{origin:(lastslugitem) }},
+//       }),
+//     })       
+//       let datajson_category=await rawdata_category.json()
+//       category = datajson_category?.data?.relatedcategoryquery;   
 
       
 
-  } catch (error) {
+//   } catch (error) {
     
-    console.error("advertsquery_withcategories ____  _____ ____ ", error)
-  }
+//     console.error("advertsquery_withcategories ____  _____ ____ ", error)
+//   }
 
 
 
-    return {
-      props: {category, categories , adverts , slugObj, countries }, 
-      revalidate: 500,      
-    };
-  }
+//     return {
+//       props: {category, categories , adverts , slugObj, countries }, 
+//       revalidate: 500,      
+//     };
+//   }
   
   
   
 
-export async function getStaticPaths() {
+// export async function getStaticPaths() {
     
-  let paths=[{params:{ slug:["emlak"]}}];    
+//   let paths=[{params:{ slug:["emlak"]}}];    
 
-    return { paths, fallback: 'blocking' }
-  }  
+//     return { paths, fallback: 'blocking' }
+//   }  
 
     
 
 
   
-const RelatedCategoryQuery = 
-`  query RelatedCategoryQuery ($data:JSON)  {
-    relatedcategoryquery (data:$data) {
-      id
-      active
-      parent_slug
-      bigdata
-      title_tr
-      title_en
-      title_fr
-      title_ar
-      title_sa
-      slug_sa
-      slug_tr
-      slug_en
-      slug_fr
-      slug_ar
-      img_tr
-      rank
-      user
-      i_key_1
-      o_key_1
-      key
-      parent_key      
-      createdat
+// const RelatedCategoryQuery = 
+// `  query RelatedCategoryQuery ($data:JSON)  {
+//     relatedcategoryquery (data:$data) {
+//       id
+//       active
+//       parent_slug
+//       bigdata
+//       title_tr
+//       title_en
+//       title_fr
+//       title_ar
+//       title_sa
+//       slug_sa
+//       slug_tr
+//       slug_en
+//       slug_fr
+//       slug_ar
+//       img_tr
+//       rank
+//       user
+//       i_key_1
+//       o_key_1
+//       key
+//       parent_key      
+//       createdat
       
-    }
-  }`
-;
+//     }
+//   }`
+// ;

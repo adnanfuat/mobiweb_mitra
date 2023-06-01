@@ -1,6 +1,7 @@
 import s from "./designlayout_theme_arges.module.css"
-import HeaderComp from "@/components/header/headercomp"
+
 import { Inter } from 'next/font/google'
+import HeaderComp from "../header/index";
 
 const inter = Inter({
     variable: '--inter-font',
@@ -17,7 +18,7 @@ export const DesignLayout_Theme_Arges = (props) => {
     <div  className={s.designwr}>
       {/* {JSON.stringify(webdata)} */}
       
-        <HeaderComp position="relative"  sidepadding={sidepadding} topbottom={5} dictionary={dictionary} params={params} webdata={webdata}/>
+        <HeaderComp position="relative" logo={logo}  sidepadding={sidepadding} topbottom={5} dictionary={dictionary} params={params} webdata={webdata}/>
 
         <div style={{paddingLeft:sidepadding, paddingRight:sidepadding }}  className={s.mainwr}>
 

@@ -37,21 +37,46 @@ export default async function  Page ({params}) {
     let detail=advert?.bigdata?.history?.[0]?.lang?.tr?.detail;
     let theme_name = webdata?.bigdata?.theme?.name;
 
+
+        //////////////////////////////////// --
+
+        let info = webdata?.bigdata?.history[0];
+        let lang = info?.lang;
+    
+        let logofiles =  lang?.tr?.logofiles;
+    
+          let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+            method: "POST",
+            headers: { "Content-Type": "application/json", },
+            body: JSON.stringify({
+              query: FilesQuery_SpecialRequests,
+              variables:{data:{specialrequests:logofiles}} 
+            })
+          })
+            .then((res) => res.json())
+            .then((result) => { return result?.data?.filesquery_specialrequests; });    
+            
+            let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+    
+        /////////////////////////////////// --
+
+
+
     let props = { advert,  detail, parents, params };
 
 
       if (theme_name=="theme_mitra") {
-        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData {...props}/> </DesignLayout_Theme_Mitra> )                      
+        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Mitra> )                      
       }
       else if (theme_name=="theme_arges") {
-        return (<DesignLayout_Theme_Arges title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData  {...props}/> </DesignLayout_Theme_Arges> )                      
+        return (<DesignLayout_Theme_Arges title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  {...props}/> </DesignLayout_Theme_Arges> )                      
       }
       else if (theme_name=="theme_vitalis") {
-        return (<DesignLayout_Theme_Vitalis title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}><RsData   {...props}  /> </DesignLayout_Theme_Vitalis> )                      
+        return (<DesignLayout_Theme_Vitalis title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData   {...props}  /> </DesignLayout_Theme_Vitalis> )                      
       }     
       else 
       {
-        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}> <RsData {...props}/> </DesignLayout_Theme_Mitra> )                      
+        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Mitra> )                      
       }  
                     
 
@@ -342,3 +367,23 @@ const RsData = async (props) => {
                   }
           }`
         ;        
+
+
+              
+      
+      const FilesQuery_SpecialRequests =
+      `  query FilesQuery_SpecialRequests ($data:JSON )  {
+            filesquery_specialrequests (data:$data) {
+            id
+            title_tr
+            bigdata
+            slug_tr
+            title_tr
+            active
+            user
+            o_key_1
+          }
+        }`
+      ;
+      
+      
