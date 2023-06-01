@@ -24,7 +24,7 @@ export  default async function HeaderComp  (props) {
 
     position= position ? position : "relative";
 
-
+console.log("sessssion", session);
           
         // let {logo, params, dictionary} = props ?? {};                  
         let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    

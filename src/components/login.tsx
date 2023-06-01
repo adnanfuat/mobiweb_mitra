@@ -1,19 +1,22 @@
 "use client"
+
 import s from "./login.module.css";
-import {  signIn, signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import {RiUserStarFill, RiUser3Fill} from "react-icons/ri";
+import { RiUserStarFill, RiUser3Fill} from "react-icons/ri";
 import { useQuery } from 'react-query';
 import dictionaryFunc from "./utils/dictionaryfunc";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 
 
 
 export const Login = (props) => {
 
-  const { dictionary} = props?? {}// isLogged();
+  let router = useRouter();
+  
+  const { dictionary, session} = props?? {}// isLogged();
 
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
 
   let {user} =  session ?? {};
@@ -40,10 +43,11 @@ export const Login = (props) => {
 
   let log_out      =   dictionaryFunc({key:"1683707781276", dictionary}).text;
 
-  let router = useRouter();
+  
 
+  // return <div  onClick={()=> {console.log("asdasddsasadsda")}}>sadsad</div>
   return (        
-               !session ?  <div onClick={()=> signIn()}  className={s.icon}> {  <RiUser3Fill/> }</div>              
+               !session ?  <div onClick={()=> {console.log("asdasddsasadsda"); signIn()}}  className={s.icon}> {  <RiUser3Fill/> }</div>              
               
               : <div  className={s.icon} style={{ backgroundImage:`url(${session?.user?.image})`, backgroundSize:"cover"}}  title={session?.user?.name} >                                                                                                 
                                   
