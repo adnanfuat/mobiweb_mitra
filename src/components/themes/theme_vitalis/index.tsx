@@ -47,9 +47,7 @@ export const Theme_Vitalis = async (props) => {
                                 
                                                         
 
-                        </div>
-
-                        
+                        </div>                        
                         </DesignLayout_Theme_Vitalis>
                         
                                              

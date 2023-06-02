@@ -1,5 +1,5 @@
 import s from "./designlayout.module.css"
-import HeaderComp from "@/components/header/headercomp"
+import HeaderComp from "@/themes/theme_mitra/header/headercomp"
 import { Inter } from 'next/font/google'
 
 const inter = Inter({

@@ -1,5 +1,5 @@
-"use client"
-import { QueryClientProvider, QueryClient } from "react-query";
+// "use client"
+// import { QueryClientProvider, QueryClient } from "react-query";
 
 // import dynamic from "next/dynamic";
 import { Login } from "./login";
@@ -11,14 +11,14 @@ export const LoginIntro = (props) => {
   // let { dictionary} = props ?? {};
    let {session, dictionary} = props ?? {};
 
-  const queryClient = new QueryClient();
+  // const queryClient = new QueryClient();
 
   return (
     <div>
-      <QueryClientProvider client={queryClient}>           
+      {/* <QueryClientProvider client={queryClient}>            */}
             {/* <Dynamic_Login dictionary={dictionary}/> */}
             <Login  dictionary={dictionary} session={session} />
-      </QueryClientProvider>    
+      {/* </QueryClientProvider>     */}
     </div>
   )
 }

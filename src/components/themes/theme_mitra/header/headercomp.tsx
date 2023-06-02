@@ -1,37 +1,31 @@
 import Link from "next/link";
 import s from "./headercomp.module.css";
-
-
-
 import {Menu} from "@/components/menu";
 import {LoginIntro} from "@/components/loginintro";
 import {Flags} from "@/components/flags";
-
-
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "../../../pages/api/auth/[...nextauth]"
+// import { getServerSession } from "next-auth/next"
+// import { authOptions } from "../../../pages/api/auth/[...nextauth]"
+// const session = await getServerSession(authOptions)      
 
 
 
 export  default async function HeaderComp  (props) {
+  //  const session = await getServerSession(authOptions)      
   
-    
-    const session = await getServerSession(authOptions)
-  
-    let { params, position, sidepadding =42, topbottom=5, logo, webdata, dictionary} = props ?? {}
+    let { params, position, sidepadding =42, topbottom=5, logo, webdata, session, dictionary} = props ?? {}
 
     let {locale} = params ?? {};
 
     position= position ? position : "relative";
 
-console.log("sessssion", session);
+    //  console.log("sessssion", session);
           
         // let {logo, params, dictionary} = props ?? {};                  
         let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
         let {width, height} = logo?.bigdata?.details ?? {};
 
         // props={locale, position, topbottom, sidepadding, filename, session, params, webdata, dictionary  }
-        props={...props, position, filename,  session, locale }
+        props={...props, position, filename,   locale }
         
         // return <div>asdsad: {locale}</div>
     return (
@@ -43,7 +37,7 @@ console.log("sessssion", session);
                           
                             <div className={s.rightwr} >               
                                     
-                                        <LoginIntro session={session} dictionary={dictionary}/>
+                                        <LoginIntro dictionary={dictionary} session={session}/>
                                         
                                         <Menu params={params} webdata={webdata} dictionary={dictionary}/>
                                         

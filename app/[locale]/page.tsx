@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google'
+
 import WebData from "@/components/utils/webdata"
 import DictionaryData from "@/components/utils/dictionarydata";
 
@@ -8,10 +8,18 @@ import {Theme_Mitra} from "@/themes/theme_mitra"
 import {Theme_Arges} from "@/themes/theme_arges"
 import {Theme_Vitalis} from "@/themes/theme_vitalis"
 
-const inter = Inter({ subsets: ['latin'] })
 
+
+// import { getServerSession } from "next-auth/next"
+
+import { authOptions } from "../../pages/api/auth/[...nextauth]"
 
 export default async function Home(props) {
+
+const session = undefined //await getServerSession(authOptions) ;
+
+
+// console.log("asdsadsaasd",session)
 
   let {params} = props ?? {}
   let {locale} = params ?? {}
@@ -30,6 +38,7 @@ export default async function Home(props) {
   let logofiles =  lang?.logofiles;
 
     let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+      next:{revalidate:10},                                   
       method: "POST",
       headers: { "Content-Type": "application/json", },
       body: JSON.stringify({
@@ -54,6 +63,7 @@ export default async function Home(props) {
 
 
     let cuff_files =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+      next:{revalidate:10},                                   
       method: "POST",
       headers: { "Content-Type": "application/json", },
       body: JSON.stringify({
@@ -74,22 +84,22 @@ export default async function Home(props) {
 
       let component=<div>...</div>;
 
-      if (theme_name=="theme_mitra" && 1==1) { // && 1==3
-        component=<Theme_Mitra logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>                            
-      }
-      else if (theme_name=="theme_arges" && 1==1) {
-        component=<Theme_Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
-      }
-      else if (theme_name=="theme_vitalis" && 1==1) {
-        component=<Theme_Vitalis logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs}/>   
-      }     
-      else 
-      {
-        component=<div style={{color:"black"}}>Teme bulunamadı... {JSON.stringify(webdata)}  </div>
-      }                       
+      // if (theme_name=="theme_mitra" && 1==1) { // && 1==3
+      //   component=<Theme_Mitra logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>                            
+      // }
+      // else if (theme_name=="theme_arges" && 1==1) {
+      //   component=<Theme_Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
+      // }
+      // else if (theme_name=="theme_vitalis" && 1==1) {
+      //   component=<Theme_Vitalis logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
+      // }     
+      // else 
+      // {
+      //   component=<div style={{color:"black"}}>Teme bulunamadı... {JSON.stringify(webdata)}  </div>
+      // }                       
                       
-      return component
-      // return <div>{JSON.stringify(webdata?.bigdata?.theme)}</div>
+      // return component
+       return <div>{JSON.stringify(webdata?.bigdata?.theme)}</div>
       
       
 

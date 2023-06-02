@@ -7,7 +7,7 @@ import { authOptions } from "../../../pages/api/auth/[...nextauth]"
 import {localeStatic} from "@/constants/localestatic";
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
 import { cacheCountries } from "@/components/utils/cachecountries";
-import HeaderComp from "@/components/header/headercomp";
+import HeaderComp from "@/themes/theme_mitra/header/headercomp";
 import { DesignLayout } from "@/layouts/designlayout";
 import DictionaryData from "@/components/utils/dictionarydata";
 import dictionaryFunc from "@/components/utils/dictionaryfunc";

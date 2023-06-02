@@ -1,5 +1,5 @@
 import s from "./designlayout_theme_mitra.module.css"
-import HeaderComp from "@/components/header/headercomp"
+import HeaderComp from "@/themes/theme_mitra/header/headercomp"
 import { Inter } from 'next/font/google'
 
 const inter = Inter({
@@ -15,9 +15,9 @@ export const DesignLayout_Theme_Mitra = (props) => {
           
   return (
     <div  className={s.designwr}>
-      {/* {JSON.stringify(webdata)} */}
+      {/* {JSON.stringify(webdata)} */}Aktif değil
       
-        <HeaderComp position="relative" logo={logo} sidepadding={sidepadding} topbottom={5} dictionary={dictionary} params={params} webdata={webdata}/>
+        {/* <HeaderComp position="relative" logo={logo} sidepadding={sidepadding} topbottom={5} dictionary={dictionary} params={params} webdata={webdata}/> */}
 
         <div style={{paddingLeft:sidepadding, paddingRight:sidepadding }}  className={s.mainwr}>
 
