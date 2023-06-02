@@ -1,6 +1,6 @@
 
 
-// import './globals.css';
+
 // import s from "./layout.module.css"
 import { Inter } from 'next/font/google'
 import {siteProxy} from "@/constants/siteproxy"

@@ -1,7 +1,9 @@
 
 import { RiContrast2Line, RiShieldCheckFill , RiShieldFill} from "react-icons/ri";
+import {Ad_LayoutMain_Visitor_V2} from "./ad_layoutmain_visitor_v2"; 
 import {Advert_VisitorMode_MetaData} from "./advert_visitormode_metadata"; 
-import {Advert_Visitor_Image} from "./advert_visitor_image"; 
+import {Content_Visitor_Image} from "./content_visitor_image"; 
+// import {Content_Visitor_Image} from "./content_visitor_"; 
 import {Advert_Visitor_Tabs} from "./advert_visitor_tabs"; 
 import s from "./s.module.css"
 import Link from 'next/link';
@@ -11,114 +13,141 @@ import DictionaryData from "@/components/utils/dictionarydata";
 import WebData from "@/components/utils/webdata";
 import { localeStatic } from "@/constants/localestatic";
 import { DesignLayout_Theme_Vitalis } from "@/themes/theme_vitalis/layouts/designlayout_theme_vitalis";
-import { DesignLayout_Theme_Mitra } from "@/themes/theme_mitra/layouts/designlayout_theme_mitra";
+import { DesignLayout_Theme_Mitra_BackPages } from "@/themes/theme_mitra/layouts/designlayout_theme_mitra_backpages";
 import { DesignLayout_Theme_Arges } from "@/themes/theme_arges/layouts/designlayout_theme_arges";
+import { cacheCountries } from "@/components/utils/cachecountries";
+
+let root_slug="cs";
 
 
-export default async function  Page ({params}) { 
-
-  let {locale, slug} = params ?? {};
-  
-  let dictionary=await DictionaryData({locale});
-  let webdata=await WebData();
-
-  let rawdata_advert= await fetch(process.env.NEXT_PUBLIC_API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", },
-    body: JSON.stringify({
-      query: AdvertQuery_Raw,
-      variables: {data:{key:slug?.[1]}},
-    }),
-  })       
-    let datajson_advert=await rawdata_advert.json();
-    let advert = datajson_advert?.data?.advertquery;
-                            
-    let parents=advert?.bigdata?.history?.[0]?.info?.parents;
-    let detail=advert?.bigdata?.history?.[0]?.lang?.tr?.detail;
-    let theme_name = webdata?.bigdata?.theme?.name;
-
-
-        //////////////////////////////////// --
-
-        let info = webdata?.bigdata?.history[0];
-        let lang = info?.lang;
-    
-        let logofiles =  lang?.tr?.logofiles;
-    
-          let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-            method: "POST",
-            headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({
-              query: FilesQuery_SpecialRequests,
-              variables:{data:{specialrequests:logofiles}} 
-            })
-          })
-            .then((res) => res.json())
-            .then((result) => { return result?.data?.filesquery_specialrequests; });    
-            
-            let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
-    
-        /////////////////////////////////// --
-
-
-
-    let props = { advert,  detail, parents, params };
-
-
-      if (theme_name=="theme_mitra") {
-        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Mitra> )                      
-      }
-      else if (theme_name=="theme_arges") {
-        return (<DesignLayout_Theme_Arges title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  {...props}/> </DesignLayout_Theme_Arges> )                      
-      }
-      else if (theme_name=="theme_vitalis") {
-        return (<DesignLayout_Theme_Vitalis title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData   {...props}  /> </DesignLayout_Theme_Vitalis> )                      
-      }     
-      else 
-      {
-        return (<DesignLayout_Theme_Mitra title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Mitra> )                      
-      }  
-                    
-
-    
-    }
-
-    
-
-
-    
-const RsData = async (props) => {
-
-  let {params, searchParams, root_category, root_slug,  bigbigparent_key, webdata, dictionary, parents, advert} = props ?? {};  
-
-  return (
-    
-                      <div className={s.shell}> 
-                    {/* ASDSDASASDA      {JSON.stringify(params)} */}
-                            <div className={s.parents}>   <Advert_Visitor_Parents parents={parents} params={params}/></div>                                                                                                                                                                     
-                            <div className={s.metadata}>  <Advert_VisitorMode_MetaData advert={advert} params={params}/>   </div>
-                            <div className={s.image}>     <Advert_Visitor_Image advert={advert}  params={params}/></div>
-                            <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div>
-                            <div className={s.who}>       <Advert_Visitor_Owner advert={advert}  params={params}/>                                       
-                            </div>         
-                            <Advert_Visitor_Tabs advert={advert}/>       
-                      </div>
+const Content = (props) => {
+  let {params, dictionary, webdata, fileobjects, countries} = props ?? {}
+    let {locale, slug} = params ?? {}
       
-      )
+    let contents= webdata?.o_key_2?.contents ?? [];      
+    let content = contents?.find(co=>co?.id==slug[1]);
+  
+      //////////////////////////////////// --
+  
+      let info = webdata?.bigdata?.history[0];
+      let lang = info?.lang;
+      let logofiles =  lang?.tr?.logofiles;
 
+      let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0]);
 
+      /////////////////////////////////// --
+  
+    
+    let theme_name = webdata?.bigdata?.theme?.name;
+      
+        if (theme_name=="theme_mitra") {
+          return (<DesignLayout_Theme_Mitra_BackPages title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra_BackPages> )                      
+        }
+        else if (theme_name=="theme_arges") {
+          return (<DesignLayout_Theme_Arges title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Theme_Arges> )                      
+        }
+        else if (theme_name=="theme_vitalis") {
+          return (<DesignLayout_Theme_Vitalis title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData params={params} webdata={webdata}/> </DesignLayout_Theme_Vitalis> )                      
+        }     
+        else 
+        {
+          return (<DesignLayout_Theme_Mitra_BackPages title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra_BackPages> )                      
+        }   
+      
+        // return <div>ASSA{JSON.stringify(theme_name)}</div>
+  
 }
 
+export default Content
+
+// export default function Content(props) { 
+
+//   let {params, dictionary, webdata, fileobjects, countries} = props ?? {}
+//   let {locale, slug} = params ?? {}
+    
+//   let contents= webdata?.o_key_2?.contents ?? [];      
+//   let content = contents?.find(co=>co?.id==slug[1]);
+
+//     //////////////////////////////////// --
+
+//     let info = webdata?.bigdata?.history[0];
+//     let lang = info?.lang;
+
+//     let logofiles =  lang?.tr?.logofiles;
 
 
-    const Advert_Visitor_Parents = (props) => {
 
-      let {parents, params} = props ?? {};
+//     /////////////////////////////////// --
+
+  
+//   let theme_name = webdata?.bigdata?.theme?.name;
+    
+//       // if (theme_name=="theme_mitra") {
+//       //   return (<DesignLayout_Theme_Mitra_BackPages title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra_BackPages> )                      
+//       // }
+//       // else if (theme_name=="theme_arges") {
+//       //   return (<DesignLayout_Theme_Arges title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Theme_Arges> )                      
+//       // }
+//       // else if (theme_name=="theme_vitalis") {
+//       //   return (<DesignLayout_Theme_Vitalis title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData params={params} webdata={webdata}/> </DesignLayout_Theme_Vitalis> )                      
+//       // }     
+//       // else 
+//       // {
+//       //   return (<DesignLayout_Theme_Mitra_BackPages title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra_BackPages> )                      
+//       // }   
+    
+//       return <div>ASSA{JSON.stringify(theme_name)}</div>
+
+
+    
+//     }
+
+    
+
+    const RsData =  (props) => {
+
+      let {params, dictionary, webdata} = props ?? {};
+      let {locale, slug} = params ?? {};
+
+      
+    
+      let fileObjects=webdata?.bigdata?.fileObjects ?? []
+    
+      let advert=undefined
+                                
+      // let parents=[];
+      
+      let contents= webdata?.o_key_2?.contents ?? [];      
+      let content = contents?.find(co=>co?.id==slug[1]);
+      let parents=content?.parents;
+
+      
+          return (
+                  <div className={s.shell}> 
+                      {/* {content?.title_tr}  {JSON.stringify(webdata?.bigdata?.fileObjects)} */}
+                      {/* {JSON.stringify(content)}  */}
+                      <div className={s.parents}>  <Content_Visitor_Parents parents={parents} params={params} root_slug={root_slug}/></div>                                                                                                                                                                     
+                      <div className={s.metadata}> <Advert_VisitorMode_MetaData content={content} params={params}/> </div>
+                      <div className={s.image}>   <Content_Visitor_Image content={content} fileObjects={fileObjects} params={params}/> </div>
+                      {/* <div className={s.maintext}> <Content_Visitor_MainText content={content} fileObjects={fileObjects} params={params}/> </div> */}
+                      {/* <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div> */}
+                            
+                      <Advert_Visitor_Tabs advert={advert}/>       
+                  </div>
+            )
+
+    }
+
+
+
+
+    const Content_Visitor_Parents = (props) => {
+
+      let {parents, params, root_slug} = props ?? {};
       let {locale} = params ?? {};
+      
 
-      // let parents=advert?.bigdata?.history?.[0]?.info?.parents;
-
-      parents=parents?.filter(item=> ( item?.slug_tr!="emlak" ) )
+      // parents=parents?.filter(item=> ( item?.slug_tr!="emlak" ) )
       
       
       let linkObj=parents?.map((item, index)=>{
@@ -129,17 +158,16 @@ const RsData = async (props) => {
                 
                 }) ?? []
           
-              linkObj= linkObj?.length>0 ? [{value:"", label:"İlanlar", fulllink:""}    , ...linkObj] : [] // Sadece ilan sayfasındayken yukarıdaki parent breadcrumbını göster. Haricinde ana sayfada gösterme
+             // linkObj= linkObj?.length>0 ? [{value:"", label:"İlanlar", fulllink:""}    , ...linkObj] : [] // Sadece ilan sayfasındayken yukarıdaki parent breadcrumbını göster. Haricinde ana sayfada gösterme
 
       return (
         <div>
           
           <div className={s.parentslist}>
               {linkObj?.map((item, i)=>{
-                        return <Link href={`/${locale}/ads/`+item?.fulllink} key={"link_"+i}><span>{i>0 && " > "}</span> {item?.label}</Link>
+                        return <Link href={`/${locale}/${root_slug}/`+item?.fulllink} key={"link_"+i}><span>{i>0 && " > "}</span> {item?.label}</Link>
               })}
-          </div>
-              {/* {JSON.stringify(linkObj)} */}          
+          </div>              
         </div>
       )
     }
@@ -274,7 +302,8 @@ const RsData = async (props) => {
       let {locale} = params ?? {}
       
 
-      return <div className={s.onelineproperty}>         
+      return <div className={s.onelineproperty}>
+         {/* {JSON.stringify(property)}        */}
                           <div className={s.xxxxxxxxxxxx}>  {eval(`property?.key_label_${locale}`) ?? eval(`property?.key_label_${localeStatic}`)} </div>
                           <div className={s.xxxxxxxxxxxxxxx}> {property?.value_label_tr} </div>                          
              </div>
@@ -319,57 +348,26 @@ const RsData = async (props) => {
 
 
 
-
-        const AdvertQuery_Raw = 
-        `  query AdvertQuery  ($data: JSON ) {
-                advertquery (data:$data) {
-                    id
-                    key
-                    active
-                    parent_slug
-                    parent_key
-                    bigparent_slug
-                    bigdata
-                    title_tr
-                    slug_tr
-                    slug_en
-                    slug_fr
-                    slug_ar
-                    rank
-                    img_tr
-                    user
-                    parentObj{
-                      title_tr
-                      slug_tr
-                    }
+      export const WebQuery = 
+      `  query WebQuery ($slug: JSON)  {
+          webquery (slug: $slug) {
+            id
+            title_tr
+            slug_tr
+            bigdata
+            createdat
+            updatedat
+            active
+            o_key_1
+            o_key_2
             
-                    getfulladdress{
-                      country
-                      city
-                      district
-                      subdistrict
-                    }                        
-                    bigparentObj{
-                      title_tr
-                      slug_tr
-                      properties
-                    }     
-                    getconnectedfiles {
-                      id
-                      bigdata
-                      rank
-                      slug_tr
-                      title_tr
-                      parent
-                      user
-                      i_key_1
-                    }       
-                  }
-          }`
-        ;        
-
-
-              
+          }
+        }`
+      ;
+      
+      
+      
+      
       
       const FilesQuery_SpecialRequests =
       `  query FilesQuery_SpecialRequests ($data:JSON )  {
@@ -387,3 +385,59 @@ const RsData = async (props) => {
       ;
       
       
+      
+
+
+      export async function getStaticProps(data) {
+
+
+        let {defaultLocale, locale, params} = data ?? {};
+       
+        //  console.log("sadasdsadsd", params);
+             
+       
+         let dictionary= await DictionaryData({locale: locale ?? "tr"});  
+         let webdata=await WebData();
+         let countries=await cacheCountries();
+       
+        //  console.log("webdatawebdata: ", webdata);
+
+
+         let theme_name = webdata?.bigdata?.theme?.name;
+       
+        
+          
+         let cuffs= webdata?.bigdata?.history?.[0]?.lang?.tr?.cuffs;
+         let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
+         let logofiles =  lang?.logofiles;
+         
+       
+           let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+             next:{revalidate:10},                                   
+             method: "POST",
+             headers: { "Content-Type": "application/json", },
+             body: JSON.stringify({
+               query: FilesQuery_SpecialRequests,
+               variables:{data:{specialrequests:logofiles}} 
+             })
+           })
+             .then((res) => res.json())
+             .then((result) => { return result?.data?.filesquery_specialrequests; });    
+             
+             let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+       
+                                                                       
+       
+           let props = { webdata, dictionary, fileobjects, logo, countries,params };
+                              
+           return { props, revalidate: 20 };
+                                     
+       }
+       
+       
+                    
+       export async function getStaticPaths({locales}) {
+        // let  paths = await cacheSubsectorQuery_BuildList()    
+        let paths=[{params:{slug:["aaaaaaa"]}}];           
+        return { paths, fallback: 'blocking' }
+                                                        }

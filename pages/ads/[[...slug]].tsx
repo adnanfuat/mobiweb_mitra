@@ -13,40 +13,35 @@ import WebData from "@/components/utils/webdata";
 import DictionaryData from "@/components/utils/dictionarydata";
 import { localeStatic } from "@/constants/localestatic";
 import { DesignLayout_Theme_Vitalis } from "@/themes/theme_vitalis/layouts/designlayout_theme_vitalis";
-import { DesignLayout_Theme_Mitra } from "@/themes/theme_mitra/layouts/designlayout_theme_mitra";
+import { DesignLayout_Theme_Mitra_BackPages } from "@/themes/theme_mitra/layouts/designlayout_theme_mitra_backpages";
 import { DesignLayout_Theme_Arges } from "@/themes/theme_arges/layouts/designlayout_theme_arges";
 
+let root_category="emlak"
 
-export default async function Category (props){ 
+const  Category = (props) => { 
   
-  let {params} = props ?? {}
-  let {locale} = params ?? {}
-
+  let {params, dictionary, webdata, fileobjects, category, advert, countries} = props ?? {}
+  let {locale, slug} = params ?? {}
+  
   locale = locale ? locale : localeStatic;
-
-  let dictionary=await DictionaryData({locale});
-  let webdata=await WebData();
-
-    return (  <Rs_Shell root_category={"emlak"} bigbigparent_key="1668310884" root_slug={`ads`} dictionary={dictionary} webdata={webdata}  sidepadding={42}  {...props}/>  ) 
+  
+    return (  <Rs_Shell root_category={root_category} countries={countries} bigbigparent_key="1668310884" root_slug={`ads`} dictionary={dictionary} webdata={webdata}  sidepadding={42}  {...props}/>  ) 
   
   }
 
+  export default Category
 
-export async function Rs_Shell (props){
+
+ function Rs_Shell (props){
     
-  let {params, searchParams, root_category, root_slug,  bigbigparent_key, webdata, dictionary} = props ?? {};  
+  let {params, searchParams, root_category, root_slug,  bigbigparent_key,fileobjects, countries,category, webdata, dictionary} = props ?? {};  
 
   let {slug} = params ?? {} ;
-  let  countries = await cacheCountries();
-
+  
   slug = slug ? slug : []
   let sluglength=slug?.length;
   let lastslugitem=slug?.length==0 ? root_category :  slug?.[sluglength-1];
-
-  // let webdata = await WebData();
-  // console.log("webdatawebdatawebdata", webdata?.richcontents);      
-  // let adverts=await richContents_WithCategories({slug, active:1, website:process.env.DOMAIN, useremail:process.env.USEREMAIL})  ?? []
-
+  
   let adverts =  webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884");
 
   if (slug?.length>0) { 
@@ -63,7 +58,7 @@ export async function Rs_Shell (props){
   }
 
 
-  let category=await relatedCategory({lastslugitem})  ?? []
+  
 
   // console.log("asdasdasdsda: ", category);
 
@@ -82,16 +77,16 @@ export async function Rs_Shell (props){
   
       let logofiles =  lang?.tr?.logofiles;
   
-        let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-          method: "POST",
-          headers: { "Content-Type": "application/json", },
-          body: JSON.stringify({
-            query: FilesQuery_SpecialRequests,
-            variables:{data:{specialrequests:logofiles}} 
-          })
-        })
-          .then((res) => res.json())
-          .then((result) => { return result?.data?.filesquery_specialrequests; });    
+        // let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json", },
+        //   body: JSON.stringify({
+        //     query: FilesQuery_SpecialRequests,
+        //     variables:{data:{specialrequests:logofiles}} 
+        //   })
+        // })
+        //   .then((res) => res.json())
+        //   .then((result) => { return result?.data?.filesquery_specialrequests; });    
           
           let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
   
@@ -105,17 +100,17 @@ export async function Rs_Shell (props){
   let theme_name = webdata?.bigdata?.theme?.name;
     
   if (theme_name=="theme_mitra") {
-    return (<DesignLayout_Theme_Mitra title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+    return (<DesignLayout_Theme_Mitra_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Mitra_BackPages> )                      
   }
   else if (theme_name=="theme_arges") {
-    return (<DesignLayout_Theme_Arges title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Theme_Arges> )                      
+    return (<DesignLayout_Theme_Arges title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  {...props} /> </DesignLayout_Theme_Arges> )                      
   }
   else if (theme_name=="theme_vitalis") {
     return (<DesignLayout_Theme_Vitalis title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData   {...props}  /> </DesignLayout_Theme_Vitalis> )                      
   }     
   else 
   {
-    return (<DesignLayout_Theme_Mitra title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+    return (<DesignLayout_Theme_Mitra_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra_BackPages> )                      
   }  
 
 
@@ -125,12 +120,12 @@ export async function Rs_Shell (props){
 
 
 
-const RsData = async (props) => {
+const RsData =  (props) => {
 
-  let {params, searchParams, root_category, root_slug,  bigbigparent_key, webdata, dictionary} = props ?? {};  
+  let {params, searchParams, root_category, countries, root_slug, category, bigbigparent_key, webdata, dictionary} = props ?? {};  
 
   let {slug} = params ?? {} ;
-  let  countries = await cacheCountries();
+  //let  countries = await cacheCountries();
 
   slug = slug ? slug : []
   let sluglength=slug?.length;
@@ -156,7 +151,7 @@ const RsData = async (props) => {
   }
 
 
-  let category=await relatedCategory({lastslugitem})  ?? []
+  //let category=await relatedCategory({lastslugitem})  ?? []
 
   // console.log("asdasdasdsda: ", category);
 
@@ -368,7 +363,7 @@ const CardImage = ({props}) => {
   let img=item?.img_tr
     
   return (    
-      <Link href={`/${params?.locale}/ad/${item?.slug_tr}/${item?.key}`}  >   
+      <Link href={`/ad/${item?.slug_tr}/${item?.key}`}  >   
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :
@@ -430,3 +425,68 @@ const filterAdverts = ({adverts, country, city, district, subdistrict}) => {
       
       
       
+
+      export async function getStaticProps(data) {
+
+        let {defaultLocale, locale, params} = data ?? {};
+        let {slug} = params ?? {};
+
+        let lastslugitem=slug?.length==0 ? root_category :  slug?.[slug?.length-1];
+
+       
+        // let rawdata_advert= await fetch(process.env.NEXT_PUBLIC_API_URL, {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json", },
+        //   body: JSON.stringify({
+        //     query: AdvertQuery_Raw,
+        //     variables: {data:{key:slug?.[1]}},
+        //   }),
+        // })       
+        //   let datajson_advert=await rawdata_advert.json();
+        //   let advert = datajson_advert?.data?.advertquery;
+             
+       
+         let dictionary= await DictionaryData({locale: locale ?? "tr"});  
+         let webdata=await WebData();
+         let countries=await cacheCountries();
+       
+        //  console.log("webdatawebdata: ", webdata);
+         let theme_name = webdata?.bigdata?.theme?.name;               
+          
+         let cuffs= webdata?.bigdata?.history?.[0]?.lang?.tr?.cuffs;
+         let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
+         let logofiles =  lang?.logofiles;
+         
+       
+           let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+             next:{revalidate:10},                                   
+             method: "POST",
+             headers: { "Content-Type": "application/json", },
+             body: JSON.stringify({
+               query: FilesQuery_SpecialRequests,
+               variables:{data:{specialrequests:logofiles}} 
+             })
+           })
+             .then((res) => res.json())
+             .then((result) => { return result?.data?.filesquery_specialrequests; });    
+             
+             let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+
+
+
+             let category=await relatedCategory({lastslugitem})  ?? []
+       
+                                                                              
+           let props = { webdata, dictionary, fileobjects, logo, category,   countries,params };
+                              
+           return { props, revalidate: 20 };
+                                     
+       }
+       
+       
+                    
+       export async function getStaticPaths({locales}) {
+        // let  paths = await cacheSubsectorQuery_BuildList()    
+        let paths=[{params:{slug:["aaaaaaa"]}}];           
+        return { paths, fallback: 'blocking' }
+                                                        }      

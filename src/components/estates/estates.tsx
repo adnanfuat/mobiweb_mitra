@@ -1,27 +1,20 @@
-import s from "./estates.module.css"
-
-import {datetimeFunc} from "@/components/utils/datetimefunc"
-// import {cacheCountries} from "@/components/utils/cachecountries"
+import s from "./estates.module.css";
+import {datetimeFunc} from "@/components/utils/datetimefunc";
 import Link from "next/link";
-
 import dictionaryFunc from "@/components/utils/dictionaryfunc";
 
 
-
-const  Estates = async ({adverts, dictionary, params}) =>{
+const  Estates = ({adverts, dictionary, params}) =>{
 
   let {locale} = params ?? {};    
-  
-  
+    
         return (
                           <div style={{backgroundColor:"transparent"}}>                                
                                       <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item, dictionary, params}} key={index}/> }) } </div>                    
                           </div>                             
                )
-
 }
 export default Estates
-
 
 
 
@@ -58,13 +51,13 @@ const Item = ({props}) => {
               <div className={s.i_image}><CardImage props={{item, id: item?.id, params}}/></div>
               <div className={s.i_info}>
                             {fiyat && <div className={s.i_info_sub}>
-                                <div>{fiyat_text}</div>  
-                                <div>{currencyFormat(fiyat?.value)}</div>  
+                                  <div>{fiyat_text}</div>  
+                                  <div>{currencyFormat(fiyat?.value)}</div>  
                             </div>}
 
                             <div className={s.i_info_sub}>
-                                <div>{tarih_text}</div>  
-                                <div title={localeString}>{timeAgo}</div>  
+                                  <div>{tarih_text}</div>  
+                                  <div title={localeString}>{timeAgo}</div>  
                             </div>
 
               </div>
@@ -85,7 +78,7 @@ const CardImage = ({props}) => {
 
     
   return (    
-      <Link href={`/${locale}/ad/${item?.slug_tr}/${item?.key}`} >
+      <Link href={`/ad/${item?.slug_tr}/${item?.key}`} >
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
           :

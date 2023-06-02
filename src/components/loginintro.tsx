@@ -9,7 +9,7 @@ import { Login } from "./login";
 export const LoginIntro = (props) => {
 
   // let { dictionary} = props ?? {};
-   let {session, dictionary} = props ?? {};
+   let { dictionary} = props ?? {};
 
   // const queryClient = new QueryClient();
 
@@ -17,7 +17,7 @@ export const LoginIntro = (props) => {
     <div>
       {/* <QueryClientProvider client={queryClient}>            */}
             {/* <Dynamic_Login dictionary={dictionary}/> */}
-            <Login  dictionary={dictionary} session={session} />
+            <Login  dictionary={dictionary} />
       {/* </QueryClientProvider>     */}
     </div>
   )

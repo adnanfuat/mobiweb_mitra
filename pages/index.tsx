@@ -1,22 +1,43 @@
 import DictionaryData from "@/components/utils/dictionarydata";
-import WebData from "@/components/utils/webdata-nodecache";
+import {siteProxy} from "@/constants/siteproxy";
+import WebData from "@/components/utils/webdata";
 import { FilesQuery_SpecialRequests } from "../src/gql/filesquery_specialrequests";
+
+import {Theme_Mitra} from "@/themes/theme_mitra"
+// import {Theme_Arges} from "@/themes/theme_arges"
+// import {Theme_Vitalis} from "@/themes/theme_vitalis"
+
+// import { authOptions } from "api/auth/[...nextauth]"
 
 
 export default  function Index(props) {                    
       
-      let { cuffs, webdata, dictionary, } =props ?? {};
+      let { cuffs, webdata, dictionary, fileobjects, logo, locale, session } =props ?? {};
 
       let theme_name = webdata?.bigdata?.theme?.name;
+            
+      let component=<div>...</div>;
 
+      //  return (<div>{JSON.stringify(webdata?.richcontents)}</div>)
 
-                  return (
-                    <div>
-                      asdsasda
-
-
-                    </div>                                                   
-                            )
+      if (theme_name=="theme_mitra" && 1==1) { // && 1==3
+        component=<Theme_Mitra logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>                            
+      }
+      // else if (theme_name=="theme_arges" && 1==1) {
+      //   component=<Theme_Arges logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
+      // }
+      // else if (theme_name=="theme_vitalis" && 1==1) {
+      //   component=<Theme_Vitalis logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
+      // }     
+      else 
+      {
+        component=<div style={{color:"black"}}>Tema bulunamadı... {JSON.stringify(webdata)}  </div>
+      }                       
+         
+      return component
+      
+       
+      return <div>{JSON.stringify(webdata?.bigdata?.theme)}</div>
 }
 
 
@@ -26,20 +47,20 @@ export default  function Index(props) {
 
 
 
-export async function getStaticProps({params, locale}) {
-      
+export async function getStaticProps(context) {
 
-  let dictionary= await DictionaryData({locale: locale ?? "tr"});  
-  let webdata=await WebData();
 
-  let theme_name = webdata?.bigdata?.theme?.name;
+ let {defaultLocale, locale} = context ?? {};
+  
+ let dictionary= await DictionaryData({locale: locale ?? "tr"});  
+ let webdata=await WebData();
 
- 
-   
-  let cuffs= webdata?.bigdata?.history?.[0]?.lang?.tr?.cuffs;
-
-  let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
-  let logofiles =  lang?.logofiles;
+ let theme_name = webdata?.bigdata?.theme?.name;
+    
+ let cuffs= webdata?.bigdata?.history?.[0]?.lang?.tr?.cuffs;
+ let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
+ let logofiles =  lang?.logofiles;
+  
 
     let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
       next:{revalidate:10},                                   
@@ -54,8 +75,7 @@ export async function getStaticProps({params, locale}) {
       .then((result) => { return result?.data?.filesquery_specialrequests; });    
       
       let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
-
-    
+            
 
     let createFileRequestsList=[]
     cuffs?.map(a=>{
@@ -86,7 +106,7 @@ export async function getStaticProps({params, locale}) {
             
 
 
-    let props = {cuffs, webdata, dictionary, };
+    let props = {cuffs, webdata, dictionary, fileobjects, logo };
                        
     return { props, revalidate: 20 };
 

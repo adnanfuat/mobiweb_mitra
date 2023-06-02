@@ -1,6 +1,6 @@
 
 
-const relatedCategory_Bigdata = async ({lastslugitem, categories}) => {
+const relatedCategory_Bigdata =  ({lastslugitem, categories}) => {
 
   
                       let relatedcategory = categories?.find(c=>c?.slug_tr==lastslugitem);

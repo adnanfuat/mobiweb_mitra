@@ -1,6 +1,6 @@
 .footercompwr {
     
-    padding: 10px 45px;
+    
     
     display: flex;
     gap:30px;    
@@ -10,6 +10,7 @@
     align-items: center;
     background-color: #334f41;
     color: white;
+    padding: 10px 20px;
 }
 
 .logowr {

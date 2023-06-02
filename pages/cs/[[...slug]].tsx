@@ -6,40 +6,41 @@ import Head from "next/head";
 import Image from "next/image";
 import {LayoutLeft} from "./layoutleft";
 import { cacheCountries } from "@/components/utils/cachecountries";
-import relatedCategory from "@/components/utils/relatedcategory";
-import { DesignLayout } from "@/layouts/designlayout";
+// import relatedCategory from "@/components/utils/relatedcategory";
+// import { DesignLayout } from "@/layouts/designlayout";
 import WebData from "@/components/utils/webdata";
 import DictionaryData from "@/components/utils/dictionarydata";
 import { localeStatic } from "@/constants/localestatic";
 import relatedCategory_Bigdata from "@/components/utils/relatedcategory_bigdata";
 import { DesignLayout_Theme_Vitalis } from "@/themes/theme_vitalis/layouts/designlayout_theme_vitalis";
-import { DesignLayout_Theme_Mitra } from "@/themes/theme_mitra/layouts/designlayout_theme_mitra";
+import { DesignLayout_Theme_Mitra_BackPages } from "@/themes/theme_mitra/layouts/designlayout_theme_mitra_backpages";
 import { DesignLayout_Theme_Arges } from "@/themes/theme_arges/layouts/designlayout_theme_arges";
 
 let bigbigparent_slug="urunler"; // Soldaki menüde hangi kategoriden itibaren aşağısnı göstereceğiz  ?
 
-export default async function Category (props){ 
+export default function Category (props){ 
   
-  let {params} = props ?? {}
+  let {params, dictionary, webdata, fileobjects, countries} = props ?? {}
   let {locale, slug} = params ?? {}
 
   locale = locale ? locale : localeStatic;
 
-  let dictionary=await DictionaryData({locale}) ;
-  let webdata=await WebData()                   ;
+  
 
   let  fileObjects = webdata?.bigdata?.fileObjects;
-  // console.log("itemitemitem: ", fileObjects);
-
+  
   let lastslugitem = slug?.[slug?.length-1]
-
+  
   let contents = webdata?.o_key_2?.contents ?? []; // Bize tüm kategoriler geldi..  
+  
 
   let categories = webdata?.o_key_1?.categories ?? []; // Bize tüm kategoriler geldi..
   
   let relatedcategory = categories?.find(cat=>cat?.slug_tr==lastslugitem); // Şimdi o tüm kategoriler içinden son slug itemına göre kategorileri getir bize...
 
   let parentkeys_forsubcontents = relatedcategory?.o_key_1?.parentkeys_forsubcontents ?? []; // Şimdi biz bir kategorideyiz ama bize bu bu kategoriye bağlı olup, aynı zamanda altlarındaki kategorilere de bağlı olan içerikler lazım... Bunu ben backendde hesaplamıştım zaten. O keyleri alıyorum
+
+  // console.log("itemitemitem: ", slug, contents);
 
   contents=contents?.filter(co=> { // içeriklerimizi tarayacağız ve içeriklerimizin parentlarından herhangi biri yukarıdaki key lerin arasında varsa listeleyeceğiz...
 
@@ -52,6 +53,7 @@ export default async function Category (props){
   })
     
 
+  
 
 
   //////////////////////////////////// --
@@ -61,29 +63,30 @@ export default async function Category (props){
 
         let logofiles =  lang?.tr?.logofiles;
 
-          let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-            method: "POST",
-            headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({
-              query: FilesQuery_SpecialRequests,
-              variables:{data:{specialrequests:logofiles}} 
-            })
-          })
-            .then((res) => res.json())
-            .then((result) => { return result?.data?.filesquery_specialrequests; });    
+          // let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+          //   method: "POST",
+          //   headers: { "Content-Type": "application/json", },
+          //   body: JSON.stringify({
+          //     query: FilesQuery_SpecialRequests,
+          //     variables:{data:{specialrequests:logofiles}} 
+          //   })
+          // })
+          //   .then((res) => res.json())
+          //   .then((result) => { return result?.data?.filesquery_specialrequests; });    
             
             let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
 
   /////////////////////////////////// --
 
-     return (<Rs_Shell contents={contents} root_category={"emlak"} logo={logo} bigbigparent_slug={bigbigparent_slug} categories={categories} root_slug={`cs`} dictionary={dictionary} webdata={webdata} fileObjects={fileObjects}  sidepadding={42}  {...props}/>) 
+    // return (<div>{JSON.stringify(relatedcategory)}</div>)
+   return (<Rs_Shell contents={contents} root_category={"emlak"} countries={countries} logo={logo} bigbigparent_slug={bigbigparent_slug} categories={categories} root_slug={`cs`} dictionary={dictionary} webdata={webdata} fileObjects={fileObjects}  sidepadding={42}  {...props}/>) 
   
   }
 
 
-export async function Rs_Shell (props){
+function Rs_Shell (props){
     
-  let {contents, params, searchParams, root_category, root_slug,  bigbigparent_slug, logo, categories, webdata, dictionary, fileObjects} = props ?? {};  
+  let {contents, params, countries, searchParams, root_category, root_slug,  bigbigparent_slug, logo, categories, webdata, dictionary, fileObjects} = props ?? {};  
 
   let {slug} = params ?? {} ;
 
@@ -107,28 +110,31 @@ export async function Rs_Shell (props){
                                           })            
   }
 
-  let category=await relatedCategory_Bigdata({lastslugitem, categories})  ?? {}
+  let category= relatedCategory_Bigdata({lastslugitem, categories})  ?? {}
   let {country, city, district, subdistrict} = searchParams ?? {}
   adverts=filterAdverts({adverts, country, city, district, subdistrict});
   
+  
+
+  // return (<div>{JSON.stringify(category)}</div>)
+
+
 
 
   if (theme_name=="theme_mitra") {
-    return (<DesignLayout_Theme_Mitra title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Mitra> )                      
+    return (<DesignLayout_Theme_Mitra_BackPages title={`${category?.title_tr ?? "Başlık!!"}`} countries={countries} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Mitra_BackPages> )                      
   }
-  else if (theme_name=="theme_arges") {
-    return (<DesignLayout_Theme_Arges title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Arges> )                      
-  }
-  else if (theme_name=="theme_vitalis") {
-    return (<DesignLayout_Theme_Vitalis title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Vitalis> )                      
-  }     
-  else 
-  {
-    return (<DesignLayout_Theme_Mitra title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Mitra> )                      
-  }     
-
+  // else if (theme_name=="theme_arges") {
+  //   return (<DesignLayout_Theme_Arges title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Arges> )                      
+  // }
+  // else if (theme_name=="theme_vitalis") {
+  //   return (<DesignLayout_Theme_Vitalis title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Vitalis> )                      
+  // }     
+  // else 
+  // {
+  //   return (<DesignLayout_Theme_Mitra_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Theme_Mitra_BackPages> )                      
+  // }     
   
-
 
 }
 
@@ -136,18 +142,18 @@ export async function Rs_Shell (props){
 
 
 
-const RsData = async (props) => {
+const RsData =  (props) => {
   
-  let {contents, params, searchParams, root_category, root_slug,  bigbigparent_slug, categories, webdata, dictionary, fileObjects} = props ?? {};  
+  let {contents, params, countries, searchParams, root_category, root_slug,  bigbigparent_slug, categories, webdata, dictionary, fileObjects} = props ?? {};  
 
   let {slug} = params ?? {} ;
-  let  countries = await cacheCountries();
+  // let  countries = await cacheCountries();
   
   slug = slug ? slug : []
   let sluglength=slug?.length;
   let lastslugitem=slug?.length==0 ? root_category :  slug?.[sluglength-1];
 
-  let category=await relatedCategory_Bigdata({lastslugitem, categories})  ?? {}
+  let category= relatedCategory_Bigdata({lastslugitem, categories})  ?? {}
   let {country, city, district, subdistrict} = searchParams ?? {}
 
   let adverts =  webdata?.o_key_2?.contents//.filter(a=>a?.bigbigparent_key==bigbigparent_key);
@@ -279,7 +285,7 @@ const CardImage = ({props}) => {
   
     
   return (    
-      <Link href={`/${params?.locale}/c/${item?.slug_tr}/${id}`}  >
+      <Link href={`/c/${item?.slug_tr}/${id}`}  >
           {/* {JSON.stringify(item)}  */}
         {img ?
           <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
@@ -423,3 +429,75 @@ const Meta = (props) => {
              
              
              
+
+
+
+
+
+
+
+             export async function getStaticProps(data) {
+
+
+              let {defaultLocale, locale, params} = data ?? {};
+             
+              //  console.log("sadasdsadsd", params);
+                   
+             
+               let dictionary= await DictionaryData({locale: locale ?? "tr"});  
+               let webdata=await WebData();
+               let countries=await cacheCountries();
+             
+              //  console.log("webdatawebdata: ", webdata);
+
+
+               let theme_name = webdata?.bigdata?.theme?.name;
+             
+              
+                
+               let cuffs= webdata?.bigdata?.history?.[0]?.lang?.tr?.cuffs;
+               let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
+               let logofiles =  lang?.logofiles;
+               
+             
+                 let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+                   next:{revalidate:10},                                   
+                   method: "POST",
+                   headers: { "Content-Type": "application/json", },
+                   body: JSON.stringify({
+                     query: FilesQuery_SpecialRequests,
+                     variables:{data:{specialrequests:logofiles}} 
+                   })
+                 })
+                   .then((res) => res.json())
+                   .then((result) => { return result?.data?.filesquery_specialrequests; });    
+                   
+                   let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+             
+                                                                             
+             
+                 let props = { webdata, dictionary, fileobjects, logo, countries,params };
+                                    
+                 return { props, revalidate: 20 };
+                                           
+             }
+             
+             
+                          
+             export async function getStaticPaths({locales}) {
+              // let  paths = await cacheSubsectorQuery_BuildList()    
+              let paths=[{params:{slug:["aaaaaaa"]}}];           
+              return { paths, fallback: 'blocking' }
+                                                              }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

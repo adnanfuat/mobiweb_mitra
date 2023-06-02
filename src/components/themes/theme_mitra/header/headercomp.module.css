@@ -14,4 +14,9 @@
   gap: 10px;
   align-items: center;
   position: relative;
+  
+}
+
+.logowr {
+  display: flex;  
 }

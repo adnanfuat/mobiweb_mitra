@@ -1,6 +1,6 @@
 "use client"
 
-import './globals.css';
+
 import {siteProxy} from "@/constants/siteproxy"
 
 

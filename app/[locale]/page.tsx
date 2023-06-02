@@ -18,6 +18,7 @@ export default async function Home(props) {
 
 const session = undefined //await getServerSession(authOptions) ;
 
+let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
 
 // console.log("asdsadsaasd",session)
 

@@ -15,10 +15,10 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import fileSpecialRequests from "@/utils/files_specialrequests";
 
 
-export  default async function HeaderComp  (props) {
+export  default function HeaderComp  (props) {
   
     
-    const session = await getServerSession(authOptions)
+    const session = undefined // await getServerSession(authOptions)
   
     let { params, position,  topbottom=5, webdata, dictionary} = props ?? {}
 
@@ -29,7 +29,7 @@ export  default async function HeaderComp  (props) {
     let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
     let logofiles =  lang?.logofiles;
 
-    let fileobjects = await fileSpecialRequests({logofiles})
+    let fileobjects = [] // await fileSpecialRequests({logofiles})
        
     let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
           

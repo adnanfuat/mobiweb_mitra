@@ -1,35 +1,26 @@
 import s from "./page.module.css"
 import { BolgeIsmiOgren } from "@/components/utils/bolgeismiogren";
-import WebData from "@/components/utils/webdata";
 import Form from "./form";
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "../../../pages/api/auth/[...nextauth]"
 import {localeStatic} from "@/constants/localestatic";
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
-import { cacheCountries } from "@/components/utils/cachecountries";
-import HeaderComp from "@/themes/theme_mitra/header/headercomp";
-import { DesignLayout } from "@/layouts/designlayout";
-import DictionaryData from "@/components/utils/dictionarydata";
 import dictionaryFunc from "@/components/utils/dictionaryfunc";
 import { DesignLayout_Theme_Vitalis } from "@/themes/theme_vitalis/layouts/designlayout_theme_vitalis";
-import { DesignLayout_Theme_Mitra } from "@/themes/theme_mitra/layouts/designlayout_theme_mitra";
+import { DesignLayout_Theme_Mitra_BackPages } from "@/themes/theme_mitra/layouts/designlayout_theme_mitra_backpages";
 import { DesignLayout_Theme_Arges } from "@/themes/theme_arges/layouts/designlayout_theme_arges";
+import DictionaryData from "@/components/utils/dictionarydata";
+import WebData from "@/components/utils/webdata";
+import { cacheCountries } from "@/components/utils/cachecountries";
 
 
-export default async function Page  ({params}) {
+const Contact = (props) => {
 
-  let  countries = await cacheCountries();
-  
-  params= params.locale ? params : {...params, locale:localeStatic}; // Eğer locale gelmemişse localestatic'i atıyoruz
-
-  let {locale} = params ?? {}
-
-  let webdata=        await WebData();
-  let dictionary  =   await DictionaryData({locale});
-  const session   =   await getServerSession(authOptions);
-
-  let iletisim =         dictionaryFunc({key:"1668310884_999", dictionary}).text;
-  let mesaj_formu =         dictionaryFunc({key:"1668310884_999", dictionary}).text;
+  let {params, dictionary, webdata, fileobjects, category, advert, countries} = props ?? {}
+  let {locale, slug} = params ?? {}
+    
+  //params= locale ? params : {...params, locale:localeStatic}; // Eğer locale gelmemişse localestatic'i atıyoruz
+      
+  let iletisim =     dictionaryFunc({key:"1668310884_999", dictionary}).text;
+  let mesaj_formu =  dictionaryFunc({key:"1668310884_999", dictionary}).text;
 
   let info = webdata?.bigdata?.history[0];
   let lang = info?.lang;
@@ -38,52 +29,38 @@ export default async function Page  ({params}) {
   let selectedaddresses= selectedlang?.addresses;
   let defaultaddresses = defaultlang?.addresses;
 
-  let addresses = (selectedaddresses && selectedaddresses?.length>0) ?  selectedaddresses : defaultaddresses
-  // console.log("webdata::::::::sadasdsdadsa", webdata);  
-
-
+  let addresses = (selectedaddresses && selectedaddresses?.length>0) ?  selectedaddresses : defaultaddresses  
   
   let logofiles =  lang?.tr?.logofiles;
-
-    let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-      method: "POST",
-      headers: { "Content-Type": "application/json", },
-      body: JSON.stringify({
-        query: FilesQuery_SpecialRequests,
-        variables:{data:{specialrequests:logofiles}} 
-      })
-    })
-      .then((res) => res.json())
-      .then((result) => { return result?.data?.filesquery_specialrequests; });    
       
-      let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+  let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
 
 
   let theme_name = webdata?.bigdata?.theme?.name;
     
   if (theme_name=="theme_mitra") {
-    return (<DesignLayout_Theme_Mitra title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+    return (<DesignLayout_Theme_Mitra_BackPages title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra_BackPages> )                      
   }
   else if (theme_name=="theme_arges") {
     return (<DesignLayout_Theme_Arges title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Theme_Arges> )                      
   }
   else if (theme_name=="theme_vitalis") {
-    return (<DesignLayout_Theme_Vitalis title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData addresses={addresses} webdata={webdata} session={session} countries={countries} /> </DesignLayout_Theme_Vitalis> )                      
+    return (<DesignLayout_Theme_Vitalis title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData addresses={addresses} webdata={webdata}  countries={countries} /> </DesignLayout_Theme_Vitalis> )                      
   }     
   else 
   {
-    return (<DesignLayout_Theme_Mitra title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra> )                      
+    return (<DesignLayout_Theme_Mitra_BackPages title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Theme_Mitra_BackPages> )                      
   }   
 
 
      
 }
 
+export default Contact
 
 
 
-
-const RsData = async (props) => {
+const RsData =  (props) => {
 
       let { addresses, countries, webdata, session } = props ?? {};
 
@@ -99,7 +76,7 @@ const RsData = async (props) => {
                   <div className={s.mainwr} style={{backgroundColor:background_color}}>
                       <div className={s.sectionwr}>                    
                             <div className={s.sectiontitle}>Mesaj Formu</div>
-                            <div className={s.form}><ContactForm session={session} webdata={webdata}/></div>                        
+                            <div className={s.form}><ContactForm  webdata={webdata}/></div>                        
                       </div>
                       <div className={s.sectionwr}>                    
                             <div className={s.sectiontitle}>İletişim Bilgileri</div>
@@ -116,7 +93,7 @@ const ContactForm = (props) => {
 
   let {session, usermessages, webdata} = props ?? {};
 
-  return ( <div className={s.ci_shell}><Form session={session} usermessages={usermessages} webdata={webdata}/></div> )
+  return ( <div className={s.ci_shell}><Form  usermessages={usermessages} webdata={webdata}/></div> )
 }
 
 
@@ -217,6 +194,47 @@ const Phones = () => {
 
 
 
+export async function getStaticProps(data) {
+
+  let {defaultLocale, locale } = data ?? {};
+  
+ 
+   let dictionary= await DictionaryData({locale: locale ?? "tr"});  
+   let webdata=await WebData();
+   let countries=await cacheCountries();
+   
+   let theme_name = webdata?.bigdata?.theme?.name;               
+    
+   let cuffs= webdata?.bigdata?.history?.[0]?.lang?.tr?.cuffs;
+   let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
+   let logofiles =  lang?.logofiles;
+   
+ 
+     let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
+       next:{revalidate:10},                                   
+       method: "POST",
+       headers: { "Content-Type": "application/json", },
+       body: JSON.stringify({
+         query: FilesQuery_SpecialRequests,
+         variables:{data:{specialrequests:logofiles}} 
+       })
+     })
+       .then((res) => res.json())
+       .then((result) => { return result?.data?.filesquery_specialrequests; });    
+       
+       let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+ 
+                                                                        
+     let props = { webdata, dictionary, fileobjects, logo,  countries };
+                        
+     return { props, revalidate: 20 };
+                               
+ }
+ 
+
+
+
+ 
 const FilesQuery_SpecialRequests =
 `  query FilesQuery_SpecialRequests ($data:JSON )  {
       filesquery_specialrequests (data:$data) {
@@ -231,5 +249,4 @@ const FilesQuery_SpecialRequests =
     }
   }`
 ;
-
 
