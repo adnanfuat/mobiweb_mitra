@@ -39,7 +39,7 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }) => {
                   <meta name="Googlebot" content="index, follow" />
                   <meta name="robots" content="index, follow" />
                   <meta name="Robots" content="all" />              
-                  <title>Sakarya'yı seviyoruz. Sakarya için çalışıyoruz.</title>
+                  <title>Sakaryayı seviyoruz. Sakarya için çalışıyoruz.</title>
               </Head> 
 
               
