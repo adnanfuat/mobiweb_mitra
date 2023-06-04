@@ -11,7 +11,9 @@ export default  async function handler(req, res) {
 
   // const url = req.nextUrl.clone()   
 
-  let mainres=await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL                                    
+  console.log("sadsadsad", process.env.NEXT_PUBLIC_API_URL)
+
+  let mainres=await fetch("https://octopus-app-oynbs.ondigitalocean.app/api/graphql", { //process.env.NEXT_PUBLIC_API_URL    // https://octopus-app-oynbs.ondigitalocean.app/api/graphql                                  
     // next:{revalidate:10},                                   
     method: "POST",
     headers: { "Content-Type": "application/json", },
@@ -25,6 +27,7 @@ export default  async function handler(req, res) {
   })
     .then(async (result) =>   { 
       
+              console.log("sadsdsad", process.env.NEXT_PUBLIC_API_URL)
             let resData = result?.data?.swissarmyknifemutation
             
             return resData ; 
