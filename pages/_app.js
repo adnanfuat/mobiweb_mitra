@@ -70,7 +70,7 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }) => {
     const changeTargetFunc = async (value) => {
 
       console.log("asdasdsadsad", 1)        
-        await fetch(`/api/repo?target=${value}`);
+        await fetch("/api/repo?target="+{value});
         console.log("asdasdsadsad",2)        
         router.reload();
                       
