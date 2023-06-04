@@ -1,14 +1,13 @@
 import {siteProxy} from "@/constants/siteproxy"
 import dynamic from "next/dynamic";
 import { SessionProvider } from "next-auth/react" 
-// import Design from "@/layouts/design"; 
 import Head from 'next/head';
 import  "/public/css/global.css";
 import  "/public/css/reset.css";
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
-// import {_userState} from "@/constants/states/user"
 import { useState } from "react";
-// import { open_sans} from "@/constants/fonts/index"; className={open_sans.className}
+import { useSnapshot } from 'valtio';
+import { useRouter } from "next/router";  
  
 
 const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }) => {
@@ -17,9 +16,10 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }) => {
   const [queryClient] = useState(() => new QueryClient());
   const [googleanalytics, setgoogleanalytics] = useState(false);
       
+  let siteState  = useSnapshot(siteProxy);
   // minHeight:"100vh",
     return (
-      <div onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}  >
+      <div onMouseOver={()=>{ siteProxy.interaction=true}} onTouchStart={()=>{ siteProxy.interaction=true}}   style={{position:"relative"}}>
         
       {/* <main className={open_sans.className}> */}
       {/* <style jsx global>{`
@@ -42,12 +42,16 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }) => {
                   <title>Sakarya'yı seviyoruz. Sakarya için çalışıyoruz.</title>
               </Head> 
 
+              
+
                   {/* {googleanalytics && <Dynamic_GoogleAnalyticsComp/> }       */}                                    
                   <Component {...pageProps} />                  
             </Hydrate>
         </QueryClientProvider>
       </SessionProvider>
       
+
+        <ChangeTarget/>
     
     </div>
     );
@@ -57,18 +61,33 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }) => {
 
 
 
-  // --font-base: ${oswald.style.fontFamily} , ${prosto_one.style.fontFamily}, ${abhaya_libre.style.fontFamily}, ${rubik_bubbles.style.fontFamily} ;  
-
-
-
-  // MyApp.propTypes = {
-  //   Component: PropTypes.elementType.isRequired,
-  //   // emotionCache: PropTypes.object,
-  //   pageProps: PropTypes.object.isRequired,
-  // };
-
-
 
   
+  
+  const ChangeTarget = () => {
+
+    let router = useRouter();
+    const changeTargetFunc = async (value) => {
+
+      console.log("asdasdsadsad", 1)        
+        await fetch(`/api/repo?target=${value}`);
+        console.log("asdasdsadsad",2)        
+        router.reload();
+                      
+    }
+
+    return (
+      <div style={{position:"absolute", zIndex:2500, backgroundColor:"black", padding:10, bottom:"43px", left:"38%"}}>                 
+          <select onChange={(e)=>changeTargetFunc(e?.target?.value)} style={{fontSize:"1.4rem"}}>
+                  <option value={""}> Seçiniz </option>
+                  <option value={"argesinsaatmimarlik.com.tr"}> argesinsaatmimarlik.com.tr </option>
+                  <option value={"mitraemlak.com"}> mitraemlak.com </option>
+                  <option value={"vitalisbotanik.com"}> vitalisbotanik.com </option>
+          </select>
+      </div>
+    )
+  }
+  
+
 
 

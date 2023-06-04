@@ -1,6 +1,7 @@
-import s from "./designlayout.module.css"
-import HeaderComp from "@/themes/mitra/header/headercomp"
+import s from "./designlayout_arges.module.css"
+
 import { Inter } from 'next/font/google'
+import HeaderComp from "../header/index";
 
 const inter = Inter({
     variable: '--inter-font',
@@ -9,15 +10,15 @@ const inter = Inter({
   })
 
 
-export const DesignLayout = (props) => {
-    let {title, dictionary, params, webdata} = props ?? {};
+export const DesignLayout_Arges = (props) => {
+    let {title, dictionary, params,logo, webdata} = props ?? {};
     let sidepadding = 26;
           
   return (
     <div  className={s.designwr}>
       {/* {JSON.stringify(webdata)} */}
       
-        <HeaderComp position="relative"  sidepadding={sidepadding} topbottom={5} dictionary={dictionary} params={params} webdata={webdata}/>
+        <HeaderComp position="relative" logo={logo}  sidepadding={sidepadding} topbottom={5} dictionary={dictionary} params={params} webdata={webdata}/>
 
         <div style={{paddingLeft:sidepadding, paddingRight:sidepadding }}  className={s.mainwr}>
 

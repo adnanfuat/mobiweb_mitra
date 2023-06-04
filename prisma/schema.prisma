@@ -475,3 +475,51 @@ model richcontents {
   @@index([type], map: "type")
   @@fulltext([title_tr], map: "title_tr")
 }
+
+model webs {
+  id               Int       @id @default(autoincrement()) @db.UnsignedInt
+  user             String?   @db.TinyText
+  active           Int?      @default(1) @db.TinyInt
+  slug_tr          String?   @db.VarChar(135)
+  slug_sa          String?   @db.VarChar(135)
+  bigbigparent_key String?   @db.TinyText
+  bigparent_key    String?   @db.TinyText
+  type             String?   @db.VarChar(25)
+  bigdata          String?   @db.LongText
+  key              String?   @db.TinyText
+  rank             Int?
+  title_tr         String?   @db.VarChar(135)
+  title_en         String?   @db.TinyText
+  title_fr         String?   @db.TinyText
+  title_ar         String?   @db.TinyText
+  title_sa         String?   @db.TinyText
+  bigparent_slug   String?   @db.TinyText
+  parent_slug      String?   @db.TinyText
+  parent_key       String?   @db.TinyText
+  oldid            Int?
+  oldparent        Int?      @default(0) @db.UnsignedInt
+  parent           Int?      @default(0) @db.UnsignedInt
+  createdat        DateTime  @default(now()) @db.DateTime(0)
+  bigparent        Int?
+  oldbigparent     Int?
+  updatedat        DateTime? @db.DateTime(0)
+  slug_en          String?   @db.TinyText
+  slug_fr          String?   @db.TinyText
+  slug_ar          String?   @db.TinyText
+  country_slug     String?   @db.TinyText
+  city_slug        String?   @db.TinyText
+  district_slug    String?   @db.TinyText
+  subdistrict_slug String?   @db.TinyText
+  img_tr           String?   @db.TinyText
+  img_en           String?   @db.TinyText
+  img_fr           String?   @db.TinyText
+  img_ar           String?   @db.TinyText
+  i_key_1          Float?    @db.Float
+  o_key_1          String?   @db.LongText
+  o_key_2          String?   @db.LongText
+  date1            DateTime? @db.DateTime(0)
+  date2            DateTime? @db.DateTime(0)
+
+  @@index([type], map: "type")
+  @@fulltext([title_tr], map: "title_tr")
+}

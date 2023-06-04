@@ -1,16 +1,16 @@
-import { cache} from "./cache";
+
 
 const DictionaryData = async ({locale}) => {
               
-                                            // console.log("process.env.NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL)
+                                             console.log("process.env.NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL)
                           
                                                               let dictionarydata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-                                                                next:{revalidate:10},                                   
+                                                                next:{revalidate:1000},                                   
                                                                 method: "POST",
                                                                 headers: { "Content-Type": "application/json", },
                                                                 body: JSON.stringify({
                                                                   query: DictionaryQuery,
-                                                                  // variables:{data:{slug:"mitraemlak.com"}} 
+                                                                  variables:{data:{locale}} 
                                                                 })
                                                               })
 
@@ -20,20 +20,11 @@ const DictionaryData = async ({locale}) => {
                                                               // console.log("dictionarydata: ", dictionarydata[0])
 
                                                                 
-                                                                // let data = await dictionarydata?.json();
-                                                                // let data = await data?.dictionaryquery;
+                                                                
                                                                                                                                                                                                                                                                                                                                                                       
-                                                              //console.log("dictionarydata is cached first time :/ ", cachekey, locale);
-                                                                                                                                  
+                                                              
+                               
 
-                                                dictionarydata= dictionarydata?.map( d=> {
-                                                                        
-                                                  // console.log("asdsadsadsda:",d, locale);
-                                                  d = {title:eval(`d?.title_${locale}`), img:eval(`d?.img_${locale}`), slug:eval(`d?.slug_${locale}`), key:d?.key} 
-                                                  return  d
-                                                                        } )
-
-                                                //  console.log("dictionarydata:::. 2", dictionarydata?.[0]?.title)
                              
                                                 return dictionarydata    
                                                 
