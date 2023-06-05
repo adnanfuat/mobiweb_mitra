@@ -37,7 +37,7 @@ export const Mitra =  (props) => {
                                   
                                   <div className={s.main}>                                                                                      
                                                           {/* asdas : {JSON.stringify(props)} */}
-                                                          {/* <Estates adverts={estates} params={params}   dictionary={dictionary}/>                                           */}
+                                                          <Estates adverts={estates} params={params}   dictionary={dictionary}/>                                          
                                   </div>   
                                   <div className={s.footer}><FooterComp logo={logo}/></div>             
                           </div>                               

@@ -1,18 +1,14 @@
 
-import { cache} from "./cache";
+
 
 const relatedCategory = async ({lastslugitem}) => {
 
-  let cachekey= `relatedcategory_${lastslugitem}`
-  let relatedcategory = cache.get(cachekey);
   
-  if (!!relatedcategory)  {        
-                                   console.log("relatedcategory is alreadycached:)", cachekey, relatedcategory?.title_tr);      
-                          } 
-                 else {
+
 
                                   let rawdata_category= await fetch(process.env.NEXT_PUBLIC_API_URL, {
-                                    method: "POST",
+                                    next:{revalidate:5000},
+                                    method: "POST",                                    
                                     headers: { "Content-Type": "application/json", },
                                     body: JSON.stringify({
                                       query: RelatedCategoryQuery,
@@ -21,16 +17,11 @@ const relatedCategory = async ({lastslugitem}) => {
                                   })     
 
                                     let datajson_category=await rawdata_category.json();
-                                    relatedcategory = datajson_category?.data?.relatedcategoryquery;
-                                                
-                                    cache.set(cachekey, relatedcategory, 100000);                                    
-                                   console.log("relatedcategory is cached first time :/ ", cachekey, relatedcategory?.title_tr);
+                                    let relatedcategory = datajson_category?.data?.relatedcategoryquery;
+                                                                      
 
-                      }
-  
                       return relatedcategory                 
     
-
 }
 
 

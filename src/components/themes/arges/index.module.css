@@ -9,4 +9,60 @@
   .main {
     min-height: 80vh;
   }
+
+
+  .bantShell {
+    display: flex;
+    background-color: #827b61;    
+    justify-content: center;
+  }
+  
+
+
+
+  .bantWr {
+    display: flex;    
+    gap: 100px;
+    padding: 60px 10px;    
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    font-family: var(--poppins-font);
+  }
+  
+
+  .bantTitle {
+    display: flex;    
+    font-size: 1.4rem;
+  }
+
+  .bantTextWr {
+    display: flex;    
+    flex-direction: column;
+    gap:20px;
+  }
+
+
+  .bantButton {
+    display: flex;    
+    flex-direction: column;
+    gap:20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    transition: all .5s;
+    cursor: pointer;
+  }
+
+
+  .bantButton:hover {
+
+    background-color: black;
+    color: white;
+  }
+
+
+  
+
+
   

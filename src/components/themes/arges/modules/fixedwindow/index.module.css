@@ -1,0 +1,101 @@
+    
+    .fixedWr {    
+      background-color: #ededed;
+      gap: 10px;
+      padding: 60px 10px;    
+      align-items: center;
+      font-family: var(--poppins-font);
+      justify-content: center;      
+      display: flex;    
+      flex-direction: column;
+      color: white;
+      
+      background-image: url("/themes/arges/index_bg.jpg");      
+      
+              /* The background image */  
+        /* Set a specified height, or the minimum height for the background image */
+        min-height: 700px;
+
+        /* Set background image to fixed (don't scroll along with the page) */
+        background-attachment: fixed;
+
+        /* Center the background image */
+        background-position: center;
+
+        /* Set the background image to no repeat */
+        background-repeat: no-repeat;
+
+        /* Scale the background image to be as large as possible */
+        background-size: cover;
+
+
+    }
+    
+    .fixedInnerWr {    
+      display: flex;    
+       
+      width: 80%;      
+      justify-content: center;
+      gap:60px;
+      
+      
+    }
+
+
+    .fixedInnerWr div {    
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      gap:15px
+      
+    }
+
+    .fixedInnerWr:nth-child(1) {    
+
+    }
+
+
+
+    .title {
+      display: flex;      
+      justify-content: center;
+      font-size: 1.6rem;
+      padding: 25px 0px;
+      flex-direction: column;
+      align-items: center;
+      gap:20px;
+      }
+
+
+
+    .titleHr {
+      display: flex;
+      background-color: rgb(255, 255, 255);
+      height: 2px;
+      width:40vw;      
+      position: relative;
+      justify-content: center;
+    }
+
+
+    .titleHrBold {
+      display: flex;      
+      height: 6px;
+      width:20vw;
+      background-color: rgb(255, 255, 255);
+      position: relative;
+      top: -2px;
+    }    
+
+
+
+    .slideritem {
+      background-color: rgb(51, 51, 51);
+      padding: 10px;      
+    }
+
+    .sliderwr {
+      width: 80%;
+      height: 600px;
+    }

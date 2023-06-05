@@ -6,8 +6,7 @@
 }
 
 .designwr {
-  display: grid;
-  gap: 4px;
+  display: grid;  
   flex-direction: column;        
   min-height: 100vh;
   grid-template-rows: max-content 1fr max-content;

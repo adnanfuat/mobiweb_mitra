@@ -1,0 +1,38 @@
+
+  
+  
+
+
+
+    .triangleWr {    
+      background-color: #ededed;
+      gap: 10px;
+      padding: 60px 10px;    
+      align-items: center;
+      font-family: var(--poppins-font);
+      justify-content: center;      
+      display: flex;    
+    }
+    
+    .triangleInnerWr {    
+      display: grid;    
+      grid-template-columns: 1fr 1fr 1fr;      
+      width: 80%;      
+      justify-content: center;
+      gap:60px;
+      
+    }
+
+
+    .triangleInnerWr div {    
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      gap:15px
+      
+    }
+
+    .triangleInnerWr:nth-child(1) {    
+
+    }

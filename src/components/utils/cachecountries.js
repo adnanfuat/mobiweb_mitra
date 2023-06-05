@@ -1,20 +1,16 @@
 
 
-import { cache} from "../utils/cache";
+
 
 
 export async function cacheCountries() {
    
-    let countries = cache.get("countries");
   
-    if (countries?.length>0)  {        
-                                    // console.log("cache country :)");      
-                              } 
+  let countries=[];
     
-    else{      
-      // const  allcountriesdata = await graphcms?.request(CountriesNewQuery);
 
             await fetch(process.env.NEXT_PUBLIC_API_URL, {
+              next:{revalidate:100000},
               method: "POST",
               headers: { "Content-Type": "application/json", },
               body: JSON.stringify({
@@ -27,13 +23,12 @@ export async function cacheCountries() {
               .then((res) => res.json())
               .then((result) => {
                 countries = result?.data?.countriesnewquery ?? [];
-                //console.log("cache country :/", countries[1]);
-                cache.set("countries", countries, 100000);
+                //console.log("cache country :/", countries[1]);                
               });
 
           
           
-    }
+    
 
 
     return countries

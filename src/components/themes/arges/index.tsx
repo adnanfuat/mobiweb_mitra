@@ -1,7 +1,12 @@
-import s from "./index.module.css"
+
 import HeaderComp from "./header/index"
 import FooterComp from "./footer/footercomp"
+import {Triangle} from "./modules/triangle"
+import {Welcome} from "./modules/welcome"
+import {FixedWindow} from "./modules/fixedwindow"
 import Image from 'next/image'
+import s from "./index.module.css"    
+
 
 // import styles from './page.module.css'
 import {Index_Cuffs_V2_Visitor} from "@/components/cuffs/index_cuffs_v2_visitor"
@@ -33,7 +38,11 @@ export const Arges =  (props) => {
 
                         <div className={s.main}>                                                                                              
                                                 <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>                                                             
-                                                {/* <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} sidepadding={42} />                                                 */}
+                                                {/* <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} sidepadding={42} />                                                 */}                        
+                                                <Bant/>                        
+                                                <Welcome/>  
+                                                <Triangle/>
+                                                <FixedWindow/>
                         </div> 
                         
                         <div className={s.footer}><FooterComp logo={logo}/></div>
@@ -43,5 +52,27 @@ export const Arges =  (props) => {
   }
   
   
+
   
+    
+  
+
+
+  
+  
+  const Bant = () => {
+    return (
+      <div className={s.bantShell}>
+
+            <div className={s.bantWr}>            
+                    <div className={s.bantTextWr}>
+                        <div className={s.bantTitle}>Arges İnşaat'dan Teklif İsteyin</div>  
+                        <div>Hizmetlerimiz için teklif almak isterseniz hızlıca bizlere ulaşabilirsiniz.</div>  
+                    </div>                    
+                    <div  className={s.bantButton}>Arges İnşaat'dan Teklif İsteyin</div>  
+              </div>
+              
+      </div>
+    )
+  }
   

@@ -13,8 +13,8 @@ export default  function Index(props) {
       let {  webdata, dictionary,   locale, session } =props ?? {};
 
       let theme_name = webdata?.bigdata?.theme?.name;
-      let cuffs = webdata?.bigdata?.theme?.cuffs;
-      let logo = webdata?.bigdata?.theme?.logo;
+      let cuffs = webdata?.bigdata?.cuffs;
+      let logo = webdata?.bigdata?.logo;
       
       // console.log("cuffscuffs: ", cuffs);
 
@@ -22,7 +22,7 @@ export default  function Index(props) {
 
       // return (<div>{component}</div>)
 
-           return (<div>{JSON.stringify(dictionary)}</div>)
+      // return (<div>{JSON.stringify(cuffs)}</div>)
 
       if (theme_name=="mitra" && 1==1) { // && 1==3
         component=<Mitra logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>                            
