@@ -1,0 +1,23 @@
+.menuwr {    
+                padding: 10px 0px;    
+                display: flex;
+                gap:30px;
+                height: fit-content;
+                border-radius: 6px;        
+                font-family: var(--poppins-font);
+                
+        }
+
+.menuitem
+{
+    padding: 6px 10px ;
+    border-radius: 4px;
+    background-color: #f2f1ec;
+}
+
+
+.menuitem:hover
+{
+background-color: black;
+color: white;
+}

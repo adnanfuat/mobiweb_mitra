@@ -1,7 +1,7 @@
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
-import DictionaryData from "@/components/utils/dictionarydata";
-import WebData from "@/components/utils/webdata";
-import { FilesQuery_SpecialRequests } from "../src/gql/filesquery_specialrequests";
+// import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
+ import DictionaryData from "@/components/utils/dictionarydata";
+ import WebData from "@/components/utils/webdata";
+// import { FilesQuery_SpecialRequests } from "../src/gql/filesquery_specialrequests";
 import {Mitra} from "@/themes/mitra"
 import { Arges } from "@/themes/arges";
 import { Vitalis } from "@/themes/vitalis";
@@ -20,7 +20,9 @@ export default  function Index(props) {
 
       let component=<div>...</div>;
 
-          //  return (<div>{JSON.stringify(cuffs)}</div>)
+      // return (<div>{component}</div>)
+
+           return (<div>{JSON.stringify(dictionary)}</div>)
 
       if (theme_name=="mitra" && 1==1) { // && 1==3
         component=<Mitra logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>                            
@@ -41,9 +43,6 @@ export default  function Index(props) {
        
       return <div>{JSON.stringify(webdata?.bigdata?.theme)}</div>
 }
-
-
-
 
 
 
@@ -72,27 +71,20 @@ export default  function Index(props) {
   
 // }
 
-
-
-
- 
-
- 
+  
 export const getServerSideProps = async (context) => {
-
-  
-   let {defaultLocale, locale} = context ?? {};
-  
- let webdata=await WebData() ?? {}; // {} //
  
-
- let theme_name = webdata?.bigdata?.theme?.name;
-          
-  //let dictionary = await DictionaryData({locale: locale ?? "tr"});  
-      
-  let props = { webdata,dictionary:[]};
-                       
-  return { props };
-
-};
+  let {defaultLocale, locale} = context ?? {};
+   
+  let webdata= await WebData() ?? {}; // {} // 
+  
+  let theme_name = webdata?.bigdata?.theme?.name;
+           
+   let dictionary = await DictionaryData({locale: locale ?? "tr"});  
+       
+   let props = { webdata,dictionary};
+                        
+   return { props };
  
+ };
+  

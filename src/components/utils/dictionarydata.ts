@@ -3,9 +3,10 @@
 const DictionaryData = async ({locale}) => {
               
                                              console.log("process.env.NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL)
+                                             
                           
                                                               let dictionarydata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-                                                                next:{revalidate:1000},                                   
+                                                                next:{revalidate:4},                                   
                                                                 method: "POST",
                                                                 headers: { "Content-Type": "application/json", },
                                                                 body: JSON.stringify({
@@ -17,7 +18,8 @@ const DictionaryData = async ({locale}) => {
                                                               dictionarydata= await dictionarydata?.json();
 
                                                               dictionarydata= await dictionarydata?.data?.dictionaryquery ?? [];
-                                                              // console.log("dictionarydata: ", dictionarydata[0])
+
+                                                              console.log("dictionarydata: ", dictionarydata)
 
                                                                 
                                                                 
