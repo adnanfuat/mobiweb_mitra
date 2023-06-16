@@ -17,14 +17,9 @@ export const DesignLayout_Vitalis = (props) => {
   return (
     <div  className={s.designwr}>    
                 {/* <HeaderComp position="relative"  logo={logo}  topbottom={5} dictionary={dictionary} params={params} webdata={webdata}/> */}
-                <div className={s.mainwr} style={{backgroundImage:"url(/themes/vitalis/bg.png)", backgroundRepeat:"no-repeat"}}>
-                        <div className={s.insidewr}>
-                                    {title ? <div className={`${s.title} ${inter.variable}`} style={{backgroundColor:"white"}}>{title ? title : "Başlık atanmamış"}</div> : <div></div>                                        }
-                                    { props?.children }                                    
-                        </div>
-                </div>
 
-                <div className={s.footer}><FooterComp logo={logo}/></div>
+
+                
         </div>
   )
 }

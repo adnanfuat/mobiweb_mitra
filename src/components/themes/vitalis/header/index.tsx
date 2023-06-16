@@ -8,51 +8,37 @@ import {LoginIntro} from "@/components/loginintro";
 import {Flags} from "@/components/flags";
 
 
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "../../../../../pages/api/auth/[...nextauth]";
-// import DictionaryData from "./utils/dictionarydata";
-// import WebData from "./utils/webdata";
-import fileSpecialRequests from "@/utils/files_specialrequests";
 
 
 export  default function HeaderComp  (props) {
+      
+    const session = undefined;
   
-    
-    const session = undefined // await getServerSession(authOptions)
-  
-    let { params, logo, position,  topbottom=5, webdata, dictionary} = props ?? {}
-
+    let { params, logo, position,  topbottom=5, webdata, dictionary} = props ?? {};
     let {locale} = params ?? {};
 
     position= position ? position : "relative";
-
     let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
-    let logofiles =  lang?.logofiles;
-
+    let logofiles =  lang?.logofiles;              
+    // let {logo, params, dictionary} = props ?? {};                  
+    let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
+    let {width, height} = logo?.bigdata?.details ?? {};
     
-          
-        // let {logo, params, dictionary} = props ?? {};                  
-        let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
-        let {width, height} = logo?.bigdata?.details ?? {};
-        
-        props={...props, position, filename,  session }
+    props={...props, position, filename,  session }
 
         // console.log("propsprops", props);
         
     return (
       <div className={s.headercompwr} style={{position, padding:`${topbottom}px 250px`}}>
                   
-        <Link href={`/${locale}`}><div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}>
-
-        </div></Link>
-
-                    <div className={s.rightwr} >               
-                            
-                                <LoginIntro session={session} dictionary={dictionary}/>                                
-                                <Menu params={params} webdata={webdata} dictionary={dictionary}/>                                
-                                <Flags params={params}/>
-                    </div>
-                              
+        <Link href={`/${locale}`}>
+            <div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}></div>
+        </Link>
+                      <div className={s.rightwr} >                                           
+                                  <LoginIntro session={session} dictionary={dictionary}/>                                
+                                  <Menu params={params} webdata={webdata} dictionary={dictionary}/>                                
+                                  <Flags params={params}/>
+                      </div>
         </div>
     )
   }

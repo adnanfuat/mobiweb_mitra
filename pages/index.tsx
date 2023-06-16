@@ -1,8 +1,8 @@
 // import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
- import DictionaryData from "@/components/utils/dictionarydata";
- import WebData from "@/components/utils/webdata";
+import DictionaryData from "@/components/utils/dictionarydata";
+import WebData from "@/components/utils/webdata";
 // import { FilesQuery_SpecialRequests } from "../src/gql/filesquery_specialrequests";
-import {Mitra} from "@/themes/mitra"
+import { Mitra } from "@/themes/mitra"
 import { Arges } from "@/themes/arges";
 import { Vitalis } from "@/themes/vitalis";
 
@@ -88,3 +88,7 @@ export const getServerSideProps = async (context) => {
  
  };
   
+
+
+
+ 
