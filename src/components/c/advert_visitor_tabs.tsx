@@ -1,5 +1,5 @@
 
-"use client"
+
 import s from "./s.module.css"
 import dynamic from 'next/dynamic'
 import { useState } from "react";

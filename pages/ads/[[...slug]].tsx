@@ -4,7 +4,7 @@ import { BolgeIsmiOgren } from "@/components/utils/bolgeismiogren";
 import { datetimeFunc } from "@/components/utils/datetimefunc";
 import Head from "next/head";
 import Image from "next/image";
-import {LayoutLeft} from "./layoutleft";
+import {LayoutLeft} from "@/components/ads/layoutleft";
 import { cacheCountries } from "@/components/utils/cachecountries";
 import relatedCategory from "@/components/utils/relatedcategory";
 import WebData from "@/components/utils/webdata";

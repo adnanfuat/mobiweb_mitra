@@ -5,7 +5,7 @@ const WebData = async () => {
                                                                                                  
   
                                  let relatedData =  await fetch(process.env.NEXT_PUBLIC_API_URL, {     //https://octopus-app-oynbs.ondigitalocean.app/api/graphql
-                                    next:{revalidate:10},                                   
+                                    // next:{revalidate:10},                                   
                                     method: "POST",
                                     headers: { "Content-Type": "application/json", },
                                     body: JSON.stringify({
@@ -17,14 +17,10 @@ const WebData = async () => {
                                   relatedData =  await relatedData?.json();
                                   relatedData =  await relatedData?.data?.webquery;
 
-
                                   // console.log("relatedDatarelatedData: ", relatedData)
-                                         
-                                  
+                                                                           
                                   return relatedData; 
-                                  
-                                                
-                                                                        
+                                                                                                                                                          
 }
 
 

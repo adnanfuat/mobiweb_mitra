@@ -21,8 +21,7 @@ export const Advert_VisitorMode_MetaData  =  (props:IProps) => {
       parents=parents?.filter((a, i)=> i>1);
       parents=parents?.map((a)=> a?.title_tr) ?? [];      
       parents=parents.join(" > ");
-
-  // console.log("advert::::", advert?.bigdata?.history[0]?.info?.parents);
+      // console.log("advert::::", advert?.bigdata?.history[0]?.info?.parents);
 
   return (
             <div> 

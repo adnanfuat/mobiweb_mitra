@@ -1,8 +1,8 @@
 
 import { RiContrast2Line, RiShieldCheckFill , RiShieldFill} from "react-icons/ri";
-import {Advert_VisitorMode_MetaData} from "./advert_visitormode_metadata"; 
-import {Advert_Visitor_Image} from "./advert_visitor_image"; 
-import {Advert_Visitor_Tabs} from "./advert_visitor_tabs"; 
+import {Advert_VisitorMode_MetaData} from "@/components/ad/advert_visitormode_metadata"; 
+import {Advert_Visitor_Image} from "@/components/ad/advert_visitor_image"; 
+import {Advert_Visitor_Tabs} from "@/components/c/advert_visitor_tabs"; 
 import s from "./s.module.css"
 import Link from 'next/link';
 import Image from "next/image";

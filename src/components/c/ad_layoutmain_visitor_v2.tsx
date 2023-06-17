@@ -54,14 +54,13 @@ const Advert_Visitor_Parents = (props) => {
                 linkObj= linkObj?.length>0 ? [{value:"", label:"İlanlar", fulllink:""}    , ...linkObj] : [] // Sadece ilan sayfasındayken yukarıdaki parent breadcrumbını göster. Haricinde ana sayfada gösterme
   
         return (
-          <div>
-            
-            <div className={s.parentslist}>
-                {linkObj?.map((item, i)=>{
-                          return <Link href={"/b/ads/"+item?.fulllink} key={"link_"+i}><span>{i>0 && " > "}</span> {item?.label}</Link>
-                })}
-            </div>
-                {/* {JSON.stringify(linkObj)} */}          
+          <div>            
+                <div className={s.parentslist}>
+                        {linkObj?.map((item, i)=>{
+                                return <Link href={"/b/ads/"+item?.fulllink} key={"link_"+i}><span>{i>0 && " > "}</span> {item?.label}</Link>
+                        })}
+                </div>
+                {/* {JSON.stringify(linkObj)} */}
           </div>
         )
       }

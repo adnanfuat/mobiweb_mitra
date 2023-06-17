@@ -1,10 +1,10 @@
 
 import { RiContrast2Line, RiShieldCheckFill , RiShieldFill} from "react-icons/ri";
 import {Ad_LayoutMain_Visitor_V2} from "./ad_layoutmain_visitor_v2"; 
-import {Advert_VisitorMode_MetaData} from "./advert_visitormode_metadata"; 
-import {Content_Visitor_Image} from "./content_visitor_image"; 
+import {Advert_VisitorMode_MetaData} from "@/components/ad/advert_visitormode_metadata"; 
+import {Content_Visitor_Image} from "@/components/c/content_visitor_image"; 
 // import {Content_Visitor_Image} from "./content_visitor_"; 
-import {Advert_Visitor_Tabs} from "./advert_visitor_tabs"; 
+import {Advert_Visitor_Tabs} from "@/components/c/advert_visitor_tabs"; 
 import s from "./s.module.css"
 import Link from 'next/link';
 import Image from "next/image";

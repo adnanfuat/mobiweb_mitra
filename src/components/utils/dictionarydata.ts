@@ -2,7 +2,7 @@
 
 const DictionaryData = async ({locale}) => {
               
-                                             console.log("process.env.NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL)
+                                                              // console.log("process.env.NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL)
                                              
                           
                                                               let dictionarydata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
@@ -16,10 +16,10 @@ const DictionaryData = async ({locale}) => {
                                                               })
 
                                                               dictionarydata= await dictionarydata?.json();
-
+                                                              
                                                               dictionarydata= await dictionarydata?.data?.dictionaryquery?.o_key_1 ?? [];
+                                                              // console.log("dictionarydatsa: ",locale, dictionarydata)
 
-                                                              console.log("dictionarydatsa: ",locale, dictionarydata?.data)
 
                                                                 
                                                                 

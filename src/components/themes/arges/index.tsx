@@ -32,7 +32,7 @@ export const Arges =  (props) => {
     let {logo, params, dictionary, webdata, cuffs} = props ?? {};
   
     return ( 
-              <div style={{position:"relative"}} className={`${poppins.variable}`}>
+              <div style={{position:"relative"}} className={poppins.className}>
                                   
                         <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>
 
@@ -66,10 +66,10 @@ export const Arges =  (props) => {
 
             <div className={s.bantWr}>            
                     <div className={s.bantTextWr}>
-                        <div className={s.bantTitle}>Arges İnşaat'dan Teklif İsteyin</div>  
+                        <div className={s.bantTitle}>{`Arges İnşaat'dan Teklif İsteyin`}</div>  
                         <div>Hizmetlerimiz için teklif almak isterseniz hızlıca bizlere ulaşabilirsiniz.</div>  
                     </div>                    
-                    <div  className={s.bantButton}>Arges İnşaat'dan Teklif İsteyin</div>  
+                    <div  className={s.bantButton}>{`Arges İnşaat'dan Teklif İsteyin`}</div>  
               </div>
               
       </div>

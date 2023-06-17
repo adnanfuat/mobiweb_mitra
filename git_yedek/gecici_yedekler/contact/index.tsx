@@ -1,6 +1,6 @@
 import s from "./page.module.css"
 import { BolgeIsmiOgren } from "@/components/utils/bolgeismiogren";
-import Form from "./form";
+import Form from "@/components/contact/form";
 import {localeStatic} from "@/constants/localestatic";
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
 import dictionaryFunc from "@/components/utils/dictionaryfunc";

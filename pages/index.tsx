@@ -1,5 +1,5 @@
 // import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
-import DictionaryData from "@/components/utils/dictionarydata";
+ import DictionaryData from "@/components/utils/dictionarydata";
 import WebData from "@/components/utils/webdata";
 // import { FilesQuery_SpecialRequests } from "../src/gql/filesquery_specialrequests";
 import { Mitra } from "@/themes/mitra"
@@ -18,10 +18,9 @@ export default  function Index(props) {
       
       // console.log("cuffscuffs: ", cuffs);
 
-      let component=<div>...</div>;
+       let component=<div>..</div>;
 
-      // return (<div>{component}</div>)
-
+      //  return (<div>{component}</div>)
       // return (<div>{JSON.stringify(cuffs)}</div>)
 
       if (theme_name=="mitra" && 1==1) { // && 1==3
@@ -76,11 +75,13 @@ export const getServerSideProps = async (context) => {
  
   let {defaultLocale, locale} = context ?? {};
    
-  let webdata= await WebData() ?? {}; // {} // 
+  let dictionary = await DictionaryData({locale: locale ?? "tr"});  
+
+  let webdata=  await WebData() ?? {}; // {} 
+  //console.log("webdatawebdata: ", webdata);
   
   let theme_name = webdata?.bigdata?.theme?.name;
            
-   let dictionary = await DictionaryData({locale: locale ?? "tr"});  
        
    let props = { webdata,dictionary};
                         
