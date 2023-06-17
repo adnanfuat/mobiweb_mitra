@@ -11,7 +11,7 @@ import s from "./index.module.css"
 // import styles from './page.module.css'
 import {Index_Cuffs_V2_Visitor} from "@/components/cuffs/index_cuffs_v2_visitor"
 
-import Estates from "@/components/estates/estates";
+// import Estates from "@/components/estates/estates";
 
 import { Inter, Poppins } from 'next/font/google'
 const inter = Inter({
