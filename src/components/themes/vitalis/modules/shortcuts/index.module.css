@@ -1,0 +1,10 @@
+
+  .shell {    
+    background-color: #ffffff;    
+    gap: 10px;
+    padding: 60px 10px;    
+    align-items: center;
+    font-family: var(--poppins-font);
+    justify-content: center;    
+    display: flex;    
+  }

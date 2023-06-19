@@ -10,6 +10,8 @@ import {Products} from "./modules/products"
 import {Blogs} from "./modules/blogs"
 import {Gallery} from "./modules/gallery"
 import {TextBoards} from "./modules/textboards"
+import {ImageBoards} from "./modules/imageboards"
+import {Shortcuts} from "./modules/shortcuts"
 // import Estates from "@/components/estates/estates";
 // import {DesignLayout_Vitalis} from "./layouts/designlayout_vitalis"
 
@@ -63,7 +65,12 @@ export const Vitalis =  (props) => {
                                                                         <div className={s.bant}> <Bant2/> </div>    
 
 
+                                                                        <div className={s.bant}> <ImageBoards/> </div>  
+
                                                                         <div className={s.bant}> <TextBoards/> </div>    
+
+
+                                                                        <div className={s.shortcuts}> <Shortcuts/> </div>    
 
 
         <br/>
