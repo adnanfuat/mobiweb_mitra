@@ -29,7 +29,7 @@ export  default function HeaderFront  (props) {
         // console.log("propsprops", props);
         
     return (
-      <div className={s.headercompwr} style={{position, padding:`${topbottom}px 250px`}}>
+      <div className={s.headercompwr}>
                   
         <Link href={`/${locale}`}>
             <div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}></div>

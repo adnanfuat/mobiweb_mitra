@@ -1,0 +1,21 @@
+.bantWr {
+  display: flex;
+  min-height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+
+}
+
+.bantinner{
+  width: 80%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.banttext {
+  font-size: 1.3rem;
+  line-height: 35px;
+}

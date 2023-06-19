@@ -1,6 +1,6 @@
 import Link from "next/link";
 import s from "./footercomp.module.css";
-import { RiHome2Fill } from "react-icons/ri";
+import { RiHome2Fill, RiCellphoneFill, RiMailFill } from "react-icons/ri";
 import Image from "next/image";
 
 
@@ -27,13 +27,14 @@ export  default function FooterComp  (props) {
                     <div className={s.ddddd}>
                       <Link href={`/`}><div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}></div></Link>
 
-                      <div className={s.ddddd}>
+                      <div className={s.rightcorner}>
                           ® 2023 Vitalis Botanik <br/>
                             Tüm hakları saklıdır.
                             
-                              <div className={s.ddddd}>
-                                        <span><Image src={`/images/pw.png`} width={50} height={50} alt={"PROWEB"} className={s.FFFFF}/> </span>
-                                        <span>sadsad</span>
+                              <div className={s.webcompanywr}>
+                                        <span><Image src={`/images/pw.png`} width={33} height={10} alt={"PROWEB"} className={s.FFFFF}/> </span>
+                                        <span>|</span>
+                                        <span><Image src={`/images/sr.png`} width={20} height={13} alt={"SR"} className={s.FFFFF}/> </span>
                               </div>
 
                       </div>
@@ -94,9 +95,9 @@ export  default function FooterComp  (props) {
           <div className={s.blockwr}>                   
                   
                   <div className={s.blocktitle}>Bize Ulaşın</div>                  
-                  <div><span><RiHome2Fill/></span> Rüstempaşa Mahallesi Kuruçay Mevkii Sapanca / SAKARYA </div>
-                  <div><span><RiHome2Fill/></span> 0 534 6045154 </div>
-                  <div><span><RiHome2Fill/></span> bilgi@vitalisbotanik.com </div>                  
+                  <div className={s.blockitem}><span><RiHome2Fill/></span> Rüstempaşa Mahallesi Kuruçay Mevkii Sapanca / SAKARYA </div>
+                  <div className={s.blockitem}><span><RiCellphoneFill/></span> 0 534 6045154 </div>
+                  <div className={s.blockitem}><span><RiMailFill/></span> bilgi@vitalisbotanik.com </div>
 
           </div>
     )

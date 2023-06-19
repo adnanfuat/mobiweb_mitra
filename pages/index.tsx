@@ -78,7 +78,7 @@ export const getServerSideProps = async (context) => {
   let dictionary = await DictionaryData({locale: locale ?? "tr"});  
 
   let webdata=  await WebData() ?? {}; // {} 
-  console.log("webdatawebdata: ", webdata);
+  //console.log("webdatawebdata: ", webdata);
   
   let theme_name = webdata?.bigdata?.theme?.name;
            

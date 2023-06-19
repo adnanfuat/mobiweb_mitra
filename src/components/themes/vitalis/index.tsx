@@ -3,17 +3,23 @@ import s from "./index.module.css"
 
 import {Index_Cuffs_V2_Visitor} from "./cuffs/index_cuffs_v2_visitor"
 import FooterComp from "./footer/footercomp"
-import Estates from "@/components/estates/estates";
-import {DesignLayout_Vitalis} from "./layouts/designlayout_vitalis"
+import {Welcome} from "./modules/welcome"
+import {Bant} from "./modules/bant"
+import {Bant2} from "./modules/bant2"
+import {Products} from "./modules/products"
+import {Blogs} from "./modules/blogs"
+import {Gallery} from "./modules/gallery"
+// import Estates from "@/components/estates/estates";
+// import {DesignLayout_Vitalis} from "./layouts/designlayout_vitalis"
 
-// import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import HeaderFront from "./header/header_front";
 
-// const inter = Inter({
-//         variable: '--inter-font',
-//         subsets:["latin","latin-ext"],
-//         weight:["100", "200","300","400","500","600", "700","800","900"]
-//       })
+const poppins = Poppins({
+        variable: '--poppins',
+        subsets:["latin","latin-ext"],
+        weight:["100", "200","300","400","500","600", "700","800","900"]
+      })
 
 
 export const Vitalis =  (props) => {
@@ -24,7 +30,7 @@ export const Vitalis =  (props) => {
   
     return (                        
 
-        <div className={s.mainwr} style={{backgroundImage:"url(/themes/vitalis/bg.png)", backgroundRepeat:"no-repeat"}}>
+        <div className={`${s.mainwr} ${poppins.className}`} style={{backgroundImage:"url(/themes/vitalis/bg.png)", backgroundRepeat:"no-repeat"}}>
 
         <div className={s.insidewr}>
 
@@ -41,12 +47,29 @@ export const Vitalis =  (props) => {
                                                                                 {/* <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} /> */}
                                                                         </div> 
 
-                                                                                                                                                
-                                                                
-                                                   
+
+                                                                        <div className={s.ssss}> <Welcome/> </div>                                                                                                                                                                                                                                                                                                                                                                           
         </div>
+
+                                                                        <div className={s.bant}> <Bant/> </div>    
+
+                                                                        <div className={s.products}><Products/></div>    
+                                                                        
+                                                                        <div className={s.products}><Blogs/></div>    
+
+                                                                        <div className={s.products}><Gallery/></div>    
+
+                                                                        <div className={s.bant}> <Bant2/> </div>    
+
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
         
         <div className={s.footer}><FooterComp logo={logo}/></div>
+
 </div>
 
                         

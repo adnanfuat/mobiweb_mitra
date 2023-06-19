@@ -1,0 +1,71 @@
+
+  .welcomeWr {    
+    background-color: #ffffff;    
+    gap: 10px;
+    padding: 60px 10px;    
+    align-items: center;
+    font-family: var(--poppins-font);
+    justify-content: center;    
+    display: flex;    
+  }
+  
+  .welcomeInnerWr {    
+    display: grid;    
+    grid-template-areas: 
+    "welcomeImage welcomeTitle"
+    "welcomeImage welcomeDescription";        
+    padding: 10px;
+    gap:20px;
+    width: 90%;
+  }
+
+
+  .welcomeTitle {
+  display: flex;
+  grid-area: welcomeTitle;
+  justify-content: center;
+  font-size: 1.6rem;
+  padding: 3px 0px;
+  flex-direction: column;
+  align-items: center;
+  gap:20px
+  }
+
+
+  .welcomeDescription {
+    display: flex;
+    
+    grid-area: welcomeDescription;
+    font-size: 1rem;
+    line-height: 38px;
+    }
+
+
+    .welcomeImage {
+      display: flex;      
+      grid-area: welcomeImage;
+      }
+
+
+    .welcomeTitleHr {
+      display: flex;
+      background-color: black;
+      height: 2px;
+      width:30vw;
+      background-color: rgb(0, 0, 0);
+      position: relative;
+      justify-content: center;
+    }
+
+
+    .welcomeTitleHrBold {
+      display: flex;
+      background-color: black;
+      height: 6px;
+      width:20vw;
+      background-color: rgb(0, 0, 0);
+      position: relative;
+      top: -2px;
+    }    
+
+

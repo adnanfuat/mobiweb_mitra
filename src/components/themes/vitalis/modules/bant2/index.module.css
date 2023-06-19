@@ -1,0 +1,38 @@
+.bantWr {
+  display: flex;
+  min-height: 390px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap:65px;
+  font-size: 1.4rem;
+color: white;
+}
+
+.bantinner{
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  
+}
+
+.bantitem {
+  font-size: 1.3rem;
+  line-height: 35px;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:25px;
+  font-weight: bold;
+  color: white;
+  transition: all 0.5s;
+}
+
+.bantitem:hover {
+transform: scale(1.1);
+}
