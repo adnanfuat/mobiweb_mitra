@@ -129,9 +129,7 @@ const RsData =  (props) => {
   let sluglength=slug?.length;
   let lastslugitem=slug?.length==0 ? root_category :  slug?.[sluglength-1];
 
-  // let webdata = await WebData();
-  // console.log("webdatawebdatawebdata", webdata?.richcontents);      
-  // let adverts=await richContents_WithCategories({slug, active:1, website:process.env.DOMAIN, useremail:process.env.USEREMAIL})  ?? []
+  
 
   let adverts =  webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884");
 

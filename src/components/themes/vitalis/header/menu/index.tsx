@@ -25,15 +25,15 @@ export const Menu =  (props) => {
           {/* {dictionary?.[0]?.title} */}          
           {/* {locale} */}
 
-                  <Link href={`/${locale}`} className={s.menuitem}  style={itemFunc({type:"main_page", menu})?.style}> {ana_sayfa} </Link>
+                  <Link href={`/`} className={s.menuitem}  style={itemFunc({type:"main_page", menu})?.style}> {ana_sayfa} </Link>
 
                   {/* <Link href={`/`} className={s.menuitem}  >{hakkimizda}</Link> */}
 
-                  {itemFunc({type:"real_estates", menu})?.visible && <Link href={`/${locale}/ads`} className={s.menuitem} style={itemFunc({type:"real_estates", menu})?.style}> {emlak_ilanlari} </Link>}                  
+                  {itemFunc({type:"real_estates", menu})?.visible && <Link href={`/ads`} className={s.menuitem} style={itemFunc({type:"real_estates", menu})?.style}> {emlak_ilanlari} </Link>}                  
 
-                  <Link href={`/${locale}/cs/urunler`} className={s.menuitem} >{urunler} </Link>                  
+                  <Link href={`/cs/urunler`} className={s.menuitem} >{urunler} </Link>                  
                   {/* <Link href={`/b/services`} className={s.menuitem}  >{hizmetler}</Link> */}
-                  <Link href={`/${locale}/contact`} className={s.menuitem}  >{iletisim}</Link>
+                  <Link href={`/contact`} className={s.menuitem}  >{iletisim}</Link>
                   
                                       {/* <style jsx>{`
                                     .additional {

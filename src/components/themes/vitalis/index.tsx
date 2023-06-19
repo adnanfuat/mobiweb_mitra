@@ -7,7 +7,7 @@ import Estates from "@/components/estates/estates";
 import {DesignLayout_Vitalis} from "./layouts/designlayout_vitalis"
 
 // import { Inter } from 'next/font/google'
-import HeaderComp from "./header";
+import HeaderFront from "./header/header_front";
 
 // const inter = Inter({
 //         variable: '--inter-font',
@@ -30,7 +30,7 @@ export const Vitalis =  (props) => {
 
                     {/* {title ? <div className={`${s.title} ${inter.variable}`} style={{backgroundColor:"white"}}>{title ? title : "Başlık atanmamış"}</div> : <div></div>} */}                    
                     {/* { props?.children }  */}                    
-                                                        <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata}  sidepadding={42} topbottom={5}/> 
+                                                        <HeaderFront logo={logo} params={params} dictionary={dictionary} webdata={webdata}  sidepadding={42} topbottom={5}/> 
                                                                 
                                         
                                                                 

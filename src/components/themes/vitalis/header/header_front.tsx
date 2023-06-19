@@ -1,5 +1,5 @@
 import Link from "next/link";
-import s from "./header.module.css";
+import s from "./header_front.module.css";
 import common from "./common.module.css";
 import theme_1 from "./theme_1.module.css";
 import theme_2 from "./theme_2.module.css";
@@ -10,7 +10,7 @@ import {Flags} from "@/components/flags";
 
 
 
-export  default function HeaderComp  (props) {
+export  default function HeaderFront  (props) {
       
     const session = undefined;
   

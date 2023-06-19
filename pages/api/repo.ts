@@ -1,17 +1,9 @@
-
-
-
-
-
 export default  async function handler(req, res) {
   
   const query = req?.query;
   let {target }  = query ?? {}    
 
-
-  // const url = req.nextUrl.clone()   
-
-  console.log("sadsadsad", process.env.NEXT_PUBLIC_API_URL)
+  // console.log("sadsadsad", process.env.NEXT_PUBLIC_API_URL)
 
   let mainres=await fetch("https://octopus-app-oynbs.ondigitalocean.app/api/graphql", { //process.env.NEXT_PUBLIC_API_URL    // https://octopus-app-oynbs.ondigitalocean.app/api/graphql                                  
     // next:{revalidate:10},                                   

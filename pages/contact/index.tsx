@@ -4,7 +4,7 @@ import Form from "@/components/contact/form";
 import {localeStatic} from "@/constants/localestatic";
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
 import dictionaryFunc from "@/components/utils/dictionaryfunc";
-import { DesignLayout_Vitalis } from "@/themes/vitalis/layouts/designlayout_vitalis";
+import { DesignLayout_Vitalis_BackPages } from "@/themes/vitalis/layouts/designlayout_vitalis_backpages";
 import { DesignLayout_Mitra_BackPages } from "@/themes/mitra/layouts/designlayout_mitra_backpages";
 import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
 import DictionaryData from "@/components/utils/dictionarydata";
@@ -45,7 +45,7 @@ const Contact = (props) => {
     return (<DesignLayout_Arges title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Arges> )                      
   }
   else if (theme_name=="vitalis") {
-    return (<DesignLayout_Vitalis title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData addresses={addresses} webdata={webdata}  countries={countries} /> </DesignLayout_Vitalis> )                      
+    return (<DesignLayout_Vitalis_BackPages title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData addresses={addresses} webdata={webdata}  countries={countries} /> </DesignLayout_Vitalis_BackPages> )                      
   }     
   else 
   {

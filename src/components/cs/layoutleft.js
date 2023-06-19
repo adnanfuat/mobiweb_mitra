@@ -27,7 +27,7 @@ export const LayoutLeft = ({props}) => {
   
     
   return (
-    <div className={s.mainWr}>
+    <div className={s.mainWr}>sassasadsadsadsda
       <div className={s.menu}>
             <div className={s.menuleft}>
               <RiArtboard2Fill size={20}/>

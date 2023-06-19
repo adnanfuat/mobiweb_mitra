@@ -1,7 +1,7 @@
 import Link from "next/link";
 import s from "./footercomp.module.css";
 import { RiHome2Fill } from "react-icons/ri";
-
+import Image from "next/image";
 
 
 export  default function FooterComp  (props) {
@@ -26,6 +26,17 @@ export  default function FooterComp  (props) {
                     <div className={s.ddddd}> <HizliErisim/> </div>
                     <div className={s.ddddd}>
                       <Link href={`/`}><div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}></div></Link>
+
+                      <div className={s.ddddd}>
+                          ® 2023 Vitalis Botanik <br/>
+                            Tüm hakları saklıdır.
+                            
+                              <div className={s.ddddd}>
+                                        <span><Image src={`/images/pw.png`} width={50} height={50} alt={"PROWEB"} className={s.FFFFF}/> </span>
+                                        <span>sadsad</span>
+                              </div>
+
+                      </div>
                     </div>
               </div>
           
@@ -60,7 +71,7 @@ export  default function FooterComp  (props) {
                   
       <div className={s.blocktitle}>Hızlı Erişim</div>                  
       
-      <div className={s.blockinnerwr}>          
+      <div className={s.blockinnergridwr}>          
 
           <div className={s.blockinner}><span><RiHome2Fill/></span> Hakkımızda </div>
           <div className={s.blockinner}><span><RiHome2Fill/></span> Ürünler </div>

@@ -10,7 +10,8 @@ const WebData = async () => {
                                     headers: { "Content-Type": "application/json", },
                                     body: JSON.stringify({
                                       query: WebQuery,
-                                      variables:{data:{slug:process.env.DOMAIN, repo:process.env.REPO}}  //cached_domain ?? 
+                                      variables:{data:{repo:process.env.REPO}}  //cached_domain ?? 
+                                      // variables:{data:{slug:process.env.DOMAIN, repo:process.env.REPO}}  //cached_domain ?? 
                                     })
                                   })
 
@@ -43,23 +44,49 @@ const WebQuery =
       bigdata
       o_key_1
       o_key_2
-      richcontents {
-        id            
-        title_tr
-        slug_tr
-        key
-        img_tr
-        bigdata
-        createdat
-        updatedat
-        active
-        bigbigparent_key
-        user
-        userdata {
-          image
-        }
-    }      
+        
     
     }
   }`
 ;
+
+
+
+
+
+// const WebQuery = 
+// `  query WebQuery ($data:JSON)  {
+//     webquery (data:$data) {
+//       id      
+//       title_tr
+//       slug_tr
+//       img_tr
+//       bigdata
+//       createdat
+//       img_tr
+//       updatedat
+//       active
+//       user
+//       bigdata
+//       o_key_1
+//       o_key_2
+//       richcontents {
+//         id            
+//         title_tr
+//         slug_tr
+//         key
+//         img_tr
+//         bigdata
+//         createdat
+//         updatedat
+//         active
+//         bigbigparent_key
+//         user
+//         userdata {
+//           image
+//         }
+//     }      
+    
+//     }
+//   }`
+// ;

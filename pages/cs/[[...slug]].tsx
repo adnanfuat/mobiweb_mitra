@@ -3,16 +3,13 @@ import Link from 'next/link';
 import { BolgeIsmiOgren } from "@/components/utils/bolgeismiogren";
 import { datetimeFunc } from "@/components/utils/datetimefunc";
 import Head from "next/head";
-import Image from "next/image";
-import {LayoutLeft} from "@/components/ads/layoutleft";
+import {LayoutLeft} from "@/components/cs/layoutleft";
 import { cacheCountries } from "@/components/utils/cachecountries";
-// import relatedCategory from "@/components/utils/relatedcategory";
-// import { DesignLayout } from "@/layouts/designlayout";
 import WebData from "@/components/utils/webdata";
 import DictionaryData from "@/components/utils/dictionarydata";
 import { localeStatic } from "@/constants/localestatic";
 import relatedCategory_Bigdata from "@/components/utils/relatedcategory_bigdata";
-import { DesignLayout_Vitalis } from "@/themes/vitalis/layouts/designlayout_vitalis";
+import { DesignLayout_Vitalis_BackPages } from "@/themes/vitalis/layouts/designlayout_vitalis_backpages";
 import { DesignLayout_Mitra_BackPages } from "@/themes/mitra/layouts/designlayout_mitra_backpages";
 import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
 
@@ -24,9 +21,7 @@ export default function Category (props){
   let {locale, slug} = params ?? {}
 
   locale = locale ? locale : localeStatic;
-
   
-
   let  fileObjects = webdata?.bigdata?.fileObjects;
   
   let lastslugitem = slug?.[slug?.length-1]
@@ -52,8 +47,6 @@ export default function Category (props){
           }        
   })
     
-
-  
 
 
   //////////////////////////////////// --
@@ -116,7 +109,7 @@ function Rs_Shell (props){
   
   
 
-  // return (<div>{JSON.stringify(category)}</div>)
+  //  return (<div>{JSON.stringify(theme_name)}</div>)
 
 
 
@@ -127,9 +120,9 @@ function Rs_Shell (props){
   else if (theme_name=="arges") {
     return (<DesignLayout_Arges title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Arges> )                      
   }
-  // else if (theme_name=="vitalis") {
-  //   return (<DesignLayout_Vitalis title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Vitalis> )                      
-  // }     
+  else if (theme_name=="vitalis") {
+    return (<DesignLayout_Vitalis_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Vitalis_BackPages> )                      
+  }     
   // else 
   // {
   //   return (<DesignLayout_Mitra_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Mitra_BackPages> )                      

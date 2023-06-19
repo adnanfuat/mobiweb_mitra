@@ -69,10 +69,12 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }: AppProps) =>
     let router = useRouter();
     const changeTargetFunc = async (value) => {
 
-      console.log("asdasdsadsad", 1)        
+      // console.log("asdasdsadsad", 1)        
+
         await fetch("/api/repo?target="+value);
-        console.log("asdasdsadsad",2)        
-        router.reload();
+        // console.log("asdasdsadsad",2)        
+        //router.reload();
+        window.open("/", '_blank', 'noreferrer');
                       
     }
 
