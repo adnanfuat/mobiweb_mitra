@@ -9,6 +9,7 @@ import {Bant2} from "./modules/bant2"
 import {Products} from "./modules/products"
 import {Blogs} from "./modules/blogs"
 import {Gallery} from "./modules/gallery"
+import {TextBoards} from "./modules/textboards"
 // import Estates from "@/components/estates/estates";
 // import {DesignLayout_Vitalis} from "./layouts/designlayout_vitalis"
 
@@ -60,6 +61,9 @@ export const Vitalis =  (props) => {
                                                                         <div className={s.products}><Gallery/></div>    
 
                                                                         <div className={s.bant}> <Bant2/> </div>    
+
+
+                                                                        <div className={s.bant}> <TextBoards/> </div>    
 
 
         <br/>
