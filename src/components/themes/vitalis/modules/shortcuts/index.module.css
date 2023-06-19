@@ -1,10 +1,25 @@
 
   .shell {    
-    background-color: #ffffff;    
+    
     gap: 10px;
     padding: 60px 10px;    
     align-items: center;
     font-family: var(--poppins-font);
     justify-content: center;    
     display: flex;    
+    position:fixed;
+    left:10px;
+    bottom:-25px;
+    flex-direction: column;
   }
+
+.item {
+  display: flex;
+  color: #C11D00;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.item:hover {
+  transform: scale(1.2);
+}
