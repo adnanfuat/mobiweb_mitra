@@ -1,30 +1,30 @@
-import s from "./re.module.css"
+import s from "./index.module.css"
 import Link from 'next/link';
 import { BolgeIsmiOgren } from "@/components/utils/bolgeismiogren";
 import { datetimeFunc } from "@/components/utils/datetimefunc";
 import Head from "next/head";
-import {LayoutLeft} from "@/components/cs/layoutleft";
-import { cacheCountries } from "@/components/utils/cachecountries";
-import WebData from "@/components/utils/webdata";
-import DictionaryData from "@/components/utils/dictionarydata";
 import { localeStatic } from "@/constants/localestatic";
 import relatedCategory_Bigdata from "@/components/utils/relatedcategory_bigdata";
 import { DesignLayout_Vitalis_BackPages } from "@/themes/vitalis/layouts/designlayout_vitalis_backpages";
 import { DesignLayout_Mitra_BackPages } from "@/themes/mitra/layouts/designlayout_mitra_backpages";
 import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
+import { LayoutLeft } from "./layoutleft";
 
-let bigbigparent_slug="urunler"; // Soldaki menüde hangi kategoriden itibaren aşağısnı göstereceğiz  ?
+// let bigbigparent_slug="urunler"; // Soldaki menüde hangi kategoriden itibaren aşağısnı göstereceğiz  ?
+// let item_type="basic";
+// let card_type="bigfoot";
+// let aspectRatio_Image="4.5/6";
 
-export default function Category (props){ 
+export default function CS_Shell (props){ 
   
-  let {params, dictionary, webdata, fileobjects, countries} = props ?? {}
-  let {locale, slug} = params ?? {}
+  let {params, dictionary, webdata, fileobjects, countries, bigbigparent_slug, item_type, card_type, aspectRatio_Image  } = props ?? {}
+  let {locale, slug} = params ?? {};
 
   locale = locale ? locale : localeStatic;
   
   let  fileObjects = webdata?.bigdata?.fileObjects;
   
-  let lastslugitem = slug?.[slug?.length-1]
+  let lastslugitem = slug?.[slug?.length-1];
   
   let contents = webdata?.o_key_2?.contents ?? []; // Bize tüm kategoriler geldi..  
   
@@ -54,20 +54,9 @@ export default function Category (props){
         let info = webdata?.bigdata?.history[0];
         let lang = info?.lang;
 
-        let logofiles =  lang?.tr?.logofiles;
-
-          // let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-          //   method: "POST",
-          //   headers: { "Content-Type": "application/json", },
-          //   body: JSON.stringify({
-          //     query: FilesQuery_SpecialRequests,
-          //     variables:{data:{specialrequests:logofiles}} 
-          //   })
-          // })
-          //   .then((res) => res.json())
-          //   .then((result) => { return result?.data?.filesquery_specialrequests; });    
+        let logofiles =  lang?.tr?.logofiles;          
             
-            let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+        let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
 
   /////////////////////////////////// --
 
@@ -171,27 +160,27 @@ const RsData =  (props) => {
                                                                                                           
     {(country || city || district || subdistrict) && <div className={s.filtered}>                             
         
-            <Link href={`/${root_slug}`}><div  className={s.filteredinner}>
-                  <div className={s.filteredtitle} >Filtre</div>                              
-                      {country && <div> {country} </div>}
-                      {city && <div> {city} </div>}
-                      {district && <div> {district} </div>}
-                      {subdistrict && <div> {subdistrict} </div>}
-                  </div>
-            </Link>
+                <Link href={`/${root_slug}`}><div  className={s.filteredinner}>
+                      <div className={s.filteredtitle} >Filtre</div>                              
+                          {country && <div> {country} </div>}
+                          {city && <div> {city} </div>}
+                          {district && <div> {district} </div>}
+                          {subdistrict && <div> {subdistrict} </div>}
+                      </div>
+                </Link>
 
       </div>
     }
     
-      <div className={s.mobilmenu}>
-              {/* <div className={s.mobilmenu_close}  onClick={()=>setmobilmenu(old=>!old)}>{mobilmenu ? <RiCloseFill size={30} /> :  <RiListUnordered size={30} />  }</div>                 */}
-              {/* { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" } */}
-      </div>
+      {/* <div className={s.mobilmenu}>
+              <div className={s.mobilmenu_close}  onClick={()=>setmobilmenu(old=>!old)}>{mobilmenu ? <RiCloseFill size={30} /> :  <RiListUnordered size={30} />  }</div>                
+              { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" }
+      </div> */}
 
       <div className={s.desktopmenu}><LayoutLeft props={{ parents, category,categories, root_slug, bigbigparent_slug, countries, searchParams}}/></div>
 
       <div className={s.bodywr}>                                    
-            <div className={s.itemswr}> {contents?.map((item,index) =>{ return <Item props={{item, countries, params, fileObjects}} key={index}/> }) } </div>                    
+            <div className={s.itemswr}> { contents?.map((item,index) =>{ return <Item props={{item, countries, params, fileObjects, ...props}} key={index}/> })   }   </div>                    
       </div>
 
       <Meta category={category} firstadvert={contents[0]} root_slug={root_slug} params={params}/>
@@ -204,100 +193,183 @@ const RsData =  (props) => {
 
 
 const Item = ({props}) => {
-  const {item,  countries, params, fileObjects} =props ?? {};
-  let {parentObj, loggedUserMail} = item ?? {};
+  const {item,  countries,  fileObjects, item_type} =props ?? {};  
   // let {name} = mailName({mail:item?.user})  
   // let owner = user?.email==item?.user;
-  const {locale} =params ?? {};
-
+  
   let properties=item?.bigdata?.history?.[0]?.info?.properties;
-
   let fiyat=properties?.find(item=>item?.key=="fiyat");
 
   let advertiser=item?.bigdata?.history[0]?.info?.advertiser;
   let company = item?.bigdata?.instant_company;  
+  // console.log("asdsasasds${root_slug}aad:", item?.title_tr, item);
+
+  let {timeAgo, localeString} = datetimeFunc({datetime:item?.createdat});
+  // let props = {item, countries, fileObjects}
+
+  if (item_type=="basic")      return <Item_Basic {...props}/>                                     
+  if (item_type=="detail")     return <Item_Detail {...props}/>                                     
+                         else return ( <div className={s.item}> Type gelmedi.. </div>)
+          
   
+}
+
+
+
+
+
+
+
+
+const Item_Basic = (props) => {
+
+  let {item,  countries, fileObjects } = props ?? {};
+
   let country_name = item?.country_slug; 
   let city_name = item?.city_slug; 
   let district_name = item?.district_slug; 
-  let subdistrict_name = item?.subdistrict_slug;  
-
-  // console.log("asdsasasds${root_slug}aad:", item?.title_tr, item);
-
-  function currencyFormat(num) {
-                                  return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+ " TL"
-                               }
-
-  let {timeAgo, localeString} = datetimeFunc({datetime:item?.createdat});
-
-  return ( 
-          <div className={s.item}>     
-              {/* {JSON.stringify(item?.slug_tr)}        */}
-              <div className={s.i_title}>{item?.title_tr}</div>
-              {parentObj?.title_tr && <div className={s.parenttitle}>{parentObj?.title_tr}</div>      }
-              {city_name && <div className={s.i_address}>
-
-                                        
-                                        <span> {BolgeIsmiOgren(city_name, "il", countries) ?? ""} </span>
-
-                                        <span> {BolgeIsmiOgren(district_name, "ilce", countries) ?? ""} </span>
-
-                                        <span> {BolgeIsmiOgren(subdistrict_name, "mahalle", countries) ?? ""}  </span>               
-                
-              </div>}      
-      
-              
-              <div className={s.i_image}><CardImage props={{item, id: item?.id, params, fileObjects}}/></div>
-              <div className={s.i_info}>
-                            {fiyat && <div className={s.i_info_sub}>                                
-                                <div>{currencyFormat(fiyat?.value)}</div>  
-                            </div>}
-
-
-                            <div className={s.i_info_sub}>                                
-                                <div title={localeString}>{timeAgo}</div>  
-                            </div>
-
-
-              </div>
-
-                                    
-          </div> 
-          )
-}
+  let subdistrict_name = item?.subdistrict_slug; 
+  
+  let {parentObj, loggedUserMail} = item ?? {};
 
   
-const CardImage = ({props}) => {
 
-  let {item, id, params, fileObjects} = props ?? {};
+
+  return ( 
+    <div className={s.item_basic}>     
+        {/* {JSON.stringify(item?.slug_tr)}        */}
+        {parentObj?.title_tr && <div className={s.parenttitle}>{parentObj?.title_tr}</div>      }
+              
+        <div className={s.basicitem_imagewr}><Card props={{item, id: item?.id,  fileObjects, ...props}}/></div>
+        <div className={s.i_title}>{item?.title_tr}</div>
+                              
+    </div> 
+    )
+}
+
+
+
+
+const Item_Detail = (props) => {
+
+  let {item,  countries, fileObjects } = props ?? {};
+
+  let country_name = item?.country_slug; 
+  let city_name = item?.city_slug; 
+  let district_name = item?.district_slug; 
+  let subdistrict_name = item?.subdistrict_slug; 
+  
+  let {parentObj, loggedUserMail} = item ?? {};
+
+  
+  function currencyFormat(num) {
+    return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+ " TL"
+ }
+
+  return ( 
+    <div className={s.item}>  sadsads   
+        {/* {JSON.stringify(item?.slug_tr)}        */}
+        <div className={s.i_title}>{item?.title_tr}</div>
+        {parentObj?.title_tr && <div className={s.parenttitle}>{parentObj?.title_tr}</div>      }
+        {city_name && <div className={s.i_address}>
+
+                                  
+                                  <span> {BolgeIsmiOgren(city_name, "il", countries) ?? ""} </span>
+
+                                  <span> {BolgeIsmiOgren(district_name, "ilce", countries) ?? ""} </span>
+
+                                  <span> {BolgeIsmiOgren(subdistrict_name, "mahalle", countries) ?? ""}  </span>               
+          
+        </div>}      
+
+        
+        <div className={s.i_image}><Card props={{item, id: item?.id,  fileObjects, ...props}}/></div>
+        <div className={s.i_info}>
+                      {/* {fiyat && <div className={s.i_info_sub}>                                
+                          <div>{currencyFormat(fiyat?.value)}</div>  
+                      </div>} */}
+
+
+                      {/* <div className={s.i_info_sub}>                                
+                          <div title={localeString}>{timeAgo}</div>  
+                      </div> */}
+
+
+        </div>
+
+                              
+    </div> 
+    )
+}
+
+
+
+
+
+
+  
+const Card = ({props}) => {
+
+  let {item, id, fileObjects, card_type} = props ?? {};
   
   let fileObject=fileObjects?.find(f=>f?.slug_tr==item?.files_tr?.[0]);
 
   let img =!!fileObject ? fileObject?.bigdata?.folder + "/" + fileObject?.bigdata?.filename : undefined
 
+  img = img ? `${process.env.NEXT_PUBLIC_IMGSOURCE}/${img}` : "/images/placeholder-image.png"
+
+  let link = `/c/${item?.slug_tr}/${id}`;
+
+  props={img, link, ...props}
   
+  if (card_type=="bigfoot")     return <Card_BigFoot {...props}/>                                     
+  if (card_type=="detail")     return <Card_Detail {...props}/>                                     
+                         else return ( <div className={s.item}> Card Tipi gelmedi </div>)
     
-  return (    
-      <Link href={`/c/${item?.slug_tr}/${id}`}  >
-          {/* {JSON.stringify(item)}  */}
-        {img ?
-          <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
-          :
-          <div><img  width="150px" height="auto" src={`/whitelogo.jpg`} title={"Resim bulunmadı"} alt={"Resim bulunmadı"}  /></div>
-          }
-      </Link>    
-  )
+  
 }
 
 
+
+
+
+
+const Card_BigFoot = (props) => {
+
+  let {link, img, aspectRatio_Image} = props ?? {};
+
+  return (
+          <Link href={link}  >
+                
+              {img ?
+                
+                <div style={{ backgroundImage:`url(${img})`, backgroundSize:"cover", backgroundPosition: "center", aspectRatio:aspectRatio_Image}} ></div>
+                :
+                <div><img  width="150px" height="auto" src={`/whitelogo.jpg`} title={"Resim bulunmadı"} alt={"Resim bulunmadı"}  /></div>
+
+                }
+            </Link>  
+  )
+}
+
   
+const Card_Detail = (props) => {
 
-// export async function getStaticPaths() {
-    
-//   let paths=[{params:{ slug:["emlak"]}}];    
+  let {link, img} = props ?? {};
 
-//     return { paths, fallback: 'blocking' }
-//   }  
+  return (
+          <Link href={link}  >
+                
+              {img ?
+                
+                <div style={{width:150, height:100, backgroundImage:`url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover", backgroundPosition: "center"}}></div>
+                :
+                <div><img  width="150px" height="auto" src={`/whitelogo.jpg`} title={"Resim bulunmadı"} alt={"Resim bulunmadı"}  /></div>
+
+                }
+            </Link>  
+  )
+}
 
     
 
@@ -405,84 +477,7 @@ const Meta = (props) => {
 
 
 
-             const FilesQuery_SpecialRequests =
-             `  query FilesQuery_SpecialRequests ($data:JSON )  {
-                   filesquery_specialrequests (data:$data) {
-                   id
-                   title_tr
-                   bigdata
-                   slug_tr
-                   title_tr
-                   active
-                   user
-                   o_key_1
-                 }
-               }`
-             ;
              
-             
-             
-
-
-
-
-
-
-
-             export async function getStaticProps(data) {
-
-
-              let {defaultLocale, locale, params} = data ?? {};
-             
-              //  console.log("sadasdsadsd", params);
-                   
-             
-               let dictionary= await DictionaryData({locale: locale ?? "tr"});  
-               let webdata=await WebData();
-               let countries=await cacheCountries();
-             
-              //  console.log("webdatawebdata: ", webdata);
-
-
-               let theme_name = webdata?.bigdata?.theme?.name;
-             
-              
-                
-               let cuffs= webdata?.bigdata?.history?.[0]?.lang?.tr?.cuffs;
-               let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
-               let logofiles =  lang?.logofiles;
-               
-             
-                 let fileobjects =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-                   next:{revalidate:10},                                   
-                   method: "POST",
-                   headers: { "Content-Type": "application/json", },
-                   body: JSON.stringify({
-                     query: FilesQuery_SpecialRequests,
-                     variables:{data:{specialrequests:logofiles}} 
-                   })
-                 })
-                   .then((res) => res.json())
-                   .then((result) => { return result?.data?.filesquery_specialrequests; });    
-                   
-                   let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
-             
-                                                                             
-             
-                 let props = { webdata, dictionary, fileobjects, logo, countries,params };
-                                    
-                 return { props, revalidate: 20 };
-                                           
-             }
-             
-             
-                          
-             export async function getStaticPaths({locales}) {
-              // let  paths = await cacheSubsectorQuery_BuildList()    
-              let paths=[{params:{slug:["aaaaaaa"]}}];           
-              return { paths, fallback: 'blocking' }
-                                                              }
-    
     
     
     

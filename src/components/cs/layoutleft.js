@@ -27,7 +27,7 @@ export const LayoutLeft = ({props}) => {
   
     
   return (
-    <div className={s.mainWr}>sassasadsadsadsda
+    <div className={s.mainWr}>
       <div className={s.menu}>
             <div className={s.menuleft}>
               <RiArtboard2Fill size={20}/>
@@ -37,7 +37,7 @@ export const LayoutLeft = ({props}) => {
             {/* <div className={s.menuright}>
               <Shortcuts/>
             </div> */}
-
+            
       </div>
       
       <CategoriesMenu_Bigdata props={props}/>
