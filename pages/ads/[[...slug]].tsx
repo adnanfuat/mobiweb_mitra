@@ -10,7 +10,7 @@ import relatedCategory from "@/components/utils/relatedcategory";
 import WebData from "@/components/utils/webdata";
 import DictionaryData from "@/components/utils/dictionarydata";
 import { localeStatic } from "@/constants/localestatic";
-import { DesignLayout_Vitalis } from "@/themes/vitalis/layouts/designlayout_vitalis";
+import { DesignLayout_Vitalis_BackPages } from "@/themes/vitalis/layouts/designlayout_vitalis_backpages";
 import { DesignLayout_Mitra_BackPages } from "@/themes/mitra/layouts/designlayout_mitra_backpages";
 import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
 
@@ -23,6 +23,7 @@ const  Category = (props) => {
   
   locale = locale ? locale : localeStatic;
   
+    
     return (  <Rs_Shell root_category={root_category} countries={countries} bigbigparent_key="1668310884" root_slug={`ads`} dictionary={dictionary} webdata={webdata}  sidepadding={42}  {...props}/>  ) 
   
   }
@@ -41,6 +42,8 @@ const  Category = (props) => {
   let lastslugitem=slug?.length==0 ? root_category :  slug?.[sluglength-1];
   
   let adverts =  webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884");
+
+  if(!adverts) return <div>...</div>
 
   if (slug?.length>0) { 
     // Sol taraftaki menüden alt kategorilerden biri seçildiğinde, diyelim //--> İş yeri > Satılık İş yeri... İlgili ilanların içinde parentlarında Satılık İş Yeri var mı diye bakıp, onları filitreler. 
@@ -104,7 +107,7 @@ const  Category = (props) => {
     return (<DesignLayout_Arges title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  {...props} /> </DesignLayout_Arges> )                      
   }
   else if (theme_name=="vitalis") {
-    return (<DesignLayout_Vitalis title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData   {...props}  /> </DesignLayout_Vitalis> )                      
+    return (<DesignLayout_Vitalis_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData   {...props}  /> </DesignLayout_Vitalis_BackPages> )                      
   }     
   else 
   {
@@ -137,7 +140,7 @@ const RsData =  (props) => {
     // Sol taraftaki menüden alt kategorilerden biri seçildiğinde, diyelim //--> İş yeri > Satılık İş yeri... İlgili ilanların içinde parentlarında Satılık İş Yeri var mı diye bakıp, onları filitreler. 
     // Böylece sadece gidilen linkteki son slugı içeren ilanları verir bize...
             adverts = adverts?.filter(ad=> {
-                          let parents= ad?.bigdata?.history[0]?.info?.parents ?? [];
+                          let parents= ad?.bigdata?.history?.[0]?.info?.parents ?? [];
                           parents=parents?.map(item=>item?.slug_tr)
                           let lastslugitem = slug?.[sluglength-1];
                           // console.log("asdasdsa," , parents, lastslugitem);
@@ -483,6 +486,6 @@ const filterAdverts = ({adverts, country, city, district, subdistrict}) => {
                     
        export async function getStaticPaths({locales}) {
         // let  paths = await cacheSubsectorQuery_BuildList()    
-        let paths=[{params:{slug:["aaaaaaa"]}}];           
+        let paths=[{params:{slug:[""]}}];           
         return { paths, fallback: 'blocking' }
                                                         }      

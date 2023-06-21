@@ -1,23 +1,18 @@
+.footer {
+  /* background-color: rebeccapurple; */
+}
 
-  
-  .footer {
-    /* background-color: rebeccapurple; */
-  }
-  
-  .shell {
-    display: grid;    
-    grid-template-rows: max-content 1fr max-content;
-    min-height: 100vh;
-  }
+.shell {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  min-height: 100vh;
+}
 
-  /* .shell> div {
+/* .shell> div {
 
     border:1px solid purple
   } */
 
-  
-  .main {
-    
-    padding: 20px 30px;
-  }
-  
+.main {
+  padding: 20px 30px;
+}

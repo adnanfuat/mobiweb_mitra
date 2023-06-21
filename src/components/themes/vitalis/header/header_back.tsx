@@ -24,7 +24,7 @@ export  default function HeaderBack  (props) {
     
     props={...props, position, filename,  session }
 
-        // console.log("propsprops", props);
+    // console.log("propsprops", props);
         
     return (
       <div className={s.headercompwr}>

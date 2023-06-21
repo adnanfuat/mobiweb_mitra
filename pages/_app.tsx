@@ -37,7 +37,8 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }: AppProps) =>
             <Hydrate state={pageProps.dehydratedState}>
               {/* {process.env.NEXT_PUBLIC_NODE_ENV=="development" &&<ReactQueryDevtools initialIsOpen={false} position="bottom-right" />} */}
 
-              <Head> <meta name="viewport" content="initial-scale=1, width=device-width" />
+              <Head>                  
+                  <meta name="viewport" content="initial-scale=1, width=device-width" />        
                   <meta name="Googlebot" content="index, follow" />
                   <meta name="robots" content="index, follow" />
                   <meta name="Robots" content="all" />              

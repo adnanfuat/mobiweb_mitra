@@ -1,6 +1,7 @@
 
 import s from "./index.module.css"
  import HeaderComp from "@/themes/mitra/header/headercomp"
+ import {Zigzag} from "@/themes/mitra/modules/zigzag"
 import FooterComp from "./footer/footercomp"
 import {siteProxy} from "@/constants/siteproxy"
 import Image from 'next/image'
@@ -12,13 +13,23 @@ import Estates from "@/components/estates/estates";
 
 import { Archivo_Black } from 'next/font/google'
 import { DesignLayout_Mitra_BackPages } from "./layouts/designlayout_mitra_backpages"
-import { Inter } from 'next/font/google';
+import { Inter, Exo_2 } from 'next/font/google';
+import Head from 'next/head';
 
 const inter = Inter({
   variable: '--inter-font',
   subsets:["latin","latin-ext"],
   weight:["100", "200","300","400","500","600", "700","800","900"]
 })
+
+
+const exo2 = Exo_2({
+  variable: '--exo2-font',
+  subsets:["latin","latin-ext"],
+  weight:["100", "200","300","400","500","600", "700","800","900"]
+})
+
+
 
 export const Mitra =  (props) => {
 
@@ -27,19 +38,31 @@ export const Mitra =  (props) => {
     let estates = webdata?.richcontents//?.filter(a=>a?.bigbigparent_key=="1668310884") ?? [];
 
     
-  
+    // ${inter.className}
+
     return (
-              <div className={`${s.shell} ${inter.className}`}>                 
+              <div className={`${s.shell}   ${exo2.className}`}>   
+                            <Head>
+                                <link rel="icon" href="/themes/mitra/fav.png" sizes="any" />
+                                <meta name="viewport" content="initial-scale=1, width=device-width" />
+                                <meta name="Googlebot" content="index, follow" />
+                                <meta name="robots" content="index, follow" />
+                                <meta name="Robots" content="all" />              
+                                <title>Mitra</title>
+                            </Head>              
                                                                     
                                 <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute" session={session} sidepadding={42} topbottom={5}/>                                    
                                 <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
                                   
                                   
-                                  <div className={s.main}>                                                                                      
-                                                          {/* asdas : {JSON.stringify(props)} */}
-                                                          <Estates adverts={estates} params={params}   dictionary={dictionary}/>                                          
+                                  <div className={s.main}> 
+                                    <Estates adverts={estates} params={params}   dictionary={dictionary}/>
+
+                                    <Zigzag/>
+
                                   </div>   
-                                  <div className={s.footer}><FooterComp logo={logo}/></div>             
+                                  <div className={s.footer}>  <FooterComp logo={logo}/>   </div>             
+
                           </div>                               
                 )
   }

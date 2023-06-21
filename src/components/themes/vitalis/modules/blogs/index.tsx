@@ -44,8 +44,8 @@ import s from "./index.module.css"
 
                                 <Link href="#">
                                         <div className={s.blogWr}> 
-                                            <div className={s.blogTitle}> Vitalis Botanik'i yakından tanıyın </div>
-                                            <div className={s.blogDescription}> Vitalis Botanik'i yakından tanıyın</div>
+                                            <div className={s.blogTitle}> {`Vitalis Botanik'i yakından tanıyın`} </div>
+                                            <div className={s.blogDescription}> {`Vitalis Botanik'i yakından tanıyın`}</div>
                                             <div className={s.blogImage}><Image src={"/themes/vitalis/blog4.jpg"} width={580} height={435}/></div>                                                                     
                                             <div className={s.blogButton}>Devamı</div>                                
                                         </div>

@@ -17,6 +17,7 @@ import {Shortcuts} from "./modules/shortcuts"
 
 import { Poppins } from 'next/font/google'
 import HeaderFront from "./header/header_front";
+import Head from 'next/head';
 
 const poppins = Poppins({
         variable: '--poppins',
@@ -34,6 +35,14 @@ export const Vitalis =  (props) => {
     return (                        
 
         <div className={`${s.mainwr} ${poppins.className}`} style={{backgroundImage:"url(/themes/vitalis/bg.png)", backgroundRepeat:"no-repeat"}}>
+                                            <Head>
+                                                <link rel="icon" href="/themes/vitalis/fav.png" sizes="any" />
+                                                <meta name="viewport" content="initial-scale=1, width=device-width" />
+                                                <meta name="Googlebot" content="index, follow" />
+                                                <meta name="robots" content="index, follow" />
+                                                <meta name="Robots" content="all" />              
+                                                <title>Vitaliss</title>
+                                             </Head> 
 
         <div className={s.insidewr}>
 

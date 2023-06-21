@@ -5,7 +5,8 @@ import {Triangle} from "./modules/triangle"
 import {Welcome} from "./modules/welcome"
 import {FixedWindow} from "./modules/fixedwindow"
 import Image from 'next/image'
-import s from "./index.module.css"    
+import s from "./index.module.css"    ;
+import Head from 'next/head';
 
 
 // import styles from './page.module.css'
@@ -33,6 +34,15 @@ export const Arges =  (props) => {
   
     return ( 
               <div style={{position:"relative"}} className={poppins.className}>
+
+              <Head>
+                  <link rel="icon" href="/themes/arges/fav.png" sizes="any" />
+                  <meta name="viewport" content="initial-scale=1, width=device-width" />
+                  <meta name="Googlebot" content="index, follow" />
+                  <meta name="robots" content="index, follow" />
+                  <meta name="Robots" content="all" />              
+                  <title>ARGES</title>
+              </Head>
                                   
                         <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>
 
