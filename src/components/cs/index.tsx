@@ -13,11 +13,11 @@ import { LayoutLeft } from "./layoutleft";
 // let bigbigparent_slug="urunler"; // Soldaki menüde hangi kategoriden itibaren aşağısnı göstereceğiz  ?
 // let item_type="basic";
 // let card_type="bigfoot";
-// let aspectRatio_Image="4.5/6";
+// let aspectratio_image="4.5/6";
 
 export default function CS_Shell (props){ 
   
-  let {params, dictionary, webdata, fileobjects, countries, bigbigparent_slug, item_type, card_type, aspectRatio_Image  } = props ?? {}
+  let {params, dictionary, webdata, fileobjects, countries, bigbigparent_slug, item_type, card_type, aspectratio_image, itemswr_specialstyle  } = props ?? {}
   let {locale, slug} = params ?? {};
 
   locale = locale ? locale : localeStatic;
@@ -60,7 +60,7 @@ export default function CS_Shell (props){
 
   /////////////////////////////////// --
 
-    // return (<div>{JSON.stringify(relatedcategory)}</div>)
+    // return (<div>{JSON.stringify(itemswr_specialstyle)}a</div>)
    return (<Rs_Shell contents={contents} root_category={"emlak"} countries={countries} logo={logo} bigbigparent_slug={bigbigparent_slug} categories={categories} root_slug={`cs`} dictionary={dictionary} webdata={webdata} fileObjects={fileObjects}  sidepadding={42}  {...props}/>) 
   
   }
@@ -104,17 +104,17 @@ function Rs_Shell (props){
 
 
   if (theme_name=="mitra") {
-    return (<DesignLayout_Mitra_BackPages title={`${category?.title_tr ?? "Başlık!!"}`} countries={countries} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Mitra_BackPages> )                      
+    return (<DesignLayout_Mitra_BackPages title={`${category?.title_tr ?? "Başlık!!"}`} countries={countries} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RichContents {...props}/> </DesignLayout_Mitra_BackPages> )                      
   }
   else if (theme_name=="arges") {
-    return (<DesignLayout_Arges title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Arges> )                      
+    return (<DesignLayout_Arges title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RichContents {...props}/> </DesignLayout_Arges> )                      
   }
   else if (theme_name=="vitalis") {
-    return (<DesignLayout_Vitalis_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Vitalis_BackPages> )                      
+    return (<DesignLayout_Vitalis_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RichContents {...props}/> </DesignLayout_Vitalis_BackPages> )                      
   }     
   // else 
   // {
-  //   return (<DesignLayout_Mitra_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RsData {...props}/> </DesignLayout_Mitra_BackPages> )                      
+  //   return (<DesignLayout_Mitra_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> <RichContents {...props}/> </DesignLayout_Mitra_BackPages> )                      
   // }     
   
 
@@ -124,9 +124,9 @@ function Rs_Shell (props){
 
 
 
-const RsData =  (props) => {
+const RichContents =  (props) => {
   
-  let {contents, params, countries, searchParams, root_category, root_slug,  bigbigparent_slug, categories, webdata, dictionary, fileObjects} = props ?? {};  
+  let {contents, params, countries, searchParams, root_category, root_slug,  bigbigparent_slug, categories, webdata, dictionary, fileObjects, itemswr_specialstyle} = props ?? {};  
 
   let {slug} = params ?? {} ;
   // let  countries = await cacheCountries();
@@ -180,7 +180,7 @@ const RsData =  (props) => {
       <div className={s.desktopmenu}><LayoutLeft props={{ parents, category,categories, root_slug, bigbigparent_slug, countries, searchParams}}/></div>
 
       <div className={s.bodywr}>                                    
-            <div className={s.itemswr}> { contents?.map((item,index) =>{ return <Item props={{item, countries, params, fileObjects, ...props}} key={index}/> })   }   </div>                    
+            <div className={s.itemswr} style={itemswr_specialstyle}> { contents?.map((item,index) =>{ return <Item props={{item, countries, params, fileObjects, ...props}} key={index}/> })   }   </div>                    
       </div>
 
       <Meta category={category} firstadvert={contents[0]} root_slug={root_slug} params={params}/>
@@ -336,14 +336,14 @@ const Card = ({props}) => {
 
 const Card_BigFoot = (props) => {
 
-  let {link, img, aspectRatio_Image} = props ?? {};
+  let {link, img, aspectratio_image} = props ?? {};
 
   return (
           <Link href={link}  >
                 
               {img ?
                 
-                <div style={{ backgroundImage:`url(${img})`, backgroundSize:"cover", backgroundPosition: "center", aspectRatio:aspectRatio_Image}} ></div>
+                <div style={{ backgroundImage:`url(${img})`, backgroundSize:"cover", backgroundPosition: "center", aspectRatio:aspectratio_image}} ></div>
                 :
                 <div><img  width="150px" height="auto" src={`/whitelogo.jpg`} title={"Resim bulunmadı"} alt={"Resim bulunmadı"}  /></div>
 

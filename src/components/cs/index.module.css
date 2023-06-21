@@ -33,8 +33,9 @@
 
 .item_basic {
   display: flex;
-  border:4px solid gray;
+  /* border:4px solid gray; */
   flex-direction: column;
+  gap:20px;
 }
 
 .test {
@@ -202,6 +203,6 @@
 
 
 .basicitem_imagewr {
-  padding: 20px;
-  background-color: aqua;
+  /* padding: 20px; */
+  
 }

@@ -6,7 +6,7 @@ const DictionaryData = async ({locale}) => {
                                              
                           
                                                               let dictionarydata =   await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, { //process.env.NEXT_PUBLIC_API_URL
-                                                                next:{revalidate:1000},                                   
+                                                                next:{revalidate:10000},                                   
                                                                 method: "POST",
                                                                 headers: { "Content-Type": "application/json", },
                                                                 body: JSON.stringify({
