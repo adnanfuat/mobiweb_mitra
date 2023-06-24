@@ -11,7 +11,7 @@ let bigbigparent_slug="urunler"; // Soldaki menüde hangi kategoriden itibaren a
 export default function Index (props){ 
   
    let {params, dictionary, webdata, fileobjects, countries, item_type, card_type, aspectratio_image  } = props ?? {};
-   props = {...props,  bigbigparent_slug } // Staticten gelenler ve modüle has olanlar 
+   props = {...props,  bigbigparent_slug } // Staticten gelenler ve modüle has olanlar...
 
    return (<CS_Shell {...props}/>)
   
