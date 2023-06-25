@@ -27,7 +27,7 @@ export const Menu = (props) => {
                   {itemFunc({type:"real_estates", menu})?.visible && <Link href={`/ads`} className={s.menuitem} style={itemFunc({type:"real_estates", menu})?.style}> {emlak_ilanlari} </Link>}                  
 
                   <Link href={`/u/urunler`} className={s.menuitem} >{urunler} </Link>                  
-                  {/* <Link href={`/b/services`} className={s.menuitem}  >{hizmetler}</Link> */}
+                  <Link href={`/h/hizmetler`} className={s.menuitem} >{hizmetler} </Link>           
                   <Link href={`/contact`} className={s.menuitem}  >{iletisim}</Link>
                                                         
         </div>

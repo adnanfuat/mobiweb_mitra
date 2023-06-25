@@ -1,0 +1,16 @@
+.changetarget {
+  position: absolute;
+  z-index: 2500;
+  background-color: black;
+  padding: 10px;
+  bottom: 4px;
+  right: 2%;
+  opacity: 0.1;
+}
+.changetarget select {
+  cursor: pointer;
+}
+
+.changetarget:hover {
+  opacity: 1;
+}

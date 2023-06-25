@@ -1,12 +1,13 @@
 
 import CS_Shell from "@/components/cs";
 import Cs_Initial_Func from "@/src/components/cs/cs_initial_func";
-let bigbigparent_slug="urunler";    // Soldaki menüde hangi kategoriden itibaren aşağısnı göstereceğiz ?
+let bigbigparent_slug="galeri";    // Soldaki menüde hangi kategoriden itibaren aşağısnı göstereceğiz ?
 
 
 export default function Index (props){ 
               
             props = {...props,  bigbigparent_slug } // Staticten gelenler ve modüle has olanlar...
+          //   return (<div>{JSON.stringify(props)}</div>)
             return (<CS_Shell {...props}/>)
   
   }

@@ -1,7 +1,8 @@
 
 import CS_Shell from "@/components/cs";
 import Cs_Initial_Func from "@/src/components/cs/cs_initial_func";
-let bigbigparent_slug="urunler";    // Soldaki menüde hangi kategoriden itibaren aşağısnı göstereceğiz ?
+
+let bigbigparent_slug="hizmetler";    // Soldaki menüde hangi kategoriden itibaren aşağısnı göstereceğiz ?
 
 
 export default function Index (props){ 

@@ -17,7 +17,7 @@ import { LayoutLeft } from "./layoutleft";
 
 export default function CS_Shell (props){ 
   
-  let {params, dictionary, webdata, fileobjects, countries, bigbigparent_slug, item_type, card_type, aspectratio_image, itemswr_specialstyle  } = props ?? {}
+  let {params, dictionary, webdata, fileobjects, countries, bigbigparent_slug, listing_type, item_type, card_type, aspectratio_image, itemswr_specialstyle, item_elementswr_specialstyle  } = props ?? {}
   let {locale, slug} = params ?? {};
 
   locale = locale ? locale : localeStatic;
@@ -60,7 +60,7 @@ export default function CS_Shell (props){
 
   /////////////////////////////////// --
 
-    // return (<div>{JSON.stringify(itemswr_specialstyle)}a</div>)
+    //  return (<div>{JSON.stringify(item_elementswr_specialstyle)}</div>)
    return (<Rs_Shell contents={contents} root_category={"emlak"} countries={countries} logo={logo} bigbigparent_slug={bigbigparent_slug} categories={categories} root_slug={`cs`} dictionary={dictionary} webdata={webdata} fileObjects={fileObjects}  sidepadding={42}  {...props}/>) 
   
   }
@@ -126,7 +126,7 @@ function Rs_Shell (props){
 
 const RichContents =  (props) => {
   
-  let {contents, params, countries, searchParams, root_category, root_slug,  bigbigparent_slug, categories, webdata, dictionary, fileObjects, itemswr_specialstyle} = props ?? {};  
+  let {contents, params, countries, searchParams, root_category, root_slug,  bigbigparent_slug, categories, webdata, dictionary, fileObjects, itemswr_specialstyle, listing_type, layout_type} = props ?? {};  
 
   let {slug} = params ?? {} ;
   // let  countries = await cacheCountries();
@@ -155,39 +155,107 @@ const RichContents =  (props) => {
   adverts=filterAdverts({adverts, country, city, district, subdistrict});
   let parents=category?.o_key_1?.parents;
 
+  let listingComp=<div> Listing </div>
 
-  return( <div className={s.mainwr}>  
-                                                                                                          
-    {(country || city || district || subdistrict) && <div className={s.filtered}>                             
-        
-                <Link href={`/${root_slug}`}><div  className={s.filteredinner}>
-                      <div className={s.filteredtitle} >Filtre</div>                              
-                          {country && <div> {country} </div>}
-                          {city && <div> {city} </div>}
-                          {district && <div> {district} </div>}
-                          {subdistrict && <div> {subdistrict} </div>}
-                      </div>
-                </Link>
+  if (listing_type=="grid") { listingComp = <Listing_Grid {...props}/>                                     }
+  else if (listing_type=="cake") { listingComp = <Listing_Cake {...props}/>}                                            
+                         else  listingComp = <div className={s.item}> Listing Type gelmedi.. {listing_type} </div>
 
-      </div>
-    }
-    
-      {/* <div className={s.mobilmenu}>
-              <div className={s.mobilmenu_close}  onClick={()=>setmobilmenu(old=>!old)}>{mobilmenu ? <RiCloseFill size={30} /> :  <RiListUnordered size={30} />  }</div>                
-              { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" }
-      </div> */}
+  let meta = <Meta category={category} firstadvert={contents[0]} root_slug={root_slug} params={params}/>    
+  
+  props = {...props, meta, listingComp, parents, category }
 
-      <div className={s.desktopmenu}><LayoutLeft props={{ parents, category,categories, root_slug, bigbigparent_slug, countries, searchParams}}/></div>
-
-      <div className={s.bodywr}>                                    
-            <div className={s.itemswr} style={itemswr_specialstyle}> { contents?.map((item,index) =>{ return <Item props={{item, countries, params, fileObjects, ...props}} key={index}/> })   }   </div>                    
-      </div>
-
-      <Meta category={category} firstadvert={contents[0]} root_slug={root_slug} params={params}/>
-
-  </div>)
+  if (layout_type=="basic") {return  <Layout_Basic {...props}/>}
+  else if (layout_type=="twocolumn") {  return  <Layout_TwoColumn {...props}/>}
+               else return ( <div className={s.xxx}> Layout Type gelmedi... {layout_type} </div>)
 
 }
+
+
+
+
+
+const Layout_Basic = (props) => {
+  
+  let {listingComp, countries, searchParams, root_slug, bigbigparent_slug, categories, parents, category, meta } = props ?? {};  
+
+  let {country, city, district, subdistrict} = searchParams ?? {}
+
+  return (
+          <div className={s.mainwr}>                                                                                                                                            
+                          <div className={s.bodywr}> {listingComp} </div>
+                          {meta}
+        </div>
+  )
+}
+
+
+
+const Layout_TwoColumn = (props) => {
+  
+  let {listingComp, countries, searchParams, root_slug, bigbigparent_slug, categories, parents, category, meta } = props ?? {};  
+
+  let {country, city, district, subdistrict} = searchParams ?? {}
+
+  return (
+          <div className={s.mainwr}>  
+                                                                                                                
+                        {(country || city || district || subdistrict) && <div className={s.filtered}>                             
+                            
+                                    <Link href={`/${root_slug}`}><div  className={s.filteredinner}>
+                                          <div className={s.filteredtitle} >Filtre</div>                              
+                                              {country && <div> {country} </div>}
+                                              {city && <div> {city} </div>}
+                                              {district && <div> {district} </div>}
+                                              {subdistrict && <div> {subdistrict} </div>}
+                                          </div>
+                                    </Link>
+
+                          </div>
+                        }
+
+                        {/* item, countries, params, fileObjects, */}
+                        
+                          {/* <div className={s.mobilmenu}>
+                                  <div className={s.mobilmenu_close}  onClick={()=>setmobilmenu(old=>!old)}>{mobilmenu ? <RiCloseFill size={30} /> :  <RiListUnordered size={30} />  }</div>                
+                                  { mobilmenu ? <Ad_LayoutLeft_Visitor_V2 props={{categories, parents, category, countries}} /> : "" }
+                          </div> */}
+
+                          <div className={s.desktopmenu}><LayoutLeft props={{ parents, category, categories, root_slug, bigbigparent_slug, countries, searchParams}}/></div>
+
+                          <div className={s.bodywr}>
+                                  {listingComp}                                                
+                          </div>
+
+                          {meta}
+
+        </div>
+  )
+}
+
+
+
+
+let Listing_Cake = (props) => 
+
+{
+    let {contents, itemswr_specialstyle} = props;
+    
+    return  <div className={s.itemswr_cake} style={itemswr_specialstyle}> { contents?.map((item,index) =>{ return <Item props={{item, ...props}} key={index}/> })   }   </div>     
+
+  }
+
+
+
+
+let Listing_Grid = (props) => 
+
+{
+    let {contents, itemswr_specialstyle} = props;
+    
+    return  <div className={s.itemswr_grid} style={itemswr_specialstyle}> {JSON.stringify(itemswr_specialstyle)} { contents?.map((item,index) =>{ return <Item props={{item, ...props}} key={index}/> })   }   </div>     
+
+  }
 
 
 
@@ -207,14 +275,20 @@ const Item = ({props}) => {
   let {timeAgo, localeString} = datetimeFunc({datetime:item?.createdat});
   // let props = {item, countries, fileObjects}
 
-  if (item_type=="basic")      return <Item_Basic {...props}/>                                     
-  if (item_type=="detail")     return <Item_Detail {...props}/>                                     
-                         else return ( <div className={s.item}> Type gelmedi.. </div>)
+  let link = `/c/${item?.slug_tr}/${item?.id}`;
+
+  props={ link, ...props}
+
+  // return <div>{JSON.stringify(item)}</div>
+
+  if (item_type=="basic")      return  <Item_Basic   {...props}/>                                     
+  if (item_type=="cluster")    return  <Item_Cluster {...props}/>       
+  if (item_type=="detail")     return  <Item_Detail  {...props}/>  
+  if (item_type=="tower")      return  <Item_Tower   {...props}/>                                      
+                         else return ( <div className={s.item}> Item Type gelmedi.. </div>)
           
   
 }
-
-
 
 
 
@@ -247,6 +321,54 @@ const Item_Basic = (props) => {
     )
 }
 
+
+
+const Item_Cluster = (props) => {
+
+  let {item,  countries, fileObjects,  item_elementswr_specialstyle } = props ?? {};
+    
+
+  return ( 
+    <div className={s.item_basic}>              
+        {/* {JSON.stringify(props)}              */}
+        <div className={s.i_title}>{item?.title_tr}</div>                              
+        <div className={s.clusteritem_imagewr} style={item_elementswr_specialstyle}> 
+
+            {
+              item?.files_tr?.map((file, index)=> <Card_ClusterElement file={file} {...props} /> )
+            }
+              
+
+        </div>
+    </div> 
+    )
+}
+
+
+
+const Item_Tower = (props) => {
+
+  let {item,  countries, fileObjects, link } = props ?? {};    
+  let {parentObj, loggedUserMail} = item ?? {};
+
+  return ( 
+    <div className={s.item_tower}> 
+
+            <div className={s.toweritem_imagewr}><Card props={{item, id: item?.id,  fileObjects, ...props}}/></div>    
+            
+            <div className={s.toweritem_data}>
+                
+                    <div className={s.toweritem_title}><h2>{item?.title_tr}</h2></div>
+                    <div className={s.toweritem_content}>{item?.maintext_tr}</div>        
+                    <div className={s.toweritem_button}> <Link href={link}>Devamı... </Link> </div>        
+
+            </div>                              
+
+
+
+    </div> 
+    )
+}
 
 
 
@@ -303,10 +425,6 @@ const Item_Detail = (props) => {
 }
 
 
-
-
-
-
   
 const Card = ({props}) => {
 
@@ -321,16 +439,40 @@ const Card = ({props}) => {
   let link = `/c/${item?.slug_tr}/${id}`;
 
   props={img, link, ...props}
+
+  // return <div>{JSON.stringify(fileObjects)}</div>
   
-  if (card_type=="bigfoot")     return <Card_BigFoot {...props}/>                                     
-  if (card_type=="detail")     return <Card_Detail {...props}/>                                     
-                         else return ( <div className={s.item}> Card Tipi gelmedi </div>)
+  if (card_type=="bigfoot")            return <Card_BigFoot {...props}/>                                     
+  // if (card_type=="clusterelement")     return <Card_ClusterElement {...props}/>
+  if (card_type=="detail")             return <Card_Detail {...props}/>                                     
+                         else          return ( <div className={s.item}> Card Tipi gelmedi </div>)
     
   
 }
 
 
 
+const Card_ClusterElement = (props) => {
+
+  let {file,fileObjects,index,  aspectratio_image} = props ?? {};
+
+  let fileObject=fileObjects?.find(f=>f?.slug_tr==file);
+
+ let img =!!fileObject ? fileObject?.bigdata?.folder + "/" + fileObject?.bigdata?.filename : undefined
+
+  img = img ? `${process.env.NEXT_PUBLIC_IMGSOURCE}/${img}` : "/images/placeholder-image.png"
+
+  // let link = `/c/${item?.slug_tr}/${id}`;
+
+
+
+  return (                          
+              img ?                
+                <div style={{ backgroundImage:`url(${img})`, backgroundSize:"cover", backgroundPosition: "center", aspectRatio:aspectratio_image}}></div>
+                :
+                <div><img  width="150px" height="auto" src={`/whitelogo.jpg`} title={"Resim bulunmadı"} alt={"Resim bulunmadı"}  /></div>
+          )
+}
 
 
 

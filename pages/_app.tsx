@@ -1,4 +1,5 @@
  import {siteProxy} from "@/constants/siteproxy"
+ import s from "./_app.module.css"
 import dynamic from "next/dynamic";
 import { SessionProvider } from "next-auth/react" 
 import Head from 'next/head';
@@ -9,8 +10,7 @@ import { useState } from "react";
 import { useSnapshot } from 'valtio';
 import { useRouter } from "next/router";  
 
-import { Carousel } from 'react-responsive-carousel';
- 
+
 
 const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }: AppProps) => {
     
@@ -80,7 +80,7 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }: AppProps) =>
     }
 
     return (
-      <div style={{position:"absolute", zIndex:2500, backgroundColor:"black", padding:10, bottom:"4px", left:"38%"}}>                 
+      <div className={s.changetarget}>                 
           <select onChange={(e)=>changeTargetFunc(e?.target?.value)} style={{fontSize:"1.1rem"}}>
                   <option value={""}> Seçiniz </option>
                   <option value={"argesinsaatmimarlik.com.tr"}> argesinsaatmimarlik.com.tr </option>
