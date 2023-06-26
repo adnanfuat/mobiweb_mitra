@@ -7,7 +7,7 @@ let bigbigparent_slug="galeri";    // Soldaki menüde hangi kategoriden itibaren
 export default function Index (props){ 
               
             props = {...props,  bigbigparent_slug } // Staticten gelenler ve modüle has olanlar...
-          //   return (<div>{JSON.stringify(props)}</div>)
+            //  return (<div>{JSON.stringify(props?.webdata)}</div>)
             return (<CS_Shell {...props}/>)
   
   }

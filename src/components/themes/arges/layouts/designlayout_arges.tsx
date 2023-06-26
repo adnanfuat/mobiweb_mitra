@@ -15,12 +15,12 @@ export const DesignLayout_Arges = (props) => {
     let sidepadding = 26;
           
   return (
-    <div  className={s.designwr}>
+    <div className={`${s.designwr} ${inter.className}`}>
       {/* {JSON.stringify(webdata)} */}
       
         <HeaderComp position="relative" logo={logo}  sidepadding={sidepadding} topbottom={5} dictionary={dictionary} params={params} webdata={webdata}/>
-
-        <div style={{paddingLeft:sidepadding, paddingRight:sidepadding }}  className={s.mainwr}>
+        <div style={{height:1, backgroundColor:"black", display:"flex", width:"100%", marginBottom:30}}/>
+        <div className={s.mainwr}>
 
                     <div className={`${s.title} ${inter.variable}`}>{title ? title : "Başlık atanmamış"}</div>        
                     

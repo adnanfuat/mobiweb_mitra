@@ -3,6 +3,7 @@ import s from "./header.module.css";
 import {Menu} from "./menu";
 import {LoginIntro} from "@/components/loginintro";
 import {Flags} from "@/components/flags";
+import Head from "next/head";
 
 // import { getServerSession } from "next-auth/next"
 // import { authOptions } from "@/pages/api/auth/[...nextauth]";
@@ -29,6 +30,15 @@ export  default  function HeaderComp  (props) {
         
     return (
       <div className={s.headercompwr} style={{position}}>
+
+            <Head>
+                  <link rel="icon" href="/themes/arges/fav.png" sizes="any" />
+                  <meta name="viewport" content="initial-scale=1, width=device-width" />
+                  <meta name="Googlebot" content="index, follow" />
+                  <meta name="robots" content="index, follow" />
+                  <meta name="Robots" content="all" />              
+                  <title>ARGES</title>
+              </Head>
                     
           <Link href={`/`}><div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}></div></Link>
 

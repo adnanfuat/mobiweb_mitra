@@ -12,6 +12,7 @@ export default function Index (props){
   }
 
 
+  
              export async function getStaticProps(data) {
 
                   let {defaultLocale, locale, params} = data ?? {};                                                                     

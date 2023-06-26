@@ -16,7 +16,8 @@ import { get_FileObjects_SpecialRequests } from "@/src/components/utils/get_file
 
               let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
               let logofiles =  lang?.logofiles;                                            
-              let fileobjects  = await get_FileObjects_SpecialRequests({files:logofiles})                   
+              let fileobjects  = await get_FileObjects_SpecialRequests({files:logofiles}) ;
+              // console.log("gggg::", logofiles)                  
               let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0]);
 
               let theme = webdata?.bigdata?.theme;

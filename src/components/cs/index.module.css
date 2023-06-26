@@ -3,7 +3,7 @@
   width: 100%;
   gap: 50px;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  padding: 0px;
+  padding: 0px;  
 }
 
 .itemswr_cake {
@@ -218,10 +218,21 @@
   padding: 10px; */
 }
 
+
+.carouselitem_imagewr {  
+  padding: 10px; 
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+}
+
 .clusteritem_imagewr {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  background-color: rebeccapurple;
+
   padding: 10px;
   gap: 10px;
 }

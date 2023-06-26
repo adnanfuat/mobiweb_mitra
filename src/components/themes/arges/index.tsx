@@ -46,7 +46,7 @@ export const Arges =  (props) => {
                                   
                         <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>
 
-                        <div className={s.main}>                                                                                              
+                        <div className={s.main}>                                                                                      
                                                 <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>                                                             
                                                 {/* <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} sidepadding={42} />                                                 */}                        
                                                 <Bant/>                        

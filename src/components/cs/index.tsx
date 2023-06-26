@@ -9,6 +9,10 @@ import { DesignLayout_Vitalis_BackPages } from "@/themes/vitalis/layouts/designl
 import { DesignLayout_Mitra_BackPages } from "@/themes/mitra/layouts/designlayout_mitra_backpages";
 import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
 import { LayoutLeft } from "./layoutleft";
+import ImageGallery from 'react-image-gallery';
+
+
+import "/node_modules/react-image-gallery/styles/css/image-gallery.css";
 
 // let bigbigparent_slug="urunler"; // Soldaki menüde hangi kategoriden itibaren aşağısnı göstereceğiz  ?
 // let item_type="basic";
@@ -253,7 +257,7 @@ let Listing_Grid = (props) =>
 {
     let {contents, itemswr_specialstyle} = props;
     
-    return  <div className={s.itemswr_grid} style={itemswr_specialstyle}> {JSON.stringify(itemswr_specialstyle)} { contents?.map((item,index) =>{ return <Item props={{item, ...props}} key={index}/> })   }   </div>     
+    return  <div className={s.itemswr_grid} style={itemswr_specialstyle}>{ contents?.map((item,index) =>{ return <Item props={{item, ...props}} key={index}/> })   }   </div>     
 
   }
 
@@ -283,6 +287,7 @@ const Item = ({props}) => {
 
   if (item_type=="basic")      return  <Item_Basic   {...props}/>                                     
   if (item_type=="cluster")    return  <Item_Cluster {...props}/>       
+  if (item_type=="carousel")    return <Item_Carousel {...props}/>       
   if (item_type=="detail")     return  <Item_Detail  {...props}/>  
   if (item_type=="tower")      return  <Item_Tower   {...props}/>                                      
                          else return ( <div className={s.item}> Item Type gelmedi.. </div>)
@@ -320,6 +325,43 @@ const Item_Basic = (props) => {
     </div> 
     )
 }
+
+
+
+const Item_Carousel = (props) => {
+
+  let {item,  countries, fileObjects,  item_elementswr_specialstyle } = props ?? {};
+
+  let images: any[]=[] 
+  
+  item?.files_tr?.map((file, index)=> {
+
+    let fileObject=fileObjects?.find(f=>f?.slug_tr==file);
+
+    let img =!!fileObject ? fileObject?.bigdata?.folder + "/" + fileObject?.bigdata?.filename : undefined
+   
+     img = img ? `${process.env.NEXT_PUBLIC_IMGSOURCE}/${img}` : "/images/placeholder-image.png"
+
+     images=[...images, {original:img, thumbnail:img}]
+
+  } )
+
+
+    
+
+  return ( 
+    <div className={s.item_basic}>              
+        {/* {JSON.stringify(props)}              */}
+        <div className={s.i_title}>{item?.title_tr}</div>                              
+        <div className={s.carouselitem_imagewr} style={item_elementswr_specialstyle}> 
+          {/* {JSON.stringify(fileObjects?.map(a=>a?.slug_tr))} */}
+            {images?.length>0 && <ImageGallery items={images} />}
+              
+        </div>
+    </div> 
+    )
+}
+
 
 
 
@@ -449,7 +491,7 @@ const Card = ({props}) => {
     
   
 }
-
+{/* <ResponsiveGallery images={images}/> */}
 
 
 const Card_ClusterElement = (props) => {
@@ -631,3 +673,18 @@ const Meta = (props) => {
     
     
     
+
+             const images = [
+              {
+                original: 'https://picsum.photos/id/1018/1000/600/',
+                thumbnail: 'https://picsum.photos/id/1018/250/150/',
+              },
+              {
+                original: 'https://picsum.photos/id/1015/1000/600/',
+                thumbnail: 'https://picsum.photos/id/1015/250/150/',
+              },
+              {
+                original: 'https://picsum.photos/id/1019/1000/600/',
+                thumbnail: 'https://picsum.photos/id/1019/250/150/',
+              },
+            ];

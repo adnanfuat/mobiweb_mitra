@@ -15,19 +15,19 @@ export const Menu = (props) => {
     let hizmetler      =   dictionaryFunc({key:"1683425098924", dictionary}).text;
     let iletisim       =   dictionaryFunc({key:"1668310884_999", dictionary}).text;
     let urunler        =   dictionaryFunc({key:"1685105157639", dictionary}).text;
+    let galeri        =   dictionaryFunc({key:"1687698859805", dictionary}).text;
         
                       
     return (
         <div className={s.menuwr}>  
           
                   <Link href={`/`} className={s.menuitem}  style={itemFunc({type:"main_page", menu})?.style}> {ana_sayfa} </Link>
-
                   {/* <Link href={`/`} className={s.menuitem}  >{hakkimizda}</Link> */}
-
                   {itemFunc({type:"real_estates", menu})?.visible && <Link href={`/ads`} className={s.menuitem} style={itemFunc({type:"real_estates", menu})?.style}> {emlak_ilanlari} </Link>}                  
 
-                  <Link href={`/u/urunler`} className={s.menuitem} >{urunler} </Link>                  
-                  <Link href={`/h/hizmetler`} className={s.menuitem} >{hizmetler} </Link>           
+                  {/* <Link href={`/u/urunler`} className={s.menuitem} >{urunler} </Link>                   */}
+                  <Link href={`/h/hizmetler`} className={s.menuitem} >{hizmetler} </Link>       
+                  <Link href={`/g/galeri`} className={s.menuitem} > {galeri} </Link>        
                   <Link href={`/contact`} className={s.menuitem}  >{iletisim}</Link>
                                                         
         </div>
