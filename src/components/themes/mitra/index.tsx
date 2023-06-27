@@ -40,8 +40,7 @@ export const Mitra =  (props) => {
     
     // ${inter.className}
 
-    return (
-              <div className={`${s.shell}   ${exo2.className}`}>   
+    return (<div className={`${s.shell} ${exo2.className}`}>   
                             <Head>
                                 <link rel="icon" href="/themes/mitra/fav.png" sizes="any" />
                                 <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -50,18 +49,24 @@ export const Mitra =  (props) => {
                                 <meta name="Robots" content="all" />              
                                 <title>Mitra</title>
                             </Head>              
+
+                            <div className={s.mainwr}>  
+                            
+                                        <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} session={session}/>                                    
+                                        <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
+                                        
+                                        
+                                        <div className={s.main}> 
+                                          <Estates adverts={estates} params={params}   dictionary={dictionary}/>
+
+                                          <Zigzag/>
+
+                                        </div>   
+                                        <div className={s.footer}>  <FooterComp logo={logo}/>   </div>                              
+                                                        
+                            </div>
                                                                     
-                                <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute" session={session} sidepadding={42} topbottom={5}/>                                    
-                                <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
-                                  
-                                  
-                                  <div className={s.main}> 
-                                    <Estates adverts={estates} params={params}   dictionary={dictionary}/>
-
-                                    <Zigzag/>
-
-                                  </div>   
-                                  <div className={s.footer}>  <FooterComp logo={logo}/>   </div>             
+                                           
 
                           </div>                               
                 )

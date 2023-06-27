@@ -18,21 +18,16 @@ export  default function HeaderComp  (props) {
     let {width, height} = logo?.bigdata?.details ?? {};
         
     props={...props, position, filename,   locale }
-        
-        // return <div>asdsad: {locale}</div>
+                
     return (
-            <div className={s.headercompwr} style={{position, padding:`${topbottom}px ${sidepadding}px`}}>
+            <div className={s.headercompwr}>
                 
                         <Link href={`/`}> <div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat",  minWidth:200, minHeight:100}}></div> </Link>
                           
-                            <div className={s.rightwr} >               
-                                    
-                                        <LoginIntro dictionary={dictionary}/>
-                                        
-                                        <Menu params={params} webdata={webdata} dictionary={dictionary}/>
-                                        
-                                        <Flags params={params}/>
-
+                            <div className={s.rightwr} >                                                   
+                                          <LoginIntro dictionary={dictionary}/>                                          
+                                          <Menu params={params} webdata={webdata} dictionary={dictionary}/>                                          
+                                          <Flags params={params}/>
                             </div>
                             
       </div>

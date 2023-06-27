@@ -21,10 +21,9 @@ export const DesignLayout_Mitra_BackPages = (props) => {
 
         <div style={{paddingLeft:sidepadding, paddingRight:sidepadding }}  className={s.mainwr}>
 
-                    {title && <div className={`${s.title} ${inter.variable}`}>{title ? title : "Başlık atanmamış"}</div>}        
-                    
+                    {title && <div className={`${s.title} ${inter.variable}`}>{title ? title : "Başlık atanmamış"}</div>}                            
                     { props?.children }
-                        
+                                            
         </div>
 
         </div>
