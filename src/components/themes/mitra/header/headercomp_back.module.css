@@ -7,31 +7,21 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-}
+  justify-content: center;
+  width: 70%;
 
+  padding: 10px;
+  top: 10px;
+  justify-content: space-between;
+}
 
 .rightwr {
   display: flex;
   gap: 10px;
   align-items: center;
+  position: relative;
 }
-
 
 .logowr {
   display: flex;
-  width: 180px;
-  height: 100px;
-  position: relative;
-  /* background-color: red; */
 }
-
-
-
-
-@media screen and (max-width: 1200px) {
-    
-  .headercompwr {
-    flex-direction: column;
-  }    
-         
-}    

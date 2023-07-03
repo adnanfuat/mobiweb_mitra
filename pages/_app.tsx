@@ -86,6 +86,7 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }: AppProps) =>
                   <option value={"argesinsaatmimarlik.com.tr"}> argesinsaatmimarlik.com.tr </option>
                   <option value={"mitraemlak.com"}> mitraemlak.com </option>
                   <option value={"vitalisbotanik.com"}> vitalisbotanik.com </option>
+                  <option value={"proweb.com.tr"}> proweb.com.tr </option>
           </select>
       </div>
     )

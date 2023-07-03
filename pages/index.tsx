@@ -5,6 +5,7 @@ import WebData from "@/components/utils/webdata";
 import { Mitra } from "@/themes/mitra"
 import { Arges } from "@/themes/arges";
 import { Vitalis } from "@/themes/vitalis";
+import { Proweb } from "@/themes/proweb";
 
 
 
@@ -31,7 +32,10 @@ export default  function Index(props) {
       }
       else if (theme_name=="vitalis" && 1==1) {
         component=<Vitalis logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
-      }     
+      }  
+      else if (theme_name=="proweb" && 1==1) {
+        component=<Proweb logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
+      }           
       else 
       {
         component=<div style={{color:"black"}}>Tema bulunamadı... {JSON.stringify(webdata)}  </div>

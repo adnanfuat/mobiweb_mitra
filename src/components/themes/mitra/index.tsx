@@ -61,7 +61,8 @@ export const Mitra =  (props) => {
 
                                           <Zigzag/>
 
-                                        </div>   
+                                        </div>
+                                           
                                         <div className={s.footer}>  <FooterComp logo={logo}/>   </div>                              
                                                         
                             </div>

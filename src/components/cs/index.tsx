@@ -10,14 +10,8 @@ import { DesignLayout_Mitra_BackPages } from "@/themes/mitra/layouts/designlayou
 import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
 import { LayoutLeft } from "./layoutleft";
 import ImageGallery from 'react-image-gallery';
-
-
 import "/node_modules/react-image-gallery/styles/css/image-gallery.css";
 
-// let bigbigparent_slug="urunler"; // Soldaki menüde hangi kategoriden itibaren aşağısnı göstereceğiz  ?
-// let item_type="basic";
-// let card_type="bigfoot";
-// let aspectratio_image="4.5/6";
 
 export default function CS_Shell (props){ 
   
