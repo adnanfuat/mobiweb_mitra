@@ -1,0 +1,38 @@
+.headercompwr {
+  /* padding: 10px 45px; */
+  border-radius: 6px;
+  display: flex;
+  gap: 18px;
+  z-index: 1500;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  
+  
+  padding: 30px 0px;
+  justify-content: space-between;
+  flex-direction: column;
+  
+}
+
+.headercomp {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.rightwr {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+  
+}
+
+.logowr {
+  display: flex;  
+  
+  width: 100%;
+}

@@ -1,0 +1,15 @@
+.menuwr {
+  display: flex;
+  border:1px solid #cfcdcd;
+  gap:10px;    
+  width: 100%;
+  
+}
+
+.menuwr span {
+
+  padding: 20px;
+}
+
+
+

@@ -19,7 +19,7 @@ export default  async function handler(req, res) {
   })
     .then(async (result) =>   { 
       
-              console.log("sadsdsad", process.env.NEXT_PUBLIC_API_URL)
+              // console.log("sadsdsad", process.env.NEXT_PUBLIC_API_URL)
             let resData = result?.data?.swissarmyknifemutation
             
             return resData ; 
@@ -34,7 +34,7 @@ export default  async function handler(req, res) {
       
       
       
-      console.log("repoo sonuç", mainres);
+      // console.log("repoo sonuç", mainres);
   
   res.status(200).json({mainres });
 }

@@ -4,9 +4,6 @@ import {Menu} from "@/themes/mitra/menu/menu";
 import {LoginIntro} from "@/components/loginintro";
 import {Flags} from "@/components/flags";
 
-// import { getServerSession } from "next-auth/next"
-// import { authOptions } from "../../../pages/api/auth/[...nextauth]"
-// const session = await getServerSession(authOptions)      
 
 export  default function HeaderComp  (props) {
     //  const session = await getServerSession(authOptions)         

@@ -2,7 +2,7 @@
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader  // Index_Cuffs için...
 import { Carousel } from 'react-responsive-carousel';
-import {localeStatic} from "../../../src/constants/localestatic";
+
 
 import Link from "next/link";
 import s from "./index_cuffs_v2_visitor_real.module.css"
@@ -28,13 +28,13 @@ export const  Index_Cuffs_V2_Visitor_Real = ({props}) => {
 //      console.log("cufffs: ", cuffs);
           
          return (<div className={s.imgwr} >
-                        <Carousel showThumbs={false} showStatus={true} autoPlay={true}>
+                        <Carousel showThumbs={false} showStatus={true} width={"100%"}>
                               {cuffs?.map((item, i) => (
-                                    <Link href={item?.link}  key={`cuff-l-${i}`}>
-                                          <div key={`cuff-${i}`} className={s.cuffitem}>
-                                                <img src={item?.imgpath} />
+                                    <Link href={item?.link}  key={`cuff-l-${i}`} >
+                                          
+                                                <img src={item?.imgpath}/>
                                                 {/* {item?.img_filename && <p className="legend">{item?.img_filename}</p>} */}
-                                          </div>
+                                          
                                     </Link>
                               ))}
                         </Carousel>       

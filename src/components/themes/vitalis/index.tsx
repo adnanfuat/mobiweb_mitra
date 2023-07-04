@@ -53,7 +53,8 @@ export const Vitalis =  (props) => {
                                         
                                                                 
 
-                                                                        <div className={s.cuffs}> <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/> </div>                    
+                                                                        <div className={s.cuffs}> <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/> 
+                                                                        </div>                    
                                                                         
                                                                         <div className={s.estates}>
                                                                                 {/* <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} /> */}
