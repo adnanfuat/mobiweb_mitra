@@ -13,7 +13,7 @@
   padding: 30px 0px;
   justify-content: space-between;
   flex-direction: column;
-  
+  position: relative;
 }
 
 .headercomp {
@@ -35,4 +35,10 @@
   display: flex;  
   
   width: 100%;
+}
+
+.flagswr {
+  position: absolute;
+  right: 5px;
+  top: 10px;
 }

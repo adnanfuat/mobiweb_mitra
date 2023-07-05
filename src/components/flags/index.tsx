@@ -1,19 +1,18 @@
 "use client"
 import ReactCountryFlag from "react-country-flag"
-import { useRouter, ReadonlyURLSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
 import { usePathname,  } from 'next/navigation';
 import { useState } from "react";
 import s from "./index.module.css"
 import { useDetectClickOutside } from 'react-detect-click-outside';
+import Link from "next/link";
 
 const locales= ["tr","en","fr","ar"]
 
 export const Flags = (props) => {
 
-    let {params} = props ?? {}
-
-    let {locale} = params ?? {}
-    
+    let {locale} = props ?? {}
+        
     const router = useRouter();
     
     let a=getCode({locale})
@@ -29,7 +28,7 @@ export const Flags = (props) => {
     }
 
  return (
-     <div  ref={ref} >
+     <div  ref={ref}  className={s.flagsmainwr} >
 
 {/* headerssssssssssss {JSON.stringify(params)} */}
 
@@ -47,7 +46,7 @@ export const Flags = (props) => {
                     className={s.flagstyle}
                 />
                         
-            {popup && <div className={s.popupwr}><Popup params={params} setpopup={setpopup}/></div>}
+            {popup && <div className={s.popupwr}><Popup locale={locale} setpopup={setpopup}/></div>}
 
      </div>
  )
@@ -60,8 +59,8 @@ export const Flags = (props) => {
 
 const Popup = (props) => {
 
-    let {params, setpopup} = props ?? {};
-    let {locale} = params ?? {};
+    let {locale, setpopup} = props ?? {};
+    
 
     const router = useRouter();
 
@@ -97,7 +96,8 @@ const Popup = (props) => {
                     // }
           
                     // let fetchres= await fetch(`/api/changelanguage?locale=fr`)
-                    router.push(`/api/changelanguage?locale=${locale}`);
+                    //router.push(`/api/changelanguage?locale=${locale}`);
+                    // router.replace({loca})
                     // console.log("ddddddddd5: ", locale, fetchres);
             // router.push(`${exploededlinkparts}`, {locale:locale}) ; // Yeni dile yönlendir
             //router.push(`/${locale}`);
@@ -107,20 +107,21 @@ const Popup = (props) => {
 
         return (<div  key={i}> 
         
-
-                        <ReactCountryFlag
-                                    countryCode={a}
-                                    svg
-                                    style={{
-                                        width: '2em',
-                                        height: '2em',
-                                    }}
-                                    title={a}
-                                    //  onClick={()=>fetch("/api/changelanguage")
-                                    // onClick={()=> setpopup(o=>!o)}
-                                    onClick={()=>goFunc()               }
-                                    className={s.flagstyle}
-                                />
+                        <Link href={router.asPath} locale={locale}>
+                            <ReactCountryFlag
+                                        countryCode={a}
+                                        svg
+                                        style={{
+                                            width: '2em',
+                                            height: '2em',
+                                        }}
+                                        title={a}
+                                        //  onClick={()=>fetch("/api/changelanguage")
+                                        // onClick={()=> setpopup(o=>!o)}
+                                         onClick={()=>goFunc()               }
+                                        className={s.flagstyle}
+                                    />
+                         </Link>
 
         </div>)
       })

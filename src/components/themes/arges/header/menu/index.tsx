@@ -5,7 +5,7 @@ import dictionaryFunc from "@/utils/dictionaryfunc";
 export const Menu = (props) => {
 
     let { params , dictionary, webdata } = props ?? {};
-    let {locale} = params ?? {};  
+
 
     let menu = webdata?.bigdata?.menu ?? {};
           

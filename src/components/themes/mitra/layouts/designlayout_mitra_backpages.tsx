@@ -11,6 +11,7 @@ const inter = Inter({
 
 
 export const DesignLayout_Mitra_BackPages = (props) => {
+    
     let {title, dictionary, params,logo, webdata} = props ?? {};
     let sidepadding = 26;
           

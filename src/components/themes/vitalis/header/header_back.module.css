@@ -8,6 +8,8 @@
   justify-content: space-between;
   align-items: center;
   width: 80%;
+  padding: 20px 0px;
+
 }
 
 .rightwr {
@@ -23,6 +25,17 @@
   position: relative;
   /* background-color: red; */
 }
+
+.flagswr 
+{
+display: flex;
+position: absolute;
+top: 10px;
+right:10px
+}
+
+
+
 
 @media screen and (max-width: 1200px) {
   .headercompwr {

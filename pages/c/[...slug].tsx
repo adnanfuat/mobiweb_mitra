@@ -17,9 +17,11 @@ let root_slug="cs";
 const Content = (props) => {
   let {params, dictionary, webdata, fileobjects, countries} = props ?? {}
     let {locale, slug} = params ?? {}
+
+    console.log("sadasdsadsd", params);
       
     let contents= webdata?.o_key_2?.contents ?? [];      
-    let content = contents?.find(co=>co?.id==slug[1]);
+    let content = contents?.find(co=>co?.id==slug?.[1]);
   
       //////////////////////////////////// --  
       let info = webdata?.bigdata?.history[0];
@@ -62,17 +64,17 @@ export default Content
       let advert=undefined;                                
       
       let contents= webdata?.o_key_2?.contents ?? [];      
-      let content = contents?.find(co=>co?.id==slug[1]);
+      let content = contents?.find(co=>co?.id==slug?.[1]);
       let parents=content?.parents;
       
           return (
                   <div className={s.shell}> 
                       {/* {content?.title_tr}  {JSON.stringify(webdata?.bigdata?.fileObjects)} */}
-                      {/* {JSON.stringify(content)}  */}
-                      <div className={s.parents}>    <Content_Visitor_Parents parents={parents} params={params} root_slug={root_slug}/></div>                                                                                                                                                                     
-                      <div className={s.metadata}>   <Advert_VisitorMode_MetaData content={content} params={params}/> </div>
-                      <div className={s.image}>      <Content_Visitor_Image content={content} fileObjects={fileObjects} params={params}/> </div>
-                      <div className={s.maintext}>   <Content_Visitor_MainText content={content} fileObjects={fileObjects} params={params}/> </div>
+                      
+                      <div className={s.parents}>   <Content_Visitor_Parents parents={parents} params={params} root_slug={root_slug}/></div>                                                                                                                                                                     
+                      <div className={s.metadata}>  <Advert_VisitorMode_MetaData content={content} params={params}/> </div>
+                      <div className={s.image}>     <Content_Visitor_Image content={content} fileObjects={fileObjects} params={params}/> </div>
+                      <div className={s.maintext}>  <Content_Visitor_MainText content={content} fileObjects={fileObjects} params={params}/> </div>
                       {/* <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div> */}
                             
                       {/* <Advert_Visitor_Tabs advert={advert}/>        */}
@@ -87,8 +89,6 @@ export default Content
     const Content_Visitor_Parents = (props) => {
 
       let {parents, params, root_slug} = props ?? {};
-      let {locale} = params ?? {};
-      
 
       // parents=parents?.filter(item=> ( item?.slug_tr!="emlak" ) )
       
@@ -164,7 +164,7 @@ export default Content
 
         let {defaultLocale, locale, params} = data ?? {};
        
-        //  console.log("sadasdsadsd", params);
+          
              
        
          let dictionary= await DictionaryData({locale: locale ?? "tr"});  
@@ -198,7 +198,9 @@ export default Content
              let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
        
                                                                        
+       params= {...params, locale}
        
+
            let props = { webdata, dictionary, fileobjects, logo, countries,params };
                               
            return { props, revalidate: 20 };

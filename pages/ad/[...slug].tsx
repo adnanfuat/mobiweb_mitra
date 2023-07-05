@@ -41,17 +41,17 @@ const  Advert = (props) => {
     //  return <div>{JSON.stringify(advert)}</div>
 
       if (theme_name=="mitra") {
-        return (<DesignLayout_Mitra_BackPages title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Mitra_BackPages> )                      
+        return (<DesignLayout_Mitra_BackPages title={`${advert?.title_tr}`} dictionary={dictionary} locale={locale} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Mitra_BackPages> )                      
       }
       // else if (theme_name=="arges") {
-      //   return (<DesignLayout_Arges title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  {...props}/> </DesignLayout_Arges> )                      
+      //   return (<DesignLayout_Arges title={`${advert?.title_tr}`} dictionary={dictionary} locale={locale} webdata={webdata} logo={logo}> <RsData  {...props}/> </DesignLayout_Arges> )                      
       // }
       // else if (theme_name=="vitalis") {
-      //   return (<DesignLayout_Vitalis title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData   {...props}  /> </DesignLayout_Vitalis> )                      
+      //   return (<DesignLayout_Vitalis title={`${advert?.title_tr}`} dictionary={dictionary} locale={locale} webdata={webdata} logo={logo}><RsData   {...props}  /> </DesignLayout_Vitalis> )                      
       // }     
       // else 
       // {
-      //   return (<DesignLayout_Mitra_BackPages title={`${advert?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Mitra_BackPages> )                      
+      //   return (<DesignLayout_Mitra_BackPages title={`${advert?.title_tr}`} dictionary={dictionary} locale={locale} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Mitra_BackPages> )                      
       // }  
                         
     }
@@ -68,11 +68,11 @@ const RsData = (props) => {
   return (
     <div className={s.shell}> 
     {/* ASDSDASASDA      {JSON.stringify(params)} */}
-            <div className={s.parents}>   <Advert_Visitor_Parents parents={parents} params={params}/></div>                                                                                                                                                                     
-            <div className={s.metadata}>  <Advert_VisitorMode_MetaData advert={advert} params={params}/>   </div>
-            <div className={s.image}>     <Advert_Visitor_Image advert={advert}  params={params}/></div>
-            <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div>
-            <div className={s.who}>       <Advert_Visitor_Owner advert={advert}  params={params}/>                                       
+            <div className={s.parents}>   <Advert_Visitor_Parents parents={parents} locale={locale}/></div>                                                                                                                                                                     
+            <div className={s.metadata}>  <Advert_VisitorMode_MetaData advert={advert} locale={locale}/>   </div>
+            <div className={s.image}>     <Advert_Visitor_Image advert={advert}  locale={locale}/></div>
+            <div className={s.info}>      <Advert_Visitor_Info advert={advert} locale={locale}/> </div>
+            <div className={s.who}>       <Advert_Visitor_Owner advert={advert}  locale={locale}/>                                       
             </div>         
             <Advert_Visitor_Tabs advert={advert}/>       
       </div>      
@@ -86,7 +86,7 @@ const RsData = (props) => {
     const Advert_Visitor_Parents = (props) => {
 
       let {parents, params} = props ?? {};
-      let {locale} = params ?? {};
+      locale
 
       // let parents=advert?.bigdata?.history?.[0]?.info?.parents;
 
@@ -178,16 +178,16 @@ const RsData = (props) => {
                                                                   {advert_properties?.map((item, i )=>{
 
                                                                             if (item?.input_type=="multicheckbox" && item?.value?.length>0) {
-                                                                            return <MultiCheckboxModule property={item} key={`mumo-${i}`}  params={params}/>
+                                                                            return <MultiCheckboxModule property={item} key={`mumo-${i}`}  locale={locale}/>
                                                                           }
                                                                           else if (item?.input_type=="textfield") {
-                                                                            return <TextFieldModule property={item} key={`tefi-${i}`}  params={params}/>
+                                                                            return <TextFieldModule property={item} key={`tefi-${i}`}  locale={locale}/>
                                                                           }
                                                                           else if (item?.input_type=="select") {
-                                                                            return <SelectFieldModule property={item} key={`sefi-${i}`}  params={params}/>
+                                                                            return <SelectFieldModule property={item} key={`sefi-${i}`}  locale={locale}/>
                                                                           }
                                                                           else if (item?.input_type=="radio") {
-                                                                            return <RadioFieldModule property={item} key={`rafi-${i}`}  params={params}/>
+                                                                            return <RadioFieldModule property={item} key={`rafi-${i}`}  locale={locale}/>
                                                                           }
                                                                       
                                                                   })}

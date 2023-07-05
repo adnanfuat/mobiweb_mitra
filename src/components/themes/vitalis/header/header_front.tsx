@@ -11,19 +11,17 @@ export  default function HeaderFront  (props) {
       
     const session = undefined;
   
-    let { params, logo, position,  topbottom=5, webdata, dictionary} = props ?? {};
-    let {locale} = params ?? {};
+    let { params, logo, position,  webdata, dictionary} = props ?? {};
+    let { locale} = params ?? {};
+    
 
     position= position ? position : "relative";
     let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
-    let logofiles =  lang?.logofiles;              
-    // let {logo, params, dictionary} = props ?? {};                  
+    let logofiles =  lang?.logofiles;                  
     let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
     let {width, height} = logo?.bigdata?.details ?? {};
     
-    props={...props, position, filename,  session }
-
-        // console.log("propsprops", props);
+    props={...props, position, filename,  session }        
         
     return (
       <div className={s.headercompwr}>
@@ -33,9 +31,9 @@ export  default function HeaderFront  (props) {
         </Link>
                       <div className={s.rightwr} >                                           
                                   <LoginIntro session={session} dictionary={dictionary}/>                                
-                                  <Menu params={params} webdata={webdata} dictionary={dictionary}/>                                
-                                  <Flags params={params}/>
+                                  <Menu locale={locale} webdata={webdata} dictionary={dictionary}/>                                
                       </div>
+                      <div className={s.flagswr} ><Flags locale={locale}/></div>
         </div>
     )
   }

@@ -18,7 +18,7 @@ const DictionaryData = async ({locale}) => {
                                                               dictionarydata= await dictionarydata?.json();
                                                               
                                                               dictionarydata= await dictionarydata?.data?.dictionaryquery?.o_key_1 ?? [];
-                                                              // console.log("dictionarydatsa: ",locale, dictionarydata)
+                                                                //console.log("cccccccccccc: ",locale, dictionarydata[0])
 
 
                                                                 

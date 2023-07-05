@@ -1,17 +1,26 @@
+.flagsmainwr{
+  display: flex;  
+  flex-direction: column;
+  max-width: fit-content;  
+  align-items: center;
+  min-width: 70px;
+
+}
+
 .popupwr {
   display: flex;
   background-color: #000000;
-  position: absolute;
-  top: 34px;
-  right: 0px;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 15px;
+  border-radius: 4px;
+  max-width: fit-content;
+ 
 }
 
 .flagswr {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   flex-direction: column;
+  
 }
 
 .flagstyle {

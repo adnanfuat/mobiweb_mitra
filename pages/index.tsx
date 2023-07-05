@@ -11,7 +11,7 @@ import { Proweb } from "@/themes/proweb";
 
 export default  function Index(props) {                    
       
-      let {  webdata, dictionary,   locale, session } =props ?? {};
+      let {  webdata, dictionary,   params, session } =props ?? {};
 
       let theme_name = webdata?.bigdata?.theme?.name;
       let cuffs = webdata?.bigdata?.cuffs;
@@ -21,20 +21,20 @@ export default  function Index(props) {
 
        let component=<div>..</div>;
 
-      //  return (<div>{component}</div>)
+      //  return (<div>{locale}</div>)
       // return (<div>{JSON.stringify(cuffs)}</div>)
 
       if (theme_name=="mitra" && 1==1) { // && 1==3
-        component=<Mitra logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>                            
+        component=<Mitra logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>                            
       }
       else if (theme_name=="arges" && 1==1) {
-        component=<Arges logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
+        component=<Arges logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
       }
       else if (theme_name=="vitalis" && 1==1) {
-        component=<Vitalis logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
+        component=<Vitalis logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
       }  
       else if (theme_name=="proweb" && 1==1) {
-        component=<Proweb logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
+        component=<Proweb logo={logo} params={params} dictionary={dictionary} webdata={webdata} cuffs={cuffs} session={session}/>   
       }           
       else 
       {
@@ -87,7 +87,7 @@ export const getServerSideProps = async (context) => {
   let theme_name = webdata?.bigdata?.theme?.name;
            
        
-   let props = { webdata,dictionary};
+   let props = { webdata,dictionary, params:{locale}};
                         
    return { props };
  

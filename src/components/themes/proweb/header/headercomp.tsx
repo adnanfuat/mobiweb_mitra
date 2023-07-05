@@ -2,14 +2,14 @@ import Link from "next/link";
 import s from "./headercomp.module.css";
 import Menu from "./menu";
 // import {LoginIntro} from "@/components/loginintro";
-// import {Flags} from "@/components/flags";
+ import {Flags} from "@/components/flags";
 import Image from "next/image";
 
 
 export  default function HeaderComp  (props) {
     //  const session = await getServerSession(authOptions)         
-    let { params, logo, webdata,  dictionary} = props ?? {}
-    let {locale} = params ?? {};
+    let { locale, logo, webdata,  dictionary} = props ?? {}
+    
     
                           
     let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
@@ -43,10 +43,11 @@ export  default function HeaderComp  (props) {
                           
                             {/* <div className={s.rightwr} >                                                   
                                           <LoginIntro dictionary={dictionary}/>                                          
-                                          <Flags params={params}/>
+                                          
                             </div> */}
-                            
-                                          <Menu params={params} webdata={webdata} dictionary={dictionary}/>    
+                            {/* {locale} */}
+                                          <Menu locale={locale} webdata={webdata} dictionary={dictionary}/>    
+                                          <div className={s.flagswr} ><Flags locale={locale}/></div>
                                           
 
               </div>

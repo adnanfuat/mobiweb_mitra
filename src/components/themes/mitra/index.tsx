@@ -53,7 +53,7 @@ export const Mitra =  (props) => {
                             <div className={s.mainwr}>  
                             
                                         <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} session={session}/>                                    
-                                        <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>             
+                                        <Index_Cuffs_V2_Visitor cuffs={cuffs} params={params}/>             
                                         
                                         
                                         <div className={s.main}> 

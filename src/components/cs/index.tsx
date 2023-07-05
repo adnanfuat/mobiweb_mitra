@@ -96,7 +96,7 @@ function Rs_Shell (props){
   
   
 
-  //  return (<div>{JSON.stringify(theme_name)}</div>)
+    // return (<div>{JSON.stringify(params)}</div>)
 
 
 

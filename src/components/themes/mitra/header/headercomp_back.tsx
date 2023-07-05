@@ -8,13 +8,13 @@ import {Flags} from "@/components/flags";
 export  default function HeaderComp_Back  (props) {
     //  const session = await getServerSession(authOptions)         
     let { params, position, logo, webdata, session, dictionary} = props ?? {}
-    let {locale} = params ?? {};
+    
     position= position ? position : "relative";
                           
     let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
     let {width, height} = logo?.bigdata?.details ?? {};
         
-    props={...props, position, filename,   locale }
+    props={...props, position, filename }
                 
     return (
             <div className={s.headercompwr}>
@@ -22,9 +22,9 @@ export  default function HeaderComp_Back  (props) {
                       <Link href={`/`}> <div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat",  minWidth:200, minHeight:100}}></div> </Link>
                   
                       <div className={s.rightwr} >                                                   
+                              <Flags locale={params?.locale}/>
                               <LoginIntro dictionary={dictionary}/>                                          
-                              <Menu params={params} webdata={webdata} dictionary={dictionary}/>                                          
-                              <Flags params={params}/>
+                              <Menu locale={params?.locale} webdata={webdata} dictionary={dictionary}/>                                          
                       </div>
                             
       </div>

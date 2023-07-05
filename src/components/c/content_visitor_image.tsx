@@ -14,7 +14,7 @@ import {siteProxy} from "@/constants/siteproxy"
         let content_properties     =   content?.bigdata?.history?.[0]?.info?.properties; // İlana atanmış özellikler 
         let siteState              =   useSnapshot(siteProxy);
 
-        
+        // return (<div>{JSON.stringify(props)}</div>)
           
         return (
           <div className={s.content_visitor_image_wr}>          
@@ -37,7 +37,7 @@ import {siteProxy} from "@/constants/siteproxy"
             
         //let img = content?.files?.[0] ? `${process.env.NEXT_PUBLIC_IMGSOURCE}/${content?.img_tr}` :"/images/common/sr.jpg";
   
-        // return (<div>{JSON.stringify(content?.files_tr)}ASSA</div>)
+        // return (<div>{JSON.stringify(content)}</div>)
         // return (<div>{JSON.stringify(fileObjects[0])}ASSA {img} --</div>)
         return(
             <div className={s.imagestandartwr} style={{ backgroundImage: `url(${img})`, backgroundSize:"cover" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}>

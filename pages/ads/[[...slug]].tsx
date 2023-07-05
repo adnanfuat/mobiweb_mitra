@@ -101,17 +101,17 @@ const  Category = (props) => {
   let theme_name = webdata?.bigdata?.theme?.name;
     
   if (theme_name=="mitra") {
-    return (<DesignLayout_Mitra_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Mitra_BackPages> )                      
+    return (<DesignLayout_Mitra_BackPages title={`${category?.title_tr}`} dictionary={dictionary} locale={locale} webdata={webdata} logo={logo}> <RsData {...props}/> </DesignLayout_Mitra_BackPages> )                      
   }
   else if (theme_name=="arges") {
-    return (<DesignLayout_Arges title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  {...props} /> </DesignLayout_Arges> )                      
+    return (<DesignLayout_Arges title={`${category?.title_tr}`} dictionary={dictionary} locale={locale} webdata={webdata} logo={logo}> <RsData  {...props} /> </DesignLayout_Arges> )                      
   }
   else if (theme_name=="vitalis") {
-    return (<DesignLayout_Vitalis_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData   {...props}  /> </DesignLayout_Vitalis_BackPages> )                      
+    return (<DesignLayout_Vitalis_BackPages title={`${category?.title_tr}`} dictionary={dictionary} locale={locale} webdata={webdata} logo={logo}><RsData   {...props}  /> </DesignLayout_Vitalis_BackPages> )                      
   }     
   else 
   {
-    return (<DesignLayout_Mitra_BackPages title={`${category?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Mitra_BackPages> )                      
+    return (<DesignLayout_Mitra_BackPages title={`${category?.title_tr}`} dictionary={dictionary} locale={locale} webdata={webdata} logo={logo}> <RsData locale={locale}  webdata={webdata}/> </DesignLayout_Mitra_BackPages> )                      
   }  
 
 
@@ -190,7 +190,7 @@ const RsData =  (props) => {
                         <div className={s.itemswr}> {adverts?.map((item,index) =>{ return <Item props={{item, countries, params}} key={index}/> }) } </div>                    
                   </div>
 
-                  <Meta category={category} firstadvert={adverts[0]} root_slug={root_slug} params={params}/>
+                  <Meta category={category} firstadvert={adverts[0]} root_slug={root_slug} locale={locale}/>
 
         </div>)
 

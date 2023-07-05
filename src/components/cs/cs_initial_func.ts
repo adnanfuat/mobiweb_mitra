@@ -48,7 +48,7 @@ import { get_FileObjects_SpecialRequests } from "@/src/components/utils/get_file
             fileobjects, 
             logo, 
             countries,
-            params, 
+            params:{...params, locale}, 
             listing_type,
             layout_type,
             item_type, card_type,  aspectratio_image , itemswr_specialstyle, item_elementswr_specialstyle    

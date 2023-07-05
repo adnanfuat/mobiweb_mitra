@@ -8,7 +8,7 @@ export default function dictionaryFunc ({key, dictionary}) {
 
         let text= dictionary?.find(a=>a?.key== key)?.title;
 
-        // console.log("aaaaa", dictionary?.length)
+        //  console.log("aaaaa", key, text, dictionary?.find(a=>a?.key== key), dictionary)
 
         
 

@@ -1,18 +1,10 @@
 
 import s from "./index.module.css"
- import HeaderComp from "./header/headercomp"
-
- import { RiHeartFill , RiWhatsappFill, RiAwardFill, RiBugFill, RiShieldFlashFill, RiFacebookCircleFill, RiBuilding4Fill, RiCoinFill } from "react-icons/ri";
-
- 
+import HeaderComp from "./header/headercomp"
+import { RiHeartFill , RiWhatsappFill, RiAwardFill, RiBugFill, RiShieldFlashFill, RiFacebookCircleFill, RiBuilding4Fill, RiCoinFill } from "react-icons/ri";
 // import FooterComp from "./footer/footercomp"
-import {siteProxy} from "@/constants/siteproxy"
-import Image from 'next/image'
-import styles from './page.module.css'
 import {Index_Cuffs_V2_Visitor} from "./cuffs/index_cuffs_v2_visitor"
-import { localeStatic } from "@/constants/localestatic"
-import Estates from "@/components/estates/estates";
-import { Archivo_Black } from 'next/font/google'
+
 
 
 // import { DesignLayout_Mitra_BackPages } from "./layouts/designlayout_mitra_backpages"
@@ -38,9 +30,10 @@ const exo2 = Exo_2({
 export const Proweb =  (props) => {
 
     let {logo, params, dictionary, webdata, cuffs, session} = props ?? {};
+
+    let {locale} = params ?? {};
     
     let stripimg = 1==2 ?  `${process.env.NEXT_PUBLIC_IMGSOURCE}/${"asssasasas"}` : "/themes/proweb/header_strip_bg.jpg"
-
 
     return (
             <div className={`${s.shell} ${exo2.className}`} >   
@@ -70,18 +63,18 @@ export const Proweb =  (props) => {
                                       </Head>              
 
                                       
-                                      
-                                                  <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} session={session}/>                                    
+                                      {/* saddasd{JSON.stringify(locale)} */}
+                                                  <HeaderComp logo={logo} locale={locale} dictionary={dictionary} webdata={webdata} session={session}/>                                    
                                                   {/*               */}
 
-                                                  <div className={s.cuffs}>  <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/> </div>
+                                                  <div className={s.cuffs}>  <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={locale}/> </div>
 
                                                   {/* <div className={s.stomach}>                                                     
                                                       
                                                       <div className={s.stomach_left}> <Services/> </div>
                                                       <div className={s.xxx}>
                                                         Merkez
-                                                         <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/> 
+                                                         <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={locale}/> 
                                                        </div>
                                                       <div className={s.xxx}>Sağ</div>
                                                       

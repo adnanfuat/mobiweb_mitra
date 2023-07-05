@@ -16,9 +16,9 @@ export  default  function HeaderComp  (props) {
     
     // const session = await getServerSession(authOptions)
   
-    let { params, position, logo, topbottom=5, webdata, dictionary } = props ?? {}
+    let { locale, position, logo,  webdata, dictionary } = props ?? {}
 
-    let {locale} = params ?? {};
+    
 
     position= position ? position : "relative";
          
@@ -42,11 +42,11 @@ export  default  function HeaderComp  (props) {
                     
           <Link href={`/`}><div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}></div></Link>
 
-          <Menu params={params} webdata={webdata} dictionary={dictionary}/>   
+          <Menu locale={locale} webdata={webdata} dictionary={dictionary}/>   
 
                     <div className={s.rightwr} >                                   
                                   <LoginIntro  dictionary={dictionary}/>
-                                  <Flags params={params}/>                                  
+                                  <Flags locale={locale}/>                                  
                     </div>
                               
         </div>

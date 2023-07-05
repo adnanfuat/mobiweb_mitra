@@ -17,7 +17,7 @@ export const DesignLayout = (props) => {
     <div  className={s.designwr}>
       {/* {JSON.stringify(webdata)} */}
       
-        <HeaderComp position="relative"  sidepadding={sidepadding} topbottom={5} dictionary={dictionary} params={params} webdata={webdata}/>
+        <HeaderComp position="relative"  sidepadding={sidepadding} topbottom={5} dictionary={dictionary} locale={locale} webdata={webdata}/>
 
         <div style={{paddingLeft:sidepadding, paddingRight:sidepadding }}  className={s.mainwr}>
 

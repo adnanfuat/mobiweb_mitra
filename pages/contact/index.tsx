@@ -225,7 +225,7 @@ export async function getStaticProps(data) {
        let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
  
                                                                         
-     let props = { webdata, dictionary, fileobjects, logo,  countries };
+     let props = { webdata, dictionary, fileobjects, logo,  countries, params:{locale} };
                         
      return { props, revalidate: 20 };
                                

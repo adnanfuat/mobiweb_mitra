@@ -10,7 +10,8 @@ export  default function HeaderBack  (props) {
     const session = undefined;
   
     let { params, logo, position,  topbottom=5, webdata, dictionary} = props ?? {};
-    let {locale} = params ?? {};
+    
+    let {locale}  = params ?? {}
 
     position= position ? position : "relative";
     let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
@@ -29,11 +30,11 @@ export  default function HeaderBack  (props) {
         <Link href={`/`}>
             <div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}></div>
         </Link>
-                      <div className={s.rightwr} >                                           
+                      <div className={s.rightwr} >                                                                                       
                                   <LoginIntro session={session} dictionary={dictionary}/>                                
-                                  <Menu params={params} webdata={webdata} dictionary={dictionary}/>                                
-                                  <Flags params={params}/>
+                                  <Menu locale={locale} webdata={webdata} dictionary={dictionary}/>                                
                       </div>
+                                  <div className={s.flagswr} ><Flags locale={locale}/></div>
         </div>
     )
   }

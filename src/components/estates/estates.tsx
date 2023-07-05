@@ -6,7 +6,7 @@ import dictionaryFunc from "@/components/utils/dictionaryfunc";
 
 const  Estates = ({adverts, dictionary, params}) =>{
 
-  let {locale} = params ?? {};    
+      
     
         return (
                           <div style={{backgroundColor:"transparent"}}>                                
@@ -21,7 +21,7 @@ export default Estates
 const Item = ({props}) => {
   const {item, dictionary, params} =props ?? {};
   
-  let {locale} = params ?? {};    
+      
 
   let {parentObj, loggedUserMail} = item ?? {};
     
@@ -74,7 +74,7 @@ const CardImage = ({props}) => {
 
   let img=item?.img_tr;
 
-  let {locale} = params ?? {};    
+  locale    
 
     
   return (    

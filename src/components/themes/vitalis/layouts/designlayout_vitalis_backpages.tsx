@@ -15,7 +15,7 @@ export const DesignLayout_Vitalis_BackPages = (props) => {
     
           
   return (
-    <div  className={`${s.designwr} ${inter.className}`}>    
+    <div  className={`${s.designwr} ${inter.className}`}>   
 
                 <HeaderBack position="relative" logo={logo}  topbottom={5} dictionary={dictionary} params={params} webdata={webdata}/>
 
@@ -24,7 +24,7 @@ export const DesignLayout_Vitalis_BackPages = (props) => {
                 <div  className={s.mainwr}> {props.children} </div>
 
 
-                <div  className={s.footerssss}> Footer </div>
+                <div  className={s.footer}> <FooterComp logo={logo}/> </div>
                 
         </div>
   )

@@ -4,7 +4,6 @@ import FooterComp from "./footer/footercomp"
 import {Triangle} from "./modules/triangle"
 import {Welcome} from "./modules/welcome"
 import {FixedWindow} from "./modules/fixedwindow"
-import Image from 'next/image'
 import s from "./index.module.css"    ;
 import Head from 'next/head';
 
@@ -44,11 +43,11 @@ export const Arges =  (props) => {
                   <title>ARGES</title>
               </Head>
                                   
-                        <HeaderComp logo={logo} params={params} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>
+                        <HeaderComp logo={logo} locale={params?.locale} dictionary={dictionary} webdata={webdata} position="absolute"  sidepadding={42} topbottom={5}/>
 
                         <div className={s.main}>                                                                                      
                                                 <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/>                                                             
-                                                {/* <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} params={params} sidepadding={42} />                                                 */}                        
+                                                {/* <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} locale={locale} sidepadding={42} />                                                 */}                        
                                                 <Bant/>                        
                                                 <Welcome/>  
                                                 <Triangle/>
