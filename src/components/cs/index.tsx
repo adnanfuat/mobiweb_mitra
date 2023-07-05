@@ -371,7 +371,7 @@ const Item_Cluster = (props) => {
         <div className={s.clusteritem_imagewr} style={item_elementswr_specialstyle}> 
 
             {
-              item?.files_tr?.map((file, index)=> <Card_ClusterElement file={file} {...props} index={index} /> )
+              item?.files_tr?.map((file, index)=> <Card_ClusterElement file={file} {...props} key={index} /> )
             }
               
 
@@ -388,7 +388,7 @@ const Item_Tower = (props) => {
   let {parentObj, loggedUserMail} = item ?? {};
 
   return ( 
-    <div className={s.item_tower} key={index}> 
+    <div className={s.item_tower} > 
 
             <div className={s.toweritem_imagewr}><Card props={{item, id: item?.id,  fileObjects, ...props}}/></div>    
             
