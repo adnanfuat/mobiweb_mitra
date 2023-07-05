@@ -2,6 +2,7 @@ import s from "./designlayout_mitra_backpages.module.css"
  import HeaderComp_Back from "@/themes/mitra/header/headercomp_back"
 import { Inter } from 'next/font/google'
 import FooterComp from "../footer/footercomp"
+import {Flags} from "@/components/flags";
 
 const inter = Inter({
     variable: '--inter-font',
@@ -32,7 +33,9 @@ export const DesignLayout_Mitra_BackPages = (props) => {
         </div>
                                             
         
-                    <div className={s.footer}>  <FooterComp logo={logo}/>   </div>                              
+                    <div className={s.footer}>  <FooterComp logo={logo}/>   </div> 
+
+                    <div className={s.flagswr} ><Flags locale={params?.locale}/></div>                                   
         </div>
   )
 }

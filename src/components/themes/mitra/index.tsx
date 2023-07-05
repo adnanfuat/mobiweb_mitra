@@ -3,16 +3,15 @@ import s from "./index.module.css"
  import HeaderComp from "@/themes/mitra/header/headercomp"
  import {Zigzag} from "@/themes/mitra/modules/zigzag"
 import FooterComp from "./footer/footercomp"
-import {siteProxy} from "@/constants/siteproxy"
-import Image from 'next/image'
+import {Flags} from "@/components/flags";
 
-import styles from './page.module.css'
+
+
 import {Index_Cuffs_V2_Visitor} from "@/components/cuffs/index_cuffs_v2_visitor"
-import { localeStatic } from "@/constants/localestatic"
+
 import Estates from "@/components/estates/estates";
 
-import { Archivo_Black } from 'next/font/google'
-import { DesignLayout_Mitra_BackPages } from "./layouts/designlayout_mitra_backpages"
+
 import { Inter, Exo_2 } from 'next/font/google';
 import Head from 'next/head';
 
@@ -67,7 +66,10 @@ export const Mitra =  (props) => {
                                                         
                             </div>
                                                                     
-                                           
+
+
+
+                            <div className={s.flagswr} ><Flags locale={params?.locale}/></div>       
 
                           </div>                               
                 )

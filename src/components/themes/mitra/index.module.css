@@ -8,6 +8,7 @@
   display: grid;
   grid-template-rows: max-content 1fr max-content;
   min-height: 100vh;
+  position: relative;
 }
 
 /* .shell> div {
@@ -29,3 +30,10 @@
 }
 
 
+.flagswr 
+{
+display: flex;
+position: absolute;
+top: 10px;
+right:10px
+}
