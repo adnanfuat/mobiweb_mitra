@@ -7,7 +7,9 @@ import { useMutation } from "react-query"
 
 export default function Form_Add (props) {
   
-    let { slug, session , resdata} = props ??  {};
+    let { slug, session , webdata} = props ??  {};
+
+    console.log("sadsadsa", props?.webdata)
 
     let {user} = session ?? {};
 
@@ -28,8 +30,8 @@ export default function Form_Add (props) {
                                                                         type:"message", 
                                                                         parent_slug:"contact", 
                                                                         bigparent_slug:"web", 
-                                                                        bigparent_key:resdata?.user,// Alıcının yani bu web sitesinin sahibinin mail adresi....
-                                                                        parent_key:"mitraemlak.com", 
+                                                                        bigparent_key:webdata?.user,// Alıcının yani bu web sitesinin sahibinin mail adresi....
+                                                                        parent_key:webdata?.slug_tr, 
                                                                         message
                                           } },
                                       }),

@@ -1,6 +1,7 @@
 import s from "./page.module.css"
-import { BolgeIsmiOgren } from "@/components/utils/bolgeismiogren";
-import Form from "@/components/contact/form";
+
+
+import Layout_Basic from "./layout_basic"; "./layout_basic"
 import {localeStatic} from "@/constants/localestatic";
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
 import dictionaryFunc from "@/components/utils/dictionaryfunc";
@@ -10,13 +11,20 @@ import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
 import DictionaryData from "@/components/utils/dictionarydata";
 import WebData from "@/components/utils/webdata";
 import { cacheCountries } from "@/components/utils/cachecountries";
+import { useIsLogged} from "@/components/utils/islogged";
 
 
 const Contact = (props) => {
 
   let {params, dictionary, webdata, fileobjects, category, advert, countries} = props ?? {}
   let {locale, slug} = params ?? {}
-    
+
+  
+  let logged = useIsLogged();
+
+  let {session} = logged ?? {}
+
+     
   //params= locale ? params : {...params, locale:localeStatic}; // Eğer locale gelmemişse localestatic'i atıyoruz
       
   let iletisim =     dictionaryFunc({key:"1668310884_999", dictionary}).text;
@@ -35,21 +43,23 @@ const Contact = (props) => {
       
   let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
 
-
   let theme_name = webdata?.bigdata?.theme?.name;
+  // console.log("sdsadsadssd", webdata?.bigdata)
+
+  let contact_props={session, params, webdata, countries, addresses}
     
   if (theme_name=="mitra") {
-    return (<DesignLayout_Mitra_BackPages title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Mitra_BackPages> )                      
+    return (<DesignLayout_Mitra_BackPages title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...contact_props}/> </DesignLayout_Mitra_BackPages> )                      
   }
   else if (theme_name=="arges") {
-    return (<DesignLayout_Arges title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Arges> )                      
+    return (<DesignLayout_Arges title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...contact_props}/> </DesignLayout_Arges> )                      
   }
   else if (theme_name=="vitalis") {
-    return (<DesignLayout_Vitalis_BackPages title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData addresses={addresses} webdata={webdata}  countries={countries} /> </DesignLayout_Vitalis_BackPages> )                      
+    return (<DesignLayout_Vitalis_BackPages title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData {...contact_props} /> </DesignLayout_Vitalis_BackPages> )                      
   }     
   else 
   {
-    return (<DesignLayout_Mitra_BackPages title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData params={params}  webdata={webdata}/> </DesignLayout_Mitra_BackPages> )                      
+    return (<DesignLayout_Mitra_BackPages title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...contact_props}/> </DesignLayout_Mitra_BackPages> )                      
   }   
 
 
@@ -59,137 +69,63 @@ const Contact = (props) => {
 export default Contact
 
 
-
 const RsData =  (props) => {
 
-      let { addresses, countries, webdata, session } = props ?? {};
+  let { addresses, countries, webdata, session } = props ?? {};
 
-      let theme=webdata?.bigdata?.theme;
+  let theme=webdata?.bigdata?.theme;
+  let theme_contact=webdata?.bigdata?.theme?.modules?.contact;
+  let layout_type = theme_contact?.layout_type
 
-      let contact_page =  theme?.pages?.contact ?? {};
+  let contact_page =  theme?.pages?.contact ?? {};
 
-      let background_color = contact_page?.background_color;
+  let background_color = contact_page?.background_color;
 
-      
-
-      return <div className={s.shell}>                      
-                  <div className={s.mainwr} style={{backgroundColor:background_color}}>
-                      <div className={s.sectionwr}>                    
-                            <div className={s.sectiontitle}>Mesaj Formu</div>
-                            <div className={s.form}><ContactForm  webdata={webdata}/></div>                        
-                      </div>
-                      <div className={s.sectionwr}>                    
-                            <div className={s.sectiontitle}>İletişim Bilgileri</div>
-                            <div className={s.info}><ContactInfo addresses={addresses} countries={countries}/></div>   
-                      </div>                                  
-                  </div>
-            </div>
-
-}
-
-
-
-const ContactForm = (props) => {
-
-  let {session, usermessages, webdata} = props ?? {};
-
-  return ( <div className={s.ci_shell}><Form  usermessages={usermessages} webdata={webdata}/></div> )
-}
-
-
-
-const ContactInfo = (props) => {
-
-  let {addresses, countries} = props ?? {};
+  // console.log("sessssssasa", session)
   
-    return (
-        <div className={s.ci_shell}>          
-              <Addresses addresses={addresses} countries={countries}/>          
-              <Phones/>
-              <Email/>
-        </div>    
-    )
-}
-
-
-
-
-const Email = () => {
-  return (
-    <div className={s.ci_itemwr}>
-                        
-        <div className={s.ci_itemicon}><RiMailFill/></div>
-        <div className={s.ci_itemdatawr}>
-              <div className={s.ci_itemtitle}>E-Posta</div>
-              <div className={s.ci_itemdata}>info@mitraemlak.com</div>                                  
-        </div>          
-
-  </div>
-  )
-}
-
-
-
-const Addresses = (props) => {
   
-  let {addresses, countries} = props ?? {};
 
-  
-  return (
-    <div className={s.ci_itemwr}>
-            
-        
-          <div className={s.ci_itemicon}><RiMapPin2Fill/></div>
-          <div className={s.ci_itemdatawr}>
-                <div className={s.ci_itemtitle}>Adres</div>
+    if (layout_type=="doctor" || !layout_type ) {return  <Layout_Basic {...props}/>}
+    // else if (layout_type=="twocolumn") {  return  <Layout_TwoColumn {...props}/>}
+                else return ( <div className={s.xxx}> Layout Type gelmedi... {layout_type} </div>)
 
-                <div className={s.itemswr}>
-                        {addresses?.map((addressitem, i)=>{
-                                
-                                    return <div className={s.ci_itemdata}  key={i}>{addressitem?.address} {BolgeIsmiOgren(addressitem?.subdistrict_slug, "mahalle", countries) ?? ""} {BolgeIsmiOgren(addressitem?.district_slug, "ilce", countries) ?? ""} {BolgeIsmiOgren(addressitem?.city_slug, "il", countries) ?? ""} {BolgeIsmiOgren(addressitem?.country_slug, "ulke", countries) ?? ""}</div>  
 
-                              })
-                        }
-                </div>
-          </div>     
-           
 
-  </div>
-  )
 }
 
 
 
-const Phones = () => {
-  return (
-    <div className={s.ci_itemwr}>
-            
-            
-    <div className={s.ci_itemicon}><RiCellphoneFill/></div>
-    <div className={s.ci_itemdatawr}>
-          <div className={s.ci_itemtitle}>Telefon</div>
-          
-          <div className={s.ci_itemdata}>
-            <span>Sefa Demiral</span>
-            <span>0 554 111 06 22</span>
-          </div>       
+// const RsData =  (props) => {
+
+//       let { addresses, countries, webdata, session } = props ?? {};
+
+//       let theme=webdata?.bigdata?.theme;
+
+//       let contact_page =  theme?.pages?.contact ?? {};
+
+//       let background_color = contact_page?.background_color;
+
+//       // console.log("sessssssasa", session)
+
+//       return <div className={s.shell}>                      
+//                   <div className={s.mainwr} style={{backgroundColor:background_color}}>
+//                       <div className={s.sectionwr}>                    
+//                             <div className={s.sectiontitle}>Mesaj Formu</div>
+//                             <div className={s.form}><ContactForm  {...props}/></div>                        
+//                       </div>
+//                       <div className={s.sectionwr}>                    
+//                             <div className={s.sectiontitle}>İletişim Bilgileri</div>
+//                             <div className={s.info}><ContactInfo addresses={addresses} countries={countries}/></div>   
+//                       </div>                                  
+//                   </div>
+//             </div>
+
+// }
 
 
-          <div className={s.ci_itemdata}>
-            <span>Ümit Demiral</span>
-            <span>0 554 333 06 68</span>
-          </div>       
 
 
-          <div className={s.ci_itemdata}>
-            <span>Valentina Koç</span>
-            <span>0 554 555 06 68</span>
-          </div>                                            
-    </div>          
 
-  </div>
-  )
-}
 
 
 

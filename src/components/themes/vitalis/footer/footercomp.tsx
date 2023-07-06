@@ -6,10 +6,16 @@ import Image from "next/image";
 
 export  default function FooterComp  (props) {
   
-    let { params, logo, position,  topbottom=5, webdata, dictionary} = props ?? {};
+    let { params, logo, position,  webdata } = props ?? {};
     let {locale} = params ?? {} ;
 
-    position= position ? position : "relative";
+    let footer= webdata?.bigdata?.theme?.settings?.footer;
+    let bg = footer?.bg;
+
+    let backgroundImage =  bg ? `url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${bg})` : "url(/themes/vitalis/footer_bg.jpg)"
+
+
+
     let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
     let logofiles =  lang?.logofiles;              
     // let {logo, params, dictionary} = props ?? {};                  
@@ -19,7 +25,9 @@ export  default function FooterComp  (props) {
 
 
     return (
-      <div className={s.footercompwr} style={{backgroundImage:"url(/themes/vitalis/footer_bg.jpg)", backgroundRepeat:"no-repeat"}}>
+      <div className={s.footercompwr} style={{backgroundImage, backgroundRepeat:"no-repeat"}}>
+
+        {/* {JSON.stringify(footer)} */}
 
               <div className={s.footercenterwr}>
                     <div className={s.ddddd}> <BizeUlasin/> </div>
