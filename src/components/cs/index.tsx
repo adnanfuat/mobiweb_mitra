@@ -96,7 +96,7 @@ function Rs_Shell (props){
   
   
 
-    // return (<div>{JSON.stringify(params)}</div>)
+//  return (<div>{JSON.stringify(webdata)}</div>)
 
 
 
@@ -157,15 +157,15 @@ const RichContents =  (props) => {
 
   if (listing_type=="grid") { listingComp = <Listing_Grid {...props}/>                                     }
   else if (listing_type=="cake") { listingComp = <Listing_Cake {...props}/>}                                            
-                         else  listingComp = <div className={s.item}> Listing Type gelmedi.. {listing_type} </div>
+                         else  listingComp = <div className={s.item}> Listing Type gelmedi.. {`${listing_type}`} </div>
 
   let meta = <Meta category={category} firstadvert={contents[0]} root_slug={root_slug} params={params}/>    
   
   props = {...props, meta, listingComp, parents, category }
-
+  //  return  <div className={s.xxx}> {`${JSON.stringify(layout_type)}`} </div>
   if (layout_type=="basic") {return  <Layout_Basic {...props}/>}
   else if (layout_type=="twocolumn") {  return  <Layout_TwoColumn {...props}/>}
-               else return ( <div className={s.xxx}> Layout Type gelmedi... {layout_type} </div>)
+               else return ( <div className={s.xxx}> Layout Type gelmedi... {`${layout_type}`} </div>)
 
 }
 

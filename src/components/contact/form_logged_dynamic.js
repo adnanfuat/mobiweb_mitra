@@ -13,13 +13,16 @@ import { useSnapshot } from 'valtio';
  export default  function Form_Logged_Dynamic ({props}) {
   
 
-  let {slug,   session, resdata} = props ?? {};
-    
+  let {slug,   session, webdata} = props ?? {};
+
+  // console.log("zxczxccxzcxxcz", props);
+    let web = webdata?.slug_tr;
+
   let siteState  = useSnapshot(siteProxy);
-  const { data, error  } = useQuery( ["userMessages"], () =>  userMessages({user:session?.user}) , {refetchOnWindowFocus:true})  // daha sonra false'a çevir...
+  const { data, error  } = useQuery( ["userMessages", web ], () =>  userMessages({user:session?.user, web}) , {refetchOnWindowFocus:true})  // daha sonra false'a çevir...
   
     
-  // console.log("sadsadsa", data, error, session?.user)
+   
 
   return ( <form onSubmit={() => formik?.handleSubmit()}>
                     <div className={s.shell}> 
@@ -39,7 +42,7 @@ import { useSnapshot } from 'valtio';
                                                                                                                                                                                 
                               </div>
                                       
-                                  {siteState?.interaction && <DynamicAdd slug={slug} session={session} resdata={resdata}/>} 
+                                  {siteState?.interaction && <DynamicAdd {...props}/>} 
 
                               </div>
 
@@ -55,8 +58,8 @@ const Comment = (props) => {
 
     let {message, locale} = props ?? {};
 
-    let historylength = message?.bigdata?.history?.length ?? 0 ;
-    let lasthistory = message?.bigdata?.history?.[historylength-1];
+    // let historylength = message?.bigdata?.history?.length ?? 0 ;
+    // let lasthistory = message?.bigdata?.history?.[historylength-1];
 
     let text =  message?.title_tr;    
 
@@ -66,7 +69,7 @@ const Comment = (props) => {
   return (
     <div className={s.item}> 
         {text}
-        <div className={s.user}> <img src={lasthistory?.info?.user?.image} style={{width:40, height:40}}/> {lasthistory?.info?.user?.name} </div>        
+        <div className={s.user}> <img src={message?.bigdata?.info?.user?.image} style={{width:40, height:40}}/> {message?.bigdata?.info?.user?.name} </div>        
     </div>
   )
 }

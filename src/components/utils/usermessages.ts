@@ -1,7 +1,7 @@
 
 // import {  useQueryClient } from "react-query";
 
-const userMessages = async ({user}) => {
+const userMessages = async ({user, web}) => {
   
   // console.log("userMessages userMessages","web_usermessages")
 
@@ -12,7 +12,7 @@ const userMessages = async ({user}) => {
         headers: { "Content-Type": "application/json", authorization: `Bearer ${user?.accessToken}`},
         body: JSON.stringify({
           query: SwissArmyKnifeQuery_Raw,
-          variables:{data:{type:"web_usermessages", parent_key: process.env.DOMAIN  }} 
+          variables:{data:{type:"web_usermessages", parent_key: web  }} 
         })
       })
         .then(async (res) =>{  
