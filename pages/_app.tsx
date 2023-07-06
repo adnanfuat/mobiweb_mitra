@@ -52,7 +52,7 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }: AppProps) =>
       </SessionProvider>
       
 
-        <ChangeTarget/>
+        {process.env.DemoRepo && <ChangeTarget/>}
     
     </div>
     );
@@ -87,6 +87,7 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }: AppProps) =>
                   <option value={"mitraemlak.com"}> mitraemlak.com </option>
                   <option value={"vitalisbotanik.com"}> vitalisbotanik.com </option>
                   <option value={"proweb.com.tr"}> proweb.com.tr </option>
+                  <option value={"aygunes.com.tr"}> aygunes.com.tr </option>
           </select>
       </div>
     )
