@@ -52,7 +52,8 @@ const MyApp = ({ Component,  pageProps:{ session, ...pageProps } }: AppProps) =>
       </SessionProvider>
       
 
-        {process.env.REPO=="DemoRepo" && <ChangeTarget/>}
+        {/* {process.env.REPO=="DemoRepo" && <ChangeTarget/>} */}
+       <ChangeTarget/>
     
     </div>
     );
