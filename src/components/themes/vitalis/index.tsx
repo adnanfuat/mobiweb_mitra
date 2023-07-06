@@ -30,18 +30,24 @@ export const Vitalis =  (props) => {
 
     let {logo, params, dictionary, webdata, cuffs} = props ?? {};
 
-    // return <div>asdasdsa</div>
-  
+    let favicon= webdata?.bigdata?.theme?.settings?.favicon;    
+    favicon =  favicon ? `${process.env.NEXT_PUBLIC_IMGSOURCE}/${favicon}` : "/themes/vitalis/fav.png" ;
+
+    let backgroundImage= webdata?.bigdata?.theme?.settings?.index?.bg;
+    backgroundImage =  backgroundImage ? `url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${backgroundImage})` : "url(/themes/vitalis/fav.png)" ;
+      
+    // let favicon= webdata?.bigdata?.theme?.index?.bg;
+
     return (                        
 
-        <div className={`${s.mainwr} ${poppins.className}`} style={{backgroundImage:"url(/themes/vitalis/bg.png)", backgroundRepeat:"no-repeat"}}>
+        <div className={`${s.mainwr} ${poppins.className}`} style={{backgroundImage, backgroundRepeat:"no-repeat"}}> 
                                             <Head>
-                                                <link rel="icon" href="/themes/vitalis/fav.png" sizes="any" />
+                                                <link rel="icon" href={favicon} sizes="any" />
                                                 <meta name="viewport" content="initial-scale=1, width=device-width" />
                                                 <meta name="Googlebot" content="index, follow" />
                                                 <meta name="robots" content="index, follow" />
                                                 <meta name="Robots" content="all" />              
-                                                <title>Vitaliss</title>
+                                                <title>{webdata?.title_tr}</title>
                                              </Head> 
 
         <div className={s.insidewr}>
@@ -64,7 +70,7 @@ export const Vitalis =  (props) => {
                                                                         <div className={s.ssss}> <Welcome/> </div>                                                                                                                                                                                                                                                                                                                                                                           
         </div>
 
-                                                                        <div className={s.bant}> <Bant/> </div>    
+                                                                        <div className={s.bant}> <Bant webdata={webdata}/> </div>    
 
                                                                         <div className={s.products}><Products/></div>    
                                                                         
@@ -72,7 +78,7 @@ export const Vitalis =  (props) => {
 
                                                                         <div className={s.products}><Gallery/></div>    
 
-                                                                        <div className={s.bant}> <Bant2/> </div>    
+                                                                        <div className={s.bant}> <Bant2 webdata={webdata}/> </div>    
 
 
                                                                         <div className={s.bant}> <ImageBoards/> </div>  
@@ -87,9 +93,8 @@ export const Vitalis =  (props) => {
         <br/>
         <br/>
         <br/>
-
         
-        <div className={s.footer}><FooterComp logo={logo}/></div>
+        <div className={s.footer}><FooterComp {...props}/></div>
 
 </div>
 

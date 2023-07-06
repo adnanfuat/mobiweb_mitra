@@ -27,7 +27,7 @@ export const DesignLayout_Vitalis_BackPages = (props) => {
                   </div>
 
 
-                <div  className={s.footer}> <FooterComp logo={logo}/> </div>
+                <div  className={s.footer}> <FooterComp {...props}/> </div>
                 
         </div>
   )
