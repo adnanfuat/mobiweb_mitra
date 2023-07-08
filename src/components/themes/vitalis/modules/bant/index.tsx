@@ -23,8 +23,6 @@ import s from "./index.module.css"
             nasıl görüneceğini öğrenmek ister misiniz?        
           </span>
         </div>
-
-
       </div>
     )
   }

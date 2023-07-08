@@ -16,6 +16,8 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  position: relative;
+  width: 100%;  
 }
 
 .logowr {
@@ -34,6 +36,16 @@ top: 10px;
 right:10px
 }
 
+.mobilebutton {
+    
+  position: fixed;
+  right: 5px;
+  top:5px;
+  z-index: 1050;
+  cursor: pointer;    
+  display: none;
+}
+
 
 
 
@@ -41,4 +53,25 @@ right:10px
   .headercompwr {
     flex-direction: column;
   }
+
+  .headercompwr {
+    flex-direction: column;
+  }    
+
+  /* .flagswr 
+{
+left:10px;
 }
+
+
+.headercompwr {  
+  gap: 0px;
+} */
+
+.mobilebutton {
+display: flex;
+}
+
+
+}
+

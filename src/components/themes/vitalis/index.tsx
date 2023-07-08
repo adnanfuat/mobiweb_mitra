@@ -52,12 +52,9 @@ export const Vitalis =  (props) => {
 
         <div className={s.insidewr}>
 
-                    {/* {title ? <div className={`${s.title} ${inter.variable}`} style={{backgroundColor:"white"}}>{title ? title : "Başlık atanmamış"}</div> : <div></div>} */}                    
-                    {/* { props?.children }  */}                    
+                                    
                                                         <HeaderFront logo={logo} params={params} dictionary={dictionary} webdata={webdata}  sidepadding={42} topbottom={5}/> 
-                                                                
-                                        
-                                                                
+                                                                                                                                                                        
 
                                                                         <div className={s.cuffs}> <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/> 
                                                                         </div>                    
@@ -70,21 +67,19 @@ export const Vitalis =  (props) => {
                                                                         <div className={s.ssss}> <Welcome/> </div>                                                                                                                                                                                                                                                                                                                                                                           
         </div>
 
-                                                                        <div className={s.bant}> <Bant webdata={webdata}/> </div>    
+                                                                       <div className={s.bant}> <Bant webdata={webdata}/> </div>    
 
-                                                                        <div className={s.products}><Products/></div>    
+                                                                         <div className={s.products}><Products/></div>    
                                                                         
-                                                                        <div className={s.products}><Blogs/></div>    
+                                                                          <div className={s.products}><Blogs/></div>    
 
-                                                                        <div className={s.products}><Gallery/></div>    
+                                                                         <div className={s.products}><Gallery/></div>    
 
                                                                         <div className={s.bant}> <Bant2 webdata={webdata}/> </div>    
 
+                                                                          <div className={s.bant}> <ImageBoards/> </div>  
 
-                                                                        <div className={s.bant}> <ImageBoards/> </div>  
-
-                                                                        <div className={s.bant}> <TextBoards/> </div>    
-
+                                                                         <div className={s.bant}> <TextBoards/> </div>    
 
                                                                         <div className={s.shortcuts}> <Shortcuts/> </div>    
 
@@ -94,7 +89,7 @@ export const Vitalis =  (props) => {
         <br/>
         <br/>
         
-        <div className={s.footer}><FooterComp {...props}/></div>
+        {/* <div className={s.footer}><FooterComp {...props}/></div> */}
 
 </div>
 

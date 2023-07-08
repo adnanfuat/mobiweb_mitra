@@ -18,6 +18,7 @@
   gap: 10px;
   align-items: center;
   position: relative;
+  width: 100%;  
 }
 
 
@@ -34,15 +35,42 @@
 display: flex;
 position: absolute;
 top: 10px;
-right:10px
+right:10px;
+
+
+}
+
+.mobilebutton {
+    
+  position: fixed;
+  right: 5px;
+  top:5px;
+  z-index: 1050;
+  cursor: pointer;    
+  display: none;
 }
 
 
 
-@media screen and (max-width: 1200px) {
+
+@media screen and (max-width: 1024px) {
     
   .headercompwr {
     flex-direction: column;
   }    
-         
+
+  .flagswr 
+{
+left:10px;
+}
+
+
+.headercompwr {  
+  gap: 0px;
+}
+
+.mobilebutton {
+display: flex;
+}
+  
 }    

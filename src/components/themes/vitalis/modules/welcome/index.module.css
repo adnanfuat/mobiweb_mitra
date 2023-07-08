@@ -69,3 +69,25 @@
     }    
 
 
+                .imagestyle {
+              object-fit: contain;
+              width: 100% !important;
+              position: relative !important;
+              height: unset !important;
+                            
+              }
+
+
+
+
+    @media screen and (max-width: 1024px) {
+
+            .welcomeInnerWr {                  
+              grid-template-areas: 
+              "welcomeTitle "
+              "welcomeImage "
+              "welcomeDescription ";                      
+              width: 100%;
+            }               
+                 
+  }      

@@ -9,7 +9,7 @@ import s from "./index.module.css"
         <div className={s.welcomeInnerWr}>
 
 
-        <div  className={s.welcomeImage}><Image src={"/themes/vitalis/welcome.jpg"} width={612} height={349}/></div>  
+        <div  className={s.welcomeImage} ><Image src={"/themes/vitalis/welcome.jpg"} width={612} height={349} className={s.imagestyle}/></div>  
 
               <div className={s.welcomeTitle}>
                 

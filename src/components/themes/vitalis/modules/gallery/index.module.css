@@ -24,7 +24,7 @@
     width: 80%;
       font-size: 10px;      
       display: grid;      
-      grid-template-columns: repeat(4, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap:20px;
       justify-content: center;
       justify-items: center;
@@ -33,6 +33,11 @@
 
   .galleryWr {
     position: relative;
+    padding:10px;    
+    display: flex;
+    width: 100%;
+    border:1px solid black;
+    justify-content: center;
   }
 
   .galleryTitle {
@@ -52,3 +57,10 @@
   .galleryWr:hover .galleryTitle {
     width: 90%;
   }
+
+  .imgstyle {
+    object-fit: contain;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;                  
+    }

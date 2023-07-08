@@ -17,8 +17,7 @@ import s from "./index.module.css"
 
           <div className={s.item} style={{color:"#cb06cd"}}><RiInstagramLine size={35}/></div>
           <div className={s.item} style={{color:"#22529c"}}><RiFacebookBoxLine size={35}/></div>
-          <div className={s.item} style={{color:"#e5b117"}}><RiMailFill size={35}/></div>
-                
+          <div className={s.item} style={{color:"#e5b117"}}><RiMailFill size={35}/></div>                
           <div className={s.item} style={{marginTop:30}}><MdCallEnd size={40}/></div>
       </div>
     )

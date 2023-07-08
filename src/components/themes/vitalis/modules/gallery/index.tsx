@@ -14,43 +14,41 @@ import 'react-medium-image-zoom/dist/styles.css'
 
         <div className={s.gallerysWr}>
 
-              <div className={s.productWr}>                   
+              <div className={s.galleryWr}>                   
               <Zoom>
-                  <Image src={"/themes/vitalis/gallery1.jpg"} width={300} height={225}/>                                 
+                  <Image src={"/themes/vitalis/gallery1.jpg"} width={300} height={225} className={s.imgstyle}/>                                 
               </Zoom>
               </div>
 
               <div className={s.galleryWr}>                   
-              <Zoom><Image src={"/themes/vitalis/gallery2.jpg"} width={300} height={225}/></Zoom>
+              <Zoom><Image src={"/themes/vitalis/gallery2.jpg"} width={300} height={225} className={s.imgstyle}/></Zoom>
               </div>
 
               <div className={s.galleryWr}>                   
-              <Zoom><Image src={"/themes/vitalis/gallery3.jpg"} width={300} height={225}/></Zoom>                                 
+              <Zoom><Image src={"/themes/vitalis/gallery3.jpg"} width={300} height={225} className={s.imgstyle}/></Zoom>                                 
               </div>
 
               <div className={s.galleryWr}>                   
-              <Zoom><Image src={"/themes/vitalis/gallery4.jpg"} width={300} height={225}/></Zoom>                                 
+              <Zoom><Image src={"/themes/vitalis/gallery4.jpg"} width={300} height={225} className={s.imgstyle}/></Zoom>                                 
               </div>
 
               <div className={s.galleryWr}>                   
-              <Zoom> <Image src={"/themes/vitalis/gallery5.jpg"} width={300} height={225}/></Zoom>                                 
+              <Zoom> <Image src={"/themes/vitalis/gallery5.jpg"} width={300} height={225} className={s.imgstyle}/></Zoom>                                 
               </div>
 
               <div className={s.galleryWr}>                   
-              <Zoom><Image src={"/themes/vitalis/gallery6.jpg"} width={300} height={225}/></Zoom>                                 
+              <Zoom><Image src={"/themes/vitalis/gallery6.jpg"} width={300} height={225} className={s.imgstyle}/></Zoom>                                 
               </div>
 
               <div className={s.galleryWr}>                   
-              <Zoom><Image src={"/themes/vitalis/gallery7.jpg"} width={300} height={225}/></Zoom>                                 
+              <Zoom><Image src={"/themes/vitalis/gallery7.jpg"} width={300} height={225} className={s.imgstyle}/></Zoom>                                 
               </div>
 
               <div className={s.galleryWr}>                   
-              <Zoom><Image src={"/themes/vitalis/gallery8.jpg"} width={300} height={225}/></Zoom>                                 
+              <Zoom><Image src={"/themes/vitalis/gallery8.jpg"} width={300} height={225} className={s.imgstyle}/></Zoom>                                 
               </div>                                                                                                  
 
               
-
-
         </div>
                                                                                    
 

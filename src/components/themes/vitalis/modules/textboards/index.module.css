@@ -76,3 +76,13 @@
     text-decoration: underline;
     
   }
+
+
+  @media screen and (max-width: 1200px) {
+    
+    .textboardsWr {            
+        grid-template-columns: 1fr;                      
+        }   
+                   
+}     
+

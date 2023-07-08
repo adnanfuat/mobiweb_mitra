@@ -80,3 +80,21 @@
     text-decoration: underline;
     
   }
+
+
+
+  
+@media screen and (max-width: 1200px) {
+    
+
+  .imageboardsWr {    
+    grid-template-columns: 1fr;
+  }
+
+  
+  .imageboardTitle {        
+    width: 80%;
+  }
+
+                 
+}     

@@ -39,6 +39,7 @@
     "blogImage blogButton"
     ;
     grid-template-columns: max-content 1fr;
+    grid-template-rows: max-content 1fr max-content;
     gap:20px;
     border: 1px solid rgb(218, 218, 218);
     padding: 40px;
@@ -58,8 +59,7 @@
     text-decoration: underline;
   }
 
-  .blogDescription {
-    position: absolute;
+  .blogDescription {    
     grid-area: blogDescription;
     font-size: 1.1rem;    
     line-height: 30px;
@@ -84,9 +84,38 @@
     font-size: 14px;
     width: 200px;
     transition: all .5s;
-    cursor: pointer;
+    cursor: pointer;    
   }
 
   .blogButton:hover {
 width: 220px;
   }
+
+
+  .imgstyle {
+    object-fit: contain;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;
+                  
+    }
+
+  
+@media screen and (max-width: 1200px) {
+    
+
+      .blogWr {
+        
+        grid-template-areas:     
+        "blogTitle"
+        "blogImage"
+        "blogDescription"
+        "blogButton"
+        ;
+        grid-template-columns: 1fr;
+        grid-template-rows: max-content max-content max-content max-content;
+        
+      }
+
+                 
+}     

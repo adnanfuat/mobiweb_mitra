@@ -10,7 +10,6 @@ const Layout_Basic = (props) => {
 
   let {locale} = params ?? {};
 
-
   let localized_data=eval(`webdata?.bigdata?.history?.[0]?.lang?.${locale}`)
 
   let theme=webdata?.bigdata?.theme;  
@@ -153,11 +152,13 @@ const Phones = (props) => {
             {localized_data?.phones?.map((item, i)=>{
                                 
                                     return <div className={s.ci_itemdatawr}  key={i}> {item?.label}
+
+                                          {/* <div>{JSON.stringify(item)}</div> */}
                                                   
                                                   <div className={s.ci_itemdata}>
                                                     <span>0</span>
                                                     <span>{item?.areacode} </span>
-                                                    <span>{item?.phone} </span>
+                                                    <span>{item?.number} </span>
                                                   </div>        
                                           
                                           </div>  

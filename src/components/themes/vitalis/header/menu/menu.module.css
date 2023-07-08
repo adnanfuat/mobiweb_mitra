@@ -1,14 +1,21 @@
+.shell { 
 
+}
 
+.mobilemenuwr {
+    display: none;
+}
 
+.menuwr {        
+    position: relative;        
+}
 
-.menuwr {
-    
+.menuinnerwr {    
     padding: 10px 30px;    
     display: flex;
     gap:30px;
     height: fit-content;
-    border-radius: 6px;    
+    border-radius: 6px; 
     
 }
 
@@ -18,9 +25,69 @@ padding: 6px 10px ;
 border-radius: 4px;
 }
 
+.closemobilebutton {
+    display: none;
+    cursor: pointer;
+}
+
+
+
 
 .menuitem:hover
 {
 background-color: black;
 color: white;
 }
+
+
+.close{
+    display: none
+}
+
+
+
+
+
+@media screen and (max-width: 1024px) {
+ 
+    .close{
+        display: flex;
+        cursor: pointer;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 1050;
+
+    }
+
+
+.mobilemenuwr {    
+        display: block;
+        padding: 80px 30px;           
+        height: 100%; 
+        background-color: rgba(0,0,0, .8);
+}
+
+.menuwr {
+            display: none;
+        }
+
+.shell {                
+        position: fixed;                    
+        z-index: 900;            
+        left:0px;
+        top:0px;                                                
+    }      
+
+.menuinnerwr{             
+    flex-direction: column;        
+    border-radius: 0px;    
+    padding: 100px 40px;
+    opacity: 1;
+    position: relative;
+    background-color: white;
+}    
+
+
+               
+}  
