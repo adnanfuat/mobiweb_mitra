@@ -15,7 +15,7 @@ import {Shortcuts} from "./modules/shortcuts"
 // import Estates from "@/components/estates/estates";
 // import {DesignLayout_Vitalis} from "./layouts/designlayout_vitalis"
 
-import { Poppins } from 'next/font/google'
+import { Noto_Sans_Lepcha, Poppins } from 'next/font/google'
 import HeaderFront from "./header/header_front";
 import Head from 'next/head';
 
@@ -34,9 +34,24 @@ export const Vitalis =  (props) => {
     favicon =  favicon ? `${process.env.NEXT_PUBLIC_IMGSOURCE}/${favicon}` : "/themes/vitalis/fav.png" ;
 
     let backgroundImage= webdata?.bigdata?.theme?.settings?.index?.bg;
-    backgroundImage =  backgroundImage ? `url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${backgroundImage})` : "url(/themes/vitalis/fav.png)" ;
-      
-    // let favicon= webdata?.bigdata?.theme?.index?.bg;
+    backgroundImage =  backgroundImage ? `url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${backgroundImage})` : "url(/themes/vitalis/bg.png)" ;
+       
+    let themev2= webdata?.bigdata?.themev2;
+     let modules = themev2?.items?.find(v=>v.type=="modules") ?? [] 
+
+     let welcome = modules?.items?.find(v=>v.key=="welcome") ?? []
+     let bant1 = modules?.items?.find(v=>v.key=="bant1") ?? []
+     let index_products = modules?.items?.find(v=>v.key=="index_products") ?? []; // Ana sayfadaki ürünler modülüyle ilgili bilgileri..
+     let index_blogs = modules?.items?.find(v=>v.key=="index_blogs") ?? []; // Ana sayfadaki ürünler modülüyle ilgili bilgileri..
+     let index_gallery = modules?.items?.find(v=>v.key=="index_gallery") ?? []; 
+     let bant2 = modules?.items?.find(v=>v.key=="bant2") ?? {}; 
+                
+     let contents = webdata?.o_key_2?.contents ?? [];
+     let fileObjects = webdata?.bigdata?.fileObjects;
+     let products = contents?.filter(a=>a?.parents?.[0]?.slug_tr=="urunler" )
+     let blogs = contents?.filter(a=>a?.parents?.[0]?.slug_tr=="blog")
+     let gallery = contents?.filter(a=>a?.parents?.[0]?.slug_tr=="galeri")
+
 
     return (                        
 
@@ -51,7 +66,7 @@ export const Vitalis =  (props) => {
                                              </Head> 
 
         <div className={s.insidewr}>
-
+        {/* {JSON.stringify(index_bant2)} */}
                                     
                                                         <HeaderFront logo={logo} params={params} dictionary={dictionary} webdata={webdata}  sidepadding={42} topbottom={5}/> 
                                                                                                                                                                         
@@ -64,24 +79,24 @@ export const Vitalis =  (props) => {
                                                                         </div> 
 
 
-                                                                        <div className={s.ssss}> <Welcome/> </div>                                                                                                                                                                                                                                                                                                                                                                           
+                                                                        <div className={s.ssss}> <Welcome data={welcome}/> </div>                                                                                                                                                                                                                                                                                                                                                                           
         </div>
 
-                                                                       <div className={s.bant}> <Bant webdata={webdata}/> </div>    
+                                                                       <div className={s.bant}> <Bant  data={bant1}/> </div>    
 
-                                                                         <div className={s.products}><Products/></div>    
+                                                                       <div className={s.products}><Products data={index_products} products={products} fileObjects={fileObjects}/></div>    
                                                                         
-                                                                          <div className={s.products}><Blogs/></div>    
+                                                                       <div className={s.products}><Blogs data={index_blogs} blogs={blogs} fileObjects={fileObjects}/></div>    
 
-                                                                         <div className={s.products}><Gallery/></div>    
+                                                                       <div className={s.products}><Gallery data={index_gallery} gallery={gallery} fileObjects={fileObjects}/></div>    
 
-                                                                        <div className={s.bant}> <Bant2 webdata={webdata}/> </div>    
+                                                                       <div className={s.bant}> <Bant2 data={bant2} fileObjects={fileObjects} /> </div>
 
-                                                                          <div className={s.bant}> <ImageBoards/> </div>  
+                                                                       <div className={s.bant}> <ImageBoards/> </div>  
 
-                                                                         <div className={s.bant}> <TextBoards/> </div>    
+                                                                       <div className={s.bant}> <TextBoards/> </div>    
 
-                                                                        <div className={s.shortcuts}> <Shortcuts/> </div>    
+                                                                       <div className={s.shortcuts}> <Shortcuts/> </div>    
 
 
         <br/>

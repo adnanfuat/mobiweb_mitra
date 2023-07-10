@@ -17,7 +17,7 @@ export default  function Index(props) {
       let cuffs = webdata?.bigdata?.cuffs;
       let logo = webdata?.bigdata?.logo;
       
-      // console.log("cuffscuffs: ", cuffs);
+      //  console.log("cuffscuffs: ", webdata);
       let component=<div>..</div>;
 
       //  return (<div>{locale}</div>)

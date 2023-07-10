@@ -31,11 +31,11 @@ export  default function HeaderFront  (props) {
     // siteState.mobilemenu!=true && 
     return (
       <div className={s.headercompwr}> 
-      
-                  
-        <Link href={`/${locale}`}>
-            <div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat", width:logosettings?.width, height:logosettings?.height}}></div>
-        </Link>
+                        
+                    <Link href={`/${locale}`}>
+                        <div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat", width:logosettings?.width, height:logosettings?.height}}></div>
+                    </Link>
+
                       <div className={s.rightwr} >                                                                 
                       {!siteState?.mobilemenu && <div className={s.mobilebutton} > 
                           { <RiMenuFill size={`3rem`}  onClick={(e)=>{e.stopPropagation(); siteProxy.mobilemenu=true}}/> }                          

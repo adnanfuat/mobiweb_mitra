@@ -1,26 +1,25 @@
+.welcomeWr {
+  background-color: #ffffff;
+  gap: 10px;
+  padding: 60px 10px;
+  align-items: center;
+  font-family: var(--poppins-font);
+  justify-content: center;
+  display: flex;
+}
 
-  .welcomeWr {    
-    background-color: #ffffff;    
-    gap: 10px;
-    padding: 60px 10px;    
-    align-items: center;
-    font-family: var(--poppins-font);
-    justify-content: center;    
-    display: flex;    
-  }
-  
-  .welcomeInnerWr {    
-    display: grid;    
-    grid-template-areas: 
+.welcomeInnerWr {
+  display: grid;
+  grid-template-areas:
     "welcomeImage welcomeTitle"
-    "welcomeImage welcomeDescription";        
-    padding: 10px;
-    gap:20px;
-    width: 90%;
-  }
+    "welcomeImage welcomeDescription";
+  grid-template-columns: 1fr 2fr;
+  padding: 10px;
+  gap: 20px;
+  width: 80%;
+}
 
-
-  .welcomeTitle {
+.welcomeTitle {
   display: flex;
   grid-area: welcomeTitle;
   justify-content: center;
@@ -28,66 +27,55 @@
   padding: 3px 0px;
   flex-direction: column;
   align-items: center;
-  gap:20px
+  gap: 20px;
+}
+
+.welcomeDescription {
+  display: flex;
+
+  grid-area: welcomeDescription;
+  font-size: 1rem;
+  line-height: 38px;
+}
+
+.welcomeImage {
+  display: flex;
+  grid-area: welcomeImage;
+}
+
+.welcomeTitleHr {
+  display: flex;
+  background-color: black;
+  height: 2px;
+  width: 30vw;
+  background-color: rgb(0, 0, 0);
+  position: relative;
+  justify-content: center;
+}
+
+.welcomeTitleHrBold {
+  display: flex;
+  background-color: black;
+  height: 6px;
+  width: 20vw;
+  background-color: rgb(0, 0, 0);
+  position: relative;
+  top: -2px;
+}
+
+.imagestyle {
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .welcomeInnerWr {
+    grid-template-areas:
+      "welcomeTitle "
+      "welcomeImage "
+      "welcomeDescription ";
+    width: 100%;
   }
-
-
-  .welcomeDescription {
-    display: flex;
-    
-    grid-area: welcomeDescription;
-    font-size: 1rem;
-    line-height: 38px;
-    }
-
-
-    .welcomeImage {
-      display: flex;      
-      grid-area: welcomeImage;
-      }
-
-
-    .welcomeTitleHr {
-      display: flex;
-      background-color: black;
-      height: 2px;
-      width:30vw;
-      background-color: rgb(0, 0, 0);
-      position: relative;
-      justify-content: center;
-    }
-
-
-    .welcomeTitleHrBold {
-      display: flex;
-      background-color: black;
-      height: 6px;
-      width:20vw;
-      background-color: rgb(0, 0, 0);
-      position: relative;
-      top: -2px;
-    }    
-
-
-                .imagestyle {
-              object-fit: contain;
-              width: 100% !important;
-              position: relative !important;
-              height: unset !important;
-                            
-              }
-
-
-
-
-    @media screen and (max-width: 1024px) {
-
-            .welcomeInnerWr {                  
-              grid-template-areas: 
-              "welcomeTitle "
-              "welcomeImage "
-              "welcomeDescription ";                      
-              width: 100%;
-            }               
-                 
-  }      
+}

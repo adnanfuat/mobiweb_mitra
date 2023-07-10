@@ -4,7 +4,10 @@ import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 
 
- export   const Gallery = () => {
+ export   const Gallery = (props) => {
+  
+    let {fileObjects, gallery, data} = props ?? {};
+
     return (
 
 <div className={s.gallerysMainWr}>
@@ -14,7 +17,35 @@ import 'react-medium-image-zoom/dist/styles.css'
 
         <div className={s.gallerysWr}>
 
-              <div className={s.galleryWr}>                   
+          {
+                gallery?.map(pro=> {
+
+                                    let fileObject=fileObjects?.find(   a=> a?.slug_tr==pro?.files_tr?.[0]   ); // İlk resim göstermek yeterli.. Ama birden fazla resim eklenebiliyor... Gerekirse diğer resimleri de çekeriz..
+                                    let link = `/c/${pro?.slug_tr}/${pro?.id}`;
+                                    return <div>
+                                                    {/* {JSON.stringify(pro?.files_tr)} */}
+
+                                                    {/* <div className={s.productWr}> 
+                                                        <div className={s.productTitle}> {pro?.title_tr} </div>
+                                                        <Link href={link} >
+                                                        <Image src={ `${process.env.NEXT_PUBLIC_IMGSOURCE}/${fileObject?.bigdata?.folder}/${fileObject?.bigdata?.filename}`  ?? "/themes/vitalis/product1.jpg"} width={300} height={225} className={s.imgstyle}/>                                 
+                                                        </Link>
+                                                    </div> */}
+
+                                                      <div className={s.galleryWr}>                   
+                                                      <Zoom>
+                                                          <Image src={"/themes/vitalis/gallery1.jpg"} width={300} height={225} className={s.imgstyle}/>                                 
+                                                      </Zoom>
+                                                      </div>                                                    
+
+                                        </div>
+
+
+                })
+
+            }
+
+              {/* <div className={s.galleryWr}>                   
               <Zoom>
                   <Image src={"/themes/vitalis/gallery1.jpg"} width={300} height={225} className={s.imgstyle}/>                                 
               </Zoom>
@@ -46,7 +77,7 @@ import 'react-medium-image-zoom/dist/styles.css'
 
               <div className={s.galleryWr}>                   
               <Zoom><Image src={"/themes/vitalis/gallery8.jpg"} width={300} height={225} className={s.imgstyle}/></Zoom>                                 
-              </div>                                                                                                  
+              </div>                                                                                                   */}
 
               
         </div>

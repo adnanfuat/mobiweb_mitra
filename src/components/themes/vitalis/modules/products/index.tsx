@@ -1,17 +1,41 @@
 import Image from 'next/image'
+import Link from 'next/link';
 import s from "./index.module.css"    
 
- export   const Products = () => {
+ export   const Products = (props) => {
+      
+    let {fileObjects, products, data} = props ?? {};
+
     return (
 
-<div className={s.productsMainWr}>
+<div className={s.productsMainWr}>         
 
-        <div className={s.title}> Ürünler </div>
+        <div className={s.title}> {data?.data_tr ?? "Ürünler"} </div>
         
-
         <div className={s.productsWr}>
+            {
+                products?.map(pro=> {
 
-              <div className={s.productWr}> 
+                                    let fileObject=fileObjects?.find(   a=> a?.slug_tr==pro?.files_tr?.[0]   )
+                                    let link = `/c/${pro?.slug_tr}/${pro?.id}`;
+                                    return <div>
+                                                    {/* {JSON.stringify(pro?.files_tr)} */}
+
+                                                    <div className={s.productWr}> 
+                                                        <div className={s.productTitle}> {pro?.title_tr} </div>
+                                                        <Link href={link} >
+                                                        <Image src={ `${process.env.NEXT_PUBLIC_IMGSOURCE}/${fileObject?.bigdata?.folder}/${fileObject?.bigdata?.filename}`  ?? "/themes/vitalis/product1.jpg"} width={300} height={225} className={s.imgstyle}/>                                 
+                                                        </Link>
+                                                    </div>
+
+                                        </div>
+
+
+                })
+
+            }
+
+              {/* <div className={s.productWr}> 
                   <div className={s.productTitle}> İğneliler </div>
                   <Image src={"/themes/vitalis/product1.jpg"} width={300} height={225} className={s.imgstyle}/>                                 
               </div>
@@ -49,7 +73,7 @@ import s from "./index.module.css"
               <div className={s.productWr}> 
                   <div className={s.productTitle}> Çim </div>
                   <Image src={"/themes/vitalis/product8.jpg"} width={300} height={225} className={s.imgstyle}/>                                 
-              </div>                                                                                                  
+              </div>                                                                                                   */}
               
 
         </div>
