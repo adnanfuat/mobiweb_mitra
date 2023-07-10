@@ -3,13 +3,13 @@ import s from "./index.module.css"
 
  export  const Welcome = (props) => {
 
-  let {data} = props ?? {};
+  let {module} = props ?? {};
 
-   let {items} = data ?? {};
+   let {data} = module ?? {};
 
-   let module_title= items[0].subitems?.find(c=>c?.key=="title")
-   let module_image= items[0].subitems?.find(c=>c?.key=="img")
-   let module_context= items[0].subitems?.find(c=>c?.key=="context")
+   let module_title= data?.find(c=>c?.key=="title")
+   let module_image= data?.find(c=>c?.key=="img")
+   let module_context= data?.find(c=>c?.key=="context")
 
    let module_img_url =module_image?.data_tr ? `${process.env.NEXT_PUBLIC_IMGSOURCE}/${module_image?.data_tr}` : "/themes/vitalis/welcome.jpg"
 
@@ -20,7 +20,7 @@ import s from "./index.module.css"
 
         <div className={s.welcomeInnerWr}>
           
-          {/* {JSON.stringify(data)} */}
+          {/* {JSON.stringify(module)} */}
           {/* {module_image?.data} */}
 
         <div  className={s.welcomeImage} ><Image src={module_img_url} width={612} height={349} className={s.imagestyle}/></div>  

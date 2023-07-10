@@ -4,14 +4,14 @@ import s from "./index.module.css"
 
  export   const Blogs = (props) => {
 
-    let {fileObjects, blogs, data} = props ?? {};
+    let {fileObjects, blogs, module} = props ?? {};
 
 
     return (
 
 <div className={s.blogsMainWr}>
 
-        <div className={s.title}>  {data?.data_tr ?? "Blog"} </div>
+        <div className={s.title}>  {module?.data?.[0]?.data_tr ?? "Blog"} </div>
         
 
         <div className={s.blogsWr}>

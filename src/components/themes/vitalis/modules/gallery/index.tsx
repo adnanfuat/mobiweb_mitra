@@ -6,13 +6,13 @@ import 'react-medium-image-zoom/dist/styles.css'
 
  export   const Gallery = (props) => {
   
-    let {fileObjects, gallery, data} = props ?? {};
+    let {fileObjects, gallery, module} = props ?? {};
 
     return (
 
 <div className={s.gallerysMainWr}>
 
-        <div className={s.title}> Galeri </div>
+        <div className={s.title}>   {module?.data?.[0]?.data_tr ?? "Galeri"}   </div>
         
 
         <div className={s.gallerysWr}>

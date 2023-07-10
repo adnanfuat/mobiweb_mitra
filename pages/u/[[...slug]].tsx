@@ -6,7 +6,10 @@ let bigbigparent_slug="urunler";    // Soldaki menüde hangi kategoriden itibare
 
 export default function Index (props){ 
               
-            props = {...props,  bigbigparent_slug } // Staticten gelenler ve modüle has olanlar...
+          // console.log("asdasdsadsdasdaasdsdads", props);
+
+          
+          props = {...props,  bigbigparent_slug } // Staticten gelenler ve modüle has olanlar...
           //   return (<div>{props?.params?.locale}</div>)
             return (<CS_Shell {...props}/>)
   

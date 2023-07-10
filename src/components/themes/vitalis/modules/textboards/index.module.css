@@ -36,10 +36,9 @@
     display: grid;
     grid-template-rows: max-content 1fr max-content;
     height: 100%;
+    width: 100%;    
+    gap:20px;
 
-    width: 100%;
-    
-    gap:20px
   }
 
   .textboardTitle {
@@ -62,6 +61,8 @@
     font-size: 0.8rem;
     line-height: 1.4rem;
     font-weight: 300;
+    max-height: 230px;
+    overflow-y: scroll;
     
   }
 

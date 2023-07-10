@@ -3,11 +3,11 @@ import s from "./index.module.css"
 
  export   const Bant = (props) => {
 
-  let {data} = props ?? {};
-  let {items} = data ?? {};
+  let {module} = props ?? {};
+  let {data} = module ?? {};
 
-  let module_title= items[0].subitems?.find(c=>c?.key=="title")
-  let module_image= items[0].subitems?.find(c=>c?.key=="img")
+  let module_title= data?.find(c=>c?.key=="title")
+  let module_image= data?.find(c=>c?.key=="img")
    
 
 
@@ -23,7 +23,7 @@ import s from "./index.module.css"
 <div className={s.bantWr} style={{backgroundImage:`url(${module_img_url})`}}>
 
         <div className={s.bantinner}> 
-        {/* {JSON.stringify(data)} */}
+        {/* {JSON.stringify(module)} */}
           <span style={{maxWidth:610}}  className={s.banttext}>
             { module_title?.data ?? `Seçtiğiniz ürünlerin bahçe düzenlemenizde 
             nasıl görüneceğini öğrenmek ister misiniz?`        }

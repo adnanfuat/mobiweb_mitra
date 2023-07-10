@@ -30,7 +30,7 @@ export const Menu =  (props) => {
     
                       
     return (
-        <div className={s.shell} style={{width:siteState?.mobilemenu==true ? "100%" : 20, height:siteState?.mobilemenu==true ? "100%" : 20, }}>             {/* // %100 açılan div diğerlerinin üzerine geliyor ve flags ve login onclicklerini engelliyor.. Bu nedenle bu trick gerekli oldu */}
+        <div className={s.shell}>             {/* // %100 açılan div diğerlerinin üzerine geliyor ve flags ve login onclicklerini engelliyor.. Bu nedenle bu trick gerekli oldu  style={{width:siteState?.mobilemenu==true ? "100%" : "100%", height:siteState?.mobilemenu==true ? "100%" : "100%", }}*/}
                                     
             {<div className={s.menuwr}>                               
                                   <div className={s.menuinnerwr}>                            
@@ -49,8 +49,7 @@ export const Menu =  (props) => {
             {siteState?.mobilemenu==true && <div className={s.mobilemenuwr} >                           
                             <div className={s.menuinnerwr} ref={ref}>
                             <div className={s.close}><RiMenu3Fill size={`3rem`} color="black" onClick={(e)=>{ siteProxy.mobilemenu=false}}/> </div>  
-                              <Link href={`/`} className={s.menuitem}  style={itemFunc({type:"main_page", menu})?.style}  onClick={(e)=>{ siteProxy.mobilemenu=false}}> {ana_sayfa} </Link>
-                              {/* <Link href={`/`} className={s.menuitem}  >{hakkimizda}</Link> */}
+                              <Link href={`/`} className={s.menuitem}  style={itemFunc({type:"main_page", menu})?.style}  onClick={(e)=>{ siteProxy.mobilemenu=false}}> {ana_sayfa} </Link>                              
                               {itemFunc({type:"real_estates", menu})?.visible && <Link href={`/ads`} className={s.menuitem} style={itemFunc({type:"real_estates", menu})?.style}  onClick={(e)=>{ siteProxy.mobilemenu=false}}> {emlak_ilanlari} </Link>}                  
                               <Link href={`/u/urunler`} className={s.menuitem}  onClick={(e)=>{ siteProxy.mobilemenu=false}} > {urunler} </Link>                  
                               <Link href={`/h/hizmetler`} className={s.menuitem}  onClick={(e)=>{ siteProxy.mobilemenu=false}}> {hizmetler} </Link>           

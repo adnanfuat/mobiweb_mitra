@@ -9,6 +9,8 @@ export  default function FooterComp  (props) {
     let { params, logo, position,  webdata } = props ?? {};
     let {locale} = params ?? {} ;
 
+    
+
     let footer= webdata?.bigdata?.theme?.settings?.footer;
     let bg = footer?.bg;
 
@@ -18,7 +20,14 @@ export  default function FooterComp  (props) {
 
     let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
     let logofiles =  lang?.logofiles;              
-    // let {logo, params, dictionary} = props ?? {};                  
+    // let {logo, params, dictionary} = props ?? {};      
+    
+
+    let themev2= webdata?.bigdata?.themev2;
+    console.log("webdataaaaaaaaa:", themev2)
+
+    
+
     let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
     let {width, height} = logo?.bigdata?.details ?? {};    
     props={...props, position, filename }

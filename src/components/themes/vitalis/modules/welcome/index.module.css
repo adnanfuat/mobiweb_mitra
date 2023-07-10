@@ -70,6 +70,17 @@
   height: unset !important;
 }
 
+
+@media screen and (max-width: 1500px) {
+  .welcomeInnerWr {
+    grid-template-columns: 1fr 3fr;
+    width: 100%;
+  }
+}
+
+
+
+
 @media screen and (max-width: 1024px) {
   .welcomeInnerWr {
     grid-template-areas:
@@ -77,5 +88,6 @@
       "welcomeImage "
       "welcomeDescription ";
     width: 100%;
+    grid-template-columns: 1fr;
   }
 }

@@ -1,7 +1,11 @@
 import Image from 'next/image'
 import s from "./index.module.css"    
 
- export   const TextBoards = () => {
+ export   const TextBoards = (props) => {
+
+
+  let {module} = props ?? {}
+  let {items} = module ?? {}
 
 
     let title1="Sakarya hediyelik bitki satışı yapan yerler";
@@ -12,7 +16,6 @@ import s from "./index.module.css"
     Sakarya hediyelik bitki satışı yapan bir yer olan Vitalis Botanik ile iletişime geçmek için;
     Adres: Rüstempaşa Mahallesi Kuruçay Mevkii Sapanca/SAKARYA
     Telefon: 0 534 6045154`;
-
 
     let title2="Sapanca'da bahçe ilaçlayacak firmalar";
     let description2=`Sapanca'da, güzel ve sağlıklı bir bahçe için gerekli olan ilaçlama hizmetlerini sunan birçok firma bulunmaktadır. Bu firmalar, bahçenizdeki bitkilerin sağlıklı ve güzel kalması için gerekli olan çeşitli ilaçları uygulayabilir ve bahçenizin sağlıklı ve güzel bir görünüm kazanmasını sağlayabilir. 
@@ -47,14 +50,22 @@ import s from "./index.module.css"
                 
         <div className={s.textboardsWr}>
 
-              <Board title={title1} description={description1}/>                                                                                                       
+              {/* {
+                JSON.stringify(module)
+              } */}
 
-              <Board title={title2} description={description2}/>       
+              {
 
-              <Board title={title3} description={description3}/>       
+                items?.map((item, index)=> {
 
-              <Board title={title4} description={description4}/>       
-              
+                  return  <Board title={item?.data?.[0]?.data_tr} description={item?.data?.[1]?.data_tr}  link={item?.data?.[2]?.data_tr}/> 
+
+                })
+
+              }
+
+                                                                                                                        
+                               
         </div>
                                                                                    
       </div>
@@ -68,7 +79,7 @@ import s from "./index.module.css"
   
   const Board = (props) => {
 
-    let {title, description} = props ?? {};
+    let {title, description, link} = props ?? {};
 
     return (
       <div className={s.textboardWr}> 
@@ -77,7 +88,7 @@ import s from "./index.module.css"
 
                   <div className={s.textboardDescription}>{description}</div>
 
-                  <div className={s.textboardButton}>Devamı</div> 
+                  {link && <div className={s.textboardButton}>Devamı</div> }
               </div>
     )
   }

@@ -37,14 +37,16 @@ export const Vitalis =  (props) => {
     backgroundImage =  backgroundImage ? `url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${backgroundImage})` : "url(/themes/vitalis/bg.png)" ;
        
     let themev2= webdata?.bigdata?.themev2;
-     let modules = themev2?.items?.find(v=>v.type=="modules") ?? [] 
+     let modules = themev2?.sections?.find(v=>v.type=="modules") ?? [] 
 
-     let welcome = modules?.items?.find(v=>v.key=="welcome") ?? []
-     let bant1 = modules?.items?.find(v=>v.key=="bant1") ?? []
-     let index_products = modules?.items?.find(v=>v.key=="index_products") ?? []; // Ana sayfadaki ürünler modülüyle ilgili bilgileri..
-     let index_blogs = modules?.items?.find(v=>v.key=="index_blogs") ?? []; // Ana sayfadaki ürünler modülüyle ilgili bilgileri..
-     let index_gallery = modules?.items?.find(v=>v.key=="index_gallery") ?? []; 
-     let bant2 = modules?.items?.find(v=>v.key=="bant2") ?? {}; 
+     let welcome = modules?.sections?.find(v=>v.key=="welcome") ?? []
+     let bant1 = modules?.sections?.find(v=>v.key=="bant1") ?? []
+     let index_products = modules?.sections?.find(v=>v.key=="index_products") ?? []; // Ana sayfadaki ürünler modülüyle ilgili bilgileri..
+     let index_blogs = modules?.sections?.find(v=>v.key=="index_blogs") ?? []; // Ana sayfadaki ürünler modülüyle ilgili bilgileri..
+     let index_gallery = modules?.sections?.find(v=>v.key=="index_gallery") ?? []; 
+     let bant2 = modules?.sections?.find(v=>v.key=="bant2") ?? {}; 
+     let imageboards = modules?.sections?.find(v=>v.key=="imageboards") ?? {}; 
+     let textboards = modules?.sections?.find(v=>v.key=="textboards") ?? {}; 
                 
      let contents = webdata?.o_key_2?.contents ?? [];
      let fileObjects = webdata?.bigdata?.fileObjects;
@@ -79,22 +81,22 @@ export const Vitalis =  (props) => {
                                                                         </div> 
 
 
-                                                                        <div className={s.ssss}> <Welcome data={welcome}/> </div>                                                                                                                                                                                                                                                                                                                                                                           
+                                                                        <div className={s.ssss}> <Welcome module={welcome}/> </div>                                                                                                                                                                                                                                                                                                                                                                           
         </div>
 
-                                                                       <div className={s.bant}> <Bant  data={bant1}/> </div>    
+                                                                       <div className={s.bant}> <Bant module={bant1}/> </div>    
 
-                                                                       <div className={s.products}><Products data={index_products} products={products} fileObjects={fileObjects}/></div>    
+                                                                       <div className={s.products}><Products module={index_products} products={products} fileObjects={fileObjects}/></div>    
                                                                         
-                                                                       <div className={s.products}><Blogs data={index_blogs} blogs={blogs} fileObjects={fileObjects}/></div>    
+                                                                       <div className={s.products}><Blogs module={index_blogs} blogs={blogs} fileObjects={fileObjects}/></div>    
 
-                                                                       <div className={s.products}><Gallery data={index_gallery} gallery={gallery} fileObjects={fileObjects}/></div>    
+                                                                       <div className={s.products}><Gallery module={index_gallery} gallery={gallery} fileObjects={fileObjects}/></div>    
 
-                                                                       <div className={s.bant}> <Bant2 data={bant2} fileObjects={fileObjects} /> </div>
+                                                                       <div className={s.bant}> <Bant2 module={bant2} fileObjects={fileObjects} /> </div>
 
-                                                                       <div className={s.bant}> <ImageBoards/> </div>  
+                                                                       <div className={s.bant}> <ImageBoards module={imageboards} fileObjects={fileObjects}/> </div>  
 
-                                                                       <div className={s.bant}> <TextBoards/> </div>    
+                                                                       <div className={s.bant}> <TextBoards module={textboards}/> </div>    
 
                                                                        <div className={s.shortcuts}> <Shortcuts/> </div>    
 

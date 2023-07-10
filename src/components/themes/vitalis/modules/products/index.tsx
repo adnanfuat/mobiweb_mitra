@@ -4,13 +4,15 @@ import s from "./index.module.css"
 
  export   const Products = (props) => {
       
-    let {fileObjects, products, data} = props ?? {};
+    let {fileObjects, products, module} = props ?? {};
 
     return (
 
 <div className={s.productsMainWr}>         
 
-        <div className={s.title}> {data?.data_tr ?? "Ürünler"} </div>
+{/* {JSON.stringify(module)} */}
+
+        <div className={s.title}> {module?.data?.[0]?.data_tr ?? "Ürünler"} </div>
         
         <div className={s.productsWr}>
             {
