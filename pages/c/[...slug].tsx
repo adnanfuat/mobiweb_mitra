@@ -6,7 +6,7 @@ import s from "./s.module.css"
 import Link from 'next/link';
 import DictionaryData from "@/components/utils/dictionarydata";
 import WebData from "@/components/utils/webdata";
-import { DesignLayout_Vitalis_BackPages } from "@/src/components/themes/vitalis/layouts/designlayout_vitalis_backpages";
+import { DesignLayout_Vitalis } from "@/src/components/themes/vitalis/layouts/designlayout_vitalis";
 import { DesignLayout_Mitra_BackPages } from "@/themes/mitra/layouts/designlayout_mitra_backpages";
 import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
 import { cacheCountries } from "@/components/utils/cachecountries";
@@ -40,7 +40,7 @@ const Content = (props) => {
           return (<DesignLayout_Arges title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Arges> )                      
         }
         else if (theme_name=="vitalis") {
-          return (<DesignLayout_Vitalis_BackPages title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData params={params} webdata={webdata}/> </DesignLayout_Vitalis_BackPages> )                      
+          return (<DesignLayout_Vitalis title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData params={params} webdata={webdata}/> </DesignLayout_Vitalis> )                      
         }     
         else 
         {

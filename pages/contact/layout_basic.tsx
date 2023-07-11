@@ -62,7 +62,7 @@ const ContactInfo = (props) => {
         <div className={s.ci_shell}>          
               <Addresses {...props}/>          
               <Phones {...props}/>
-              <Email {...props}/>
+              {/* <Email {...props}/> */}
         </div>    
     )
 }
@@ -83,7 +83,7 @@ const Email = (props) => {
             
     <div className={s.ci_itemicon}><RiCellphoneFill/></div>
     <div className={s.ci_itemdatawr}>
-          <div className={s.ci_itemtitle}>Telefon</div>
+          <div className={s.ci_itemtitle}>E-Posta</div>
           
             {localized_data?.emails?.map((item, i)=>{
                                 
