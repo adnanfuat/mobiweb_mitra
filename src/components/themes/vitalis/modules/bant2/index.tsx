@@ -16,22 +16,22 @@ import s from "./index.module.css"
 
                     <div className={s.bantItems} >
                                                         {
-                                                    items?.map(item=> {
+                                                            items?.map((item, index)=> {
 
-                                                                        // let fileObject=fileObjects?.find(   a=> a?.slug_tr==item?.subitems?.[1].data_tr   )
-                                                                        let link = `/c/${item?.slug_tr}/${item?.id}`;
-                                                                        return <div>
-                                                                                        {/* {JSON.stringify(pro?.files_tr)} */}                                                                                        
-                                                                                        {/* {item?.subitems?.[1].data_tr} */}
-                                                                                        <div className={s.bantitem}>
-                                                                                            <Image src={`${process.env.NEXT_PUBLIC_IMGSOURCE}/${item?.data?.[1].data_tr}`} width={150} height={150}/>
-                                                                                            <div>{item?.data?.[0]?.data_tr ?? "Farklı Tasarımlar"}</div>
-                                                                                        </div>                                                    
-                                                                            </div>
+                                                                                // let fileObject=fileObjects?.find(   a=> a?.slug_tr==item?.subitems?.[1].data_tr   )
+                                                                                let link = `/c/${item?.slug_tr}/${item?.id}`;
+                                                                                return <div key={index}>
+                                                                                                {/* {JSON.stringify(pro?.files_tr)} */}                                                                                        
+                                                                                                {/* {item?.subitems?.[1].data_tr} */}
+                                                                                                <div className={s.bantitem}>
+                                                                                                    <Image src={`${process.env.NEXT_PUBLIC_IMGSOURCE}/${item?.data?.[1].data_tr}`} width={150} height={150}/>
+                                                                                                    <div>{item?.data?.[0]?.data_tr ?? "Farklı Tasarımlar"}</div>
+                                                                                                </div>                                                    
+                                                                                    </div>
 
-                                                    })
+                                                            })
 
-                                                }
+                                                        }
 
                     </div>
 

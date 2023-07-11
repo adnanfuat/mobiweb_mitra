@@ -58,7 +58,7 @@ import s from "./index.module.css"
 
                 items?.map((item, index)=> {
 
-                  return  <Board title={item?.data?.[0]?.data_tr} description={item?.data?.[1]?.data_tr}  link={item?.data?.[2]?.data_tr}/> 
+                  return  <Board title={item?.data?.[0]?.data_tr} description={item?.data?.[1]?.data_tr}  link={item?.data?.[2]?.data_tr} key={index}/> 
 
                 })
 

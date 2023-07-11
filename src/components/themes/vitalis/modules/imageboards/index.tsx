@@ -16,10 +16,10 @@ import s from "./index.module.css"
                 
         <div className={s.imageboardsWr}>
 
-            {items?.map(item=>{
+            {items?.map((item, index)=>{
 
 
-              return  <Board title={item?.data?.[0]?.data_tr} bgimage={item?.data?.[1]?.data_tr} />   
+              return  <Board title={item?.data?.[0]?.data_tr} bgimage={item?.data?.[1]?.data_tr} key={index}/>
 
             })}
 

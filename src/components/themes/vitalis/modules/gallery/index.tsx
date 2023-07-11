@@ -18,11 +18,11 @@ import 'react-medium-image-zoom/dist/styles.css'
         <div className={s.gallerysWr}>
 
           {
-                gallery?.map(pro=> {
+                gallery?.map((pro, index)=> {
 
                                     let fileObject=fileObjects?.find(   a=> a?.slug_tr==pro?.files_tr?.[0]   ); // İlk resim göstermek yeterli.. Ama birden fazla resim eklenebiliyor... Gerekirse diğer resimleri de çekeriz..
                                     let link = `/c/${pro?.slug_tr}/${pro?.id}`;
-                                    return <div>
+                                    return <div key={index}>
                                                     {/* {JSON.stringify(pro?.files_tr)} */}
 
                                                     {/* <div className={s.productWr}> 

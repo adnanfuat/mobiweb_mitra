@@ -18,13 +18,13 @@ import s from "./index.module.css"
 
 
         {
-                blogs?.map(pro=> {
+                blogs?.map((pro, index)=> {
 
                                     // console.log("propropro: ",pro);
 
                                     let fileObject=fileObjects?.find(   a=> a?.slug_tr==pro?.files_tr?.[0]   )
                                     let link = `/c/${pro?.slug_tr}/${pro?.id}`;
-                                    return    <div className={s.blogWr}> 
+                                    return    <div className={s.blogWr} key={index}> 
                                                         <div className={s.blogTitle}> {pro?.title_tr} </div>
                                                         <div className={s.blogDescription}> {pro?.maintext_tr} </div>
                                                         <div className={s.blogImage}>

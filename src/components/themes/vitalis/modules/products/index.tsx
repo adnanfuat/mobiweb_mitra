@@ -16,11 +16,11 @@ import s from "./index.module.css"
         
         <div className={s.productsWr}>
             {
-                products?.map(pro=> {
+                products?.map((pro, index)=> {
 
                                     let fileObject=fileObjects?.find(   a=> a?.slug_tr==pro?.files_tr?.[0]   )
                                     let link = `/c/${pro?.slug_tr}/${pro?.id}`;
-                                    return <div>
+                                    return <div key={index}>
                                                     {/* {JSON.stringify(pro?.files_tr)} */}
 
                                                     <div className={s.productWr}> 
