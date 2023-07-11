@@ -13,7 +13,7 @@ import {TextBoards} from "./modules/textboards"
 import {ImageBoards} from "./modules/imageboards"
 import {Shortcuts} from "./modules/shortcuts"
 // import Estates from "@/components/estates/estates";
- import {DesignLayout_Vitalis} from "./layouts/designlayout_vitalis"
+// import {DesignLayout_Vitalis} from "./layouts/designlayout_vitalis"
 
 import { Noto_Sans_Lepcha, Poppins } from 'next/font/google'
 import HeaderFront from "./header/header_front";
@@ -56,8 +56,21 @@ export const Vitalis =  (props) => {
 
 
     return (                        
-        <DesignLayout_Vitalis  title={``} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}>
-                                                                                                                                                                       
+
+        <div className={`${s.mainwr} ${poppins.className}`} style={{backgroundImage, backgroundRepeat:"no-repeat"}}> 
+                                            <Head>
+                                                <link rel="icon" href={favicon} sizes="any" />
+                                                <meta name="viewport" content="initial-scale=1, width=device-width" />
+                                                <meta name="Googlebot" content="index, follow" />
+                                                <meta name="robots" content="index, follow" />
+                                                <meta name="Robots" content="all" />              
+                                                <title>{webdata?.title_tr}</title>
+                                             </Head> 
+
+        <div className={s.insidewr}>
+        {/* {JSON.stringify(index_bant2)} */}                                    
+                                                        <HeaderFront logo={logo} params={params} dictionary={dictionary} webdata={webdata}  sidepadding={42} topbottom={5}/> 
+                                                                                                                                                                        
 
                                                                         <div className={s.cuffs}> <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/> 
                                                                         </div>                    
@@ -68,6 +81,7 @@ export const Vitalis =  (props) => {
 
 
                                                                         <div className={s.ssss}> <Welcome module={welcome}/> </div>                                                                                                                                                                                                                                                                                                                                                                           
+        </div>
 
                                                                        <div className={s.bant}> <Bant module={bant1}/> </div>    
 
@@ -91,9 +105,9 @@ export const Vitalis =  (props) => {
         <br/>
         <br/>
         
-        
+        <div className={s.footer}><FooterComp {...props}/></div>
 
-</DesignLayout_Vitalis>
+</div>
 
                         
                         
@@ -107,55 +121,3 @@ export const Vitalis =  (props) => {
   
   
   
-
-//   <div className={`${s.mainwr} ${poppins.className}`} style={{backgroundImage, backgroundRepeat:"no-repeat"}}> 
-//   <Head>
-//       <link rel="icon" href={favicon} sizes="any" />
-//       <meta name="viewport" content="initial-scale=1, width=device-width" />
-//       <meta name="Googlebot" content="index, follow" />
-//       <meta name="robots" content="index, follow" />
-//       <meta name="Robots" content="all" />              
-//       <title>{webdata?.title_tr}</title>
-//    </Head> 
-
-// <div className={s.insidewr}>
-// {/* {JSON.stringify(index_bant2)} */}                                    
-//               <HeaderFront logo={logo} params={params} dictionary={dictionary} webdata={webdata}  sidepadding={42} topbottom={5}/> 
-                                                                                                                              
-
-//                               <div className={s.cuffs}> <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/> 
-//                               </div>                    
-                              
-//                               <div className={s.estates}>
-//                                       {/* <Estates adverts={webdata?.richcontents?.filter(a=>a?.bigbigparent_key=="1668310884")} locale={locale} /> */}
-//                               </div> 
-
-
-//                               <div className={s.ssss}> <Welcome module={welcome}/> </div>                                                                                                                                                                                                                                                                                                                                                                           
-// </div>
-
-//                              <div className={s.bant}> <Bant module={bant1}/> </div>    
-
-//                              <div className={s.products}><Products module={index_products} products={products} fileObjects={fileObjects}/></div>    
-                              
-//                              <div className={s.products}><Blogs module={index_blogs} blogs={blogs} fileObjects={fileObjects}/></div>    
-
-//                              <div className={s.products}><Gallery module={index_gallery} gallery={gallery} fileObjects={fileObjects}/></div>    
-
-//                              <div className={s.bant}> <Bant2 module={bant2} fileObjects={fileObjects} /> </div>
-
-//                              <div className={s.bant}> <ImageBoards module={imageboards} fileObjects={fileObjects}/> </div>  
-
-//                              <div className={s.bant}> <TextBoards module={textboards}/> </div>    
-
-//                              <div className={s.shortcuts}> <Shortcuts/> </div>    
-
-
-// <br/>
-// <br/>
-// <br/>
-// <br/>
-
-// <div className={s.footer}><FooterComp {...props}/></div>
-
-// </div>

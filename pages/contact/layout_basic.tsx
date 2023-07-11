@@ -10,7 +10,6 @@ const Layout_Basic = (props) => {
 
   let {locale} = params ?? {};
 
-
   let localized_data=eval(`webdata?.bigdata?.history?.[0]?.lang?.${locale}`)
 
   let theme=webdata?.bigdata?.theme;  
@@ -63,7 +62,7 @@ const ContactInfo = (props) => {
         <div className={s.ci_shell}>          
               <Addresses {...props}/>          
               <Phones {...props}/>
-              <Email {...props}/>
+              {/* <Email {...props}/> */}
         </div>    
     )
 }
@@ -84,7 +83,7 @@ const Email = (props) => {
             
     <div className={s.ci_itemicon}><RiCellphoneFill/></div>
     <div className={s.ci_itemdatawr}>
-          <div className={s.ci_itemtitle}>Telefon</div>
+          <div className={s.ci_itemtitle}>E-Posta</div>
           
             {localized_data?.emails?.map((item, i)=>{
                                 
@@ -153,11 +152,13 @@ const Phones = (props) => {
             {localized_data?.phones?.map((item, i)=>{
                                 
                                     return <div className={s.ci_itemdatawr}  key={i}> {item?.label}
+
+                                          {/* <div>{JSON.stringify(item)}</div> */}
                                                   
                                                   <div className={s.ci_itemdata}>
                                                     <span>0</span>
                                                     <span>{item?.areacode} </span>
-                                                    <span>{item?.phone} </span>
+                                                    <span>{item?.number} </span>
                                                   </div>        
                                           
                                           </div>  

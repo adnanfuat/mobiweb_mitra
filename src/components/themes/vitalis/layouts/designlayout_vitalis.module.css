@@ -1,9 +1,21 @@
+/* .shell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+} */
+
 .title {
   padding: 10px;
   font-size: 1.8rem;
   background-color: #cbbb9f;
   border-radius: 6px 6px 0px 0px;
 }
+
+/* .cuffs {
+  background-color: aquamarine;
+  padding: 20px;
+} */
 
 .designwr {
   display: flex;
@@ -19,8 +31,8 @@
   gap: 20px;
   flex-direction: column;
   align-items: center;
-  width: 80%;
-  padding: 0px 0px 80px 0px;
+
+  width: 100%;
 }
 
 .fullwr {

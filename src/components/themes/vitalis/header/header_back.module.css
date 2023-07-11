@@ -9,13 +9,14 @@
   align-items: center;
   width: 80%;
   padding: 20px 0px;
-
 }
 
 .rightwr {
   display: flex;
   gap: 10px;
   align-items: center;
+  position: relative;
+  width: 100%;
 }
 
 .logowr {
@@ -26,19 +27,42 @@
   /* background-color: red; */
 }
 
-.flagswr 
-{
-display: flex;
-position: absolute;
-top: 10px;
-right:10px
+.flagswr {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
-
-
+.mobilebutton {
+  position: fixed;
+  right: 5px;
+  top: 5px;
+  z-index: 1050;
+  cursor: pointer;
+  display: none;
+}
 
 @media screen and (max-width: 1200px) {
   .headercompwr {
     flex-direction: column;
+  }
+
+  .headercompwr {
+    flex-direction: column;
+  }
+
+  /* .flagswr 
+{
+left:10px;
+}
+
+
+.headercompwr {  
+  gap: 0px;
+} */
+
+  .mobilebutton {
+    display: flex;
   }
 }

@@ -3,6 +3,9 @@ import s from "./header_back.module.css";
 import {Menu} from "./menu";
 import {LoginIntro} from "@/components/loginintro";
 import {Flags} from "@/components/flags";
+import { useSnapshot } from 'valtio';
+import {siteProxy} from "@/constants/siteproxy"
+import { RiMenuFill } from "react-icons/ri";
 
 
 export  default function HeaderBack  (props) {
@@ -14,15 +17,13 @@ export  default function HeaderBack  (props) {
     let {locale}  = params ?? {}
 
     position= position ? position : "relative";
-    let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
-    let logofiles =  lang?.logofiles;              
-    // let {logo, params, dictionary} = props ?? {};                  
+        
     let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
-    let {width, height} = logo?.bigdata?.details ?? {};
+    
     
     props={...props, position, filename,  session }
 
-    // console.log("propsprops", props);
+    let siteState  = useSnapshot(siteProxy);    
         
     return (
       <div className={s.headercompwr}>
@@ -31,10 +32,14 @@ export  default function HeaderBack  (props) {
             <div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}></div>
         </Link>
                       <div className={s.rightwr} >                                                                                       
-                                  <LoginIntro session={session} dictionary={dictionary}/>                                
+
+                        {!siteState?.mobilemenu && <div className={s.mobilebutton} > 
+                            { <RiMenuFill size={`3rem`}  onClick={(e)=>{e.stopPropagation(); siteProxy.mobilemenu=true}}/> }                          
+                      </div>}
+
                                   <Menu locale={locale} webdata={webdata} dictionary={dictionary}/>                                
                       </div>
-                                  <div className={s.flagswr} ><Flags locale={locale}/></div>
+                                  <div className={s.flagswr} ><LoginIntro session={session} dictionary={dictionary}/> <Flags locale={locale}/></div>
         </div>
     )
   }

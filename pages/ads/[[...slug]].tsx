@@ -10,7 +10,7 @@ import relatedCategory from "@/components/utils/relatedcategory";
 import WebData from "@/components/utils/webdata";
 import DictionaryData from "@/components/utils/dictionarydata";
 import { localeStatic } from "@/constants/localestatic";
-import { DesignLayout_Vitalis_BackPages } from "@/themes/vitalis/layouts/designlayout_vitalis_backpages";
+import { DesignLayout_Vitalis } from "@/src/components/themes/vitalis/layouts/designlayout_vitalis";
 import { DesignLayout_Mitra_BackPages } from "@/themes/mitra/layouts/designlayout_mitra_backpages";
 import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
 
@@ -107,7 +107,7 @@ const  Category = (props) => {
     return (<DesignLayout_Arges title={`${category?.title_tr}`} dictionary={dictionary} locale={locale} webdata={webdata} logo={logo}> <RsData  {...props} /> </DesignLayout_Arges> )                      
   }
   else if (theme_name=="vitalis") {
-    return (<DesignLayout_Vitalis_BackPages title={`${category?.title_tr}`} dictionary={dictionary} locale={locale} webdata={webdata} logo={logo}><RsData   {...props}  /> </DesignLayout_Vitalis_BackPages> )                      
+    return (<DesignLayout_Vitalis title={`${category?.title_tr}`} dictionary={dictionary} locale={locale} webdata={webdata} logo={logo}><RsData   {...props}  /> </DesignLayout_Vitalis> )                      
   }     
   else 
   {

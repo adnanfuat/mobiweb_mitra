@@ -1,4 +1,4 @@
-import s from "./designlayout_vitalis_backpages.module.css"
+import s from "./designlayout_vitalis.module.css"
 import HeaderFront from "../header/header_front"
 import { Inter } from 'next/font/google'
 import FooterComp from "../footer/footercomp"
@@ -20,7 +20,7 @@ const inter = Inter({
   })  
 
 
-export const DesignLayout_Vitalis_BackPages = (props) => {
+export const DesignLayout_Vitalis = (props) => {
     let {title, dictionary, params,logo, webdata} = props ?? {};
 
 
@@ -48,7 +48,7 @@ export const DesignLayout_Vitalis_BackPages = (props) => {
 
              {title && <div  className={s.titlewr}> {title} </div>}
 
-             <div  className={s.mainwr}> 
+             <div className={s.mainwr}> 
                {props.children}                   
              </div>
 

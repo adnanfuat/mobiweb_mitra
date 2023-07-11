@@ -5,7 +5,9 @@ import { datetimeFunc } from "@/components/utils/datetimefunc";
 import Head from "next/head";
 import { localeStatic } from "@/constants/localestatic";
 import relatedCategory_Bigdata from "@/components/utils/relatedcategory_bigdata";
-import { DesignLayout_Vitalis_BackPages } from "@/themes/vitalis/layouts/designlayout_vitalis_backpages";
+// import { DesignLayout_Vitalis_BackPages } from "@/themes/vitalis/layouts/designlayout_vitalis_backpages";
+import { DesignLayout_Vitalis_BackPages } from "@/src/components/themes/vitalis/layouts/designlayout_vitalis_backpages";
+import { DesignLayout_Vitalis } from "@/src/components/themes/vitalis/layouts/designlayout_vitalis";
 import { DesignLayout_Mitra_BackPages } from "@/themes/mitra/layouts/designlayout_mitra_backpages";
 import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
 import { LayoutLeft } from "./layoutleft";
@@ -35,6 +37,8 @@ export default function CS_Shell (props){
 
   // console.log("itemitemitem: ", slug, contents);
 
+  // return (<div>{JSON.stringify(contents)}</div>)
+
   contents=contents?.filter(co=> { // içeriklerimizi tarayacağız ve içeriklerimizin parentlarından herhangi biri yukarıdaki key lerin arasında varsa listeleyeceğiz...
 
           let co_parents=co?.parents?.map(c=>c?.key); // önce parentların gereksiz teferruatlarını atalım...
@@ -58,7 +62,7 @@ export default function CS_Shell (props){
 
   /////////////////////////////////// --
 
-    //  return (<div>{JSON.stringify(item_elementswr_specialstyle)}</div>)
+      // return (<div>{JSON.stringify(contents)}</div>)
    return (<Rs_Shell contents={contents} root_category={"emlak"} countries={countries} logo={logo} bigbigparent_slug={bigbigparent_slug} categories={categories} root_slug={`cs`} dictionary={dictionary} webdata={webdata} fileObjects={fileObjects}  sidepadding={42}  {...props}/>) 
   
   }
@@ -96,7 +100,7 @@ function Rs_Shell (props){
   
   
 
-//  return (<div>{JSON.stringify(webdata)}</div>)
+  // return (<div>{JSON.stringify(contents)}</div>)
 
 
 

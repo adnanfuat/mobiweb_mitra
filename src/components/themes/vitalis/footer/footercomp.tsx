@@ -9,16 +9,28 @@ export  default function FooterComp  (props) {
     let { params, logo, position,  webdata } = props ?? {};
     let {locale} = params ?? {} ;
 
-    let footer= webdata?.bigdata?.theme?.settings?.footer;
-    let bg = footer?.bg;
+    
 
-    let backgroundImage =  bg ? `url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${bg})` : "url(/themes/vitalis/footer_bg.jpg)"
+
 
 
 
     let lang= webdata?.bigdata?.history?.[0]?.lang?.tr;
     let logofiles =  lang?.logofiles;              
-    // let {logo, params, dictionary} = props ?? {};                  
+    // let {logo, params, dictionary} = props ?? {};      
+    
+
+    let themev2= webdata?.bigdata?.themev2;
+    let modules = themev2?.sections?.find(sec=>sec?.type=="modules")
+    let footer = modules?.sections?.find(sec=>sec?.key=="footer")
+    console.log("webdataaaaaaaaa:", footer)
+
+    // let footer= webdata?.bigdata?.theme?.settings?.footer;
+    let bg = footer?.data?.[0]?.data_tr;
+
+    let backgroundImage =  bg ? `url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${bg})` : "url(/themes/vitalis/footer_bg.jpg)"
+
+    
     let filename = logo?.bigdata?.folder+"/"+logo?.bigdata?.filename;    
     let {width, height} = logo?.bigdata?.details ?? {};    
     props={...props, position, filename }
@@ -30,14 +42,14 @@ export  default function FooterComp  (props) {
         {/* {JSON.stringify(footer)} */}
 
               <div className={s.footercenterwr}>
-                    <div className={s.ddddd}> <BizeUlasin/> </div>
+                    <div className={s.ddddd}> <BizeUlasin module={footer?.items[0]}/> </div>
                     <div className={s.ddddd}> <HizliErisim/> </div>
                     <div className={s.ddddd}>
-                      <Link href={`/`}><div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}></div></Link>
+                      <Link href={`/`} style={{justifyContent:"center", display:"flex"}}><div className={s.logowr} style={{ backgroundImage: `url(${`${process.env.NEXT_PUBLIC_IMGSOURCE}/${filename}`})`, backgroundSize:"contain" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}></div></Link>
 
                       <div className={s.rightcorner}>
-                          ® 2023 Vitalis Botanik <br/>
-                            Tüm hakları saklıdır.
+                          {footer?.data?.[1]?.data_tr ?? "® 2023 Vitalis Botanik "} <br/>
+                            { footer?.data?.[2]?.data_tr ?? "Tüm hakları saklıdır"}
                             
                               <div className={s.webcompanywr}>
                                         <span><Image src={`/images/pw.png`} width={33} height={10} alt={"PROWEB"} className={s.FFFFF}/> </span>
@@ -98,14 +110,17 @@ export  default function FooterComp  (props) {
   
   
   
-  const BizeUlasin = () => {
+  const BizeUlasin = (props) => {
+
+    let {module} = props ?? {}
+
     return (
           <div className={s.blockwr}>                   
-                  
-                  <div className={s.blocktitle}>Bize Ulaşın</div>                  
-                  <div className={s.blockitem}><span><RiHome2Fill/></span> Rüstempaşa Mahallesi Kuruçay Mevkii Sapanca / SAKARYA </div>
-                  <div className={s.blockitem}><span><RiCellphoneFill/></span> 0 534 6045154 </div>
-                  <div className={s.blockitem}><span><RiMailFill/></span> bilgi@vitalisbotanik.com </div>
+    {/* {JSON.stringify(module)}               */}
+                  <div className={s.blocktitle}> {module?.data?.[0]?.data_tr ?? "Bize Ulaşın "}</div>                  
+                  <div className={s.blockitem}><span><RiHome2Fill/></span>  {module?.items?.[0]?.data?.[0]?.data_tr ?? "Rüstempaşa Mahallesi Kuruçay Mevkii Sapanca / SAKARYA"}  </div>
+                  <div className={s.blockitem}><span><RiCellphoneFill/></span> {module?.items?.[1]?.data?.[0]?.data_tr ?? "0 534 6045154"}  </div>
+                  <div className={s.blockitem}><span><RiMailFill/></span> {module?.items?.[2]?.data?.[0]?.data_tr ?? "bilgi@vitalisbotanik.com"}  </div>
 
           </div>
     )

@@ -5,7 +5,8 @@ import Layout_Basic from "./layout_basic"; "./layout_basic"
 import {localeStatic} from "@/constants/localestatic";
 import { RiMapPin2Fill, RiMailFill, RiCellphoneFill } from "react-icons/ri";
 import dictionaryFunc from "@/components/utils/dictionaryfunc";
-import { DesignLayout_Vitalis_BackPages } from "@/themes/vitalis/layouts/designlayout_vitalis_backpages";
+import { DesignLayout_Vitalis_BackPages } from "@/src/components/themes/vitalis/layouts/designlayout_vitalis_backpages";
+import { DesignLayout_Vitalis } from "@/src/components/themes/vitalis/layouts/designlayout_vitalis";
 import { DesignLayout_Mitra_BackPages } from "@/themes/mitra/layouts/designlayout_mitra_backpages";
 import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
 import DictionaryData from "@/components/utils/dictionarydata";
