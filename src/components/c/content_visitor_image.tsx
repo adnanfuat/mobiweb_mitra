@@ -30,18 +30,12 @@ import {siteProxy} from "@/constants/siteproxy"
     const Content_Visitor_Image_Standart = (props) => {
 
         let {content, fileObjects} = props;
-
         let fileObject=fileObjects?.find(f=>f?.slug_tr==content?.files_tr?.[0]);
+        let img =!!fileObject ? fileObject?.bigdata?.folder + "/" + fileObject?.bigdata?.filename : undefined;        
 
-        let img =!!fileObject ? fileObject?.bigdata?.folder + "/" + fileObject?.bigdata?.filename : undefined
-            
-        //let img = content?.files?.[0] ? `${process.env.NEXT_PUBLIC_IMGSOURCE}/${content?.img_tr}` :"/images/common/sr.jpg";
-  
-        // return (<div>{JSON.stringify(content)}</div>)
-        // return (<div>{JSON.stringify(fileObjects[0])}ASSA {img} --</div>)
         return(
-            <div className={s.imagestandartwr} style={{ backgroundImage: `url(${img})`, backgroundSize:"cover" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}}>
-                         <Image src={`${process.env.NEXT_PUBLIC_IMGSOURCE}/${img}`} fill alt={content?.title_tr}/> 
+            <div className={s.imagestandartwr} style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${img})`, backgroundSize:"cover" , backgroundPosition: 'center', backgroundRepeat:"no-repeat", aspectRatio: 4/3  }}>
+                         {/* <Image src={`${process.env.NEXT_PUBLIC_IMGSOURCE}/${img}`} fill alt={content?.title_tr}/>  */} 
             </div>
         )
   

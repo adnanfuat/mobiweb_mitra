@@ -21,17 +21,17 @@ import { get_FileObjects_SpecialRequests } from "@/src/components/utils/get_file
               let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0]);
 
               let theme = webdata?.bigdata?.theme;
+              let themev2 = webdata?.bigdata?.themev2;
               let theme_module=undefined;                                          
 
               switch (bigbigparent_slug) {
-                  case "urunler": theme_module = theme?.modules?.products; break;
-                  case "hizmetler": theme_module = theme?.modules?.services; break;              
-                  case "galeri": theme_module = theme?.modules?.gallery; break;
-                  default: theme_module = theme?.modules?.products; break;                                 
+                  case "urunler": theme_module = themev2?.settings?.products; break;
+                  case "hizmetler": theme_module = themev2?.settings?.services; break;              
+                  case "galeri": theme_module = themev2?.settings?.gallery; break;
+                  default: theme_module = themev2?.settings?.products; break;                                 
               }
 
-            //   console.log("bigbigparent_slugbigbigparent_slug: ", bigbigparent_slug);
-
+              // console.log("theme_moduletheme_module:", theme_module);
               
               let layout_type= theme_module?.layout_type ?? {};
               let item_type= theme_module?.item_type ?? {};

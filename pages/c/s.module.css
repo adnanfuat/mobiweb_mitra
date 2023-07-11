@@ -42,6 +42,8 @@
 
 .maintext {
   grid-area: main-text;
+  line-height: 1.3rem;
+  white-space: pre-line;
 }
 
 .image {

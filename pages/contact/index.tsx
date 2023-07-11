@@ -19,7 +19,6 @@ const Contact = (props) => {
 
   let {params, dictionary, webdata, fileobjects, category, advert, countries} = props ?? {}
   let {locale, slug} = params ?? {}
-
   
   let logged = useIsLogged();
 
@@ -90,38 +89,8 @@ const RsData =  (props) => {
     // else if (layout_type=="twocolumn") {  return  <Layout_TwoColumn {...props}/>}
                 else return ( <div className={s.xxx}> Layout Type gelmedi... {layout_type} </div>)
 
-
-
 }
 
-
-
-// const RsData =  (props) => {
-
-//       let { addresses, countries, webdata, session } = props ?? {};
-
-//       let theme=webdata?.bigdata?.theme;
-
-//       let contact_page =  theme?.pages?.contact ?? {};
-
-//       let background_color = contact_page?.background_color;
-
-//       // console.log("sessssssasa", session)
-
-//       return <div className={s.shell}>                      
-//                   <div className={s.mainwr} style={{backgroundColor:background_color}}>
-//                       <div className={s.sectionwr}>                    
-//                             <div className={s.sectiontitle}>Mesaj Formu</div>
-//                             <div className={s.form}><ContactForm  {...props}/></div>                        
-//                       </div>
-//                       <div className={s.sectionwr}>                    
-//                             <div className={s.sectiontitle}>İletişim Bilgileri</div>
-//                             <div className={s.info}><ContactInfo addresses={addresses} countries={countries}/></div>   
-//                       </div>                                  
-//                   </div>
-//             </div>
-
-// }
 
 
 

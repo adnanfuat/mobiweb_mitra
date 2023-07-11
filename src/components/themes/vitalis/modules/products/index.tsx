@@ -10,7 +10,7 @@ import s from "./index.module.css"
 
 <div className={s.productsMainWr}>         
 
-{/* {JSON.stringify(module)} */}
+    {/* {JSON.stringify(module)} */}
 
         <div className={s.title}> {module?.data?.[0]?.data_tr ?? "Ürünler"} </div>
         

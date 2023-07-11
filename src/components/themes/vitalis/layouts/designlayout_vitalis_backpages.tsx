@@ -23,11 +23,9 @@ const inter = Inter({
 export const DesignLayout_Vitalis_BackPages = (props) => {
     let {title, dictionary, params,logo, webdata} = props ?? {};
 
-
-    let backgroundImage= webdata?.bigdata?.theme?.settings?.index?.bg;
+    let backgroundImage= webdata?.bigdata?.themev2?.settings?.index?.bg;
     backgroundImage =  backgroundImage ? `url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${backgroundImage})` : "url(/themes/vitalis/bg.png)" ;
-    
-          
+              
   return (
 
     <div className={`${s.shell} ${poppins.className}`} style={{backgroundImage, backgroundRepeat:"no-repeat"}}>
@@ -45,12 +43,11 @@ export const DesignLayout_Vitalis_BackPages = (props) => {
 
              <div  className={s.fullwr}> 
 
+               {title && <div  className={s.titlewr}> {title} </div>}
 
-             {title && <div  className={s.titlewr}> {title} </div>}
-
-             <div  className={s.mainwr}> 
-               {props.children}                   
-             </div>
+              <div  className={s.mainwr}> 
+                {props.children}                   
+              </div>
 
              </div>
 

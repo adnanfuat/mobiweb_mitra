@@ -6,30 +6,28 @@ import s from "./s.module.css"
 import Link from 'next/link';
 import DictionaryData from "@/components/utils/dictionarydata";
 import WebData from "@/components/utils/webdata";
-import { DesignLayout_Vitalis } from "@/src/components/themes/vitalis/layouts/designlayout_vitalis";
+import { DesignLayout_Vitalis_BackPages } from "@/src/components/themes/vitalis/layouts/designlayout_vitalis_backpages";
 import { DesignLayout_Mitra_BackPages } from "@/themes/mitra/layouts/designlayout_mitra_backpages";
 import { DesignLayout_Arges } from "@/themes/arges/layouts/designlayout_arges";
 import { cacheCountries } from "@/components/utils/cachecountries";
 
-let root_slug="cs";
-
+let root_slug="u";
 
 const Content = (props) => {
   let {params, dictionary, webdata, fileobjects, countries} = props ?? {}
     let {locale, slug} = params ?? {}
-
-    console.log("sadasdsadsd", params);
-      
+          
     let contents= webdata?.o_key_2?.contents ?? [];      
     let content = contents?.find(co=>co?.id==slug?.[1]);
   
-      //////////////////////////////////// --  
-      let info = webdata?.bigdata?.history[0];
-      let lang = info?.lang;
-      let logofiles =  lang?.tr?.logofiles;
+      ////////////////////////////////////
 
-      let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0]);
-      /////////////////////////////////// --
+            let info = webdata?.bigdata?.history[0];
+            let lang = info?.lang;
+            let logofiles =  lang?.tr?.logofiles;
+            let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0]);
+
+      ///////////////////////////////////
       
      let theme_name = webdata?.bigdata?.theme?.name;
       
@@ -40,7 +38,7 @@ const Content = (props) => {
           return (<DesignLayout_Arges title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData  params={params}  webdata={webdata}/> </DesignLayout_Arges> )                      
         }
         else if (theme_name=="vitalis") {
-          return (<DesignLayout_Vitalis title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData params={params} webdata={webdata}/> </DesignLayout_Vitalis> )                      
+          return (<DesignLayout_Vitalis_BackPages title={`${content?.title_tr}`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}><RsData params={params} webdata={webdata}/> </DesignLayout_Vitalis_BackPages> )                      
         }     
         else 
         {
@@ -60,23 +58,21 @@ export default Content
       let {params, dictionary, webdata} = props ?? {};
       let {locale, slug} = params ?? {};
           
-      let fileObjects=webdata?.bigdata?.fileObjects ?? []    
-      let advert=undefined;                                
-      
+      let fileObjects=webdata?.bigdata?.fileObjects ?? [];            
+      let advert=undefined;                                      
+      // console.log("webdata::::--->", webdata);
+
       let contents= webdata?.o_key_2?.contents ?? [];      
       let content = contents?.find(co=>co?.id==slug?.[1]);
       let parents=content?.parents;
       
           return (
-                  <div className={s.shell}> 
-                      {/* {content?.title_tr}  {JSON.stringify(webdata?.bigdata?.fileObjects)} */}
-                      
-                      <div className={s.parents}>   <Content_Visitor_Parents parents={parents} params={params} root_slug={root_slug}/></div>                                                                                                                                                                     
-                      <div className={s.metadata}>  <Advert_VisitorMode_MetaData content={content} params={params}/> </div>
-                      <div className={s.image}>     <Content_Visitor_Image content={content} fileObjects={fileObjects} params={params}/> </div>
-                      <div className={s.maintext}>  <Content_Visitor_MainText content={content} fileObjects={fileObjects} params={params}/> </div>
-                      {/* <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div> */}
-                            
+                  <div className={s.shell}>                       
+                      <div className={s.parents}> <Content_Visitor_Parents parents={parents} params={params} root_slug={root_slug}/>        </div>                                                                                                                                                                     
+                      <div className={s.metadata}> <Advert_VisitorMode_MetaData content={content} params={params}/> </div>
+                      <div className={s.image}>    <Content_Visitor_Image content={content} fileObjects={fileObjects} params={params}/>     </div>
+                      <div className={s.maintext}> <Content_Visitor_MainText content={content} fileObjects={fileObjects} params={params}/>  </div>
+                      {/* <div className={s.info}>      <Advert_Visitor_Info advert={advert} params={params}/> </div> */}                            
                       {/* <Advert_Visitor_Tabs advert={advert}/>        */}
                   </div>
             )

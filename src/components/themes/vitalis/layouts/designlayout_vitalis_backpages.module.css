@@ -19,13 +19,12 @@
   gap: 20px;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 80%;  
   padding: 0px 0px 80px 0px;
 }
 
 .fullwr {
-  display: flex;
-  /* background-color: #e1e6ea; */
+  display: flex;  
   width: 100%;
   flex-direction: column;
   align-items: center;
@@ -36,8 +35,10 @@
   display: flex;
   background-color: #cbbb9f;
   width: 80%;
-  padding: 20px 10px;
+  
   border-radius: 4px;
+  font-size: 2rem;
+  padding: 16px;
 }
 
 .insidewr {

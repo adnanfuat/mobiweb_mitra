@@ -24,7 +24,7 @@ export const DesignLayout_Vitalis = (props) => {
     let {title, dictionary, params,logo, webdata} = props ?? {};
 
 
-    let backgroundImage= webdata?.bigdata?.theme?.settings?.index?.bg;
+    let backgroundImage= webdata?.bigdata?.themev2?.settings?.index?.bg;
     backgroundImage =  backgroundImage ? `url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${backgroundImage})` : "url(/themes/vitalis/bg.png)" ;
     
           

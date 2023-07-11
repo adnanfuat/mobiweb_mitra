@@ -8,7 +8,7 @@ import {Bant} from "./modules/bant"
 import {Bant2} from "./modules/bant2"
 import {Products} from "./modules/products"
 import {Blogs} from "./modules/blogs"
-import {Gallery} from "./modules/gallery"
+import {MyGallery} from "./modules/mygallery"
 import {TextBoards} from "./modules/textboards"
 import {ImageBoards} from "./modules/imageboards"
 import {Shortcuts} from "./modules/shortcuts"
@@ -75,7 +75,7 @@ export const Vitalis =  (props) => {
                                                                         
                                                                        <div className={s.products}><Blogs module={index_blogs} blogs={blogs} fileObjects={fileObjects}/></div>    
 
-                                                                       <div className={s.products}><Gallery module={index_gallery} gallery={gallery} fileObjects={fileObjects}/></div>    
+                                                                       <div className={s.products}><MyGallery module={index_gallery} gallery={gallery} fileObjects={fileObjects}/></div>    
 
                                                                        <div className={s.bant}> <Bant2 module={bant2} fileObjects={fileObjects} /> </div>
 

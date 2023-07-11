@@ -169,7 +169,7 @@ const RichContents =  (props) => {
   //  return  <div className={s.xxx}> {`${JSON.stringify(layout_type)}`} </div>
   if (layout_type=="basic") {return  <Layout_Basic {...props}/>}
   else if (layout_type=="twocolumn") {  return  <Layout_TwoColumn {...props}/>}
-               else return ( <div className={s.xxx}> Layout Type gelmedi... {`${layout_type}`} </div>)
+  else return ( <div className={s.xxx}> Layout Type gelmedi... {`${layout_type}`} </div>)
 
 }
 

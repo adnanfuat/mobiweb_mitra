@@ -17,8 +17,8 @@ import {siteProxy} from "@/constants/siteproxy"
        let maintext_tr=content?.maintext_tr;
           
         return (
-          <div className={s.content_visitor_image_wr}>          
-                {maintext_tr}
+          <div className={s.content_visitor_image_wr} dangerouslySetInnerHTML={{ __html: maintext_tr }}>          
+                
           </div>
         )
       }

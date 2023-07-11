@@ -23,7 +23,7 @@ export  default function FooterComp  (props) {
     let themev2= webdata?.bigdata?.themev2;
     let modules = themev2?.sections?.find(sec=>sec?.type=="modules")
     let footer = modules?.sections?.find(sec=>sec?.key=="footer")
-    console.log("webdataaaaaaaaa:", footer)
+    // console.log("webdataaaaaaaaa:", footer)
 
     // let footer= webdata?.bigdata?.theme?.settings?.footer;
     let bg = footer?.data?.[0]?.data_tr;
