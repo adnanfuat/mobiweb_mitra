@@ -24,7 +24,14 @@ export const DesignLayout_Vitalis = (props) => {
     let {title, dictionary, params,logo, webdata} = props ?? {};
 
 
+    let favicon= webdata?.bigdata?.themev2?.settings?.index?.favicon;
+
+    
+
+    
+
     let backgroundImage= webdata?.bigdata?.themev2?.settings?.index?.bg;
+
     backgroundImage =  backgroundImage ? `url(${process.env.NEXT_PUBLIC_IMGSOURCE}/${backgroundImage})` : "url(/themes/vitalis/bg.png)" ;
     
           
@@ -32,7 +39,7 @@ export const DesignLayout_Vitalis = (props) => {
 
     <div className={`${s.shell} ${poppins.className}`} style={{backgroundImage, backgroundRepeat:"no-repeat"}}>
                                             <Head>
-                                                {/* <link rel="icon" href={favicon} sizes="any" /> */}
+                                                <link rel="icon" href={`${process.env.NEXT_PUBLIC_IMGSOURCE}/${favicon}`} sizes="any" />
                                                 <meta name="viewport" content="initial-scale=1, width=device-width" />
                                                 <meta name="Googlebot" content="index, follow" />
                                                 <meta name="robots" content="index, follow" />

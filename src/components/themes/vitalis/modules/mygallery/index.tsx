@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import s from "./index.module.css"    
 //import 'photoswipe/dist/photoswipe.css'
 //import { Gallery, Item } from 'react-photoswipe-gallery'
@@ -10,6 +12,8 @@ import s from "./index.module.css"
 
 
  export  const MyGallery = (props) => {
+
+  let router = useRouter();
   
     let {fileObjects, gallery, module} = props ?? {};
 
@@ -37,7 +41,7 @@ import s from "./index.module.css"
 
 
 
-
+      
         <div className={s.gallerysWr}>
         
 
@@ -50,7 +54,7 @@ import s from "./index.module.css"
                                     let bgImg=`${process.env.NEXT_PUBLIC_IMGSOURCE}/${fileObject?.bigdata?.folder}/${fileObject?.bigdata?.filename}`
 
 
-                                    return <div className={s.galleryWr} style={{backgroundImage:`url(${bgImg})`, aspectRatio:"4/3", backgroundSize:"cover" , backgroundPosition: 'center', backgroundRepeat:"no-repeat"}} key={index}>                   
+                                    return <div className={s.galleryWr} style={{backgroundImage:`url(${bgImg})`, aspectRatio:"4/3", backgroundSize:"cover" , backgroundPosition: 'center', backgroundRepeat:"no-repeat", cursor:"pointer1"}} key={index} onClick={()=>router.push("/g/galeri")}>                   
                                                       {/* <Zoom> */}
                                                           {/* <Image src={"/themes/vitalis/gallery1.jpg"} width={300} height={225} className={s.imgstyle}/>                                  */}
                                                           {/* <Image src={ `${process.env.NEXT_PUBLIC_IMGSOURCE}/${fileObject?.bigdata?.folder}/${fileObject?.bigdata?.filename}`  ?? "/themes/vitalis/gallery1.jpg"} width={300} height={225} className={s.imgstyle}/>                                  */}
@@ -63,8 +67,6 @@ import s from "./index.module.css"
                                         </Link>
                                     </div> */}
                                                       
-
-
                                                       </div>                                                    
 
                                                       
@@ -112,6 +114,7 @@ import s from "./index.module.css"
 
               
         </div>
+      
                                                                                    
 
       </div>

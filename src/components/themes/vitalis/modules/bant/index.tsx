@@ -23,9 +23,9 @@ import s from "./index.module.css"
 <div className={s.bantWr} style={{backgroundImage:`url(${module_img_url})`}}>
 
         <div className={s.bantinner}> 
-        {/* {JSON.stringify(module)} */}
+        {/* {JSON.stringify(data)} */}
           <span style={{maxWidth:610}}  className={s.banttext}>
-            { module_title?.data ?? `Seçtiğiniz ürünlerin bahçe düzenlemenizde 
+            { module_title?.data_tr ?? `Seçtiğiniz ürünlerin bahçe düzenlemenizde 
             nasıl görüneceğini öğrenmek ister misiniz?`        }
           </span>
         </div>
