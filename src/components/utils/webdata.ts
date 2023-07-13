@@ -16,7 +16,9 @@ const WebData = async () => {
                                   })
 
                                   relatedData =  await relatedData?.json();
+                                  //console.log("webdatawebdata: ", relatedData);
                                   relatedData =  await relatedData?.data?.webquery;
+
 
                                   // console.log("relatedDatarelatedData: ", relatedData)
                                                                            

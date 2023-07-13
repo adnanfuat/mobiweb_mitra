@@ -32,8 +32,8 @@ const Contact = (props) => {
 
   let info = webdata?.bigdata?.history[0];
   let lang = info?.lang;
-  let selectedlang = eval(`lang.${locale}`);
-  let defaultlang = eval(`lang.${localeStatic}`);
+  let selectedlang = eval(`lang?.${locale}`);
+  let defaultlang = eval(`lang?.${localeStatic}`);
   let selectedaddresses= selectedlang?.addresses;
   let defaultaddresses = defaultlang?.addresses;
 
@@ -47,6 +47,8 @@ const Contact = (props) => {
   // console.log("sdsadsadssd", webdata?.bigdata)
 
   let contact_props={session, params, webdata, countries, addresses}
+
+  // return (<div>{JSON.stringify(webdata)}</div>)
     
   if (theme_name=="mitra") {
     return (<DesignLayout_Mitra_BackPages title={`İletişim`} dictionary={dictionary} params={params} webdata={webdata} logo={logo}> <RsData {...contact_props}/> </DesignLayout_Mitra_BackPages> )                      
@@ -107,6 +109,9 @@ export async function getStaticProps(data) {
  
    let dictionary= await DictionaryData({locale: locale ?? "tr"});  
    let webdata=await WebData();
+   
+
+
    let countries=await cacheCountries();
    
    let theme_name = webdata?.bigdata?.theme?.name;               
@@ -128,7 +133,7 @@ export async function getStaticProps(data) {
        .then((res) => res.json())
        .then((result) => { return result?.data?.filesquery_specialrequests; });    
        
-       let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+       let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0]) ?? null
  
                                                                         
      let props = { webdata, dictionary, fileobjects, logo,  countries, params:{locale} };

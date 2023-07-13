@@ -79,7 +79,9 @@
 .ci_itemdata {
   color: rgb(26, 26, 26);
   display: flex;
-  gap:4px  
+  gap:1px;
+  line-height: 1.8rem;  
+  flex-direction: column;
 }
 
 .ci_itemtitle {

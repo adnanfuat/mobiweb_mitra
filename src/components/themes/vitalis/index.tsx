@@ -30,7 +30,15 @@ export const Vitalis =  (props) => {
 
     let {logo, params, dictionary, webdata, cuffs} = props ?? {};
 
-    let favicon= webdata?.bigdata?.theme?.settings?.favicon;    
+    let settings = webdata?.bigdata?.themev2?.settings;
+    let favicon= settings?.index?.favicon;    
+    let instagram= settings?.index?.instagram;    
+    let phone= settings?.index?.phone;    
+    let whatsapp= settings?.index?.whatsapp; 
+    let whatsapp_text= settings?.index?.whatsapp_text; 
+       
+    let facebook= settings?.index?.facebook;    
+
     favicon =  favicon ? `${process.env.NEXT_PUBLIC_IMGSOURCE}/${favicon}` : "/themes/vitalis/fav.png" ;
 
     let backgroundImage= webdata?.bigdata?.theme?.settings?.index?.bg;
@@ -56,7 +64,9 @@ export const Vitalis =  (props) => {
 
 
     return (                        
-        <DesignLayout_Vitalis  title={``} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}>
+        <DesignLayout_Vitalis  title={``} dictionary={dictionary} params={params} webdata={webdata}  logo={logo}> 
+                                                                                                        
+                                                                        {/* {JSON.stringify(settings)} */}
                                                                                                                                                                        
 
                                                                         <div className={s.cuffs}> <Index_Cuffs_V2_Visitor cuffs={cuffs} locale={params?.locale}/> 
@@ -83,7 +93,7 @@ export const Vitalis =  (props) => {
 
                                                                        <div className={s.bant}> <TextBoards module={textboards}/> </div>    
 
-                                                                       <div className={s.shortcuts}> <Shortcuts/> </div>    
+                                                                       <div className={s.shortcuts}> <Shortcuts instagram={instagram} facebook={facebook} phone={phone} whatsapp_text={whatsapp_text} whatsapp={whatsapp}/> </div>    
 
 
         <br/>

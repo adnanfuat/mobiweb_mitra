@@ -61,8 +61,8 @@ const ContactInfo = (props) => {
     return (
         <div className={s.ci_shell}>          
               <Addresses {...props}/>          
-              <Phones {...props}/>
-              {/* <Email {...props}/> */}
+              <Phones {...props}/>              
+              <Email {...props}/>
         </div>    
     )
 }
@@ -73,7 +73,7 @@ const ContactInfo = (props) => {
 
 const Email = (props) => {
 
-  let {addresses, countries, localized_data} = props ?? {};
+  let { localized_data} = props ?? {};
 
 
     // return (<div>{JSON.stringify(localized_data)}</div>)
@@ -81,7 +81,7 @@ const Email = (props) => {
     <div className={s.ci_itemwr}>
             
             
-    <div className={s.ci_itemicon}><RiCellphoneFill/></div>
+    <div className={s.ci_itemicon}><RiMailFill/></div>
     <div className={s.ci_itemdatawr}>
           <div className={s.ci_itemtitle}>E-Posta</div>
           
@@ -91,7 +91,7 @@ const Email = (props) => {
                                                   
                                                   <div className={s.ci_itemdata}>
                                                                                                         
-                                                    <span>{item?.mail} </span>
+                                                    <span>{item?.email} </span>
                                                   </div>        
                                           
                                           </div>  
@@ -123,7 +123,11 @@ const Addresses = (props) => {
                 <div className={s.itemswr}>
                         {localized_data?.addresses?.map((addressitem, i)=>{
                                 
-                                    return <div className={s.ci_itemdata}  key={i}>{addressitem?.address} {BolgeIsmiOgren(addressitem?.subdistrict_slug, "mahalle", countries) ?? ""} {BolgeIsmiOgren(addressitem?.district_slug, "ilce", countries) ?? ""} {BolgeIsmiOgren(addressitem?.city_slug, "il", countries) ?? ""} {BolgeIsmiOgren(addressitem?.country_slug, "ulke", countries) ?? ""}</div>  
+                                    return <div className={s.ci_itemdata} key={i}>
+                                              <div className={s.xxxx} style={{fontWeight:"bold"}}>{addressitem?.label}</div>                                                           
+                                              <div className={s.xxxx}>{addressitem?.address}</div>                                                           
+                                              <div className={s.xxxx}>{BolgeIsmiOgren(addressitem?.subdistrict_slug, "mahalle", countries) ?? ""} {BolgeIsmiOgren(addressitem?.district_slug, "ilce", countries) ?? ""} {BolgeIsmiOgren(addressitem?.city_slug, "il", countries) ?? ""} {BolgeIsmiOgren(addressitem?.country_slug, "ulke", countries) ?? ""}</div>                                                                                                                     
+                                           </div>  
 
                               })
                         }
@@ -151,16 +155,20 @@ const Phones = (props) => {
           
             {localized_data?.phones?.map((item, i)=>{
                                 
-                                    return <div className={s.ci_itemdatawr}  key={i}> {item?.label}
+                                    return <div className={s.ci_itemdatawr}  key={i}> 
+                                    
+                                          
+
+                                          <div className={s.xxxx} style={{fontWeight:"bold"}}>{item?.label}</div>
 
                                           {/* <div>{JSON.stringify(item)}</div> */}
-                                                  
-                                                  <div className={s.ci_itemdata}>
-                                                    <span>0</span>
-                                                    <span>{item?.areacode} </span>
-                                                    <span>{item?.number} </span>
-                                                  </div>        
-                                          
+
+                                                    <div className={s.xxxx} >
+                                                        <span>0</span>
+                                                        <span>{item?.areacode} </span>
+                                                        <span>{item?.number} </span>
+                                                    </div>
+                                                                                                                                              
                                           </div>  
 
                               })
@@ -171,4 +179,7 @@ const Phones = (props) => {
   </div>
   )
 }
+
+
+
 
