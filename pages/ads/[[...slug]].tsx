@@ -89,7 +89,7 @@ const  Category = (props) => {
         //   .then((res) => res.json())
         //   .then((result) => { return result?.data?.filesquery_specialrequests; });    
           
-          let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+          let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])  ?? null
   
       /////////////////////////////////// --
 
@@ -469,7 +469,7 @@ const filterAdverts = ({adverts, country, city, district, subdistrict}) => {
              .then((res) => res.json())
              .then((result) => { return result?.data?.filesquery_specialrequests; });    
              
-             let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+             let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])  ?? null
 
 
 

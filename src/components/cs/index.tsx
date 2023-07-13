@@ -58,7 +58,7 @@ export default function CS_Shell (props){
 
         let logofiles =  lang?.tr?.logofiles;          
             
-        let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+        let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])  ?? null
 
   /////////////////////////////////// --
 

@@ -30,7 +30,7 @@ const  Advert = (props) => {
         let info = webdata?.bigdata?.history[0];
         let lang = info?.lang;
         let logofiles =  lang?.tr?.logofiles;
-        let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+        let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])  ?? null
     
         /////////////////////////////////// --
 
@@ -404,7 +404,7 @@ const RsData = (props) => {
              .then((res) => res.json())
              .then((result) => { return result?.data?.filesquery_specialrequests; });    
              
-             let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+             let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0]) ?? null
        
                                                                               
            let props = { webdata, dictionary, fileobjects, logo, advert, countries,params };

@@ -25,7 +25,7 @@ const Content = (props) => {
             let info = webdata?.bigdata?.history[0];
             let lang = info?.lang;
             let logofiles =  lang?.tr?.logofiles;
-            let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0]);
+            let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])  ?? null
 
       ///////////////////////////////////
       
@@ -191,7 +191,7 @@ export default Content
              .then((res) => res.json())
              .then((result) => { return result?.data?.filesquery_specialrequests; });    
              
-             let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+             let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])  ?? null
        
                                                                        
        params= {...params, locale}
@@ -207,6 +207,6 @@ export default Content
                     
        export async function getStaticPaths({locales}) {
         // let  paths = await cacheSubsectorQuery_BuildList()    
-        let paths=[{params:{slug:["aaaaaaa"]}}];           
+        let paths=[{params:{slug:["250_watt_gunes_paneli","zo_1687247099543"]}}];           
         return { paths, fallback: 'blocking' }
                                                         }

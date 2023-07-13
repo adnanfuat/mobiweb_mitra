@@ -41,7 +41,7 @@ const Contact = (props) => {
   
   let logofiles =  lang?.tr?.logofiles;
       
-  let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])
+  let logo = fileobjects?.find(f=>f?.slug_tr  == logofiles[0])  ?? null
 
   let theme_name = webdata?.bigdata?.theme?.name;
   // console.log("sdsadsadssd", webdata?.bigdata)
